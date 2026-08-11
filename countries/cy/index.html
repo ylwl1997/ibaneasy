@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://ibaneasy.com/countries/cy/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the IBAN format for Cyprus?", "acceptedAnswer": {"@type": "Answer", "text": "Cyprus uses a 28-character IBAN with the country code \"CY\" followed by two check digits and a 24-character BBAN. The format is <code>3!n5!n16!c</code>. The bank code occupies positions 5 to 7."}}, {"@type": "Question", "name": "Is Cyprus a SEPA country?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, Cyprus is part of the SEPA (Single Euro Payments Area) and uses IBAN for all domestic and international transfers."}}, {"@type": "Question", "name": "How long is a Cyprus IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "A Cyprus IBAN is exactly 28 characters long. The BBAN portion accounts for 24 characters."}}, {"@type": "Question", "name": "How do I find my Cyprus IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "Your IBAN is printed on your bank statement, available in your online banking portal, or can be obtained from your bank. It typically appears alongside your BIC/SWIFT code for international transfers."}}, {"@type": "Question", "name": "Can I generate a valid Cyprus IBAN for testing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Use the IBAN generator on this page or visit the <a href=\"/\">IBAN Easy homepage</a> to generate mathematically valid IBANs for any supported country. All generation is client-side and private."}}]}</script>
 </head>
@@ -27,6 +28,11 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -64,9 +70,9 @@
 </table></div><h2>Example Cyprus IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> Cyprus IBANs for testing:</p>
 <ul>
-<li><code>CY30 9678 2047 WDP4 RTA9 C4D5 ULO1</code></li>
-<li><code>CY71 6259 3040 FXHI JD1W RJCZ 7NHX</code></li>
-<li><code>CY36 6943 6109 OWGK U6MN O1TN CA8J</code></li>
+<li><code>CY85 2767 3983 FBV6 OLZ4 10AD CMOD</code></li>
+<li><code>CY45 7755 3180 C7Y0 4CBA B6LV 948F</code></li>
+<li><code>CY41 0558 9182 IDUQ 5BOQ 5MVH OC5Q</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
 <h2>Generate Cyprus IBANs for Testing</h2>
@@ -151,6 +157,17 @@
 <li><a href="/countries/by/">Belarus IBAN (28 chars)</a></li>
 <li><a href="/countries/ch/">Switzerland IBAN (21 chars, SEPA)</a></li>
 </ul>
+<h2>Major Bank BIC/SWIFT Codes in Cyprus</h2>
+<p>BIC (Bank Identifier Code) / SWIFT codes for major banks in Cyprus. These codes are used for international wire transfers alongside the IBAN.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>BIC Code</th><th>Bank Name</th><th>City</th></tr></thead>
+<tbody>
+<tr><td><code class="swift-bic-code">ABKLCY2N</code></td><td>Alpha Bank Cyprus</td><td>Nicosia</td></tr>
+<tr><td><code class="swift-bic-code">BCYPCY2N</code></td><td>Bank of Cyprus</td><td>Nicosia</td></tr>
+<tr><td><code class="swift-bic-code">CCBKCY2N</code></td><td>Central Bank of Cyprus</td><td>Nicosia</td></tr>
+<tr><td><code class="swift-bic-code">HEBACYN2</code></td><td>Hellenic Bank</td><td>Nicosia</td></tr>
+</tbody>
+</table></div>
 </main>
 <footer class="site-footer">
   <div class="footer-inner">
@@ -164,6 +181,7 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
