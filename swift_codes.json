@@ -1,0 +1,3014 @@
+[
+  {
+    "bic": "DEUTDEFF",
+    "bankName": "Deutsche Bank",
+    "country": "DE",
+    "city": "Frankfurt am Main"
+  },
+  {
+    "bic": "COBADEFF",
+    "bankName": "Commerzbank",
+    "country": "DE",
+    "city": "Frankfurt am Main"
+  },
+  {
+    "bic": "BYLADEM1",
+    "bankName": "Bayerische Landesbank",
+    "country": "DE",
+    "city": "Munich"
+  },
+  {
+    "bic": "GENODEF1",
+    "bankName": "DZ Bank",
+    "country": "DE",
+    "city": "Frankfurt am Main"
+  },
+  {
+    "bic": "HELADEFF",
+    "bankName": "Helaba (Landesbank Hessen-Thüringen)",
+    "country": "DE",
+    "city": "Frankfurt am Main"
+  },
+  {
+    "bic": "HYVEDEMM",
+    "bankName": "UniCredit Bank (HypoVereinsbank)",
+    "country": "DE",
+    "city": "Munich"
+  },
+  {
+    "bic": "MARKDEFF",
+    "bankName": "Deutsche Bundesbank",
+    "country": "DE",
+    "city": "Frankfurt am Main"
+  },
+  {
+    "bic": "NOLADE21",
+    "bankName": "Norddeutsche Landesbank (Nord/LB)",
+    "country": "DE",
+    "city": "Hannover"
+  },
+  {
+    "bic": "SOLADEST",
+    "bankName": "Landesbank Baden-Württemberg (LBBW)",
+    "country": "DE",
+    "city": "Stuttgart"
+  },
+  {
+    "bic": "INGDDEFF",
+    "bankName": "ING-DiBa",
+    "country": "DE",
+    "city": "Frankfurt am Main"
+  },
+  {
+    "bic": "WELADED1",
+    "bankName": "Landesbank Hessen-Thüringen (Helaba)",
+    "country": "DE",
+    "city": "Frankfurt am Main"
+  },
+  {
+    "bic": "PBNKDEFF",
+    "bankName": "Postbank",
+    "country": "DE",
+    "city": "Bonn"
+  },
+  {
+    "bic": "SOGEDEFF",
+    "bankName": "Société Générale Frankfurt",
+    "country": "DE",
+    "city": "Frankfurt am Main"
+  },
+  {
+    "bic": "BKCHDEFF",
+    "bankName": "Bank of China Frankfurt",
+    "country": "DE",
+    "city": "Frankfurt am Main"
+  },
+  {
+    "bic": "ESSEDE5F",
+    "bankName": "SEB Frankfurt",
+    "country": "DE",
+    "city": "Frankfurt am Main"
+  },
+  {
+    "bic": "CHASDEFX",
+    "bankName": "J.P. Morgan Frankfurt",
+    "country": "DE",
+    "city": "Frankfurt am Main"
+  },
+  {
+    "bic": "CITIDEFF",
+    "bankName": "Citigroup Global Markets (Germany)",
+    "country": "DE",
+    "city": "Frankfurt am Main"
+  },
+  {
+    "bic": "VOWADE2B",
+    "bankName": "Volkswagen Bank",
+    "country": "DE",
+    "city": "Braunschweig"
+  },
+  {
+    "bic": "GENODEM1",
+    "bankName": "DZ Bank München",
+    "country": "DE",
+    "city": "Munich"
+  },
+  {
+    "bic": "BNPAFRPP",
+    "bankName": "BNP Paribas",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "AGRIFRPP",
+    "bankName": "Crédit Agricole",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "SOGEFRPP",
+    "bankName": "Société Générale",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "CRLYFRPP",
+    "bankName": "Crédit Lyonnais (LCL)",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "CCBPFRPP",
+    "bankName": "Banque Populaire",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "CMCIFRPP",
+    "bankName": "Crédit Mutuel",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "CEPAFRPP",
+    "bankName": "Caisse d'Épargne",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "BDFEFRPP",
+    "bankName": "Banque de France",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "AXABFRPP",
+    "bankName": "AXA Banque",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "BNPPFRPP",
+    "bankName": "BNP Paribas Securities",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "BOUSFRPP",
+    "bankName": "Boursorama",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "HSBCFRPP",
+    "bankName": "HSBC France",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "CITIFRPP",
+    "bankName": "Citibank France",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "NATXFRPP",
+    "bankName": "Natixis",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "RABOFRPP",
+    "bankName": "Rabobank Paris",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "BARCGB22",
+    "bankName": "Barclays Bank",
+    "country": "GB",
+    "city": "London"
+  },
+  {
+    "bic": "HBUKGB4B",
+    "bankName": "HSBC UK Bank",
+    "country": "GB",
+    "city": "London"
+  },
+  {
+    "bic": "NWBKGB2L",
+    "bankName": "NatWest Bank",
+    "country": "GB",
+    "city": "London"
+  },
+  {
+    "bic": "LOYDGB2L",
+    "bankName": "Lloyds Bank",
+    "country": "GB",
+    "city": "London"
+  },
+  {
+    "bic": "BUKBGB22",
+    "bankName": "Barclays Bank UK",
+    "country": "GB",
+    "city": "London"
+  },
+  {
+    "bic": "RBOSGB2L",
+    "bankName": "Royal Bank of Scotland",
+    "country": "GB",
+    "city": "Edinburgh"
+  },
+  {
+    "bic": "CPBKGB22",
+    "bankName": "Co-operative Bank",
+    "country": "GB",
+    "city": "Manchester"
+  },
+  {
+    "bic": "SCBLGB2L",
+    "bankName": "Standard Chartered Bank",
+    "country": "GB",
+    "city": "London"
+  },
+  {
+    "bic": "SMBDGB2L",
+    "bankName": "Santander UK",
+    "country": "GB",
+    "city": "London"
+  },
+  {
+    "bic": "NATNGB2L",
+    "bankName": "Nationwide Building Society",
+    "country": "GB",
+    "city": "Swindon"
+  },
+  {
+    "bic": "TSBIGB2L",
+    "bankName": "TSB Bank",
+    "country": "GB",
+    "city": "Edinburgh"
+  },
+  {
+    "bic": "CLYDGB2S",
+    "bankName": "Clydesdale Bank",
+    "country": "GB",
+    "city": "Glasgow"
+  },
+  {
+    "bic": "BANKGB2L",
+    "bankName": "Bank of England",
+    "country": "GB",
+    "city": "London"
+  },
+  {
+    "bic": "CHASGB2L",
+    "bankName": "J.P. Morgan London",
+    "country": "GB",
+    "city": "London"
+  },
+  {
+    "bic": "BSCHESMM",
+    "bankName": "Banco Santander",
+    "country": "ES",
+    "city": "Madrid"
+  },
+  {
+    "bic": "BBVAESMM",
+    "bankName": "BBVA",
+    "country": "ES",
+    "city": "Madrid"
+  },
+  {
+    "bic": "CAIXESBB",
+    "bankName": "CaixaBank",
+    "country": "ES",
+    "city": "Barcelona"
+  },
+  {
+    "bic": "BAPUES22",
+    "bankName": "Banco Popular Español",
+    "country": "ES",
+    "city": "Madrid"
+  },
+  {
+    "bic": "BASKES2B",
+    "bankName": "Banco Sabadell",
+    "country": "ES",
+    "city": "Alicante"
+  },
+  {
+    "bic": "POPIES2A",
+    "bankName": "Banco Santander (Popular)",
+    "country": "ES",
+    "city": "Madrid"
+  },
+  {
+    "bic": "BEDMESM1",
+    "bankName": "Banco de España",
+    "country": "ES",
+    "city": "Madrid"
+  },
+  {
+    "bic": "BKKBESMM",
+    "bankName": "Bankinter",
+    "country": "ES",
+    "city": "Madrid"
+  },
+  {
+    "bic": "CECAESMM",
+    "bankName": "CECA Confederación Española",
+    "country": "ES",
+    "city": "Madrid"
+  },
+  {
+    "bic": "UBBKESMM",
+    "bankName": "Unicaja Banco",
+    "country": "ES",
+    "city": "Malaga"
+  },
+  {
+    "bic": "KBANES22",
+    "bankName": "Kutxabank",
+    "country": "ES",
+    "city": "Bilbao"
+  },
+  {
+    "bic": "ABANES2B",
+    "bankName": "Abanca",
+    "country": "ES",
+    "city": "A Coruña"
+  },
+  {
+    "bic": "IBRCESMM",
+    "bankName": "Ibercaja Banco",
+    "country": "ES",
+    "city": "Zaragoza"
+  },
+  {
+    "bic": "UNCRITMM",
+    "bankName": "UniCredit",
+    "country": "IT",
+    "city": "Milan"
+  },
+  {
+    "bic": "BCITITMM",
+    "bankName": "Intesa Sanpaolo",
+    "country": "IT",
+    "city": "Milan"
+  },
+  {
+    "bic": "BPMIITMM",
+    "bankName": "Banco BPM",
+    "country": "IT",
+    "city": "Milan"
+  },
+  {
+    "bic": "MONTITMM",
+    "bankName": "Monte dei Paschi di Siena (MPS)",
+    "country": "IT",
+    "city": "Siena"
+  },
+  {
+    "bic": "BPAAIT2B",
+    "bankName": "Banco Popolare",
+    "country": "IT",
+    "city": "Verona"
+  },
+  {
+    "bic": "ANIBIT22",
+    "bankName": "Banca Nazionale del Lavoro (BNL)",
+    "country": "IT",
+    "city": "Rome"
+  },
+  {
+    "bic": "BLOPIT22",
+    "bankName": "UBI Banca",
+    "country": "IT",
+    "city": "Bergamo"
+  },
+  {
+    "bic": "VEBHIT2M",
+    "bankName": "Banca Popolare di Vicenza",
+    "country": "IT",
+    "city": "Vicenza"
+  },
+  {
+    "bic": "BRELIT22",
+    "bankName": "Banco di Sardegna",
+    "country": "IT",
+    "city": "Cagliari"
+  },
+  {
+    "bic": "BPERIT22",
+    "bankName": "BPER Banca",
+    "country": "IT",
+    "city": "Modena"
+  },
+  {
+    "bic": "ICRAITRR",
+    "bankName": "ICCREA Banca",
+    "country": "IT",
+    "city": "Rome"
+  },
+  {
+    "bic": "CIPBITMM",
+    "bankName": "Cassa Depositi e Prestiti",
+    "country": "IT",
+    "city": "Rome"
+  },
+  {
+    "bic": "BITAITRR",
+    "bankName": "Banca d'Italia",
+    "country": "IT",
+    "city": "Rome"
+  },
+  {
+    "bic": "MEDBITMM",
+    "bankName": "Mediobanca",
+    "country": "IT",
+    "city": "Milan"
+  },
+  {
+    "bic": "ABNANL2A",
+    "bankName": "ABN AMRO Bank",
+    "country": "NL",
+    "city": "Amsterdam"
+  },
+  {
+    "bic": "INGBNL2A",
+    "bankName": "ING Bank",
+    "country": "NL",
+    "city": "Amsterdam"
+  },
+  {
+    "bic": "RABONL2U",
+    "bankName": "Rabobank",
+    "country": "NL",
+    "city": "Utrecht"
+  },
+  {
+    "bic": "NNBANL2G",
+    "bankName": "Nationale-Nederlanden Bank",
+    "country": "NL",
+    "city": "Amsterdam"
+  },
+  {
+    "bic": "FLBKNL2R",
+    "bankName": "De Nederlandse Bank (DNB)",
+    "country": "NL",
+    "city": "Amsterdam"
+  },
+  {
+    "bic": "BUNQNL2A",
+    "bankName": "Bunq",
+    "country": "NL",
+    "city": "Amsterdam"
+  },
+  {
+    "bic": "VOWANL21",
+    "bankName": "Volkswagen Bank Netherlands",
+    "country": "NL",
+    "city": "Amsterdam"
+  },
+  {
+    "bic": "SNSBNL2A",
+    "bankName": "SNS Bank",
+    "country": "NL",
+    "city": "Utrecht"
+  },
+  {
+    "bic": "ASNBNL21",
+    "bankName": "ASN Bank",
+    "country": "NL",
+    "city": "The Hague"
+  },
+  {
+    "bic": "TRIONL2U",
+    "bankName": "Triodos Bank",
+    "country": "NL",
+    "city": "Zeist"
+  },
+  {
+    "bic": "UBSWCHZH",
+    "bankName": "UBS",
+    "country": "CH",
+    "city": "Zurich"
+  },
+  {
+    "bic": "CRESCHZZ",
+    "bankName": "Credit Suisse",
+    "country": "CH",
+    "city": "Zurich"
+  },
+  {
+    "bic": "RAIFCH22",
+    "bankName": "Raiffeisen Schweiz",
+    "country": "CH",
+    "city": "St. Gallen"
+  },
+  {
+    "bic": "ZKBKCHZZ",
+    "bankName": "Zürcher Kantonalbank",
+    "country": "CH",
+    "city": "Zurich"
+  },
+  {
+    "bic": "BCVLCH2L",
+    "bankName": "Banque Cantonale Vaudoise",
+    "country": "CH",
+    "city": "Lausanne"
+  },
+  {
+    "bic": "POFNCHBE",
+    "bankName": "PostFinance",
+    "country": "CH",
+    "city": "Bern"
+  },
+  {
+    "bic": "KBSGCH22",
+    "bankName": "St. Galler Kantonalbank",
+    "country": "CH",
+    "city": "St. Gallen"
+  },
+  {
+    "bic": "MIGRCHZZ",
+    "bankName": "Migros Bank",
+    "country": "CH",
+    "city": "Zurich"
+  },
+  {
+    "bic": "SNBZCHZZ",
+    "bankName": "Swiss National Bank",
+    "country": "CH",
+    "city": "Bern"
+  },
+  {
+    "bic": "BBVACH22",
+    "bankName": "BBVA Switzerland",
+    "country": "CH",
+    "city": "Zurich"
+  },
+  {
+    "bic": "BEREZCH2",
+    "bankName": "Berner Kantonalbank",
+    "country": "CH",
+    "city": "Bern"
+  },
+  {
+    "bic": "EBRDPLPW",
+    "bankName": "Bank Pekao",
+    "country": "PL",
+    "city": "Warsaw"
+  },
+  {
+    "bic": "BREXPLPW",
+    "bankName": "mBank",
+    "country": "PL",
+    "city": "Warsaw"
+  },
+  {
+    "bic": "PKOPPLPW",
+    "bankName": "PKO Bank Polski",
+    "country": "PL",
+    "city": "Warsaw"
+  },
+  {
+    "bic": "INGBPLPW",
+    "bankName": "ING Bank Śląski",
+    "country": "PL",
+    "city": "Katowice"
+  },
+  {
+    "bic": "BWBKPLPP",
+    "bankName": "Santander Bank Polska",
+    "country": "PL",
+    "city": "Warsaw"
+  },
+  {
+    "bic": "ALBPPLP1",
+    "bankName": "Alior Bank",
+    "country": "PL",
+    "city": "Warsaw"
+  },
+  {
+    "bic": "BIGBPLPW",
+    "bankName": "Bank Millennium",
+    "country": "PL",
+    "city": "Warsaw"
+  },
+  {
+    "bic": "POLUPLPR",
+    "bankName": "Bank Polska Kasa Opieki",
+    "country": "PL",
+    "city": "Warsaw"
+  },
+  {
+    "bic": "NBPLPLPW",
+    "bankName": "Narodowy Bank Polski",
+    "country": "PL",
+    "city": "Warsaw"
+  },
+  {
+    "bic": "CITIPLPX",
+    "bankName": "Citi Handlowy",
+    "country": "PL",
+    "city": "Warsaw"
+  },
+  {
+    "bic": "BKAUATWW",
+    "bankName": "Bank Austria (UniCredit)",
+    "country": "AT",
+    "city": "Vienna"
+  },
+  {
+    "bic": "GIBAATWW",
+    "bankName": "Erste Group Bank",
+    "country": "AT",
+    "city": "Vienna"
+  },
+  {
+    "bic": "OPSKATWW",
+    "bankName": "BAWAG P.S.K.",
+    "country": "AT",
+    "city": "Vienna"
+  },
+  {
+    "bic": "RLBBAT2E",
+    "bankName": "Raiffeisen Bank International",
+    "country": "AT",
+    "city": "Vienna"
+  },
+  {
+    "bic": "SPBAATWW",
+    "bankName": "Erste Bank der Österreichischen Sparkassen",
+    "country": "AT",
+    "city": "Vienna"
+  },
+  {
+    "bic": "OBPAATWW",
+    "bankName": "Oberbank",
+    "country": "AT",
+    "city": "Linz"
+  },
+  {
+    "bic": "NABAATWW",
+    "bankName": "Oesterreichische Nationalbank",
+    "country": "AT",
+    "city": "Vienna"
+  },
+  {
+    "bic": "VBOEATWW",
+    "bankName": "Volksbank Wien",
+    "country": "AT",
+    "city": "Vienna"
+  },
+  {
+    "bic": "GEBABEBB",
+    "bankName": "BNP Paribas Fortis",
+    "country": "BE",
+    "city": "Brussels"
+  },
+  {
+    "bic": "KREDBEBB",
+    "bankName": "KBC Bank",
+    "country": "BE",
+    "city": "Brussels"
+  },
+  {
+    "bic": "BBRUBEBB",
+    "bankName": "ING Belgium",
+    "country": "BE",
+    "city": "Brussels"
+  },
+  {
+    "bic": "GKCCBEBB",
+    "bankName": "Belfius Bank",
+    "country": "BE",
+    "city": "Brussels"
+  },
+  {
+    "bic": "BSCHBEBB",
+    "bankName": "Santander Consumer Finance Belgium",
+    "country": "BE",
+    "city": "Brussels"
+  },
+  {
+    "bic": "AXABBE22",
+    "bankName": "AXA Bank Belgium",
+    "country": "BE",
+    "city": "Brussels"
+  },
+  {
+    "bic": "ECMSBEBB",
+    "bankName": "Euroclear Bank",
+    "country": "BE",
+    "city": "Brussels"
+  },
+  {
+    "bic": "NBBEBEBB",
+    "bankName": "National Bank of Belgium",
+    "country": "BE",
+    "city": "Brussels"
+  },
+  {
+    "bic": "BGALPTG1",
+    "bankName": "Banco BPI",
+    "country": "PT",
+    "city": "Porto"
+  },
+  {
+    "bic": "BBPIPTPL",
+    "bankName": "Banco BPI Direct",
+    "country": "PT",
+    "city": "Porto"
+  },
+  {
+    "bic": "BCOMPTPL",
+    "bankName": "Banco Comercial Português (Millennium BCP)",
+    "country": "PT",
+    "city": "Porto"
+  },
+  {
+    "bic": "TOTAPTPL",
+    "bankName": "Banco Santander Totta",
+    "country": "PT",
+    "city": "Lisbon"
+  },
+  {
+    "bic": "BBVAPTPL",
+    "bankName": "BBVA Portugal",
+    "country": "PT",
+    "city": "Lisbon"
+  },
+  {
+    "bic": "CGDIPTPL",
+    "bankName": "Caixa Geral de Depósitos",
+    "country": "PT",
+    "city": "Lisbon"
+  },
+  {
+    "bic": "BDIGPTPL",
+    "bankName": "Banco BIC Português",
+    "country": "PT",
+    "city": "Lisbon"
+  },
+  {
+    "bic": "BNIFPTPL",
+    "bankName": "BancoBNI Europa",
+    "country": "PT",
+    "city": "Lisbon"
+  },
+  {
+    "bic": "BGALPTGC",
+    "bankName": "Banco BPI S.A.",
+    "country": "PT",
+    "city": "Porto"
+  },
+  {
+    "bic": "SWEDSESS",
+    "bankName": "Swedbank",
+    "country": "SE",
+    "city": "Stockholm"
+  },
+  {
+    "bic": "HANDSESS",
+    "bankName": "Handelsbanken",
+    "country": "SE",
+    "city": "Stockholm"
+  },
+  {
+    "bic": "NORSESSS",
+    "bankName": "Nordea Bank",
+    "country": "SE",
+    "city": "Stockholm"
+  },
+  {
+    "bic": "ESSESESS",
+    "bankName": "SEB (Skandinaviska Enskilda Banken)",
+    "country": "SE",
+    "city": "Stockholm"
+  },
+  {
+    "bic": "LUNASESS",
+    "bankName": "Länsförsäkringar Bank",
+    "country": "SE",
+    "city": "Stockholm"
+  },
+  {
+    "bic": "SRIKSESS",
+    "bankName": "Sveriges Riksbank",
+    "country": "SE",
+    "city": "Stockholm"
+  },
+  {
+    "bic": "DABASESX",
+    "bankName": "Danske Bank Sweden",
+    "country": "SE",
+    "city": "Stockholm"
+  },
+  {
+    "bic": "NDEANOKK",
+    "bankName": "Nordea Bank",
+    "country": "NO",
+    "city": "Oslo"
+  },
+  {
+    "bic": "DNBANOKK",
+    "bankName": "DNB Bank",
+    "country": "NO",
+    "city": "Oslo"
+  },
+  {
+    "bic": "HANDNOKK",
+    "bankName": "Handelsbanken Norway",
+    "country": "NO",
+    "city": "Oslo"
+  },
+  {
+    "bic": "SB1NOKK",
+    "bankName": "SpareBank 1",
+    "country": "NO",
+    "city": "Oslo"
+  },
+  {
+    "bic": "NBHKNOKK",
+    "bankName": "Norges Bank",
+    "country": "NO",
+    "city": "Oslo"
+  },
+  {
+    "bic": "SPARNO22",
+    "bankName": "Sparebanken Sør",
+    "country": "NO",
+    "city": "Kristiansand"
+  },
+  {
+    "bic": "DABADKKK",
+    "bankName": "Danske Bank",
+    "country": "DK",
+    "city": "Copenhagen"
+  },
+  {
+    "bic": "NDEADKKK",
+    "bankName": "Nordea Bank Danmark",
+    "country": "DK",
+    "city": "Copenhagen"
+  },
+  {
+    "bic": "SXPYDKKK",
+    "bankName": "Saxo Bank",
+    "country": "DK",
+    "city": "Copenhagen"
+  },
+  {
+    "bic": "NYKBDKKK",
+    "bankName": "Nykredit Bank",
+    "country": "DK",
+    "city": "Copenhagen"
+  },
+  {
+    "bic": "SYBKDK22",
+    "bankName": "Sydbank",
+    "country": "DK",
+    "city": "Aabenraa"
+  },
+  {
+    "bic": "JYBADKKK",
+    "bankName": "Jyske Bank",
+    "country": "DK",
+    "city": "Silkeborg"
+  },
+  {
+    "bic": "NDEAFIHH",
+    "bankName": "Nordea Bank Finland",
+    "country": "FI",
+    "city": "Helsinki"
+  },
+  {
+    "bic": "OKOYFIHH",
+    "bankName": "OP Financial Group",
+    "country": "FI",
+    "city": "Helsinki"
+  },
+  {
+    "bic": "DABAFIHH",
+    "bankName": "Danske Bank Finland",
+    "country": "FI",
+    "city": "Helsinki"
+  },
+  {
+    "bic": "SBANFIHH",
+    "bankName": "S-Bank",
+    "country": "FI",
+    "city": "Helsinki"
+  },
+  {
+    "bic": "AABAFI22",
+    "bankName": "Ålandsbanken",
+    "country": "FI",
+    "city": "Mariehamn"
+  },
+  {
+    "bic": "SPFNFIHH",
+    "bankName": "Suomen Pankki (Bank of Finland)",
+    "country": "FI",
+    "city": "Helsinki"
+  },
+  {
+    "bic": "HANDFIHH",
+    "bankName": "Handelsbanken Finland",
+    "country": "FI",
+    "city": "Helsinki"
+  },
+  {
+    "bic": "BOFAIE2D",
+    "bankName": "Bank of America Europe (Dublin)",
+    "country": "IE",
+    "city": "Dublin"
+  },
+  {
+    "bic": "AIBKIE2D",
+    "bankName": "AIB (Allied Irish Banks)",
+    "country": "IE",
+    "city": "Dublin"
+  },
+  {
+    "bic": "BBDIIE2D",
+    "bankName": "Barclays Bank Ireland",
+    "country": "IE",
+    "city": "Dublin"
+  },
+  {
+    "bic": "BOFIIE2X",
+    "bankName": "Bank of Ireland",
+    "country": "IE",
+    "city": "Dublin"
+  },
+  {
+    "bic": "CTBAIE2D",
+    "bankName": "Citibank Europe",
+    "country": "IE",
+    "city": "Dublin"
+  },
+  {
+    "bic": "ULSBIE2D",
+    "bankName": "Ulster Bank Ireland",
+    "country": "IE",
+    "city": "Dublin"
+  },
+  {
+    "bic": "IRCEIE2D",
+    "bankName": "Central Bank of Ireland",
+    "country": "IE",
+    "city": "Dublin"
+  },
+  {
+    "bic": "PTSBIE2D",
+    "bankName": "Permanent TSB",
+    "country": "IE",
+    "city": "Dublin"
+  },
+  {
+    "bic": "CEKOLU2L",
+    "bankName": "Spuerkeess (BCEE)",
+    "country": "LU",
+    "city": "Luxembourg"
+  },
+  {
+    "bic": "BLUXLULL",
+    "bankName": "Banque de Luxembourg",
+    "country": "LU",
+    "city": "Luxembourg"
+  },
+  {
+    "bic": "BGLLLULL",
+    "bankName": "BGL BNP Paribas",
+    "country": "LU",
+    "city": "Luxembourg"
+  },
+  {
+    "bic": "BSUILULL",
+    "bankName": "Banque internationale à Luxembourg (BIL)",
+    "country": "LU",
+    "city": "Luxembourg"
+  },
+  {
+    "bic": "BCEELULL",
+    "bankName": "Banque Centrale du Luxembourg",
+    "country": "LU",
+    "city": "Luxembourg"
+  },
+  {
+    "bic": "BRASBRRJ",
+    "bankName": "Banco do Brasil",
+    "country": "BR",
+    "city": "Brasília"
+  },
+  {
+    "bic": "BBDEBRSP",
+    "bankName": "Banco Bradesco",
+    "country": "BR",
+    "city": "São Paulo"
+  },
+  {
+    "bic": "ITAUBRSP",
+    "bankName": "Itaú Unibanco",
+    "country": "BR",
+    "city": "São Paulo"
+  },
+  {
+    "bic": "CEFXBRSP",
+    "bankName": "Caixa Econômica Federal",
+    "country": "BR",
+    "city": "Brasília"
+  },
+  {
+    "bic": "SABRBRSP",
+    "bankName": "Banco Santander Brasil",
+    "country": "BR",
+    "city": "São Paulo"
+  },
+  {
+    "bic": "BBMDBRRJ",
+    "bankName": "Banco BMG",
+    "country": "BR",
+    "city": "São Paulo"
+  },
+  {
+    "bic": "BCBBBRRJ",
+    "bankName": "Banco do Brasil Central (BCB)",
+    "country": "BR",
+    "city": "Brasília"
+  },
+  {
+    "bic": "BOTKBRSX",
+    "bankName": "Banco BTG Pactual",
+    "country": "BR",
+    "city": "São Paulo"
+  },
+  {
+    "bic": "SAFBBRSP",
+    "bankName": "Banco Safra",
+    "country": "BR",
+    "city": "São Paulo"
+  },
+  {
+    "bic": "BBICBRSP",
+    "bankName": "Banco Original",
+    "country": "BR",
+    "city": "São Paulo"
+  },
+  {
+    "bic": "TCZBTR2A",
+    "bankName": "Türkiye Cumhuriyeti Ziraat Bankası",
+    "country": "TR",
+    "city": "Ankara"
+  },
+  {
+    "bic": "ISBKTRIS",
+    "bankName": "Türkiye İş Bankası",
+    "country": "TR",
+    "city": "Istanbul"
+  },
+  {
+    "bic": "GARATRIS",
+    "bankName": "Garanti BBVA",
+    "country": "TR",
+    "city": "Istanbul"
+  },
+  {
+    "bic": "AKBKTRIS",
+    "bankName": "Akbank",
+    "country": "TR",
+    "city": "Istanbul"
+  },
+  {
+    "bic": "YAPITRIS",
+    "bankName": "Yapı Kredi Bankası",
+    "country": "TR",
+    "city": "Istanbul"
+  },
+  {
+    "bic": "TVBATR2A",
+    "bankName": "Türkiye Vakıflar Bankası",
+    "country": "TR",
+    "city": "Istanbul"
+  },
+  {
+    "bic": "HALKTRI2",
+    "bankName": "Türkiye Halk Bankası",
+    "country": "TR",
+    "city": "Ankara"
+  },
+  {
+    "bic": "DENITRIS",
+    "bankName": "DenizBank",
+    "country": "TR",
+    "city": "Istanbul"
+  },
+  {
+    "bic": "TCMBTR2A",
+    "bankName": "Türkiye Cumhuriyet Merkez Bankası",
+    "country": "TR",
+    "city": "Ankara"
+  },
+  {
+    "bic": "FINATRIS",
+    "bankName": "QNB Finansbank",
+    "country": "TR",
+    "city": "Istanbul"
+  },
+  {
+    "bic": "NBOKAEAA",
+    "bankName": "National Bank of Abu Dhabi (First Abu Dhabi Bank)",
+    "country": "AE",
+    "city": "Abu Dhabi"
+  },
+  {
+    "bic": "EBILAEAD",
+    "bankName": "Emirates NBD",
+    "country": "AE",
+    "city": "Dubai"
+  },
+  {
+    "bic": "ADIBAEAA",
+    "bankName": "Abu Dhabi Islamic Bank",
+    "country": "AE",
+    "city": "Abu Dhabi"
+  },
+  {
+    "bic": "DUIBAEAD",
+    "bankName": "Dubai Islamic Bank",
+    "country": "AE",
+    "city": "Dubai"
+  },
+  {
+    "bic": "ARNBAEAD",
+    "bankName": "Arab Bank Dubai",
+    "country": "AE",
+    "city": "Dubai"
+  },
+  {
+    "bic": "FABMAEAA",
+    "bankName": "First Abu Dhabi Bank",
+    "country": "AE",
+    "city": "Abu Dhabi"
+  },
+  {
+    "bic": "MASHREAA",
+    "bankName": "Mashreq Bank",
+    "country": "AE",
+    "city": "Dubai"
+  },
+  {
+    "bic": "BBRUAEAD",
+    "bankName": "HSBC Bank Middle East",
+    "country": "AE",
+    "city": "Dubai"
+  },
+  {
+    "bic": "CITIAEAD",
+    "bankName": "Citibank UAE",
+    "country": "AE",
+    "city": "Dubai"
+  },
+  {
+    "bic": "CCBAAEAD",
+    "bankName": "Commercial Bank of Dubai",
+    "country": "AE",
+    "city": "Dubai"
+  },
+  {
+    "bic": "NCBKSAJE",
+    "bankName": "Saudi National Bank (SNB)",
+    "country": "SA",
+    "city": "Riyadh"
+  },
+  {
+    "bic": "ALBISARI",
+    "bankName": "Al Rajhi Bank",
+    "country": "SA",
+    "city": "Riyadh"
+  },
+  {
+    "bic": "SABBSARI",
+    "bankName": "Saudi British Bank (SABB)",
+    "country": "SA",
+    "city": "Riyadh"
+  },
+  {
+    "bic": "BSFRSARI",
+    "bankName": "Banque Saudi Fransi",
+    "country": "SA",
+    "city": "Riyadh"
+  },
+  {
+    "bic": "AAALSARI",
+    "bankName": "Arab National Bank",
+    "country": "SA",
+    "city": "Riyadh"
+  },
+  {
+    "bic": "SAMASARI",
+    "bankName": "Saudi Central Bank (SAMA)",
+    "country": "SA",
+    "city": "Riyadh"
+  },
+  {
+    "bic": "RIYASARI",
+    "bankName": "Riyad Bank",
+    "country": "SA",
+    "city": "Riyadh"
+  },
+  {
+    "bic": "ALINSARI",
+    "bankName": "Alinma Bank",
+    "country": "SA",
+    "city": "Riyadh"
+  },
+  {
+    "bic": "CITIUS33",
+    "bankName": "Citibank N.A.",
+    "country": "US",
+    "city": "New York"
+  },
+  {
+    "bic": "CHASUS33",
+    "bankName": "J.P. Morgan Chase Bank",
+    "country": "US",
+    "city": "New York"
+  },
+  {
+    "bic": "BOFAUS3N",
+    "bankName": "Bank of America",
+    "country": "US",
+    "city": "Charlotte"
+  },
+  {
+    "bic": "WFBIUS6S",
+    "bankName": "Wells Fargo Bank",
+    "country": "US",
+    "city": "San Francisco"
+  },
+  {
+    "bic": "IRVTUS3N",
+    "bankName": "Bank of New York Mellon",
+    "country": "US",
+    "city": "New York"
+  },
+  {
+    "bic": "PNBPUS3N",
+    "bankName": "PNC Bank",
+    "country": "US",
+    "city": "Pittsburgh"
+  },
+  {
+    "bic": "USBKUS44",
+    "bankName": "U.S. Bank",
+    "country": "US",
+    "city": "Minneapolis"
+  },
+  {
+    "bic": "FRNYUS33",
+    "bankName": "Federal Reserve Bank of New York",
+    "country": "US",
+    "city": "New York"
+  },
+  {
+    "bic": "GSBKUS33",
+    "bankName": "Goldman Sachs Bank",
+    "country": "US",
+    "city": "New York"
+  },
+  {
+    "bic": "MSBUS33",
+    "bankName": "Morgan Stanley Bank",
+    "country": "US",
+    "city": "New York"
+  },
+  {
+    "bic": "ROYCCAT2",
+    "bankName": "Royal Bank of Canada (RBC)",
+    "country": "CA",
+    "city": "Toronto"
+  },
+  {
+    "bic": "TDOMCATT",
+    "bankName": "TD Canada Trust",
+    "country": "CA",
+    "city": "Toronto"
+  },
+  {
+    "bic": "BNPACATT",
+    "bankName": "Bank of Nova Scotia (Scotiabank)",
+    "country": "CA",
+    "city": "Toronto"
+  },
+  {
+    "bic": "BMOFCAT2",
+    "bankName": "Bank of Montreal (BMO)",
+    "country": "CA",
+    "city": "Montreal"
+  },
+  {
+    "bic": "CIBCCATT",
+    "bankName": "CIBC (Canadian Imperial Bank)",
+    "country": "CA",
+    "city": "Toronto"
+  },
+  {
+    "bic": "NBBCCAT2",
+    "bankName": "National Bank of Canada",
+    "country": "CA",
+    "city": "Montreal"
+  },
+  {
+    "bic": "BKOFCAT2",
+    "bankName": "Bank of Canada",
+    "country": "CA",
+    "city": "Ottawa"
+  },
+  {
+    "bic": "BOTKJPJT",
+    "bankName": "MUFG Bank",
+    "country": "JP",
+    "city": "Tokyo"
+  },
+  {
+    "bic": "SMBCJPJT",
+    "bankName": "Sumitomo Mitsui Banking Corporation",
+    "country": "JP",
+    "city": "Tokyo"
+  },
+  {
+    "bic": "MIZUJPJT",
+    "bankName": "Mizuho Bank",
+    "country": "JP",
+    "city": "Tokyo"
+  },
+  {
+    "bic": "SMTRJPJT",
+    "bankName": "Sumitomo Mitsui Trust Bank",
+    "country": "JP",
+    "city": "Tokyo"
+  },
+  {
+    "bic": "BOJPJPJT",
+    "bankName": "Bank of Japan",
+    "country": "JP",
+    "city": "Tokyo"
+  },
+  {
+    "bic": "SINRJPJT",
+    "bankName": "Shinsei Bank",
+    "country": "JP",
+    "city": "Tokyo"
+  },
+  {
+    "bic": "HNRKJPJT",
+    "bankName": "Hachijuni Bank",
+    "country": "JP",
+    "city": "Nagano"
+  },
+  {
+    "bic": "AOMBJPJT",
+    "bankName": "Aozora Bank",
+    "country": "JP",
+    "city": "Tokyo"
+  },
+  {
+    "bic": "ICBKCNBJ",
+    "bankName": "Industrial and Commercial Bank of China (ICBC)",
+    "country": "CN",
+    "city": "Beijing"
+  },
+  {
+    "bic": "BKCHCNBJ",
+    "bankName": "Bank of China",
+    "country": "CN",
+    "city": "Beijing"
+  },
+  {
+    "bic": "ABOCCNBJ",
+    "bankName": "Agricultural Bank of China",
+    "country": "CN",
+    "city": "Beijing"
+  },
+  {
+    "bic": "PCBCCNBJ",
+    "bankName": "China Construction Bank",
+    "country": "CN",
+    "city": "Beijing"
+  },
+  {
+    "bic": "COMMCNSH",
+    "bankName": "Bank of Communications",
+    "country": "CN",
+    "city": "Shanghai"
+  },
+  {
+    "bic": "MSBCCNBJ",
+    "bankName": "China Minsheng Bank",
+    "country": "CN",
+    "city": "Beijing"
+  },
+  {
+    "bic": "CIBKCNBJ",
+    "bankName": "China CITIC Bank",
+    "country": "CN",
+    "city": "Beijing"
+  },
+  {
+    "bic": "SPDBCNSH",
+    "bankName": "Shanghai Pudong Development Bank",
+    "country": "CN",
+    "city": "Shanghai"
+  },
+  {
+    "bic": "PBOCCNBJ",
+    "bankName": "People's Bank of China",
+    "country": "CN",
+    "city": "Beijing"
+  },
+  {
+    "bic": "BKIDINBB",
+    "bankName": "Bank of India",
+    "country": "IN",
+    "city": "Mumbai"
+  },
+  {
+    "bic": "SBININBB",
+    "bankName": "State Bank of India",
+    "country": "IN",
+    "city": "Mumbai"
+  },
+  {
+    "bic": "HDFCINBB",
+    "bankName": "HDFC Bank",
+    "country": "IN",
+    "city": "Mumbai"
+  },
+  {
+    "bic": "ICICINBB",
+    "bankName": "ICICI Bank",
+    "country": "IN",
+    "city": "Mumbai"
+  },
+  {
+    "bic": "AXISINBB",
+    "bankName": "Axis Bank",
+    "country": "IN",
+    "city": "Mumbai"
+  },
+  {
+    "bic": "KARBINBB",
+    "bankName": "Karnataka Bank",
+    "country": "IN",
+    "city": "Mangalore"
+  },
+  {
+    "bic": "RBISINBB",
+    "bankName": "Reserve Bank of India",
+    "country": "IN",
+    "city": "Mumbai"
+  },
+  {
+    "bic": "PUNBINBB",
+    "bankName": "Punjab National Bank",
+    "country": "IN",
+    "city": "New Delhi"
+  },
+  {
+    "bic": "CBININBB",
+    "bankName": "Central Bank of India",
+    "country": "IN",
+    "city": "Mumbai"
+  },
+  {
+    "bic": "BARBINBB",
+    "bankName": "Bank of Baroda",
+    "country": "IN",
+    "city": "Vadodara"
+  },
+  {
+    "bic": "WPACAU2S",
+    "bankName": "Westpac Banking Corporation",
+    "country": "AU",
+    "city": "Sydney"
+  },
+  {
+    "bic": "ANZBAU3M",
+    "bankName": "ANZ Bank (Australia and New Zealand)",
+    "country": "AU",
+    "city": "Melbourne"
+  },
+  {
+    "bic": "CTBAAU2S",
+    "bankName": "Commonwealth Bank of Australia",
+    "country": "AU",
+    "city": "Sydney"
+  },
+  {
+    "bic": "NATAAU33",
+    "bankName": "National Australia Bank (NAB)",
+    "country": "AU",
+    "city": "Melbourne"
+  },
+  {
+    "bic": "MACQAU2S",
+    "bankName": "Macquarie Bank",
+    "country": "AU",
+    "city": "Sydney"
+  },
+  {
+    "bic": "BKAUAU2S",
+    "bankName": "Bank Australia",
+    "country": "AU",
+    "city": "Melbourne"
+  },
+  {
+    "bic": "RSBKAU2S",
+    "bankName": "Reserve Bank of Australia",
+    "country": "AU",
+    "city": "Sydney"
+  },
+  {
+    "bic": "BNZANZ22",
+    "bankName": "Bank of New Zealand (BNZ)",
+    "country": "NZ",
+    "city": "Auckland"
+  },
+  {
+    "bic": "ANZBNZ22",
+    "bankName": "ANZ Bank New Zealand",
+    "country": "NZ",
+    "city": "Auckland"
+  },
+  {
+    "bic": "ASBBNZ2A",
+    "bankName": "ASB Bank",
+    "country": "NZ",
+    "city": "Auckland"
+  },
+  {
+    "bic": "WIBKNZ2A",
+    "bankName": "Westpac New Zealand",
+    "country": "NZ",
+    "city": "Auckland"
+  },
+  {
+    "bic": "KINANZ22",
+    "bankName": "Kiwibank",
+    "country": "NZ",
+    "city": "Wellington"
+  },
+  {
+    "bic": "BUKBHKHH",
+    "bankName": "HSBC Hong Kong",
+    "country": "HK",
+    "city": "Hong Kong"
+  },
+  {
+    "bic": "BKCHHKHH",
+    "bankName": "Bank of China Hong Kong",
+    "country": "HK",
+    "city": "Hong Kong"
+  },
+  {
+    "bic": "SCBLHKHH",
+    "bankName": "Standard Chartered Bank Hong Kong",
+    "country": "HK",
+    "city": "Hong Kong"
+  },
+  {
+    "bic": "DHBKHKHH",
+    "bankName": "Dah Sing Bank",
+    "country": "HK",
+    "city": "Hong Kong"
+  },
+  {
+    "bic": "DSBAHKHH",
+    "bankName": "DBS Bank Hong Kong",
+    "country": "HK",
+    "city": "Hong Kong"
+  },
+  {
+    "bic": "BOEAHKHH",
+    "bankName": "Bank of East Asia",
+    "country": "HK",
+    "city": "Hong Kong"
+  },
+  {
+    "bic": "CHASHKHH",
+    "bankName": "J.P. Morgan Hong Kong",
+    "country": "HK",
+    "city": "Hong Kong"
+  },
+  {
+    "bic": "CITIHKHH",
+    "bankName": "Citibank Hong Kong",
+    "country": "HK",
+    "city": "Hong Kong"
+  },
+  {
+    "bic": "DBSSSGSG",
+    "bankName": "DBS Bank",
+    "country": "SG",
+    "city": "Singapore"
+  },
+  {
+    "bic": "OCBCSGSG",
+    "bankName": "OCBC Bank",
+    "country": "SG",
+    "city": "Singapore"
+  },
+  {
+    "bic": "UOVBSGSG",
+    "bankName": "United Overseas Bank (UOB)",
+    "country": "SG",
+    "city": "Singapore"
+  },
+  {
+    "bic": "CITISGSG",
+    "bankName": "Citibank Singapore",
+    "country": "SG",
+    "city": "Singapore"
+  },
+  {
+    "bic": "HSBCSGSG",
+    "bankName": "HSBC Singapore",
+    "country": "SG",
+    "city": "Singapore"
+  },
+  {
+    "bic": "MASGSGSG",
+    "bankName": "Monetary Authority of Singapore",
+    "country": "SG",
+    "city": "Singapore"
+  },
+  {
+    "bic": "BDCHMXMM",
+    "bankName": "BBVA México",
+    "country": "MX",
+    "city": "Mexico City"
+  },
+  {
+    "bic": "BIMEMXMM",
+    "bankName": "Banorte",
+    "country": "MX",
+    "city": "Monterrey"
+  },
+  {
+    "bic": "BNMXMXMM",
+    "bankName": "Banco Santander México",
+    "country": "MX",
+    "city": "Mexico City"
+  },
+  {
+    "bic": "CITIMXMM",
+    "bankName": "Citibanamex",
+    "country": "MX",
+    "city": "Mexico City"
+  },
+  {
+    "bic": "BMSXMXMM",
+    "bankName": "HSBC México",
+    "country": "MX",
+    "city": "Mexico City"
+  },
+  {
+    "bic": "BAMXMXMM",
+    "bankName": "Banco Azteca",
+    "country": "MX",
+    "city": "Mexico City"
+  },
+  {
+    "bic": "BMXTMXMM",
+    "bankName": "Banco del Bajío",
+    "country": "MX",
+    "city": "León"
+  },
+  {
+    "bic": "BANXMXMM",
+    "bankName": "Banco de México",
+    "country": "MX",
+    "city": "Mexico City"
+  },
+  {
+    "bic": "CIBEEGCX",
+    "bankName": "Commercial International Bank (CIB)",
+    "country": "EG",
+    "city": "Cairo"
+  },
+  {
+    "bic": "NBEGEGCX",
+    "bankName": "National Bank of Egypt",
+    "country": "EG",
+    "city": "Cairo"
+  },
+  {
+    "bic": "BMISEGCX",
+    "bankName": "Banque Misr",
+    "country": "EG",
+    "city": "Cairo"
+  },
+  {
+    "bic": "BDEIEGCX",
+    "bankName": "Banque du Caire",
+    "country": "EG",
+    "city": "Cairo"
+  },
+  {
+    "bic": "ARABEGCX",
+    "bankName": "Arab African International Bank",
+    "country": "EG",
+    "city": "Cairo"
+  },
+  {
+    "bic": "CBEIEGCX",
+    "bankName": "Central Bank of Egypt",
+    "country": "EG",
+    "city": "Cairo"
+  },
+  {
+    "bic": "BHLIMYKL",
+    "bankName": "CIMB Bank",
+    "country": "MY",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "bic": "MBBEMYKL",
+    "bankName": "Maybank",
+    "country": "MY",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "bic": "PBBEMYKL",
+    "bankName": "Public Bank",
+    "country": "MY",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "bic": "RHBBMYKL",
+    "bankName": "RHB Bank",
+    "country": "MY",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "bic": "HBMBMYKL",
+    "bankName": "Hong Leong Bank",
+    "country": "MY",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "bic": "BNMYMYKL",
+    "bankName": "Bank Negara Malaysia",
+    "country": "MY",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "bic": "DBSBIDJA",
+    "bankName": "Bank DBS Indonesia",
+    "country": "ID",
+    "city": "Jakarta"
+  },
+  {
+    "bic": "BNINIDJA",
+    "bankName": "Bank Negara Indonesia (BNI)",
+    "country": "ID",
+    "city": "Jakarta"
+  },
+  {
+    "bic": "BMRIIDJA",
+    "bankName": "Bank Mandiri",
+    "country": "ID",
+    "city": "Jakarta"
+  },
+  {
+    "bic": "BRIOIDJA",
+    "bankName": "Bank Rakyat Indonesia (BRI)",
+    "country": "ID",
+    "city": "Jakarta"
+  },
+  {
+    "bic": "BBIAIDJA",
+    "bankName": "Bank Central Asia (BCA)",
+    "country": "ID",
+    "city": "Jakarta"
+  },
+  {
+    "bic": "CENAIDJA",
+    "bankName": "Bank CIMB Niaga",
+    "country": "ID",
+    "city": "Jakarta"
+  },
+  {
+    "bic": "BIIKIDJA",
+    "bankName": "Bank Maybank Indonesia",
+    "country": "ID",
+    "city": "Jakarta"
+  },
+  {
+    "bic": "INDOIDJA",
+    "bankName": "Bank Indonesia",
+    "country": "ID",
+    "city": "Jakarta"
+  },
+  {
+    "bic": "SCBLKRHX",
+    "bankName": "Standard Chartered Bank Korea",
+    "country": "KR",
+    "city": "Seoul"
+  },
+  {
+    "bic": "KOEXKRSE",
+    "bankName": "Korea Exchange Bank (KEB Hana Bank)",
+    "country": "KR",
+    "city": "Seoul"
+  },
+  {
+    "bic": "SHBKKRSE",
+    "bankName": "Shinhan Bank",
+    "country": "KR",
+    "city": "Seoul"
+  },
+  {
+    "bic": "KOOKKRSE",
+    "bankName": "Kookmin Bank (KB)",
+    "country": "KR",
+    "city": "Seoul"
+  },
+  {
+    "bic": "WRBKKRSE",
+    "bankName": "Woori Bank",
+    "country": "KR",
+    "city": "Seoul"
+  },
+  {
+    "bic": "IBKOKRSE",
+    "bankName": "Industrial Bank of Korea",
+    "country": "KR",
+    "city": "Seoul"
+  },
+  {
+    "bic": "BOKRKRSE",
+    "bankName": "Bank of Korea",
+    "country": "KR",
+    "city": "Seoul"
+  },
+  {
+    "bic": "CITIKRSE",
+    "bankName": "Citibank Korea",
+    "country": "KR",
+    "city": "Seoul"
+  },
+  {
+    "bic": "UCTLROBU",
+    "bankName": "Banca Transilvania",
+    "country": "RO",
+    "city": "Cluj-Napoca"
+  },
+  {
+    "bic": "BRLIROBU",
+    "bankName": "Banca Comercială Română (BCR)",
+    "country": "RO",
+    "city": "Bucharest"
+  },
+  {
+    "bic": "BRDEROBU",
+    "bankName": "BRD Groupe Société Générale",
+    "country": "RO",
+    "city": "Bucharest"
+  },
+  {
+    "bic": "NBORROBU",
+    "bankName": "Banca Națională a României",
+    "country": "RO",
+    "city": "Bucharest"
+  },
+  {
+    "bic": "CITIROBU",
+    "bankName": "CEC Bank",
+    "country": "RO",
+    "city": "Bucharest"
+  },
+  {
+    "bic": "RNCBROBU",
+    "bankName": "Raiffeisen Bank România",
+    "country": "RO",
+    "city": "Bucharest"
+  },
+  {
+    "bic": "INGBROBU",
+    "bankName": "ING Bank România",
+    "country": "RO",
+    "city": "Bucharest"
+  },
+  {
+    "bic": "OLBABG22",
+    "bankName": "United Bulgarian Bank (UBB)",
+    "country": "BG",
+    "city": "Sofia"
+  },
+  {
+    "bic": "BNBGBGSD",
+    "bankName": "Bulgarian National Bank",
+    "country": "BG",
+    "city": "Sofia"
+  },
+  {
+    "bic": "INTFBGSF",
+    "bankName": "First Investment Bank (Fibank)",
+    "country": "BG",
+    "city": "Sofia"
+  },
+  {
+    "bic": "BUINBGSF",
+    "bankName": "DSK Bank",
+    "country": "BG",
+    "city": "Sofia"
+  },
+  {
+    "bic": "BPBIBGSF",
+    "bankName": "Postbank Bulgaria",
+    "country": "BG",
+    "city": "Sofia"
+  },
+  {
+    "bic": "CEKOHR2X",
+    "bankName": "Hrvatska Narodna Banka (Croatian National Bank)",
+    "country": "HR",
+    "city": "Zagreb"
+  },
+  {
+    "bic": "ZABAHR2X",
+    "bankName": "Zagrebačka Banka",
+    "country": "HR",
+    "city": "Zagreb"
+  },
+  {
+    "bic": "PBZGHR2X",
+    "bankName": "Privredna Banka Zagreb",
+    "country": "HR",
+    "city": "Zagreb"
+  },
+  {
+    "bic": "ESBGHR22",
+    "bankName": "Erste & Steiermärkische Bank Croatia",
+    "country": "HR",
+    "city": "Zagreb"
+  },
+  {
+    "bic": "OTPVHUHB",
+    "bankName": "OTP Bank",
+    "country": "HU",
+    "city": "Budapest"
+  },
+  {
+    "bic": "OKHBHUHB",
+    "bankName": "K&H Bank",
+    "country": "HU",
+    "city": "Budapest"
+  },
+  {
+    "bic": "MKKBHUHB",
+    "bankName": "MKB Bank",
+    "country": "HU",
+    "city": "Budapest"
+  },
+  {
+    "bic": "ERBAHUH2",
+    "bankName": "Erste Bank Hungary",
+    "country": "HU",
+    "city": "Budapest"
+  },
+  {
+    "bic": "MANEHUHB",
+    "bankName": "Magyar Nemzeti Bank (Hungarian National Bank)",
+    "country": "HU",
+    "city": "Budapest"
+  },
+  {
+    "bic": "RAIFHU22",
+    "bankName": "Raiffeisen Bank Hungary",
+    "country": "HU",
+    "city": "Budapest"
+  },
+  {
+    "bic": "KOMBCZPP",
+    "bankName": "Komerční Banka",
+    "country": "CZ",
+    "city": "Prague"
+  },
+  {
+    "bic": "CEKOCZPP",
+    "bankName": "Česká spořitelna",
+    "country": "CZ",
+    "city": "Prague"
+  },
+  {
+    "bic": "BACXCZPP",
+    "bankName": "Československá obchodní banka (ČSOB)",
+    "country": "CZ",
+    "city": "Prague"
+  },
+  {
+    "bic": "CNBACZPP",
+    "bankName": "Česká národní banka",
+    "country": "CZ",
+    "city": "Prague"
+  },
+  {
+    "bic": "FIOZSKBA",
+    "bankName": "Fio banka",
+    "country": "CZ",
+    "city": "Prague"
+  },
+  {
+    "bic": "RZBCCZPP",
+    "bankName": "Raiffeisenbank Czech Republic",
+    "country": "CZ",
+    "city": "Prague"
+  },
+  {
+    "bic": "SLOSSK22",
+    "bankName": "Slovenská sportiteľna",
+    "country": "SK",
+    "city": "Bratislava"
+  },
+  {
+    "bic": "TATRSKBX",
+    "bankName": "Tatra banka",
+    "country": "SK",
+    "city": "Bratislava"
+  },
+  {
+    "bic": "CEKOSKBX",
+    "bankName": "Československá obchodná banka Slovakia",
+    "country": "SK",
+    "city": "Bratislava"
+  },
+  {
+    "bic": "VUBASKBX",
+    "bankName": "Všeobecná úverová banka (VÚB)",
+    "country": "SK",
+    "city": "Bratislava"
+  },
+  {
+    "bic": "NBSBSKBX",
+    "bankName": "Národná banka Slovenska",
+    "country": "SK",
+    "city": "Bratislava"
+  },
+  {
+    "bic": "INGBLT2X",
+    "bankName": "ING Bank Lithuania",
+    "country": "LT",
+    "city": "Vilnius"
+  },
+  {
+    "bic": "SEBLLT2X",
+    "bankName": "SEB Bank Lithuania",
+    "country": "LT",
+    "city": "Vilnius"
+  },
+  {
+    "bic": "SWEDLT22",
+    "bankName": "Swedbank Lithuania",
+    "country": "LT",
+    "city": "Vilnius"
+  },
+  {
+    "bic": "LIABLT22",
+    "bankName": "Lietuvos Bankas (Bank of Lithuania)",
+    "country": "LT",
+    "city": "Vilnius"
+  },
+  {
+    "bic": "CBSBLT26",
+    "bankName": "Citadele Bank Lithuania",
+    "country": "LT",
+    "city": "Vilnius"
+  },
+  {
+    "bic": "HABALLVX",
+    "bankName": "Swedbank Latvia",
+    "country": "LV",
+    "city": "Riga"
+  },
+  {
+    "bic": "SEBLLV2X",
+    "bankName": "SEB Bank Latvia",
+    "country": "LV",
+    "city": "Riga"
+  },
+  {
+    "bic": "LATBLV22",
+    "bankName": "Latvijas Banka (Bank of Latvia)",
+    "country": "LV",
+    "city": "Riga"
+  },
+  {
+    "bic": "MULTLLV2",
+    "bankName": "Luminor Bank Latvia",
+    "country": "LV",
+    "city": "Riga"
+  },
+  {
+    "bic": "CITILLVX",
+    "bankName": "Citadele Bank Latvia",
+    "country": "LV",
+    "city": "Riga"
+  },
+  {
+    "bic": "HABAEE2X",
+    "bankName": "Swedbank Estonia",
+    "country": "EE",
+    "city": "Tallinn"
+  },
+  {
+    "bic": "SEBEEE2X",
+    "bankName": "SEB Bank Estonia",
+    "country": "EE",
+    "city": "Tallinn"
+  },
+  {
+    "bic": "LUMIEE22",
+    "bankName": "Luminor Bank Estonia",
+    "country": "EE",
+    "city": "Tallinn"
+  },
+  {
+    "bic": "EPBEEE2X",
+    "bankName": "Eesti Pank (Bank of Estonia)",
+    "country": "EE",
+    "city": "Tallinn"
+  },
+  {
+    "bic": "BCYPCY2N",
+    "bankName": "Bank of Cyprus",
+    "country": "CY",
+    "city": "Nicosia"
+  },
+  {
+    "bic": "HEBACYN2",
+    "bankName": "Hellenic Bank",
+    "country": "CY",
+    "city": "Nicosia"
+  },
+  {
+    "bic": "CCBKCY2N",
+    "bankName": "Central Bank of Cyprus",
+    "country": "CY",
+    "city": "Nicosia"
+  },
+  {
+    "bic": "ABKLCY2N",
+    "bankName": "Alpha Bank Cyprus",
+    "country": "CY",
+    "city": "Nicosia"
+  },
+  {
+    "bic": "VALLMTMT",
+    "bankName": "Bank of Valletta",
+    "country": "MT",
+    "city": "Valletta"
+  },
+  {
+    "bic": "HSBCMTMT",
+    "bankName": "HSBC Bank Malta",
+    "country": "MT",
+    "city": "Valletta"
+  },
+  {
+    "bic": "MMEBMTMT",
+    "bankName": "Mediterranean Bank",
+    "country": "MT",
+    "city": "Valletta"
+  },
+  {
+    "bic": "MALTMTMT",
+    "bankName": "Central Bank of Malta",
+    "country": "MT",
+    "city": "Valletta"
+  },
+  {
+    "bic": "ETHNGRAA",
+    "bankName": "National Bank of Greece",
+    "country": "GR",
+    "city": "Athens"
+  },
+  {
+    "bic": "CRBAGRAA",
+    "bankName": "Alpha Bank",
+    "country": "GR",
+    "city": "Athens"
+  },
+  {
+    "bic": "EFGBGRAA",
+    "bankName": "Eurobank",
+    "country": "GR",
+    "city": "Athens"
+  },
+  {
+    "bic": "IRVTGRAA",
+    "bankName": "National Bank of Greece (BNG)",
+    "country": "GR",
+    "city": "Athens"
+  },
+  {
+    "bic": "BNGRGRAA",
+    "bankName": "Bank of Greece",
+    "country": "GR",
+    "city": "Athens"
+  },
+  {
+    "bic": "PIRAGRAA",
+    "bankName": "Piraeus Bank",
+    "country": "GR",
+    "city": "Athens"
+  },
+  {
+    "bic": "GIBASGSX",
+    "bankName": "DBS Bank",
+    "country": "SG",
+    "city": "Singapore"
+  },
+  {
+    "bic": "DEUTSGSG",
+    "bankName": "Deutsche Bank Singapore",
+    "country": "SG",
+    "city": "Singapore"
+  },
+  {
+    "bic": "BKTWTWTP",
+    "bankName": "Bank of Taiwan",
+    "country": "TW",
+    "city": "Taipei"
+  },
+  {
+    "bic": "CTCBTWTP",
+    "bankName": "CTBC Bank",
+    "country": "TW",
+    "city": "Taipei"
+  },
+  {
+    "bic": "MBBETWTP",
+    "bankName": "Mega International Commercial Bank",
+    "country": "TW",
+    "city": "Taipei"
+  },
+  {
+    "bic": "TPBKTWTP",
+    "bankName": "Taipei Fubon Bank",
+    "country": "TW",
+    "city": "Taipei"
+  },
+  {
+    "bic": "BKCHTHBK",
+    "bankName": "Bangkok Bank",
+    "country": "TH",
+    "city": "Bangkok"
+  },
+  {
+    "bic": "KRTHTHBK",
+    "bankName": "Krungthai Bank",
+    "country": "TH",
+    "city": "Bangkok"
+  },
+  {
+    "bic": "SICOTHBB",
+    "bankName": "Siam Commercial Bank",
+    "country": "TH",
+    "city": "Bangkok"
+  },
+  {
+    "bic": "BOTHTHBK",
+    "bankName": "Bank of Thailand",
+    "country": "TH",
+    "city": "Bangkok"
+  },
+  {
+    "bic": "KKBKTHBK",
+    "bankName": "Kasikornbank",
+    "country": "TH",
+    "city": "Bangkok"
+  },
+  {
+    "bic": "BPHKMAMC",
+    "bankName": "Banque Populaire du Maroc",
+    "country": "MA",
+    "city": "Casablanca"
+  },
+  {
+    "bic": "BKAMMAMC",
+    "bankName": "Bank Al-Maghrib (Central Bank of Morocco)",
+    "country": "MA",
+    "city": "Rabat"
+  },
+  {
+    "bic": "ABMMMAMC",
+    "bankName": "Attijariwafa Bank",
+    "country": "MA",
+    "city": "Casablanca"
+  },
+  {
+    "bic": "BCMAMAMC",
+    "bankName": "Banque Commerciale du Maroc",
+    "country": "MA",
+    "city": "Casablanca"
+  },
+  {
+    "bic": "SGSBRSBG",
+    "bankName": "Société Générale Srbija",
+    "country": "RS",
+    "city": "Belgrade"
+  },
+  {
+    "bic": "INRSRSBG",
+    "bankName": "Eurobank Direktna",
+    "country": "RS",
+    "city": "Belgrade"
+  },
+  {
+    "bic": "KOBBRSBG",
+    "bankName": "Komercijalna Banka",
+    "country": "RS",
+    "city": "Belgrade"
+  },
+  {
+    "bic": "NBSRRSBG",
+    "bankName": "National Bank of Serbia",
+    "country": "RS",
+    "city": "Belgrade"
+  },
+  {
+    "bic": "KINBISRE",
+    "bankName": "Bank of Israel",
+    "country": "IL",
+    "city": "Jerusalem"
+  },
+  {
+    "bic": "LUMIILIT",
+    "bankName": "Bank Leumi",
+    "country": "IL",
+    "city": "Tel Aviv"
+  },
+  {
+    "bic": "POALILIT",
+    "bankName": "Bank Hapoalim",
+    "country": "IL",
+    "city": "Tel Aviv"
+  },
+  {
+    "bic": "MIBXILIT",
+    "bankName": "Mizrahi Tefahot Bank",
+    "country": "IL",
+    "city": "Tel Aviv"
+  },
+  {
+    "bic": "DSCTILIT",
+    "bankName": "Israel Discount Bank",
+    "country": "IL",
+    "city": "Tel Aviv"
+  },
+  {
+    "bic": "FIRBILIT",
+    "bankName": "First International Bank of Israel (FIBI)",
+    "country": "IL",
+    "city": "Tel Aviv"
+  },
+  {
+    "bic": "TNBKTRIS",
+    "bankName": "Turkish Bank",
+    "country": "TR",
+    "city": "Istanbul"
+  },
+  {
+    "bic": "VAFBTRIS",
+    "bankName": "Vakıf Katılım Bankası",
+    "country": "TR",
+    "city": "Istanbul"
+  },
+  {
+    "bic": "TEKFTRIS",
+    "bankName": "Tekfenbank",
+    "country": "TR",
+    "city": "Istanbul"
+  },
+  {
+    "bic": "ADABTRIS",
+    "bankName": "Adabank",
+    "country": "TR",
+    "city": "Istanbul"
+  },
+  {
+    "bic": "INGBTRIS",
+    "bankName": "ING Bank Turkey",
+    "country": "TR",
+    "city": "Istanbul"
+  },
+  {
+    "bic": "SMBCFRPP",
+    "bankName": "Sumitomo Mitsui Banking Corporation Paris",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "BOFAFRPP",
+    "bankName": "Bank of America Merrill Lynch Paris",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "ARABFRPP",
+    "bankName": "Arab Bank Paris",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "ANZBSGSG",
+    "bankName": "ANZ Bank Singapore",
+    "country": "SG",
+    "city": "Singapore"
+  },
+  {
+    "bic": "BNPASGSG",
+    "bankName": "BNP Paribas Singapore",
+    "country": "SG",
+    "city": "Singapore"
+  },
+  {
+    "bic": "CHASSGSG",
+    "bankName": "J.P. Morgan Singapore",
+    "country": "SG",
+    "city": "Singapore"
+  },
+  {
+    "bic": "SGSGSGSG",
+    "bankName": "Standard Chartered Singapore",
+    "country": "SG",
+    "city": "Singapore"
+  },
+  {
+    "bic": "BOFAUS6S",
+    "bankName": "Bank of America San Francisco",
+    "country": "US",
+    "city": "San Francisco"
+  },
+  {
+    "bic": "NATXUS33",
+    "bankName": "Natixis New York",
+    "country": "US",
+    "city": "New York"
+  },
+  {
+    "bic": "BBVAUS33",
+    "bankName": "BBVA New York",
+    "country": "US",
+    "city": "New York"
+  },
+  {
+    "bic": "BSCHUS33",
+    "bankName": "Santander New York",
+    "country": "US",
+    "city": "New York"
+  },
+  {
+    "bic": "HSBCUS33",
+    "bankName": "HSBC Bank USA",
+    "country": "US",
+    "city": "New York"
+  },
+  {
+    "bic": "ABRKEGCA",
+    "bankName": "Arab Bank Egypt",
+    "country": "EG",
+    "city": "Cairo"
+  },
+  {
+    "bic": "ABRKJOAM",
+    "bankName": "Arab Bank",
+    "country": "JO",
+    "city": "Amman"
+  },
+  {
+    "bic": "CBJOJOAM",
+    "bankName": "Central Bank of Jordan",
+    "country": "JO",
+    "city": "Amman"
+  },
+  {
+    "bic": "JONBJOAM",
+    "bankName": "Jordan National Bank",
+    "country": "JO",
+    "city": "Amman"
+  },
+  {
+    "bic": "AIBKKRSX",
+    "bankName": "Industrial Bank of Korea",
+    "country": "KR",
+    "city": "Seoul"
+  },
+  {
+    "bic": "DAEBKRSE",
+    "bankName": "Daegu Bank",
+    "country": "KR",
+    "city": "Daegu"
+  },
+  {
+    "bic": "BNKPKRSE",
+    "bankName": "Busan Bank",
+    "country": "KR",
+    "city": "Busan"
+  },
+  {
+    "bic": "JBHKKRSE",
+    "bankName": "Jeonbuk Bank",
+    "country": "KR",
+    "city": "Jeonju"
+  },
+  {
+    "bic": "NBNZARWW",
+    "bankName": "Nedbank",
+    "country": "ZA",
+    "city": "Johannesburg"
+  },
+  {
+    "bic": "SBZAZAJJ",
+    "bankName": "Standard Bank of South Africa",
+    "country": "ZA",
+    "city": "Johannesburg"
+  },
+  {
+    "bic": "ABSAZAJJ",
+    "bankName": "ABSA Bank",
+    "country": "ZA",
+    "city": "Johannesburg"
+  },
+  {
+    "bic": "FIRNZAJJ",
+    "bankName": "FirstRand Bank (FNB)",
+    "country": "ZA",
+    "city": "Johannesburg"
+  },
+  {
+    "bic": "SARBZAJJ",
+    "bankName": "South African Reserve Bank",
+    "country": "ZA",
+    "city": "Pretoria"
+  },
+  {
+    "bic": "NESAZAJJ",
+    "bankName": "Nedbank Corporate",
+    "country": "ZA",
+    "city": "Johannesburg"
+  },
+  {
+    "bic": "NBRKRUM1",
+    "bankName": "Sberbank",
+    "country": "RU",
+    "city": "Moscow"
+  },
+  {
+    "bic": "VTBKRUM1",
+    "bankName": "VTB Bank",
+    "country": "RU",
+    "city": "Moscow"
+  },
+  {
+    "bic": "ALFARUM1",
+    "bankName": "Alfa-Bank",
+    "country": "RU",
+    "city": "Moscow"
+  },
+  {
+    "bic": "GAZPRUM1",
+    "bankName": "Gazprombank",
+    "country": "RU",
+    "city": "Moscow"
+  },
+  {
+    "bic": "CBRFRUM1",
+    "bankName": "Central Bank of the Russian Federation",
+    "country": "RU",
+    "city": "Moscow"
+  },
+  {
+    "bic": "OTPVRUMM",
+    "bankName": "OTP Bank Russia",
+    "country": "RU",
+    "city": "Moscow"
+  },
+  {
+    "bic": "RAIFRUMM",
+    "bankName": "Raiffeisenbank Russia",
+    "country": "RU",
+    "city": "Moscow"
+  },
+  {
+    "bic": "UNCRRUMM",
+    "bankName": "UniCredit Bank Russia",
+    "country": "RU",
+    "city": "Moscow"
+  },
+  {
+    "bic": "PRCBKZKA",
+    "bankName": "Halyk Bank",
+    "country": "KZ",
+    "city": "Almaty"
+  },
+  {
+    "bic": "KAZIKZKA",
+    "bankName": "Kaspi Bank",
+    "country": "KZ",
+    "city": "Almaty"
+  },
+  {
+    "bic": "NBRKKZKA",
+    "bankName": "National Bank of Kazakhstan",
+    "country": "KZ",
+    "city": "Astana"
+  },
+  {
+    "bic": "BNRANGLI",
+    "bankName": "Banco Nacional de Angola",
+    "country": "AO",
+    "city": "Luanda"
+  },
+  {
+    "bic": "BICOAOLU",
+    "bankName": "Banco BIC Angola",
+    "country": "AO",
+    "city": "Luanda"
+  },
+  {
+    "bic": "BCGAOLLU",
+    "bankName": "Banco Caixa Geral Angola",
+    "country": "AO",
+    "city": "Luanda"
+  },
+  {
+    "bic": "SCOAOAEA",
+    "bankName": "Banco Económico Angola",
+    "country": "AO",
+    "city": "Luanda"
+  },
+  {
+    "bic": "COLOFR2X",
+    "bankName": "Crédit Lyonnais",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "SICOFRAX",
+    "bankName": "Société Générale S.A.",
+    "country": "FR",
+    "city": "Paris"
+  },
+  {
+    "bic": "MHCBJPJT",
+    "bankName": "Mizuho Trust & Banking",
+    "country": "JP",
+    "city": "Tokyo"
+  },
+  {
+    "bic": "NORPJPJT",
+    "bankName": "Norinchukin Bank",
+    "country": "JP",
+    "city": "Tokyo"
+  },
+  {
+    "bic": "CHBKJPJT",
+    "bankName": "Chiba Bank",
+    "country": "JP",
+    "city": "Chiba"
+  },
+  {
+    "bic": "FJARJPJT",
+    "bankName": "Fukuoka Bank",
+    "country": "JP",
+    "city": "Fukuoka"
+  },
+  {
+    "bic": "HIROJPJT",
+    "bankName": "Hiroshima Bank",
+    "country": "JP",
+    "city": "Hiroshima"
+  },
+  {
+    "bic": "IBKOINBB",
+    "bankName": "IDBI Bank",
+    "country": "IN",
+    "city": "Mumbai"
+  },
+  {
+    "bic": "IOBAINBB",
+    "bankName": "Indian Overseas Bank",
+    "country": "IN",
+    "city": "Chennai"
+  },
+  {
+    "bic": "UBININBB",
+    "bankName": "Union Bank of India",
+    "country": "IN",
+    "city": "Mumbai"
+  },
+  {
+    "bic": "CNRBINBB",
+    "bankName": "Canara Bank",
+    "country": "IN",
+    "city": "Bengaluru"
+  },
+  {
+    "bic": "MAHBINBB",
+    "bankName": "Bank of Maharashtra",
+    "country": "IN",
+    "city": "Pune"
+  },
+  {
+    "bic": "ANDBINBB",
+    "bankName": "Andhra Bank",
+    "country": "IN",
+    "city": "Hyderabad"
+  },
+  {
+    "bic": "BHBMMYKL",
+    "bankName": "Bank Islam Malaysia",
+    "country": "MY",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "bic": "AMMBMYKL",
+    "bankName": "AmBank",
+    "country": "MY",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "bic": "ABBGMYKL",
+    "bankName": "Affin Bank",
+    "country": "MY",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "bic": "BKRMMYKL",
+    "bankName": "Bank Rakyat Malaysia",
+    "country": "MY",
+    "city": "Kuala Lumpur"
+  },
+  {
+    "bic": "AUBKPHMM",
+    "bankName": "Asia United Bank (AUB)",
+    "country": "PH",
+    "city": "Manila"
+  },
+  {
+    "bic": "BNPAPHMM",
+    "bankName": "BDO Unibank",
+    "country": "PH",
+    "city": "Manila"
+  },
+  {
+    "bic": "BNORPHMM",
+    "bankName": "Bank of the Philippine Islands (BPI)",
+    "country": "PH",
+    "city": "Manila"
+  },
+  {
+    "bic": "MBTCPHMM",
+    "bankName": "Metrobank",
+    "country": "PH",
+    "city": "Manila"
+  },
+  {
+    "bic": "PNBMPHMM",
+    "bankName": "Philippine National Bank",
+    "country": "PH",
+    "city": "Manila"
+  },
+  {
+    "bic": "BSPHPHMM",
+    "bankName": "Bangko Sentral ng Pilipinas",
+    "country": "PH",
+    "city": "Manila"
+  },
+  {
+    "bic": "NIBNVNVX",
+    "bankName": "National Investment Bank of Vietnam",
+    "country": "VN",
+    "city": "Hanoi"
+  },
+  {
+    "bic": "BFTVVNVX",
+    "bankName": "Bank for Foreign Trade of Vietnam (Vietcombank)",
+    "country": "VN",
+    "city": "Hanoi"
+  },
+  {
+    "bic": "ICBVVNVX",
+    "bankName": "VietinBank",
+    "country": "VN",
+    "city": "Hanoi"
+  },
+  {
+    "bic": "ASCBVNVX",
+    "bankName": "Asia Commercial Bank (ACB)",
+    "country": "VN",
+    "city": "Ho Chi Minh City"
+  },
+  {
+    "bic": "SBITVNVX",
+    "bankName": "State Bank of Vietnam",
+    "country": "VN",
+    "city": "Hanoi"
+  },
+  {
+    "bic": "NBPAUYMM",
+    "bankName": "Banco de la República Oriental del Uruguay",
+    "country": "UY",
+    "city": "Montevideo"
+  },
+  {
+    "bic": "BROUUYMM",
+    "bankName": "Banco República (BROU)",
+    "country": "UY",
+    "city": "Montevideo"
+  },
+  {
+    "bic": "ITAUUYMM",
+    "bankName": "Banco Itaú Uruguay",
+    "country": "UY",
+    "city": "Montevideo"
+  },
+  {
+    "bic": "SANTUYMM",
+    "bankName": "Banco Santander Uruguay",
+    "country": "UY",
+    "city": "Montevideo"
+  },
+  {
+    "bic": "BSFASNDA",
+    "bankName": "Banque Saudi Fransi",
+    "country": "SA",
+    "city": "Riyadh"
+  },
+  {
+    "bic": "NBADAEAA",
+    "bankName": "First Abu Dhabi Bank (FAB)",
+    "country": "AE",
+    "city": "Abu Dhabi"
+  },
+  {
+    "bic": "AUBAAEAA",
+    "bankName": "Ahli United Bank UAE",
+    "country": "AE",
+    "city": "Dubai"
+  },
+  {
+    "bic": "SBINAEAD",
+    "bankName": "State Bank of India Dubai",
+    "country": "AE",
+    "city": "Dubai"
+  },
+  {
+    "bic": "BOMLAEAD",
+    "bankName": "Bank of Baroda UAE",
+    "country": "AE",
+    "city": "Dubai"
+  },
+  {
+    "bic": "NBKAKWKW",
+    "bankName": "National Bank of Kuwait",
+    "country": "KW",
+    "city": "Kuwait City"
+  },
+  {
+    "bic": "CBKUKWKW",
+    "bankName": "Central Bank of Kuwait",
+    "country": "KW",
+    "city": "Kuwait City"
+  },
+  {
+    "bic": "GULFKWKW",
+    "bankName": "Gulf Bank",
+    "country": "KW",
+    "city": "Kuwait City"
+  },
+  {
+    "bic": "COMBKWKW",
+    "bankName": "Commercial Bank of Kuwait",
+    "country": "KW",
+    "city": "Kuwait City"
+  },
+  {
+    "bic": "QNBAQAQA",
+    "bankName": "Qatar National Bank (QNB)",
+    "country": "QA",
+    "city": "Doha"
+  },
+  {
+    "bic": "CBQAQAQA",
+    "bankName": "Qatar Central Bank",
+    "country": "QA",
+    "city": "Doha"
+  },
+  {
+    "bic": "MAFRQAQA",
+    "bankName": "Masraf Al Rayan",
+    "country": "QA",
+    "city": "Doha"
+  },
+  {
+    "bic": "DOHBQAQA",
+    "bankName": "Doha Bank",
+    "country": "QA",
+    "city": "Doha"
+  },
+  {
+    "bic": "BHRMBHBM",
+    "bankName": "Bank of Bahrain and Kuwait (BBK)",
+    "country": "BH",
+    "city": "Manama"
+  },
+  {
+    "bic": "CBBMBHBM",
+    "bankName": "Central Bank of Bahrain",
+    "country": "BH",
+    "city": "Manama"
+  },
+  {
+    "bic": "NBOBBHBM",
+    "bankName": "National Bank of Bahrain",
+    "country": "BH",
+    "city": "Manama"
+  },
+  {
+    "bic": "AUBBBHBM",
+    "bankName": "Ahli United Bank Bahrain",
+    "country": "BH",
+    "city": "Manama"
+  },
+  {
+    "bic": "BSOMOMRU",
+    "bankName": "Bank Muscat",
+    "country": "OM",
+    "city": "Muscat"
+  },
+  {
+    "bic": "CBOMOMRU",
+    "bankName": "Central Bank of Oman",
+    "country": "OM",
+    "city": "Muscat"
+  },
+  {
+    "bic": "NBOMOMRU",
+    "bankName": "National Bank of Oman",
+    "country": "OM",
+    "city": "Muscat"
+  },
+  {
+    "bic": "BDOMOMRU",
+    "bankName": "Bank Dhofar",
+    "country": "OM",
+    "city": "Salalah"
+  },
+  {
+    "bic": "COBADEHD",
+    "bankName": "Commerzbank Hamburg",
+    "country": "DE",
+    "city": "Hamburg"
+  },
+  {
+    "bic": "DRESDEFF",
+    "bankName": "Commerzbank (formerly Dresdner Bank)",
+    "country": "DE",
+    "city": "Frankfurt am Main"
+  },
+  {
+    "bic": "MIDLGB22",
+    "bankName": "HSBC Bank (formerly Midland)",
+    "country": "GB",
+    "city": "London"
+  }
+]
