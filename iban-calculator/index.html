@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IBAN Calculator — Calculate &amp; Validate IBAN Check Digits</title>
+<meta name="description" content="Free online IBAN calculator. Enter a country code and account details to compute the correct IBAN check digits using MOD-97. See step-by-step calculation. Supports all 96 IBAN countries.">
+<link rel="canonical" href="https://ibaneasy.com/iban-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IBAN Easy">
+<meta property="og:title" content="IBAN Calculator — Calculate &amp; Validate IBAN Check Digits">
+<meta property="og:description" content="Free online IBAN calculator. Enter a country code and account details to compute the correct IBAN check digits using MOD-97. See step-by-step calculation. Supports all 96 IBAN countries.">
+<meta property="og:url" content="https://ibaneasy.com/iban-calculator/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
+<link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+<div class="app-container">
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="/"><span class="lg-accent">IBAN</span><span class="lg-dim"> Easy</span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/what-is-iban/">What is IBAN</a>
+      <a href="/countries/">Countries</a>
+      <a href="/validate/">Validator</a>
+      <a href="/sepa-countries/">SEPA</a>
+      <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <a href="/iban-calculator/">Calculator</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">IBAN Calculator</span></nav>
+<main class="main-content prose-content">
+<h1>IBAN Calculator — Compute Check Digits</h1>
+<p>Use this calculator to compute IBAN check digits from a country code and domestic account details. Enter a country, type the BBAN (domestic bank + account number), and we'll calculate the correct check digits using the MOD-97 algorithm.</p>
+<div class="glass-panel" style="margin:1.5rem 0">
+<h2 style="margin-bottom:1rem">Calculate IBAN Check Digits</h2>
+<div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem">
+<select id="calc-country" style="flex:1;min-width:200px;font-family:var(--font);padding:0.65rem 1rem;background:var(--bg-elev-1);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.92rem;cursor:pointer">
+<option value="">Select a country...</option>
+<option value="AL">Albania</option>
+<option value="DZ">Algeria</option>
+<option value="AD">Andorra</option>
+<option value="AM">Armenia</option>
+<option value="AT">Austria</option>
+<option value="AZ">Azerbaijan</option>
+<option value="BH">Bahrain</option>
+<option value="BY">Belarus</option>
+<option value="BE">Belgium</option>
+<option value="BA">Bosnia and Herzegovina</option>
+<option value="BR">Brazil</option>
+<option value="VG">British Virgin Islands</option>
+<option value="BG">Bulgaria</option>
+<option value="BI">Burundi</option>
+<option value="CV">Cape Verde</option>
+<option value="CR">Costa Rica</option>
+<option value="HR">Croatia</option>
+<option value="CY">Cyprus</option>
+<option value="CZ">Czech Republic</option>
+<option value="DK">Denmark</option>
+<option value="DJ">Djibouti</option>
+<option value="DO">Dominican Republic</option>
+<option value="EG">Egypt</option>
+<option value="SV">El Salvador</option>
+<option value="EE">Estonia</option>
+<option value="FK">Falkland Islands</option>
+<option value="FO">Faroe Islands</option>
+<option value="FI">Finland</option>
+<option value="FR">France</option>
+<option value="GF">French Guiana</option>
+<option value="PF">French Polynesia</option>
+<option value="GE">Georgia</option>
+<option value="DE">Germany</option>
+<option value="GI">Gibraltar</option>
+<option value="GR">Greece</option>
+<option value="GL">Greenland</option>
+<option value="GP">Guadeloupe</option>
+<option value="GT">Guatemala</option>
+<option value="GG">Guernsey</option>
+<option value="HN">Honduras</option>
+<option value="HU">Hungary</option>
+<option value="IS">Iceland</option>
+<option value="IQ">Iraq</option>
+<option value="IE">Ireland</option>
+<option value="IM">Isle of Man</option>
+<option value="IL">Israel</option>
+<option value="IT">Italy</option>
+<option value="JE">Jersey</option>
+<option value="JO">Jordan</option>
+<option value="KZ">Kazakhstan</option>
+<option value="XK">Kosovo</option>
+<option value="KW">Kuwait</option>
+<option value="KG">Kyrgyzstan</option>
+<option value="LV">Latvia</option>
+<option value="LB">Lebanon</option>
+<option value="LY">Libya</option>
+<option value="LI">Liechtenstein</option>
+<option value="LT">Lithuania</option>
+<option value="LU">Luxembourg</option>
+<option value="MT">Malta</option>
+<option value="MQ">Martinique</option>
+<option value="MR">Mauritania</option>
+<option value="MU">Mauritius</option>
+<option value="YT">Mayotte</option>
+<option value="MD">Moldova</option>
+<option value="MC">Monaco</option>
+<option value="MN">Mongolia</option>
+<option value="ME">Montenegro</option>
+<option value="NL">Netherlands</option>
+<option value="NC">New Caledonia</option>
+<option value="NI">Nicaragua</option>
+<option value="MK">North Macedonia</option>
+<option value="NO">Norway</option>
+<option value="OM">Oman</option>
+<option value="PK">Pakistan</option>
+<option value="PS">Palestine</option>
+<option value="PL">Poland</option>
+<option value="PT">Portugal</option>
+<option value="QA">Qatar</option>
+<option value="RO">Romania</option>
+<option value="RU">Russia</option>
+<option value="RE">Réunion</option>
+<option value="BL">Saint Barthélemy</option>
+<option value="LC">Saint Lucia</option>
+<option value="MF">Saint Martin</option>
+<option value="PM">Saint Pierre and Miquelon</option>
+<option value="SM">San Marino</option>
+<option value="SA">Saudi Arabia</option>
+<option value="RS">Serbia</option>
+<option value="SC">Seychelles</option>
+<option value="SK">Slovakia</option>
+<option value="SI">Slovenia</option>
+<option value="SO">Somalia</option>
+<option value="ES">Spain</option>
+<option value="SD">Sudan</option>
+<option value="SE">Sweden</option>
+<option value="CH">Switzerland</option>
+<option value="ST">São Tomé and Príncipe</option>
+<option value="TL">Timor-Leste</option>
+<option value="TN">Tunisia</option>
+<option value="TR">Turkey</option>
+<option value="UA">Ukraine</option>
+<option value="AE">United Arab Emirates</option>
+<option value="GB">United Kingdom</option>
+<option value="VA">Vatican City</option>
+<option value="WF">Wallis and Futuna</option>
+</select>
+</div>
+<div style="margin-bottom:1rem">
+<label for="calc-bban" style="display:block;color:var(--text-secondary);font-size:0.82rem;margin-bottom:0.35rem">BBAN (domestic bank code + account number, without country code or check digits)</label>
+<input type="text" id="calc-bban" placeholder="e.g., 370400440532013000 for Germany" style="width:100%;font-family:var(--font-display);padding:0.75rem 1rem;background:var(--bg-elev-1);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none" oninput="calculateIban()" onfocus="this.style.borderColor='var(--accent-light)'" onblur="this.style.borderColor='var(--border)'">
+<p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.3rem" id="calc-format-hint"></p>
+</div>
+<button class="btn btn-primary" id="calc-btn" onclick="calculateIban()" style="margin-bottom:1rem">&#x2699; Calculate IBAN</button>
+<div id="calc-result" style="display:none">
+<h3>Result</h3>
+<div style="font-family:var(--font-display);font-size:1.3rem;font-weight:700;padding:0.75rem 1rem;background:var(--bg-elev-1);border:1px solid var(--border-active);border-radius:var(--radius-sm);margin-bottom:0.75rem;letter-spacing:0.02em" id="calc-iban-output"></div>
+<h3>Step-by-Step Calculation</h3>
+<div style="font-size:0.88rem;line-height:1.8;color:var(--text-secondary)" id="calc-steps"></div>
+</div>
+</div>
+<script src="/js/iban-core.js"></script>
+<script>
+(function() {
+  var countries = {};
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "/iban_countries.json", true);
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      var data = JSON.parse(xhr.responseText);
+      for (var i = 0; i < data.length; i++) {
+        countries[data[i].code] = data[i];
+      }
+    }
+  };
+  xhr.send();
+
+  window.calculateIban = function() {
+    var cc = document.getElementById("calc-country").value;
+    var bban = document.getElementById("calc-bban").value.replace(/\s/g, "").toUpperCase();
+    var resultDiv = document.getElementById("calc-result");
+    var output = document.getElementById("calc-iban-output");
+    var steps = document.getElementById("calc-steps");
+    var hint = document.getElementById("calc-format-hint");
+
+    if (!cc || !bban) { hint.textContent = "Please select a country and enter the BBAN."; return; }
+    var c = countries[cc];
+    if (!c) { hint.textContent = "Country not found in database."; return; }
+    if (bban.length !== c.bbanLen) { hint.textContent = "BBAN should be " + c.bbanLen + " characters for " + c.name + " (you entered " + bban.length + ")."; resultDiv.style.display = "none"; return; }
+
+    hint.textContent = c.name + " — " + c.bbanLen + "-character BBAN, format: " + c.bbanFormat;
+
+    // Step 1: Assemble country + "00" + BBAN
+    var step1 = cc + "00" + bban;
+    var s = [];
+    s.push("<strong>Step 1:</strong> Start with country code + \"00\" + BBAN = <code>" + step1 + "</code>");
+
+    // Step 2: Move first 4 chars to end
+    var step2 = step1.slice(4) + step1.slice(0, 4);
+    s.push("<strong>Step 2:</strong> Move first 4 characters to the end = <code>" + step2 + "</code>");
+
+    // Step 3: Convert letters to numbers
+    var step3 = "";
+    for (var i = 0; i < step2.length; i++) {
+      var ch = step2[i];
+      if (ch >= "A" && ch <= "Z") { step3 += (ch.charCodeAt(0) - 55).toString(); }
+      else { step3 += ch; }
+    }
+    s.push("<strong>Step 3:</strong> Convert letters to numbers (A=10, B=11, ...) = <code>" + step3.slice(0, 20) + "..." + step3.slice(-10) + "</code>");
+
+    // Step 4: MOD-97
+    var remainder = IBAN.mod97(step3);
+    s.push("<strong>Step 4:</strong> Compute MOD-97: the huge number mod 97 = <code>" + remainder + "</code>");
+
+    // Step 5: Check digits = 98 - remainder
+    var checkDigits = 98 - remainder;
+    var checkStr = ("0" + checkDigits).slice(-2);
+    s.push("<strong>Step 5:</strong> Check digits = 98 − " + remainder + " = <code>" + checkStr + "</code>");
+
+    // Final IBAN
+    var iban = cc + checkStr + bban;
+    var formatted = IBAN.format(iban);
+    output.textContent = formatted;
+    s.push("<br><strong style=\"color:var(--accent-light)\">Final IBAN:</strong> <code style=\"font-size:1rem\">" + formatted + "</code>");
+    s.push("<span style=\"color:var(--text-muted);font-size:0.82rem\">This IBAN passes MOD-97 validation.</span>");
+
+    steps.innerHTML = s.join("<br>");
+    resultDiv.style.display = "";
+  };
+
+  // Country change handler
+  document.getElementById("calc-country").addEventListener("change", function() {
+    var cc = this.value;
+    var c = countries[cc];
+    var hint = document.getElementById("calc-format-hint");
+    var ibanBban = document.getElementById("calc-bban");
+    if (c) {
+      hint.textContent = c.name + " — BBAN: " + c.bbanLen + " chars, format " + c.bbanFormat;
+      ibanBban.placeholder = "Enter " + c.bbanLen + "-character BBAN...";
+    }
+    calculateIban();
+  });
+})();
+</script>
+<h2>How the IBAN Calculator Works</h2>
+<p>The calculator follows the official ISO 13616 algorithm for computing IBAN check digits:</p>
+<ol>
+<li><strong>Assemble</strong>: Take the country code + "00" (placeholder check digits) + BBAN (domestic account details)</li>
+<li><strong>Rearrange</strong>: Move the first 4 characters (country code + "00") to the end of the string</li>
+<li><strong>Convert</strong>: Replace each letter with its numeric value (A=10, B=11, ..., Z=35)</li>
+<li><strong>Divide</strong>: Interpret the result as a single large integer and compute remainder modulo 97</li>
+<li><strong>Finalise</strong>: Check digits = 98 − remainder (zero-padded to 2 digits)</li>
+</ol>
+<h2>Why Would You Need an IBAN Calculator?</h2>
+<ul>
+<li><strong>Verify your IBAN</strong>: If you know your domestic bank code and account number, use this calculator to verify your IBAN's check digits are correct</li>
+<li><strong>Understand the algorithm</strong>: See each step of the MOD-97 calculation to understand how IBAN validation works</li>
+<li><strong>Educational purposes</strong>: Students and developers learning about international banking can explore the IBAN structure interactively</li>
+<li><strong>Testing and QA</strong>: Validate that your payment system's IBAN generation logic produces correct check digits</li>
+</ul>
+<h2>IBAN Calculator vs IBAN Generator</h2>
+<p>This <strong>calculator</strong> computes check digits from your existing domestic bank details. Our <a href="/">IBAN Generator</a> creates entirely random (but mathematically valid) IBANs for testing. Use the calculator when you have real bank data and need to verify the check digits; use the generator when you need test data.</p>
+<h2>Frequently Asked Questions</h2>
+<div class="faq-list">
+<details class="faq-item"><summary class="faq-q">Can I calculate an IBAN from just a sort code and account number?</summary><div class="faq-a"><p>Yes! The IBAN calculator does exactly this. Enter the country, type your domestic bank code + account number (the BBAN), and we compute the correct check digits using MOD-97.</p></div></details>
+<details class="faq-item"><summary class="faq-q">What if my calculated IBAN doesn't match the one on my bank statement?</summary><div class="faq-a"><p>Your bank's IBAN is the authoritative source. If there's a discrepancy, double-check that you entered the correct domestic bank code and account number. Some banks use proprietary BBAN formats that differ slightly from the standard.</p></div></details>
+<details class="faq-item"><summary class="faq-q">Is the MOD-97 algorithm the same for all countries?</summary><div class="faq-a"><p>Yes. All IBAN countries use the same MOD-97 check digit algorithm (ISO 7064). The only difference between countries is the BBAN format — the length and structure of the domestic bank/account details.</p></div></details>
+<details class="faq-item"><summary class="faq-q">Can I use this calculator for any IBAN country?</summary><div class="faq-a"><p>Yes! The calculator supports all 96 IBAN countries. Select your country from the dropdown, enter the BBAN in the correct format, and we'll compute the check digits.</p></div></details>
+</div>
+<h2>Related Tools</h2>
+<div class="card-grid card-grid-2" style="margin-top:1rem">
+<a class="country-card" href="/"><div class="cc-badge">&#x1F4A0;</div><div class="cc-name">IBAN Generator</div><div class="cc-meta">Generate random valid IBANs for testing</div></a>
+<a class="country-card" href="/validate/"><div class="cc-badge">&#x2714;</div><div class="cc-name">IBAN Validator</div><div class="cc-meta">Check if any IBAN is valid using MOD-97</div></a>
+<a class="country-card" href="/what-is-iban/"><div class="cc-badge">&#x2753;</div><div class="cc-name">What is an IBAN?</div><div class="cc-meta">Complete guide to international bank account numbers</div></a>
+<a class="country-card" href="/iban-check-digit/"><div class="cc-badge">&#x1F522;</div><div class="cc-name">Check Digits Explained</div><div class="cc-meta">Deep dive into the MOD-97 algorithm</div></a>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><span class="fb-accent">IBAN</span><span class="fb-dim"> Easy</span></div>
+      <p class="footer-note">Free online IBAN tools. All generation and validation runs client-side. No data is collected or stored. Generated IBANs are for testing only.</p>
+    </div>
+    <div class="footer-links">
+      <a href="/">IBAN Generator</a>
+      <a href="/what-is-iban/">What is an IBAN?</a>
+      <a href="/countries/">All Countries</a>
+      <a href="/validate/">Validator</a>
+      <a href="/sepa-countries/">SEPA Countries</a>
+      <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
+      <a href="/iban-calculator/">IBAN Calculator</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/sitemap/">Sitemap</a>
+    </div>
+  </div>
+</footer>
+</div><!-- /app-container -->
+</body>
+</html>
