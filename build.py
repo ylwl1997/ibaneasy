@@ -158,6 +158,38 @@ FOOT = '''</main>
 </body>
 </html>'''
 
+# ── Schema Helpers ────────────────────────────────────────────────
+def schema_script(data):
+    """Wrap a dict/list as a JSON-LD script tag."""
+    return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>\n'
+
+
+def breadcrumb_schema(crumbs):
+    """Build a BreadcrumbList schema from a list of (name, url) tuples."""
+    items = []
+    for i, (name, url) in enumerate(crumbs, start=1):
+        item = {'@type': 'ListItem', 'position': i, 'name': name}
+        if url:
+            item['item'] = url
+        items.append(item)
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        'itemListElement': items,
+    }
+
+
+def itemlist_schema(items):
+    """Build an ItemList schema from a list of (name, url) tuples."""
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        'itemListElement': [
+            {'@type': 'ListItem', 'position': i, 'name': name, 'url': url}
+            for i, (name, url) in enumerate(items, start=1)
+        ],
+    }
+
 # ── Country Banking System Descriptions ───────────────────────────
 # Used to add unique descriptive content to each country page
 BANKING_NOTES = {
@@ -330,11 +362,15 @@ def build_country_page(c):
     desc = 'Generate valid {} IBANs. {} IBAN format: {}-character code starting with {}, bank code ({}) + account number. SEPA member: {}. Free online tool.'.format(
         name, name, c['ibanLen'], code, c['bankLen'], 'Yes' if c['sepa'] else 'No')
 
-    extra = '<script type="application/ld+json">' + json.dumps({
+    extra = schema_script({
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
         'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in country_faqs(c)]
-    }) + '</script>'
+    }) + schema_script(breadcrumb_schema([
+        ('Home', SITE + '/'),
+        ('Countries', SITE + '/countries/'),
+        ('{} IBAN'.format(name), SITE + can_path),
+    ]))
 
     body = HEAD.format(
         title=esc(title), desc=esc(desc),
@@ -472,6 +508,17 @@ def build_country_page(c):
             if len(country_bics) > 25:
                 body += '<p style="font-size:0.85rem;color:var(--text-muted)">Showing 25 of {} banks. <a href="/swift-codes/">Search all SWIFT/BIC codes &rarr;</a></p>\n'.format(len(country_bics))
 
+    # Related tools & resources (internal linking)
+    body += '<h2>IBAN Tools &amp; Resources</h2>\n'
+    body += '<div class="card-grid card-grid-2" style="margin-top:0.5rem">\n'
+    body += '<a class="country-card" href="/iban-calculator/"><div class="cc-badge">&#x1F522;</div><div class="cc-name">IBAN Calculator</div><div class="cc-meta">Compute check digits for {} IBANs from domestic account details</div></a>\n'.format(name)
+    body += '<a class="country-card" href="/validate/"><div class="cc-badge">&#x2714;</div><div class="cc-name">IBAN Validator</div><div class="cc-meta">Check any IBAN (including {} IBANs) with MOD-97</div></a>\n'.format(name)
+    body += '<a class="country-card" href="/what-is-iban/"><div class="cc-badge">&#x2753;</div><div class="cc-name">What is an IBAN?</div><div class="cc-meta">Complete guide to IBAN structure and how it works</div></a>\n'
+    body += '<a class="country-card" href="/learn/iban-vs-swift/"><div class="cc-badge">&#x1F4E8;</div><div class="cc-name">IBAN vs SWIFT</div><div class="cc-meta">When do you need an IBAN, a SWIFT code, or both?</div></a>\n'
+    body += '<a class="country-card" href="/learn/how-to-get-an-iban/"><div class="cc-badge">&#x1F4CD;</div><div class="cc-name">How to Find Your IBAN</div><div class="cc-meta">5 ways to locate your {} IBAN quickly</div></a>\n'.format(name)
+    body += '<a class="country-card" href="/swift-codes/"><div class="cc-badge">&#x1F4E8;</div><div class="cc-name">SWIFT/BIC Lookup</div><div class="cc-meta">Find bank BIC codes for international transfers</div></a>\n'
+    body += '</div>\n'
+
     body += FOOT
     return body
 
@@ -481,11 +528,19 @@ def build_countries_index():
     title = 'All IBAN Countries — Complete List of 96 IBAN Formats Worldwide'
     desc = 'Browse all 96 countries that use IBAN. Filter by continent and SEPA membership. Each country page includes IBAN format, bank code details, examples, and a free generator.'
 
+    extra = schema_script(itemlist_schema([
+        (c['name'], SITE + '/countries/{}/'.format(c['code'].lower()))
+        for c in sorted(countries, key=lambda x: x['name'])
+    ])) + schema_script(breadcrumb_schema([
+        ('Home', SITE + '/'),
+        ('Countries', SITE + '/countries/'),
+    ]))
+
     body = HEAD.format(
         title=esc(title), desc=esc(desc),
         canon=SITE + '/countries/',
         og_title=esc(title), og_desc=esc(desc),
-        extra=''
+        extra=extra
     )
 
     body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">Countries</span></nav>\n'
@@ -549,14 +604,17 @@ def build_validator_page():
     title = 'Free IBAN Validator — Check Any IBAN Number Online'
     desc = 'Validate any IBAN number instantly. Checks country code, length, and MOD-97 check digits. Supports all 96 IBAN countries. 100% client-side — your data stays private.'
 
-    extra = '<script type="application/ld+json">' + json.dumps({
+    extra = schema_script({
         '@context': 'https://schema.org',
         '@type': 'WebApplication',
         'name': 'IBAN Validator',
         'url': SITE + '/validate/',
         'description': 'Free online IBAN validator — check any IBAN for correctness using MOD-97 algorithm',
         'applicationCategory': 'FinanceApplication'
-    }) + '</script>'
+    }) + schema_script(breadcrumb_schema([
+        ('Home', SITE + '/'),
+        ('IBAN Validator', SITE + '/validate/'),
+    ]))
 
     body = HEAD.format(
         title=esc(title), desc=esc(desc),
@@ -672,11 +730,20 @@ def build_sepa_page():
     title = 'SEPA Countries — Complete List of 36 SEPA IBAN Countries (2026)'
     desc = 'Full list of all 36 SEPA countries and their IBAN formats. SEPA includes EU/EEA states, Switzerland, Monaco, San Marino, Andorra, Vatican City, and UK crown dependencies.'
 
+    sepa_countries = [c for c in countries if c['sepa']]
+    extra = schema_script(itemlist_schema([
+        (c['name'], SITE + '/countries/{}/'.format(c['code'].lower()))
+        for c in sorted(sepa_countries, key=lambda x: x['name'])
+    ])) + schema_script(breadcrumb_schema([
+        ('Home', SITE + '/'),
+        ('SEPA Countries', SITE + '/sepa-countries/'),
+    ]))
+
     body = HEAD.format(
         title=esc(title), desc=esc(desc),
         canon=SITE + '/sepa-countries/',
         og_title=esc(title), og_desc=esc(desc),
-        extra=''
+        extra=extra
     )
 
     body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">SEPA Countries</span></nav>\n'
@@ -715,11 +782,16 @@ def build_check_digit_page():
     title = 'IBAN Check Digits Explained — How MOD-97 Validates Your IBAN'
     desc = 'Learn how IBAN check digits work using the MOD-97 algorithm. Step-by-step explanation with examples. Understand why IBANs are so reliable for international banking.'
 
+    extra = schema_script(breadcrumb_schema([
+        ('Home', SITE + '/'),
+        ('IBAN Check Digits', SITE + '/iban-check-digit/'),
+    ]))
+
     body = HEAD.format(
         title=esc(title), desc=esc(desc),
         canon=SITE + '/iban-check-digit/',
         og_title=esc(title), og_desc=esc(desc),
-        extra=''
+        extra=extra
     )
 
     body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">IBAN Check Digits</span></nav>\n'
@@ -899,11 +971,23 @@ def build_swift_page():
     title = 'SWIFT/BIC Code Lookup — Find Bank BIC Codes Worldwide'
     desc = 'Free SWIFT/BIC code lookup. Search by bank name, country, or BIC code. Database of major banks worldwide. All searches are client-side and private.'
 
+    extra = schema_script({
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        'name': 'SWIFT/BIC Code Lookup',
+        'url': SITE + '/swift-codes/',
+        'description': 'Free SWIFT/BIC code lookup for banks worldwide',
+        'applicationCategory': 'FinanceApplication'
+    }) + schema_script(breadcrumb_schema([
+        ('Home', SITE + '/'),
+        ('SWIFT/BIC Codes', SITE + '/swift-codes/'),
+    ]))
+
     body = HEAD.format(
         title=esc(title), desc=esc(desc),
         canon=SITE + '/swift-codes/',
         og_title=esc(title), og_desc=esc(desc),
-        extra=''
+        extra=extra
     )
 
     body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">SWIFT/BIC Codes</span></nav>\n'
@@ -1167,11 +1251,19 @@ def build_learn_index():
     title = 'Learn About IBAN — Guides, Tips & Resources'
     desc = 'Learn everything about IBAN: what it is, how check digits work, the difference between IBAN and SWIFT, SEPA vs SWIFT transfers, and how to find your IBAN.'
 
+    extra = schema_script(itemlist_schema([
+        (art['title'], SITE + '/learn/{}/'.format(art['slug']))
+        for art in BLOG_ARTICLES
+    ])) + schema_script(breadcrumb_schema([
+        ('Home', SITE + '/'),
+        ('Learn', SITE + '/learn/'),
+    ]))
+
     body = HEAD.format(
         title=esc(title), desc=esc(desc),
         canon=SITE + '/learn/',
         og_title=esc(title), og_desc=esc(desc),
-        extra=''
+        extra=extra
     )
 
     body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">Learn</span></nav>\n'
@@ -1207,7 +1299,7 @@ def build_article_page(art):
     desc = art['desc']
     can_path = '/learn/{}/'.format(slug)
 
-    extra = '<script type="application/ld+json">' + json.dumps({
+    extra = schema_script({
         '@context': 'https://schema.org',
         '@type': 'Article',
         'headline': title,
@@ -1216,7 +1308,11 @@ def build_article_page(art):
         'author': {'@type': 'Organization', 'name': 'IBAN Easy'},
         'publisher': {'@type': 'Organization', 'name': 'IBAN Easy', 'url': SITE},
         'mainEntityOfPage': SITE + can_path,
-    }) + '</script>'
+    }) + schema_script(breadcrumb_schema([
+        ('Home', SITE + '/'),
+        ('Learn', SITE + '/learn/'),
+        (art['title'], SITE + can_path),
+    ]))
 
     body = HEAD.format(
         title=esc(title), desc=esc(desc),
@@ -1282,11 +1378,25 @@ def build_what_is_iban_page():
     title = 'What is an IBAN? — Complete Guide to International Bank Account Numbers'
     desc = 'Learn what an IBAN is, how it works, its structure, and why it matters for international banking. Covers IBAN format, country codes, check digits, SEPA, and how to find your IBAN.'
 
+    extra = schema_script({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        'headline': 'What is an IBAN? The Complete Guide to International Bank Account Numbers',
+        'description': desc,
+        'datePublished': '2026-07-01',
+        'author': {'@type': 'Organization', 'name': 'IBAN Easy'},
+        'publisher': {'@type': 'Organization', 'name': 'IBAN Easy', 'url': SITE},
+        'mainEntityOfPage': SITE + '/what-is-iban/',
+    }) + schema_script(breadcrumb_schema([
+        ('Home', SITE + '/'),
+        ('What is an IBAN?', SITE + '/what-is-iban/'),
+    ]))
+
     body = HEAD.format(
         title=esc(title), desc=esc(desc),
         canon=SITE + '/what-is-iban/',
         og_title=esc(title), og_desc=esc(desc),
-        extra=''
+        extra=extra
     )
 
     body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">What is an IBAN?</span></nav>\n'
@@ -1410,8 +1520,18 @@ def build_what_is_iban_page():
     body += '<div class="card-grid card-grid-2" style="margin-top:1rem">\n'
     body += '<a class="country-card" href="/"><div class="cc-badge">&#x1F4A0;</div><div class="cc-name">IBAN Generator</div><div class="cc-meta">Generate valid IBANs for any country — free, no sign-up</div></a>\n'
     body += '<a class="country-card" href="/validate/"><div class="cc-badge">&#x2714;</div><div class="cc-name">IBAN Validator</div><div class="cc-meta">Check any IBAN for correctness using MOD-97</div></a>\n'
+    body += '<a class="country-card" href="/iban-calculator/"><div class="cc-badge">&#x1F522;</div><div class="cc-name">IBAN Calculator</div><div class="cc-meta">Compute IBAN check digits from domestic account details</div></a>\n'
     body += '<a class="country-card" href="/countries/"><div class="cc-badge">&#x1F30D;</div><div class="cc-name">All IBAN Countries</div><div class="cc-meta">Complete reference for 96 IBAN formats worldwide</div></a>\n'
     body += '<a class="country-card" href="/swift-codes/"><div class="cc-badge">&#x1F4E8;</div><div class="cc-name">SWIFT/BIC Lookup</div><div class="cc-meta">Find bank BIC codes for international transfers</div></a>\n'
+    body += '<a class="country-card" href="/learn/"><div class="cc-badge">&#x1F4D6;</div><div class="cc-name">IBAN Guides &amp; Tips</div><div class="cc-meta">Practical articles on IBAN, SEPA, and SWIFT</div></a>\n'
+    body += '</div>\n'
+
+    body += '<h2>Related Articles</h2>\n'
+    body += '<div class="card-grid card-grid-2" style="margin-top:1rem">\n'
+    body += '<a class="country-card" href="/learn/iban-vs-swift/"><div class="cc-badge">&#x1F4E8;</div><div class="cc-name">IBAN vs SWIFT</div><div class="cc-meta">The key differences and when you need each</div></a>\n'
+    body += '<a class="country-card" href="/learn/iban-check-digit-explained/"><div class="cc-badge">&#x1F522;</div><div class="cc-name">MOD-97 Explained</div><div class="cc-meta">How IBAN check digits catch 99.94% of errors</div></a>\n'
+    body += '<a class="country-card" href="/learn/sepa-vs-swift/"><div class="cc-badge">&#x1F30D;</div><div class="cc-name">SEPA vs SWIFT</div><div class="cc-meta">Costs, speed, and when to use each</div></a>\n'
+    body += '<a class="country-card" href="/learn/what-is-bban/"><div class="cc-badge">&#x1F4CB;</div><div class="cc-name">What is a BBAN?</div><div class="cc-meta">Understanding the domestic part of your IBAN</div></a>\n'
     body += '</div>\n'
 
     body += FOOT
@@ -1423,11 +1543,23 @@ def build_iban_calculator_page():
     title = 'IBAN Calculator — Calculate & Validate IBAN Check Digits'
     desc = 'Free online IBAN calculator. Enter a country code and account details to compute the correct IBAN check digits using MOD-97. See step-by-step calculation. Supports all 96 IBAN countries.'
 
+    extra = schema_script({
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        'name': 'IBAN Calculator',
+        'url': SITE + '/iban-calculator/',
+        'description': 'Free online IBAN calculator — compute check digits using MOD-97',
+        'applicationCategory': 'FinanceApplication'
+    }) + schema_script(breadcrumb_schema([
+        ('Home', SITE + '/'),
+        ('IBAN Calculator', SITE + '/iban-calculator/'),
+    ]))
+
     body = HEAD.format(
         title=esc(title), desc=esc(desc),
         canon=SITE + '/iban-calculator/',
         og_title=esc(title), og_desc=esc(desc),
-        extra=''
+        extra=extra
     )
 
     body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">IBAN Calculator</span></nav>\n'
