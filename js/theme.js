@@ -31,4 +31,25 @@
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem(KEY, next);
   };
+
+  // Language switcher — called by the lang button in navbar
+  window.toggleLangMenu = function() {
+    var menu = document.getElementById('lang-menu');
+    if (!menu) return;
+    var expanded = menu.style.display === 'block';
+    menu.style.display = expanded ? 'none' : 'block';
+    var btn = document.querySelector('.lang-btn');
+    if (btn) btn.setAttribute('aria-expanded', String(!expanded));
+  };
+
+  // Close lang menu when clicking elsewhere
+  document.addEventListener('click', function(e) {
+    var menu = document.getElementById('lang-menu');
+    var btn = document.querySelector('.lang-btn');
+    if (!menu || !btn) return;
+    if (!btn.contains(e.target) && !menu.contains(e.target)) {
+      menu.style.display = 'none';
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
 })();
