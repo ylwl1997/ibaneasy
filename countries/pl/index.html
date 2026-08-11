@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://ibaneasy.com/countries/pl/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the IBAN format for Poland?", "acceptedAnswer": {"@type": "Answer", "text": "Poland uses a 28-character IBAN with the country code \"PL\" followed by two check digits and a 24-character BBAN. The format is <code>8!n16!n</code>. The bank code occupies positions 5 to 11."}}, {"@type": "Question", "name": "Is Poland a SEPA country?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, Poland is part of the SEPA (Single Euro Payments Area) and uses IBAN for all domestic and international transfers."}}, {"@type": "Question", "name": "How long is a Poland IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "A Poland IBAN is exactly 28 characters long. The BBAN portion accounts for 24 characters."}}, {"@type": "Question", "name": "How do I find my Poland IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "Your IBAN is printed on your bank statement, available in your online banking portal, or can be obtained from your bank. It typically appears alongside your BIC/SWIFT code for international transfers."}}, {"@type": "Question", "name": "Can I generate a valid Poland IBAN for testing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Use the IBAN generator on this page or visit the <a href=\"/\">IBAN Easy homepage</a> to generate mathematically valid IBANs for any supported country. All generation is client-side and private."}}]}</script>
 </head>
@@ -27,6 +28,11 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -61,9 +67,9 @@
 </table></div><h2>Example Poland IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> Poland IBANs for testing:</p>
 <ul>
-<li><code>PL55 2118 5540 6905 8647 2337 7541</code></li>
-<li><code>PL94 9156 0513 9867 4349 6990 6550</code></li>
-<li><code>PL21 6759 4471 9446 0109 7425 9255</code></li>
+<li><code>PL96 6890 6808 5946 3575 6060 3457</code></li>
+<li><code>PL32 6456 7919 5922 9645 4987 0987</code></li>
+<li><code>PL56 8571 1782 3351 1678 5268 3558</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
 <h2>Generate Poland IBANs for Testing</h2>
@@ -148,6 +154,23 @@
 <li><a href="/countries/by/">Belarus IBAN (28 chars)</a></li>
 <li><a href="/countries/ch/">Switzerland IBAN (21 chars, SEPA)</a></li>
 </ul>
+<h2>Major Bank BIC/SWIFT Codes in Poland</h2>
+<p>BIC (Bank Identifier Code) / SWIFT codes for major banks in Poland. These codes are used for international wire transfers alongside the IBAN.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>BIC Code</th><th>Bank Name</th><th>City</th></tr></thead>
+<tbody>
+<tr><td><code class="swift-bic-code">ALBPPLP1</code></td><td>Alior Bank</td><td>Warsaw</td></tr>
+<tr><td><code class="swift-bic-code">BIGBPLPW</code></td><td>Bank Millennium</td><td>Warsaw</td></tr>
+<tr><td><code class="swift-bic-code">EBRDPLPW</code></td><td>Bank Pekao</td><td>Warsaw</td></tr>
+<tr><td><code class="swift-bic-code">POLUPLPR</code></td><td>Bank Polska Kasa Opieki</td><td>Warsaw</td></tr>
+<tr><td><code class="swift-bic-code">CITIPLPX</code></td><td>Citi Handlowy</td><td>Warsaw</td></tr>
+<tr><td><code class="swift-bic-code">INGBPLPW</code></td><td>ING Bank Śląski</td><td>Katowice</td></tr>
+<tr><td><code class="swift-bic-code">NBPLPLPW</code></td><td>Narodowy Bank Polski</td><td>Warsaw</td></tr>
+<tr><td><code class="swift-bic-code">PKOPPLPW</code></td><td>PKO Bank Polski</td><td>Warsaw</td></tr>
+<tr><td><code class="swift-bic-code">BWBKPLPP</code></td><td>Santander Bank Polska</td><td>Warsaw</td></tr>
+<tr><td><code class="swift-bic-code">BREXPLPW</code></td><td>mBank</td><td>Warsaw</td></tr>
+</tbody>
+</table></div>
 </main>
 <footer class="site-footer">
   <div class="footer-inner">
@@ -161,6 +184,7 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
