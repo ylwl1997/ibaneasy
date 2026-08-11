@@ -61,13 +61,74 @@
 </table></div><h2>Example Vatican City IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> Vatican City IBANs for testing:</p>
 <ul>
-<li><code>VA93 2444 4028 9002 7303 84</code></li>
-<li><code>VA87 6621 9653 6163 5575 86</code></li>
-<li><code>VA90 8130 4413 1145 3628 79</code></li>
+<li><code>VA07 3990 7725 7554 2428 36</code></li>
+<li><code>VA75 4493 9847 1691 2510 40</code></li>
+<li><code>VA45 0220 4132 8549 0747 26</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
-<h2>Generate More Vatican City IBANs</h2>
-<p>Use our <a href="/">free IBAN generator</a> to create more test IBANs for Vatican City. The tool runs entirely in your browser — no data is sent to any server.</p>
+<h2>Generate Vatican City IBANs for Testing</h2>
+<p>Generate valid Vatican City IBANs right here. All generation is client-side — no data leaves your browser.</p>
+<div class="glass-panel" style="text-align:center">
+<div class="quantity-row" style="max-width:320px;margin:0 auto 0.85rem">
+<label for="mini-qty">Quantity</label>
+<div class="quantity-control">
+<input type="range" id="mini-qty" min="1" max="100" value="5">
+<span class="quantity-num" id="mini-qty-val">5</span>
+</div></div>
+<button class="btn btn-primary" id="mini-gen" style="margin-bottom:0.85rem">&#x21bb; Generate Vatican City IBANs</button>
+<div id="mini-results" style="text-align:left;max-height:300px;overflow-y:auto"></div>
+<div style="margin-top:0.75rem;display:none" id="mini-actions">
+<button class="btn btn-ghost btn-sm" id="mini-copy-all">&#x2398; Copy All</button>
+<button class="btn btn-ghost btn-sm" id="mini-csv">CSV</button>
+<button class="btn btn-ghost btn-sm" id="mini-json">JSON</button>
+<button class="btn btn-ghost btn-sm" id="mini-txt">TXT</button>
+</div></div>
+<script src="/js/iban-core.js"></script>
+<script>
+(function() {
+  var COUNTRY = "VA";
+  var FORMAT = "3!n15!n";
+  var results = [];
+  var qty = document.getElementById("mini-qty");
+  var qtyVal = document.getElementById("mini-qty-val");
+  qty.addEventListener("input", function() { qtyVal.textContent = qty.value; });
+  document.getElementById("mini-gen").addEventListener("click", function() {
+    var n = parseInt(qty.value, 10);
+    results = [];
+    var html = "";
+    for (var i = 0; i < n; i++) {
+      var iban = IBAN.generate(COUNTRY, FORMAT);
+      var fmt = IBAN.format(iban);
+      results.push({raw: iban, formatted: fmt});
+      html += "<div style=\"font-family:var(--font-display);padding:0.35rem 0;border-bottom:1px solid #ffffff08;font-size:0.88rem\">" + fmt + "</div>";
+    }
+    document.getElementById("mini-results").innerHTML = html;
+    document.getElementById("mini-actions").style.display = "";
+  });
+  function download(filename, content, mime) {
+    var b = new Blob([content], {type: mime + ";charset=utf-8"});
+    var u = URL.createObjectURL(b);
+    var a = document.createElement("a");
+    a.href = u; a.download = filename;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(u);
+  }
+  function copyAll() {
+    var t = results.map(function(r) { return r.formatted; }).join("\n");
+    navigator.clipboard.writeText(t);
+  }
+  document.getElementById("mini-copy-all").addEventListener("click", copyAll);
+  document.getElementById("mini-csv").addEventListener("click", function() {
+    download("ibans.csv", "IBAN\n" + results.map(function(r) { return r.raw; }).join("\n"), "text/csv");
+  });
+  document.getElementById("mini-json").addEventListener("click", function() {
+    download("ibans.json", JSON.stringify(results.map(function(r) { return {iban: r.raw, formatted: r.formatted}; }), null, 2), "application/json");
+  });
+  document.getElementById("mini-txt").addEventListener("click", function() {
+    download("ibans.txt", results.map(function(r) { return r.raw; }).join("\n"), "text/plain");
+  });
+})();
+</script>
 <h2>Frequently Asked Questions</h2>
 <div class="faq-list">
 <details class="faq-item"><summary class="faq-q">What is the IBAN format for Vatican City?</summary><div class="faq-a"><p>Vatican City uses a 22-character IBAN with the country code "VA" followed by two check digits and a 18-character BBAN. The format is <code>3!n15!n</code>. The bank code occupies positions 5 to 7.</p></div></details>
@@ -100,6 +161,10 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/sitemap/">Sitemap</a>
     </div>
   </div>
 </footer>
