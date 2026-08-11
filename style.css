@@ -1479,6 +1479,32 @@ td a:hover { text-decoration: underline; }
 .faq-a p { margin-bottom: 0.5rem; }
 .faq-a p:last-child { margin-bottom: 0; }
 
+/* ── Blog / Learn section ──────────────────────────────────────── */
+.blog-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  padding: 1.35rem 1.5rem;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+}
+.blog-card:hover { border-color: var(--border-active); }
+
+.blog-card h2 { margin: 0.35rem 0 0.5rem; font-size: 1.25rem; }
+.blog-card h2 a { color: var(--text); text-decoration: none; }
+.blog-card h2 a:hover { color: var(--accent-light); }
+.blog-card p { margin-bottom: 0.6rem; }
+.blog-card p:last-child { margin-bottom: 0; }
+
+.blog-meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
+}
+.prose-content .blog-meta { margin-bottom: 0.4rem; }
+
 /* ── CTA Band ──────────────────────────────────────────────────── */
 .cta-band {
   text-align: center;
