@@ -15,7 +15,7 @@ import random
 from datetime import date
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-SRC = os.path.join(ROOT, 'src')
+SRC = ROOT  # Output to project root so Cloudflare Pages serves at correct URLs
 DATA = os.path.join(ROOT, 'iban_countries.json')
 SITE = 'https://ibaneasy.com'
 TODAY = date.today().isoformat()
