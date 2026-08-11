@@ -1,0 +1,627 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ibaneasy.com — Global Stylesheet
+   Single shared CSS for all pages. Mobile-first, CSS custom properties.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Reset & Design Tokens ─────────────────────────────────────── */
+:root {
+  --bg: #ffffff;
+  --ink: #1e293b;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --surface: #f8fafc;
+  --accent: #2563eb;
+  --accent-dark: #1d4ed8;
+  --accent-light: #dbeafe;
+  --success: #16a34a;
+  --success-light: #dcfce7;
+  --danger: #dc2626;
+  --danger-light: #fef2f2;
+  --warning: #f59e0b;
+  --warning-light: #fffbeb;
+
+  --mono: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --wrap: 860px;
+  --r: 10px;
+  --ease: 0.2s ease;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Typography ────────────────────────────────────────────────── */
+h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; }
+h2 { font-size: 1.4rem; font-weight: 700; margin-top: 2rem; margin-bottom: 0.75rem; }
+h3 { font-size: 1.1rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+p  { margin-bottom: 0.75rem; }
+a  { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.lede {
+  font-size: 1.15rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+code, .code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  background: var(--surface);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+}
+
+pre {
+  font-family: var(--mono);
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 1rem 1.25rem;
+  border-radius: var(--r);
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* ── Header / Navigation ───────────────────────────────────────── */
+.barwrap {
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.bar {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  height: 56px;
+  gap: 1.5rem;
+}
+
+.brand {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+.brand span { color: var(--accent); }
+.brand:hover { text-decoration: none; }
+
+.bar nav {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.bar nav a {
+  color: var(--muted);
+  padding: 0.3rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color var(--ease), border-color var(--ease);
+}
+.bar nav a:hover,
+.bar nav a.active {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+  text-decoration: none;
+}
+
+/* ── Main Content ──────────────────────────────────────────────── */
+main {
+  flex: 1;
+  max-width: var(--wrap);
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.prose {
+  max-width: 720px;
+}
+
+/* ── Tool Hero ─────────────────────────────────────────────────── */
+.tool-hero {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.tool-hero h1 {
+  margin-bottom: 0.5rem;
+}
+
+.tool-hero .iban-display {
+  font-family: var(--mono);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  word-break: break-all;
+  padding: 1.5rem 1rem;
+  background: white;
+  border: 2px solid var(--line);
+  border-radius: var(--r);
+  margin: 1.5rem 0;
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--ease);
+}
+.tool-hero .iban-display.generated {
+  border-color: var(--success);
+}
+
+.tool-hero .controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.tool-hero select {
+  font-size: 1rem;
+  padding: 0.6rem 2rem 0.6rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: white;
+  font-family: var(--sans);
+  cursor: pointer;
+  min-width: 220px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%2364748b'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+}
+
+/* ── Buttons ───────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.65rem 1.5rem;
+  border-radius: var(--r);
+  border: none;
+  cursor: pointer;
+  transition: background var(--ease), transform 0.1s ease;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+.btn-primary:hover { background: var(--accent-dark); }
+
+.btn-outline {
+  background: white;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+}
+.btn-outline:hover { background: var(--accent-light); }
+
+.btn-sm {
+  font-size: 0.85rem;
+  padding: 0.4rem 1rem;
+}
+
+/* ── IBAN Structure Diagram ────────────────────────────────────── */
+.iban-structure {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin: 1.5rem 0;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+.iban-block {
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  text-align: center;
+  border: 1px solid var(--line);
+}
+
+.iban-block.country {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.iban-block.check {
+  background: var(--success-light);
+  border-color: var(--success);
+  font-weight: 700;
+  color: var(--success);
+}
+
+.iban-block.bank {
+  background: var(--warning-light);
+  border-color: var(--warning);
+}
+
+.iban-block.branch {
+  background: #f0f9ff;
+  border-color: #0284c7;
+}
+
+.iban-block.account {
+  background: var(--surface);
+  border-color: var(--muted);
+}
+
+.iban-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.iban-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.iban-legend .swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+
+/* ── Spec Table ────────────────────────────────────────────────── */
+.tablewrap {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+th, td {
+  padding: 0.65rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+
+th {
+  background: var(--surface);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+tr:hover td {
+  background: #fafbff;
+}
+
+/* ── Country Grid ──────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem;
+  list-style: none;
+  margin: 1.5rem 0;
+}
+
+.grid .card {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 1rem;
+  text-align: center;
+  transition: border-color var(--ease), box-shadow var(--ease);
+  display: block;
+  color: var(--ink);
+}
+.grid .card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+}
+
+.grid .card .cc {
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-family: var(--mono);
+  color: var(--accent);
+}
+
+.grid .card .name {
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  color: var(--muted);
+}
+
+.grid .card .meta {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15em 0.5em;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.badge-sepa {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+/* ── Validator ─────────────────────────────────────────────────── */
+.validator-input {
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 1.2rem;
+  padding: 1rem;
+  border: 2px solid var(--line);
+  border-radius: var(--r);
+  outline: none;
+  transition: border-color var(--ease);
+}
+.validator-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+.validator-input.valid {
+  border-color: var(--success);
+  background: var(--success-light);
+}
+.validator-input.invalid {
+  border-color: var(--danger);
+  background: var(--danger-light);
+}
+
+.validator-result {
+  padding: 1rem;
+  border-radius: var(--r);
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.validator-result.valid {
+  background: var(--success-light);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+.validator-result.invalid {
+  background: var(--danger-light);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
+
+/* ── Breadcrumbs ───────────────────────────────────────────────── */
+.crumbs {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.crumbs a { color: var(--muted); }
+.crumbs a:hover { color: var(--accent); }
+.crumbs .sep { margin: 0 0.4rem; color: var(--line); }
+
+/* ── FAQs ──────────────────────────────────────────────────────── */
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+}
+
+.faq-q {
+  padding: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  user-select: none;
+}
+.faq-q:hover { background: var(--surface); }
+.faq-q::after {
+  content: '+';
+  font-size: 1.2rem;
+  color: var(--muted);
+  transition: transform var(--ease);
+}
+
+.faq-item.open .faq-q::after {
+  content: '\2212';
+}
+
+.faq-a {
+  padding: 0 1rem 1rem;
+  display: none;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.faq-item.open .faq-a {
+  display: block;
+}
+
+/* ── Ads ───────────────────────────────────────────────────────── */
+.ad-slot {
+  margin: 2rem 0;
+  text-align: center;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ad-native {
+  min-height: 120px;
+  border: 1px dashed var(--line);
+  border-radius: var(--r);
+  background: var(--surface);
+}
+
+.ad-banner {
+  min-height: 90px;
+}
+
+/* ── CTA ───────────────────────────────────────────────────────── */
+.cta {
+  margin: 2rem 0;
+}
+
+/* ── Footer ────────────────────────────────────────────────────── */
+.foot {
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.foot nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.foot nav a {
+  color: var(--muted);
+}
+
+.foot nav a:hover {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* ── Search ────────────────────────────────────────────────────── */
+.search-box {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.65rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  margin-bottom: 1.5rem;
+  font-family: var(--sans);
+}
+.search-box:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+/* ── Toast ─────────────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  color: white;
+  padding: 0.65rem 1.25rem;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.toast.show {
+  opacity: 1;
+}
+
+/* ── Responsive ────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  html { font-size: 15px; }
+  h1 { font-size: 1.6rem; }
+
+  .bar nav { gap: 0.5rem; }
+  .bar nav a { font-size: 0.8rem; }
+
+  .tool-hero { padding: 1.25rem; }
+  .tool-hero .iban-display { font-size: 1.2rem; padding: 1rem; }
+  .tool-hero .controls { flex-direction: column; }
+  .tool-hero select { width: 100%; }
+  .tool-hero .btn { width: 100%; }
+
+  .grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+
+  .iban-structure { flex-direction: column; font-size: 0.8rem; }
+
+  table { font-size: 0.85rem; }
+  th, td { padding: 0.5rem 0.65rem; }
+}
+
+@media (min-width: 680px) {
+  .specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+/* ── Print ─────────────────────────────────────────────────────── */
+@media print {
+  .barwrap, .foot, .ad-slot, .btn { display: none; }
+  main { padding: 0; }
+}
+
+/* ── Reduced motion ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
