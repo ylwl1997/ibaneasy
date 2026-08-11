@@ -1,0 +1,1579 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <script>
+    (function (w) {
+        var key = '__websMonorepoEarlyErrorsV1';
+        if (w[key]) return;
+
+        var queue = {items: []};
+        queue.onError = function (event) {
+            var filename;
+            var page;
+            if (queue.items.length >= 20) return;
+            if (event.target && event.target !== w && !event.error) return;
+            if (typeof event.filename !== 'string' || !event.filename) return;
+            try {
+                filename = new URL(event.filename, w.location.href);
+                page = new URL(w.location.href);
+                if (!/^https?:$/.test(filename.protocol)) return;
+                if (filename.hostname !== w.location.hostname) return;
+                if (
+                    filename.origin === page.origin
+                    && filename.pathname === page.pathname
+                    && (!Number.isInteger(event.lineno) || event.lineno <= 1)
+                ) return;
+            } catch (error) {
+                return;
+            }
+            queue.items.push({
+                kind: 'error',
+                filename: filename.origin + filename.pathname,
+                lineno: Number.isInteger(event.lineno) ? event.lineno : null,
+                colno: Number.isInteger(event.colno) ? event.colno : null
+            });
+        };
+        queue.cancel = function () {
+            w.removeEventListener('error', queue.onError, true);
+            queue.items.length = 0;
+            if (w[key] === queue) delete w[key];
+        };
+
+        w[key] = queue;
+        w.addEventListener('error', queue.onError, true);
+        w.addEventListener('DOMContentLoaded', function () {
+            if (w[key] === queue) queue.cancel();
+        }, {once: true});
+    }(window));
+</script>
+        <script>
+            (function() {
+                // Resolve device-dependent visibility before body parsing so the
+                // Android promotion never appears late and causes a layout shift.
+                document.documentElement.classList.toggle(
+                    'is-android-client',
+                    /Android/i.test(navigator.userAgent)
+                );
+            })();
+        </script>
+                                        
+                        <meta name="google-adsense-account"
+              content="ca-pub-7804935272820466"
+              data-adsense-eligible="true">
+
+                <script>
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};
+            window.gtag('consent', 'default', {
+                ad_storage: 'denied',
+                analytics_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                wait_for_update: 500,
+                region: [
+                    'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU',
+                    'IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES',
+                    'SE','IS','LI','NO','GB','CH'
+                ]
+            });
+            window.gtag('consent', 'default', {
+                ad_storage: 'granted',
+                analytics_storage: 'granted',
+                ad_user_data: 'granted',
+                ad_personalization: 'granted'
+            });
+        </script>
+
+                    <script async
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7804935272820466"
+                    crossorigin="anonymous"
+                    data-randomiban-adsense></script>
+        
+                    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+
+
+
+    <meta name="description" content="Generate free random IBANs with valid MOD-97 checksums for Spain, Germany, France, UK and supported countries. Export CSV/JSON for QA and demos.">
+
+
+    <link rel="canonical" href="https://randomiban.co/">
+                                <link rel="alternate"
+                  href="https://randomiban.co/"
+                  hreflang="en">
+                    <link rel="alternate"
+                  href="https://randomiban.co/es/"
+                  hreflang="es">
+                    <link rel="alternate"
+                  href="https://randomiban.co/pt/"
+                  hreflang="pt">
+                    <link rel="alternate"
+                  href="https://randomiban.co/fr/"
+                  hreflang="fr">
+                    <link rel="alternate"
+                  href="https://randomiban.co/ja/"
+                  hreflang="ja">
+                    <link rel="alternate"
+                  href="https://randomiban.co/de/"
+                  hreflang="de">
+                <link rel="alternate"
+              href="https://randomiban.co/"
+              hreflang="x-default">
+    
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#2563EB">
+
+
+<meta property="og:locale" content="en_US"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="IBAN Generator: Valid Test IBANs for Supported Countries"/>
+<meta property="og:description" content="Generate free random IBANs with valid MOD-97 checksums for Spain, Germany, France, UK and supported countries. Export CSV/JSON for QA and demos."/>
+<meta property="og:url" content="https://randomiban.co/" />
+<meta property="og:site_name" content="Random IBAN"/>
+<meta property="og:image" content="https://randomiban.co/og-image.png" itemprop="image"/>
+<meta property="og:image:secure_url" content="https://randomiban.co/og-image.png" itemprop="image"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="IBAN Generator: Valid Test IBANs for Supported Countries"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="IBAN Generator: Valid Test IBANs for Supported Countries"/>
+<meta name="twitter:description" content="Generate free random IBANs with valid MOD-97 checksums for Spain, Germany, France, UK and supported countries. Export CSV/JSON for QA and demos."/>
+<meta name="twitter:image" content="https://randomiban.co/og-image.png"/>
+<meta name="twitter:image:alt" content="IBAN Generator: Valid Test IBANs for Supported Countries"/>
+
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Random IBAN",
+      "url": "https://randomiban.co/"
+    }
+</script>
+
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "RandomIBAN",
+      "url": "https://randomiban.co",
+      "logo": "https://randomiban.co/og-image.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "support@randomiban.co"
+      }
+    }
+</script>
+
+<script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://randomiban.co/"}]}
+</script>
+
+        
+        <title>IBAN Generator: Valid Test IBANs for Supported Countries</title>
+
+                    <link rel="stylesheet" href="/build/styles.e9f98a84.css">
+        
+        
+
+        <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Random IBAN Generator",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "description": "Generate valid random IBAN numbers for testing and development. Supports multiple European countries with proper check digit validation.",
+  "url": "https\u003A\/\/randomiban.co\/",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Random IBAN",
+    "url": "https://randomiban.co"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+            {
+      "@type": "Question",
+      "name": "What is an IBAN?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An\u0020IBAN\u0020\u0028International\u0020Bank\u0020Account\u0020Number\u0029\u0020is\u0020a\u0020standardized\u0020international\u0020numbering\u0020system\u0020developed\u0020to\u0020identify\u0020bank\u0020accounts\u0020across\u0020national\u0020borders.\u0020It\u0020consists\u0020of\u0020a\u0020country\u0020code,\u0020two\u0020check\u0020digits,\u0020and\u0020a\u0020Basic\u0020Bank\u0020Account\u0020Number\u0020\u0028BBAN\u0029\u0020that\u0020includes\u0020the\u0020bank\u0020identifier\u0020and\u0020account\u0020number.\u0020IBANs\u0020were\u0020introduced\u0020to\u0020reduce\u0020errors\u0020in\u0020cross\u002Dborder\u0020transactions\u0020and\u0020are\u0020used\u0020in\u0020over\u002070\u0020countries\u0020worldwide."
+      }
+    },        {
+      "@type": "Question",
+      "name": "Are the generated IBANs safe to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Generated\u0020IBANs\u0020are\u0020intended\u0020for\u0020isolated\u0020testing,\u0020development,\u0020and\u0020demonstrations.\u0020They\u0020include\u0020a\u0020country\u0020pattern\u0020and\u0020correct\u0020MOD\u002D97\u0020check\u0020digits,\u0020but\u0020are\u0020not\u0020checked\u0020against\u0020bank\u0020or\u0020account\u0020directories,\u0020so\u0020an\u0020accidental\u0020match\u0020cannot\u0020be\u0020ruled\u0020out.\u0020Never\u0020use\u0020them\u0020for\u0020a\u0020payment,\u0020a\u0020live\u0020customer\u0020record,\u0020or\u0020a\u0020production\u0020payment\u0020system."
+      }
+    },        {
+      "@type": "Question",
+      "name": "Which countries are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our\u0020generator\u0020supports\u0020over\u002030\u0020countries\u0020including\u0020all\u0020major\u0020European\u0020markets\u0020\u0028Germany,\u0020France,\u0020Spain,\u0020Italy,\u0020United\u0020Kingdom,\u0020Netherlands,\u0020Belgium,\u0020Portugal,\u0020Ireland,\u0020Switzerland,\u0020Austria\u0029,\u0020Nordic\u0020countries\u0020\u0028Sweden,\u0020Norway,\u0020Finland,\u0020Denmark,\u0020Iceland\u0029,\u0020Eastern\u0020European\u0020countries\u0020\u0028Poland,\u0020Czech\u0020Republic,\u0020Slovakia,\u0020Hungary,\u0020Romania,\u0020Bulgaria,\u0020Croatia,\u0020Slovenia,\u0020Serbia\u0029,\u0020Baltic\u0020states\u0020\u0028Estonia,\u0020Latvia,\u0020Lithuania\u0029,\u0020and\u0020select\u0020Middle\u0020Eastern\u0020and\u0020other\u0020regions\u0020\u0028Saudi\u0020Arabia,\u0020UAE,\u0020Qatar,\u0020Turkey,\u0020Cyprus,\u0020Malta,\u0020Brazil,\u0020Costa\u0020Rica,\u0020Dominican\u0020Republic,\u0020Israel\u0029.\u0020Each\u0020country\u0020implementation\u0020follows\u0020the\u0020official\u0020IBAN\u0020format\u0020specifications\u0020published\u0020by\u0020national\u0020banking\u0020authorities."
+      }
+    },        {
+      "@type": "Question",
+      "name": "How does IBAN validation work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IBAN\u0020validation\u0020uses\u0020the\u0020modulo\u002097\u0020algorithm\u0020defined\u0020in\u0020ISO\u002013616.\u0020The\u0020process\u0020involves\u0020moving\u0020the\u0020first\u0020four\u0020characters\u0020\u0028country\u0020code\u0020and\u0020check\u0020digits\u0029\u0020to\u0020the\u0020end\u0020of\u0020the\u0020IBAN,\u0020converting\u0020all\u0020letters\u0020to\u0020numbers\u0020\u0028A\u003D10,\u0020B\u003D11,\u0020...\u0020Z\u003D35\u0029,\u0020and\u0020performing\u0020a\u0020modulo\u002097\u0020operation\u0020on\u0020the\u0020resulting\u0020number.\u0020If\u0020the\u0020result\u0020equals\u00201,\u0020the\u0020IBAN\u0020is\u0020valid.\u0020Our\u0020generator\u0020automatically\u0020calculates\u0020the\u0020correct\u0020check\u0020digits\u0020for\u0020each\u0020generated\u0020IBAN\u0020to\u0020ensure\u0020they\u0020pass\u0020this\u0020validation."
+      }
+    },        {
+      "@type": "Question",
+      "name": "Can I use these IBANs in production systems?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No,\u0020absolutely\u0020not.\u0020The\u0020generated\u0020IBANs\u0020are\u0020synthetic\u0020test\u0020data\u0020and\u0020must\u0020never\u0020be\u0020used\u0020in\u0020production\u0020payment\u0020systems,\u0020live\u0020transactions,\u0020or\u0020any\u0020real\u0020financial\u0020operations.\u0020They\u0020are\u0020intended\u0020solely\u0020for\u0020testing\u0020environments,\u0020quality\u0020assurance,\u0020demonstrations,\u0020training\u0020materials,\u0020and\u0020documentation.\u0020Using\u0020fake\u0020IBANs\u0020in\u0020production\u0020could\u0020lead\u0020to\u0020payment\u0020failures,\u0020compliance\u0020issues,\u0020and\u0020potential\u0020legal\u0020problems."
+      }
+    },        {
+      "@type": "Question",
+      "name": "Can I generate multiple IBANs at once?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes.\u0020The\u0020quantity\u0020control\u0020creates\u0020between\u00201\u0020and\u0020100\u0020IBANs\u0020in\u0020one\u0020batch.\u0020You\u0020can\u0020copy\u0020the\u0020batch\u0020or\u0020export\u0020CSV,\u0020JSON,\u0020or\u0020plain\u0020text.\u0020Larger\u0020datasets\u0020should\u0020be\u0020generated\u0020with\u0020reviewed\u0020code\u0020in\u0020an\u0020isolated\u0020test\u0020environment."
+      }
+    },        {
+      "@type": "Question",
+      "name": "What is the structure of an IBAN?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An\u0020IBAN\u0020consists\u0020of\u0020up\u0020to\u002034\u0020alphanumeric\u0020characters\u0020with\u0020the\u0020following\u0020structure\u003A\u0020a\u0020two\u002Dletter\u0020country\u0020code\u0020\u0028e.g.,\u0020DE\u0020for\u0020Germany\u0029,\u0020two\u0020check\u0020digits\u0020calculated\u0020using\u0020modulo\u002097,\u0020and\u0020a\u0020Basic\u0020Bank\u0020Account\u0020Number\u0020\u0028BBAN\u0029\u0020that\u0020varies\u0020by\u0020country.\u0020The\u0020BBAN\u0020typically\u0020includes\u0020a\u0020bank\u0020code,\u0020branch\u0020identifier,\u0020and\u0020account\u0020number.\u0020For\u0020example,\u0020a\u0020German\u0020IBAN\u0020has\u002022\u0020characters,\u0020while\u0020a\u0020UK\u0020IBAN\u0020has\u002022\u0020characters,\u0020and\u0020a\u0020French\u0020IBAN\u0020has\u002027\u0020characters.\u0020The\u0020exact\u0020length\u0020and\u0020format\u0020depend\u0020on\u0020each\u0020country\u0027\u0027s\u0020banking\u0020standards."
+      }
+    },        {
+      "@type": "Question",
+      "name": "What is a test IBAN?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A\u0020test\u0020IBAN\u0020is\u0020a\u0020synthetic\u0020value\u0020used\u0020in\u0020development,\u0020QA,\u0020or\u0020demonstrations.\u0020It\u0020can\u0020match\u0020a\u0020configured\u0020country\u0020pattern\u0020and\u0020pass\u0020MOD\u002D97,\u0020but\u0020it\u0020is\u0020not\u0020checked\u0020against\u0020bank\u0020directories,\u0020account\u0020assignments,\u0020or\u0020provider\u0020sandboxes\u003B\u0020an\u0020accidental\u0020match\u0020cannot\u0020be\u0020ruled\u0020out.\u0020Use\u0020generated\u0020values\u0020only\u0020in\u0020isolated\u0020format\u0020tests\u0020and\u0020use\u0020a\u0020provider\u0027s\u0020current\u0020designated\u0020values\u0020for\u0020integration\u0020testing."
+      }
+    },        {
+      "@type": "Question",
+      "name": "How do I generate a valid fake IBAN?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Select\u0020a\u0020country\u0020and\u0020click\u0020\u0022Generate\u0020IBAN\u0022.\u0020The\u0020tool\u0020builds\u0020a\u0020BBAN\u0020matching\u0020its\u0020configured\u0020national\u0020pattern\u0020and\u0020calculates\u0020the\u0020MOD\u002D97\u0020check\u0020digits.\u0020The\u0020result\u0020can\u0020pass\u0020structural\u0020validation,\u0020but\u0020bank\u002Dcode\u0020currency,\u0020account\u0020existence,\u0020and\u0020assignment\u0020are\u0020not\u0020verified.\u0020Generate\u0020up\u0020to\u0020100\u0020values\u0020and\u0020export\u0020CSV,\u0020JSON,\u0020or\u0020plain\u0020text."
+      }
+    },        {
+      "@type": "Question",
+      "name": "What is the format of a Spanish IBAN?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A\u0020Spanish\u0020IBAN\u0020has\u002024\u0020characters\u0020with\u0020the\u0020format\u0020ES\u0020\u002B\u00202\u0020check\u0020digits\u0020\u002B\u002020\u002Ddigit\u0020BBAN.\u0020The\u0020BBAN\u0020consists\u0020of\u003A\u0020bank\u0020code\u0020\u00284\u0020digits\u0029,\u0020branch\u0020code\u0020\u00284\u0020digits\u0029,\u0020national\u0020check\u0020digits\u0020\u00282\u0020digits\u0029,\u0020and\u0020account\u0020number\u0020\u002810\u0020digits\u0029.\u0020For\u0020example\u003A\u0020ES76\u00202100\u00200418\u00204502\u00200005\u00201332.\u0020Major\u0020Spanish\u0020banks\u0020include\u0020Santander\u0020\u00280049\u0029,\u0020BBVA\u0020\u00280182\u0029,\u0020CaixaBank\u0020\u00282100\u0029,\u0020and\u0020Sabadell\u0020\u00280081\u0029.\u0020Our\u0020generator\u0020draws\u0020Spanish\u0020bank\u0020codes\u0020from\u0020a\u0020configured\u0020reference\u0020list,\u0020but\u0020does\u0020not\u0020certify\u0020that\u0020a\u0020code\u0020is\u0020current\u0020or\u0020that\u0020an\u0020account\u0020exists."
+      }
+    },        {
+      "@type": "Question",
+      "name": "How do I validate an IBAN number?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IBAN\u0020checksum\u0020validation\u0020uses\u0020the\u0020MOD\u002D97\u0020algorithm\u0020defined\u0020in\u0020ISO\u002013616.\u0020The\u0020process\u0020involves\u0020moving\u0020the\u0020first\u00204\u0020characters\u0020to\u0020the\u0020end,\u0020converting\u0020all\u0020letters\u0020to\u0020numbers\u0020\u0028A\u003D10,\u0020B\u003D11...\u0020Z\u003D35\u0029,\u0020and\u0020dividing\u0020the\u0020resulting\u0020number\u0020by\u002097.\u0020A\u0020remainder\u0020of\u00201\u0020means\u0020the\u0020checksum\u0020passes,\u0020not\u0020that\u0020the\u0020bank\u0020or\u0020account\u0020exists.\u0020Our\u0020validator\u0020performs\u0020this\u0020check\u0020in\u0020your\u0020browser\u0020without\u0020submitting\u0020the\u0020IBAN\u0020value\u0020to\u0020RandomIBAN."
+      }
+    },        {
+      "@type": "Question",
+      "name": "What is an IBAN calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An\u0020IBAN\u0020calculator\u0020is\u0020a\u0020tool\u0020that\u0020computes\u0020valid\u0020IBAN\u0020numbers\u0020from\u0020basic\u0020bank\u0020account\u0020details.\u0020It\u0020takes\u0020a\u0020country\u0020code\u0020and\u0020BBAN\u0020\u0028bank\u0020code,\u0020branch,\u0020and\u0020account\u0020number\u0029\u0020and\u0020calculates\u0020the\u0020two\u0020check\u0020digits\u0020using\u0020the\u0020MOD\u002D97\u0020algorithm\u0020defined\u0020in\u0020ISO\u002013616.\u0020Our\u0020IBAN\u0020generator\u0020works\u0020as\u0020a\u0020full\u0020IBAN\u0020calculator\u0020\u2014\u0020it\u0020generates\u0020structurally\u0020correct\u0020BBANs\u0020for\u0020supported\u0020countries\u0020and\u0020automatically\u0020calculates\u0020the\u0020check\u0020digits,\u0020producing\u0020valid\u0020IBANs\u0020ready\u0020for\u0020testing,\u0020QA,\u0020and\u0020development\u0020environments."
+      }
+    },        {
+      "@type": "Question",
+      "name": "How is an IBAN number generated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An\u0020IBAN\u0020is\u0020generated\u0020in\u0020three\u0020steps\u003A\u0020first,\u0020a\u0020Basic\u0020Bank\u0020Account\u0020Number\u0020\u0028BBAN\u0029\u0020is\u0020created\u0020following\u0020the\u0020configured\u0020character\u0020pattern\u0020for\u0020the\u0020target\u0020country.\u0020Where\u0020implemented,\u0020the\u0020generator\u0020also\u0020uses\u0020a\u0020curated\u0020bank\u002Dcode\u0020list\u0020or\u0020national\u0020checksum\u0020rule\u003B\u0020otherwise\u0020those\u0020positions\u0020are\u0020synthetic\u0020pattern\u002Dmatching\u0020values.\u0020Second,\u0020the\u0020check\u0020digits\u0020are\u0020calculated\u0020using\u0020the\u0020MOD\u002D97\u0020algorithm.\u0020Third,\u0020the\u0020final\u0020IBAN\u0020is\u0020assembled\u0020as\u0020country\u0020code\u0020\u002B\u0020check\u0020digits\u0020\u002B\u0020BBAN.\u0020Passing\u0020these\u0020checks\u0020establishes\u0020structural\u0020validity\u0020only,\u0020not\u0020bank\u002Dcode\u0020currency\u0020or\u0020account\u0020existence."
+      }
+    }      ]
+}
+</script>
+    </head>
+
+    <body class="bg-surface text-text-main font-body">
+    <style>
+.cross-nav-wrap{overflow:hidden;width:100%}
+.cross-nav-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;-ms-overflow-style:none;scrollbar-width:none}
+.cross-nav-scroll::-webkit-scrollbar{display:none}
+.cross-nav-arrow{position:absolute;top:0;bottom:0;width:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;color:#9ca3af;transition:color .15s}
+.cross-nav-arrow:hover{color:#fff}
+.cross-nav-arrow--left{left:0;background:linear-gradient(to right,#171717 60%,transparent)}
+.cross-nav-arrow--right{right:0;background:linear-gradient(to left,#171717 60%,transparent)}
+.cross-nav-arrow[hidden]{display:none}
+</style>
+<div class="cross-nav-wrap bg-neutral-900 border-b border-neutral-800 text-xs">
+    <div class="relative max-w-[1200px] mx-auto px-4" id="cross-nav-container">
+        <button type="button" class="cross-nav-arrow cross-nav-arrow--left" id="cross-nav-left" hidden aria-label="Scroll left">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <div class="cross-nav-scroll h-8 flex items-center gap-1" id="cross-nav-scroll">
+            <span class="text-neutral-500 shrink-0 mr-1" style="display:none" data-show-sm>Our Tools:</span>
+                                                                        <span class="inline-flex items-center px-2 py-0.5 rounded bg-neutral-700 text-white font-medium shrink-0">
+                        Random IBAN
+                    </span>
+                                <span class="text-neutral-700 shrink-0">&middot;</span>                                                <a href="https://randomimei.com?ref=nav" class="inline-flex items-center px-2 py-0.5 rounded text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors duration-150 shrink-0" rel="nofollow noopener">
+                        Random IMEI
+                    </a>
+                                <span class="text-neutral-700 shrink-0">&middot;</span>                                                <a href="https://randommac.com?ref=nav" class="inline-flex items-center px-2 py-0.5 rounded text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors duration-150 shrink-0" rel="nofollow noopener">
+                        Random MAC
+                    </a>
+                                <span class="text-neutral-700 shrink-0">&middot;</span>                                                <a href="https://createuuid.com?ref=nav" class="inline-flex items-center px-2 py-0.5 rounded text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors duration-150 shrink-0" rel="nofollow noopener">
+                        UUID Gen
+                    </a>
+                                <span class="text-neutral-700 shrink-0">&middot;</span>                                                <a href="https://password-generator.co?ref=nav" class="inline-flex items-center px-2 py-0.5 rounded text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors duration-150 shrink-0" rel="nofollow noopener">
+                        Password Gen
+                    </a>
+                                <span class="text-neutral-700 shrink-0">&middot;</span>                                                <a href="https://hashgenerator.co?ref=nav" class="inline-flex items-center px-2 py-0.5 rounded text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors duration-150 shrink-0" rel="nofollow noopener">
+                        Hash Gen
+                    </a>
+                                                    </div>
+        <button type="button" class="cross-nav-arrow cross-nav-arrow--right" id="cross-nav-right" hidden aria-label="Scroll right">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </button>
+    </div>
+</div>
+<script>
+document.querySelectorAll('[data-show-sm]').forEach(function(e){if(window.innerWidth>=640)e.style.display=''});
+(function(){
+    var s=document.getElementById('cross-nav-scroll'),l=document.getElementById('cross-nav-left'),r=document.getElementById('cross-nav-right');
+    if(!s||!l||!r)return;
+    function update(){
+        l.hidden=s.scrollLeft<4;
+        r.hidden=s.scrollLeft+s.clientWidth>=s.scrollWidth-4;
+    }
+    l.addEventListener('click',function(){s.scrollBy({left:-200,behavior:'smooth'})});
+    r.addEventListener('click',function(){s.scrollBy({left:200,behavior:'smooth'})});
+    s.addEventListener('scroll',update,{passive:true});
+    window.addEventListener('resize',update);
+    update();
+})();
+</script>
+        <div class="mx-auto flex w-full max-w-6xl flex-col">
+                            
+<header class="w-full border-b border-border bg-surface">
+    <nav aria-label="Menu" class="px-4 py-2.5 lg:px-6">
+        <div class="relative flex w-full items-center justify-between" style="min-height:52px;">
+            <div class="flex items-center">
+                                    <a href="/" class="flex items-center gap-2">
+                                                <span class="text-xl font-semibold text-text-main">Random IBAN</span>
+                    </a>
+                            </div>
+            <div class="self-center">
+                
+                                                                <ul class="hidden items-center gap-4 font-semibold sm:flex">
+                                                            <li>
+                                    <a href="/"
+                                       class="text-text-main transition-colors hover:text-primary-600">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li>
+                                    <a href="/iban-validator"
+                                       class="text-text-main transition-colors hover:text-primary-600">
+                                        IBAN Validator
+                                    </a>
+                                </li>
+                                                            <li>
+                                    <a href="/about-us"
+                                       class="text-text-main transition-colors hover:text-primary-600">
+                                        About Us
+                                    </a>
+                                </li>
+                                                            <li>
+                                    <a href="/contact"
+                                       class="text-text-main transition-colors hover:text-primary-600">
+                                        Contact
+                                    </a>
+                                </li>
+                                                            <li>
+                                    <a href="/terms-of-use"
+                                       class="text-text-main transition-colors hover:text-primary-600">
+                                        Terms of Use
+                                    </a>
+                                </li>
+                                                            <li>
+                                    <a href="/articles"
+                                       class="text-text-main transition-colors hover:text-primary-600">
+                                        Articles
+                                    </a>
+                                </li>
+                                                    </ul>
+                                                </div>
+
+            <div class="flex items-center justify-center sm:gap-4">
+                                <div class="hidden sm:flex items-center gap-1.5 text-xs text-text-light bg-muted px-3 py-1.5 rounded-full">
+                    <svg class="w-3.5 h-3.5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                    <span>IBAN values stay in your browser</span>
+                </div>
+
+                
+                                    <div class="flex items-center justify-center p-2">
+                        <button type="button" id="theme-toggle-button" class="rounded-md focus:outline-none"
+                                aria-label="Toggle color theme"
+                                data-theme-toggle-light="Switch to light mode"
+                                data-theme-toggle-dark="Switch to dark mode">
+                            <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg"
+     class="w-6 h-6 text-text-main"
+     width="24" height="24"
+     fill="none"
+     viewBox="0 0 24 24"
+     stroke="currentColor"
+     aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 118.646 3.646a7 7 0 0011.708 11.708z"/>
+</svg>
+
+                            <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg"
+     class="hidden h-6 w-6 text-text-main"
+     width="24" height="24"
+     fill="none"
+     viewBox="0 0 24 24"
+     stroke="currentColor"
+     aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+</svg>
+
+                            <span class="sr-only">Toggle color theme</span>
+                        </button>
+                    </div>
+                
+                                    <div class="hidden sm:flex">
+                        
+<div class="relative inline-block">
+    <button type="button"
+            id="lang-btn"
+            class="flex items-center p-2"
+            aria-haspopup="true"
+            aria-expanded="false">
+        <span class="mr-1 flex items-center gap-1">
+                                                                        <span><?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18">
+    <rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#fff"/>
+    <path d="M1.638,5.846H30.362c-.711-1.108-1.947-1.846-3.362-1.846H5c-1.414,0-2.65,.738-3.362,1.846Z"
+          fill="#a62842"/>
+    <path d="M2.03,7.692c-.008,.103-.03,.202-.03,.308v1.539H31v-1.539c0-.105-.022-.204-.03-.308H2.03Z"
+          fill="#a62842"/>
+    <path fill="#a62842" d="M2 11.385H31V13.231H2z"/>
+    <path fill="#a62842" d="M2 15.077H31V16.923000000000002H2z"/>
+    <path fill="#a62842" d="M1 18.769H31V20.615H1z"/>
+    <path d="M1,24c0,.105,.023,.204,.031,.308H30.969c.008-.103,.031-.202,.031-.308v-1.539H1v1.539Z"
+          fill="#a62842"/>
+    <path d="M30.362,26.154H1.638c.711,1.108,1.947,1.846,3.362,1.846H27c1.414,0,2.65-.738,3.362-1.846Z"
+          fill="#a62842"/>
+    <path d="M5,4h11v12.923H1V8c0-2.208,1.792-4,4-4Z" fill="#102d5e"/>
+    <path
+        d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+        opacity=".15"/>
+    <path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+          fill="#fff" opacity=".2"/>
+    <path fill="#fff"
+          d="M4.601 7.463L5.193 7.033 4.462 7.033 4.236 6.338 4.01 7.033 3.279 7.033 3.87 7.463 3.644 8.158 4.236 7.729 4.827 8.158 4.601 7.463z"/>
+    <path fill="#fff"
+          d="M7.58 7.463L8.172 7.033 7.441 7.033 7.215 6.338 6.989 7.033 6.258 7.033 6.849 7.463 6.623 8.158 7.215 7.729 7.806 8.158 7.58 7.463z"/>
+    <path fill="#fff"
+          d="M10.56 7.463L11.151 7.033 10.42 7.033 10.194 6.338 9.968 7.033 9.237 7.033 9.828 7.463 9.603 8.158 10.194 7.729 10.785 8.158 10.56 7.463z"/>
+    <path fill="#fff"
+          d="M6.066 9.283L6.658 8.854 5.927 8.854 5.701 8.158 5.475 8.854 4.744 8.854 5.335 9.283 5.109 9.979 5.701 9.549 6.292 9.979 6.066 9.283z"/>
+    <path fill="#fff"
+          d="M9.046 9.283L9.637 8.854 8.906 8.854 8.68 8.158 8.454 8.854 7.723 8.854 8.314 9.283 8.089 9.979 8.68 9.549 9.271 9.979 9.046 9.283z"/>
+    <path fill="#fff"
+          d="M12.025 9.283L12.616 8.854 11.885 8.854 11.659 8.158 11.433 8.854 10.702 8.854 11.294 9.283 11.068 9.979 11.659 9.549 12.251 9.979 12.025 9.283z"/>
+    <path fill="#fff"
+          d="M6.066 12.924L6.658 12.494 5.927 12.494 5.701 11.799 5.475 12.494 4.744 12.494 5.335 12.924 5.109 13.619 5.701 13.19 6.292 13.619 6.066 12.924z"/>
+    <path fill="#fff"
+          d="M9.046 12.924L9.637 12.494 8.906 12.494 8.68 11.799 8.454 12.494 7.723 12.494 8.314 12.924 8.089 13.619 8.68 13.19 9.271 13.619 9.046 12.924z"/>
+    <path fill="#fff"
+          d="M12.025 12.924L12.616 12.494 11.885 12.494 11.659 11.799 11.433 12.494 10.702 12.494 11.294 12.924 11.068 13.619 11.659 13.19 12.251 13.619 12.025 12.924z"/>
+    <path fill="#fff"
+          d="M13.539 7.463L14.13 7.033 13.399 7.033 13.173 6.338 12.947 7.033 12.216 7.033 12.808 7.463 12.582 8.158 13.173 7.729 13.765 8.158 13.539 7.463z"/>
+    <path fill="#fff"
+          d="M4.601 11.104L5.193 10.674 4.462 10.674 4.236 9.979 4.01 10.674 3.279 10.674 3.87 11.104 3.644 11.799 4.236 11.369 4.827 11.799 4.601 11.104z"/>
+    <path fill="#fff"
+          d="M7.58 11.104L8.172 10.674 7.441 10.674 7.215 9.979 6.989 10.674 6.258 10.674 6.849 11.104 6.623 11.799 7.215 11.369 7.806 11.799 7.58 11.104z"/>
+    <path fill="#fff"
+          d="M10.56 11.104L11.151 10.674 10.42 10.674 10.194 9.979 9.968 10.674 9.237 10.674 9.828 11.104 9.603 11.799 10.194 11.369 10.785 11.799 10.56 11.104z"/>
+    <path fill="#fff"
+          d="M13.539 11.104L14.13 10.674 13.399 10.674 13.173 9.979 12.947 10.674 12.216 10.674 12.808 11.104 12.582 11.799 13.173 11.369 13.765 11.799 13.539 11.104z"/>
+    <path fill="#fff"
+          d="M4.601 14.744L5.193 14.315 4.462 14.315 4.236 13.619 4.01 14.315 3.279 14.315 3.87 14.744 3.644 15.44 4.236 15.01 4.827 15.44 4.601 14.744z"/>
+    <path fill="#fff"
+          d="M7.58 14.744L8.172 14.315 7.441 14.315 7.215 13.619 6.989 14.315 6.258 14.315 6.849 14.744 6.623 15.44 7.215 15.01 7.806 15.44 7.58 14.744z"/>
+    <path fill="#fff"
+          d="M10.56 14.744L11.151 14.315 10.42 14.315 10.194 13.619 9.968 14.315 9.237 14.315 9.828 14.744 9.603 15.44 10.194 15.01 10.785 15.44 10.56 14.744z"/>
+    <path fill="#fff"
+          d="M13.539 14.744L14.13 14.315 13.399 14.315 13.173 13.619 12.947 14.315 12.216 14.315 12.808 14.744 12.582 15.44 13.173 15.01 13.765 15.44 13.539 14.744z"/>
+</svg>
+</span>
+                                        <span class="font-medium">EN</span>
+                                                                                                                                                                                </span>
+        <svg class="h-4 w-4" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+             viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+</div>
+<div id="lang-menu"
+     class="absolute mt-10 hidden rounded border border-border bg-surface shadow z-20"
+     role="menu"
+     aria-orientation="vertical"
+     aria-labelledby="lang-btn"
+     data-endpoint="/change-locale/"
+     data-payload-key="language">
+                                                        <a href="/es/"
+               class="flex items-center gap-2 px-3 py-2 transition hover:bg-primary-100"
+               role="menuitem"
+               data-lang="es">
+                                    <span><?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18">
+    <path fill="#f1c142" d="M1 10H31V22H1z"/>
+    <path d="M5,4H27c2.208,0,4,1.792,4,4v3H1v-3c0-2.208,1.792-4,4-4Z" fill="#a0251e"/>
+    <path d="M5,21H27c2.208,0,4,1.792,4,4v3H1v-3c0-2.208,1.792-4,4-4Z" transform="rotate(180 16 24.5)"
+          fill="#a0251e"/>
+    <path
+        d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+        opacity=".15"/>
+    <path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+          fill="#fff" opacity=".2"/>
+    <path
+        d="M12.614,13.091c.066-.031,.055-.14-.016-.157,.057-.047,.02-.15-.055-.148,.04-.057-.012-.144-.082-.13,.021-.062-.042-.127-.104-.105,.01-.068-.071-.119-.127-.081,.004-.068-.081-.112-.134-.069-.01-.071-.11-.095-.15-.035-.014-.068-.111-.087-.149-.028-.027-.055-.114-.057-.144-.004-.03-.047-.107-.045-.136,.002-.018-.028-.057-.044-.09-.034,.009-.065-.066-.115-.122-.082,.002-.07-.087-.111-.138-.064-.013-.064-.103-.087-.144-.036-.02-.063-.114-.075-.148-.017-.036-.056-.129-.042-.147,.022-.041-.055-.135-.031-.146,.036-.011-.008-.023-.014-.037-.016,.006-.008,.01-.016,.015-.025h.002c.058-.107,.004-.256-.106-.298v-.098h.099v-.154h-.099v-.101h-.151v.101h-.099v.154h.099v.096c-.113,.04-.169,.191-.11,.299h.002c.004,.008,.009,.017,.014,.024-.015,.002-.029,.008-.04,.017-.011-.067-.106-.091-.146-.036-.018-.064-.111-.078-.147-.022-.034-.057-.128-.046-.148,.017-.041-.052-.131-.028-.144,.036-.051-.047-.139-.006-.138,.064-.056-.033-.131,.017-.122,.082-.034-.01-.072,.006-.091,.034-.029-.047-.106-.049-.136-.002-.03-.054-.117-.051-.143,.004-.037-.059-.135-.04-.149,.028-.039-.06-.14-.037-.15,.035-.053-.043-.138,0-.134,.069-.056-.038-.137,.013-.127,.081-.062-.021-.125,.044-.104,.105-.05-.009-.096,.033-.096,.084h0c0,.017,.005,.033,.014,.047-.075-.002-.111,.101-.055,.148-.071,.017-.082,.125-.016,.157-.061,.035-.047,.138,.022,.154-.013,.015-.021,.034-.021,.055h0c0,.042,.03,.077,.069,.084-.023,.048,.009,.11,.06,.118-.013,.03-.012,.073-.012,.106,.09-.019,.2,.006,.239,.11-.015,.068,.065,.156,.138,.146,.06,.085,.133,.165,.251,.197-.021,.093,.064,.093,.123,.118-.013,.016-.043,.063-.055,.081,.024,.013,.087,.041,.113,.051,.005,.019,.004,.028,.004,.031,.091,.501,2.534,.502,2.616-.001v-.002s.004,.003,.004,.004c0-.003-.001-.011,.004-.031l.118-.042-.062-.09c.056-.028,.145-.025,.123-.119,.119-.032,.193-.112,.253-.198,.073,.01,.153-.078,.138-.146,.039-.104,.15-.129,.239-.11,0-.035,.002-.078-.013-.109,.044-.014,.07-.071,.049-.115,.062-.009,.091-.093,.048-.139,.069-.016,.083-.12,.022-.154Zm-.296-.114c0,.049-.012,.098-.034,.141-.198-.137-.477-.238-.694-.214-.002-.009-.006-.017-.011-.024,0,0,0-.001,0-.002,.064-.021,.074-.12,.015-.153,0,0,0,0,0,0,.048-.032,.045-.113-.005-.141,.328-.039,.728,.09,.728,.393Zm-.956-.275c0,.063-.02,.124-.054,.175-.274-.059-.412-.169-.717-.185-.007-.082-.005-.171-.011-.254,.246-.19,.81-.062,.783,.264Zm-1.191-.164c-.002,.05-.003,.102-.007,.151-.302,.013-.449,.122-.719,.185-.26-.406,.415-.676,.73-.436-.002,.033-.005,.067-.004,.101Zm-1.046,.117c0,.028,.014,.053,.034,.069,0,0,0,0,0,0-.058,.033-.049,.132,.015,.152,0,0,0,.001,0,.002-.005,.007-.008,.015-.011,.024-.219-.024-.495,.067-.698,.206-.155-.377,.323-.576,.698-.525-.023,.015-.039,.041-.039,.072Zm3.065-.115s0,0,0,0c0,0,0,0,0,0,0,0,0,0,0,0Zm-3.113,1.798v.002s-.002,0-.003,.002c0-.001,.002-.003,.003-.003Z"
+        fill="#9b8028"/>
+    <path
+        d="M14.133,16.856c.275-.65,.201-.508-.319-.787v-.873c.149-.099-.094-.121,.05-.235h.072v-.339h-.99v.339h.075c.136,.102-.091,.146,.05,.235v.76c-.524-.007-.771,.066-.679,.576h.039s0,0,0,0l.016,.036c.14-.063,.372-.107,.624-.119v.224c-.384,.029-.42,.608,0,.8v1.291c-.053,.017-.069,.089-.024,.123,.007,.065-.058,.092-.113,.083,0,.026,0,.237,0,.269-.044,.024-.113,.03-.17,.028v.108s0,0,0,0v.107s0,0,0,0v.107s0,0,0,0v.108s0,0,0,0v.186c.459-.068,.895-.068,1.353,0v-.616c-.057,.002-.124-.004-.17-.028,0-.033,0-.241,0-.268-.054,.008-.118-.017-.113-.081,.048-.033,.034-.108-.021-.126v-.932c.038,.017,.073,.035,.105,.053-.105,.119-.092,.326,.031,.429l.057-.053c.222-.329,.396-.743-.193-.896v-.35c.177-.019,.289-.074,.319-.158Z"
+        fill="#9b8028"/>
+    <path
+        d="M8.36,16.058c-.153-.062-.39-.098-.653-.102v-.76c.094-.041,.034-.115-.013-.159,.02-.038,.092-.057,.056-.115h.043v-.261h-.912v.261h.039c-.037,.059,.039,.078,.057,.115-.047,.042-.108,.118-.014,.159v.873c-.644,.133-.611,.748,0,.945v.35c-.59,.154-.415,.567-.193,.896l.057,.053c.123-.103,.136-.31,.031-.429,.032-.018,.067-.036,.105-.053v.932c-.055,.018-.069,.093-.021,.126,.005,.064-.059,.089-.113,.081,0,.026,0,.236,0,.268-.045,.024-.113,.031-.17,.028v.401h0v.215c.459-.068,.895-.068,1.352,0v-.186s0,0,0,0v-.108s0,0,0,0v-.107s0,0,0,0v-.107s0,0,0,0v-.108c-.056,.002-.124-.004-.169-.028,0-.033,0-.241,0-.269-.055,.008-.119-.018-.113-.083,.045-.034,.03-.107-.024-.124v-1.29c.421-.192,.383-.772,0-.8v-.224c.575,.035,.796,.314,.653-.392Z"
+        fill="#9b8028"/>
+    <path
+        d="M12.531,14.533h-4.28l.003,2.572v1.485c0,.432,.226,.822,.591,1.019,.473,.252,1.024,.391,1.552,.391s1.064-.135,1.544-.391c.364-.197,.591-.587,.591-1.019v-4.057Z"
+        fill="#a0251e"/>
+</svg>
+</span>
+                                <span>ES</span>
+            </a>
+                                            <a href="/pt/"
+               class="flex items-center gap-2 px-3 py-2 transition hover:bg-primary-100"
+               role="menuitem"
+               data-lang="pt">
+                                    <span><?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18">
+    <rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#459a45"/>
+    <path
+        d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+        opacity=".15"/>
+    <path d="M3.472,16l12.528,8,12.528-8-12.528-8L3.472,16Z" fill="#fedf00"/>
+    <circle cx="16" cy="16" r="5" fill="#0a2172"/>
+    <path
+        d="M14,14.5c-.997,0-1.958,.149-2.873,.409-.078,.35-.126,.71-.127,1.083,.944-.315,1.951-.493,2.999-.493,2.524,0,4.816,.996,6.519,2.608,.152-.326,.276-.666,.356-1.026-1.844-1.604-4.245-2.583-6.875-2.583Z"
+        fill="#fff"/>
+    <path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+          fill="#fff" opacity=".2"/>
+</svg>
+</span>
+                                <span>PT</span>
+            </a>
+                                            <a href="/fr/"
+               class="flex items-center gap-2 px-3 py-2 transition hover:bg-primary-100"
+               role="menuitem"
+               data-lang="fr">
+                                    <span><?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18">
+    <path fill="#fff" d="M10 4H22V28H10z"/>
+    <path d="M5,4h6V28H5c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" fill="#092050"/>
+    <path d="M25,4h6V28h-6c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" transform="rotate(180 26 16)"
+          fill="#be2a2c"/>
+    <path
+        d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+        opacity=".15"/>
+    <path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+          fill="#fff" opacity=".2"/>
+</svg>
+</span>
+                                <span>FR</span>
+            </a>
+                                            <a href="/ja/"
+               class="flex items-center gap-2 px-3 py-2 transition hover:bg-primary-100"
+               role="menuitem"
+               data-lang="ja">
+                                    <span><?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18">
+    <rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#fff"/>
+    <circle cx="16" cy="16" r="6" fill="#bc002d"/>
+    <path d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z" opacity=".15"/>
+    <path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z" fill="#fff" opacity=".2"/>
+</svg>
+</span>
+                                <span>JA</span>
+            </a>
+                                            <a href="/de/"
+               class="flex items-center gap-2 px-3 py-2 transition hover:bg-primary-100"
+               role="menuitem"
+               data-lang="de">
+                                    <span><?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18">
+    <path d="M5,4H27c2.208,0,4,1.792,4,4v4H1V8c0-2.208,1.792-4,4-4Z" fill="#1f1f1f"/>
+    <rect x="1" y="12" width="30" height="8" fill="#d21f26"/>
+    <path d="M1,20H31v4c0,2.208-1.792,4-4,4H5c-2.208,0-4-1.792-4-4V20Z" fill="#f2c500"/>
+    <path
+        d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+        opacity=".15"/>
+    <path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3V8c0-1.657-1.343-3-3-3Z"
+          fill="#fff" opacity=".2"/>
+</svg>
+</span>
+                                <span>DE</span>
+            </a>
+            </div>
+                    </div>
+                
+                <div class="relative inline-block text-left sm:hidden">
+                    <input type="checkbox" id="burger-toggle" class="peer hidden" />
+
+                    <label for="burger-toggle"
+                           class="flex cursor-pointer items-center px-3 py-2 text-sm">
+                        <svg class="h-6 w-6" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                             viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </label>
+
+                    <div id="burger-menu"
+                         class="fixed inset-0 z-30 hidden flex-col bg-surface p-8 peer-checked:flex"
+                         role="dialog" aria-modal="true">
+                        <div class="flex items-center justify-between">
+                            <div class="text-xl font-bold">Menu</div>
+                            <label for="burger-toggle" class="cursor-pointer text-4xl text-text-main">&times;</label>
+                        </div>
+                        <div class="mt-4 flex flex-col gap-4">
+                                                                                        <a href="/"
+                                   class="text-lg transition-colors hover:text-primary-600">
+                                    Home
+                                </a>
+                                                            <a href="/iban-validator"
+                                   class="text-lg transition-colors hover:text-primary-600">
+                                    IBAN Validator
+                                </a>
+                                                            <a href="/about-us"
+                                   class="text-lg transition-colors hover:text-primary-600">
+                                    About Us
+                                </a>
+                                                            <a href="/contact"
+                                   class="text-lg transition-colors hover:text-primary-600">
+                                    Contact
+                                </a>
+                                                            <a href="/terms-of-use"
+                                   class="text-lg transition-colors hover:text-primary-600">
+                                    Terms of Use
+                                </a>
+                                                            <a href="/articles"
+                                   class="text-lg transition-colors hover:text-primary-600">
+                                    Articles
+                                </a>
+                            
+                            
+                                                            <hr>
+                                
+<div class="flex flex-col gap-2">
+    <div>
+        <button type="button"
+                id="lang_mobile"
+                class="flex items-center gap-2"
+                aria-haspopup="true"
+                aria-expanded="false">
+                                                                        <span><?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18">
+    <rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#fff"/>
+    <path d="M1.638,5.846H30.362c-.711-1.108-1.947-1.846-3.362-1.846H5c-1.414,0-2.65,.738-3.362,1.846Z"
+          fill="#a62842"/>
+    <path d="M2.03,7.692c-.008,.103-.03,.202-.03,.308v1.539H31v-1.539c0-.105-.022-.204-.03-.308H2.03Z"
+          fill="#a62842"/>
+    <path fill="#a62842" d="M2 11.385H31V13.231H2z"/>
+    <path fill="#a62842" d="M2 15.077H31V16.923000000000002H2z"/>
+    <path fill="#a62842" d="M1 18.769H31V20.615H1z"/>
+    <path d="M1,24c0,.105,.023,.204,.031,.308H30.969c.008-.103,.031-.202,.031-.308v-1.539H1v1.539Z"
+          fill="#a62842"/>
+    <path d="M30.362,26.154H1.638c.711,1.108,1.947,1.846,3.362,1.846H27c1.414,0,2.65-.738,3.362-1.846Z"
+          fill="#a62842"/>
+    <path d="M5,4h11v12.923H1V8c0-2.208,1.792-4,4-4Z" fill="#102d5e"/>
+    <path
+        d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+        opacity=".15"/>
+    <path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+          fill="#fff" opacity=".2"/>
+    <path fill="#fff"
+          d="M4.601 7.463L5.193 7.033 4.462 7.033 4.236 6.338 4.01 7.033 3.279 7.033 3.87 7.463 3.644 8.158 4.236 7.729 4.827 8.158 4.601 7.463z"/>
+    <path fill="#fff"
+          d="M7.58 7.463L8.172 7.033 7.441 7.033 7.215 6.338 6.989 7.033 6.258 7.033 6.849 7.463 6.623 8.158 7.215 7.729 7.806 8.158 7.58 7.463z"/>
+    <path fill="#fff"
+          d="M10.56 7.463L11.151 7.033 10.42 7.033 10.194 6.338 9.968 7.033 9.237 7.033 9.828 7.463 9.603 8.158 10.194 7.729 10.785 8.158 10.56 7.463z"/>
+    <path fill="#fff"
+          d="M6.066 9.283L6.658 8.854 5.927 8.854 5.701 8.158 5.475 8.854 4.744 8.854 5.335 9.283 5.109 9.979 5.701 9.549 6.292 9.979 6.066 9.283z"/>
+    <path fill="#fff"
+          d="M9.046 9.283L9.637 8.854 8.906 8.854 8.68 8.158 8.454 8.854 7.723 8.854 8.314 9.283 8.089 9.979 8.68 9.549 9.271 9.979 9.046 9.283z"/>
+    <path fill="#fff"
+          d="M12.025 9.283L12.616 8.854 11.885 8.854 11.659 8.158 11.433 8.854 10.702 8.854 11.294 9.283 11.068 9.979 11.659 9.549 12.251 9.979 12.025 9.283z"/>
+    <path fill="#fff"
+          d="M6.066 12.924L6.658 12.494 5.927 12.494 5.701 11.799 5.475 12.494 4.744 12.494 5.335 12.924 5.109 13.619 5.701 13.19 6.292 13.619 6.066 12.924z"/>
+    <path fill="#fff"
+          d="M9.046 12.924L9.637 12.494 8.906 12.494 8.68 11.799 8.454 12.494 7.723 12.494 8.314 12.924 8.089 13.619 8.68 13.19 9.271 13.619 9.046 12.924z"/>
+    <path fill="#fff"
+          d="M12.025 12.924L12.616 12.494 11.885 12.494 11.659 11.799 11.433 12.494 10.702 12.494 11.294 12.924 11.068 13.619 11.659 13.19 12.251 13.619 12.025 12.924z"/>
+    <path fill="#fff"
+          d="M13.539 7.463L14.13 7.033 13.399 7.033 13.173 6.338 12.947 7.033 12.216 7.033 12.808 7.463 12.582 8.158 13.173 7.729 13.765 8.158 13.539 7.463z"/>
+    <path fill="#fff"
+          d="M4.601 11.104L5.193 10.674 4.462 10.674 4.236 9.979 4.01 10.674 3.279 10.674 3.87 11.104 3.644 11.799 4.236 11.369 4.827 11.799 4.601 11.104z"/>
+    <path fill="#fff"
+          d="M7.58 11.104L8.172 10.674 7.441 10.674 7.215 9.979 6.989 10.674 6.258 10.674 6.849 11.104 6.623 11.799 7.215 11.369 7.806 11.799 7.58 11.104z"/>
+    <path fill="#fff"
+          d="M10.56 11.104L11.151 10.674 10.42 10.674 10.194 9.979 9.968 10.674 9.237 10.674 9.828 11.104 9.603 11.799 10.194 11.369 10.785 11.799 10.56 11.104z"/>
+    <path fill="#fff"
+          d="M13.539 11.104L14.13 10.674 13.399 10.674 13.173 9.979 12.947 10.674 12.216 10.674 12.808 11.104 12.582 11.799 13.173 11.369 13.765 11.799 13.539 11.104z"/>
+    <path fill="#fff"
+          d="M4.601 14.744L5.193 14.315 4.462 14.315 4.236 13.619 4.01 14.315 3.279 14.315 3.87 14.744 3.644 15.44 4.236 15.01 4.827 15.44 4.601 14.744z"/>
+    <path fill="#fff"
+          d="M7.58 14.744L8.172 14.315 7.441 14.315 7.215 13.619 6.989 14.315 6.258 14.315 6.849 14.744 6.623 15.44 7.215 15.01 7.806 15.44 7.58 14.744z"/>
+    <path fill="#fff"
+          d="M10.56 14.744L11.151 14.315 10.42 14.315 10.194 13.619 9.968 14.315 9.237 14.315 9.828 14.744 9.603 15.44 10.194 15.01 10.785 15.44 10.56 14.744z"/>
+    <path fill="#fff"
+          d="M13.539 14.744L14.13 14.315 13.399 14.315 13.173 13.619 12.947 14.315 12.216 14.315 12.808 14.744 12.582 15.44 13.173 15.01 13.765 15.44 13.539 14.744z"/>
+</svg>
+</span>
+                                        <span class="font-medium">EN</span>
+                    <svg class="ml-1 h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                                                                                                                                                                                </button>
+    </div>
+    <div id="lang-mobile-menu"
+         class="hidden flex-col gap-1"
+         data-endpoint="/change-locale/"
+         data-payload-key="language">
+                                                                                        <a href="/es/" class="flex items-center gap-2 rounded px-4 py-2 transition hover:bg-primary-100"
+                   role="menuitem" data-lang="es">
+                                            <span><?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18">
+    <path fill="#f1c142" d="M1 10H31V22H1z"/>
+    <path d="M5,4H27c2.208,0,4,1.792,4,4v3H1v-3c0-2.208,1.792-4,4-4Z" fill="#a0251e"/>
+    <path d="M5,21H27c2.208,0,4,1.792,4,4v3H1v-3c0-2.208,1.792-4,4-4Z" transform="rotate(180 16 24.5)"
+          fill="#a0251e"/>
+    <path
+        d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+        opacity=".15"/>
+    <path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+          fill="#fff" opacity=".2"/>
+    <path
+        d="M12.614,13.091c.066-.031,.055-.14-.016-.157,.057-.047,.02-.15-.055-.148,.04-.057-.012-.144-.082-.13,.021-.062-.042-.127-.104-.105,.01-.068-.071-.119-.127-.081,.004-.068-.081-.112-.134-.069-.01-.071-.11-.095-.15-.035-.014-.068-.111-.087-.149-.028-.027-.055-.114-.057-.144-.004-.03-.047-.107-.045-.136,.002-.018-.028-.057-.044-.09-.034,.009-.065-.066-.115-.122-.082,.002-.07-.087-.111-.138-.064-.013-.064-.103-.087-.144-.036-.02-.063-.114-.075-.148-.017-.036-.056-.129-.042-.147,.022-.041-.055-.135-.031-.146,.036-.011-.008-.023-.014-.037-.016,.006-.008,.01-.016,.015-.025h.002c.058-.107,.004-.256-.106-.298v-.098h.099v-.154h-.099v-.101h-.151v.101h-.099v.154h.099v.096c-.113,.04-.169,.191-.11,.299h.002c.004,.008,.009,.017,.014,.024-.015,.002-.029,.008-.04,.017-.011-.067-.106-.091-.146-.036-.018-.064-.111-.078-.147-.022-.034-.057-.128-.046-.148,.017-.041-.052-.131-.028-.144,.036-.051-.047-.139-.006-.138,.064-.056-.033-.131,.017-.122,.082-.034-.01-.072,.006-.091,.034-.029-.047-.106-.049-.136-.002-.03-.054-.117-.051-.143,.004-.037-.059-.135-.04-.149,.028-.039-.06-.14-.037-.15,.035-.053-.043-.138,0-.134,.069-.056-.038-.137,.013-.127,.081-.062-.021-.125,.044-.104,.105-.05-.009-.096,.033-.096,.084h0c0,.017,.005,.033,.014,.047-.075-.002-.111,.101-.055,.148-.071,.017-.082,.125-.016,.157-.061,.035-.047,.138,.022,.154-.013,.015-.021,.034-.021,.055h0c0,.042,.03,.077,.069,.084-.023,.048,.009,.11,.06,.118-.013,.03-.012,.073-.012,.106,.09-.019,.2,.006,.239,.11-.015,.068,.065,.156,.138,.146,.06,.085,.133,.165,.251,.197-.021,.093,.064,.093,.123,.118-.013,.016-.043,.063-.055,.081,.024,.013,.087,.041,.113,.051,.005,.019,.004,.028,.004,.031,.091,.501,2.534,.502,2.616-.001v-.002s.004,.003,.004,.004c0-.003-.001-.011,.004-.031l.118-.042-.062-.09c.056-.028,.145-.025,.123-.119,.119-.032,.193-.112,.253-.198,.073,.01,.153-.078,.138-.146,.039-.104,.15-.129,.239-.11,0-.035,.002-.078-.013-.109,.044-.014,.07-.071,.049-.115,.062-.009,.091-.093,.048-.139,.069-.016,.083-.12,.022-.154Zm-.296-.114c0,.049-.012,.098-.034,.141-.198-.137-.477-.238-.694-.214-.002-.009-.006-.017-.011-.024,0,0,0-.001,0-.002,.064-.021,.074-.12,.015-.153,0,0,0,0,0,0,.048-.032,.045-.113-.005-.141,.328-.039,.728,.09,.728,.393Zm-.956-.275c0,.063-.02,.124-.054,.175-.274-.059-.412-.169-.717-.185-.007-.082-.005-.171-.011-.254,.246-.19,.81-.062,.783,.264Zm-1.191-.164c-.002,.05-.003,.102-.007,.151-.302,.013-.449,.122-.719,.185-.26-.406,.415-.676,.73-.436-.002,.033-.005,.067-.004,.101Zm-1.046,.117c0,.028,.014,.053,.034,.069,0,0,0,0,0,0-.058,.033-.049,.132,.015,.152,0,0,0,.001,0,.002-.005,.007-.008,.015-.011,.024-.219-.024-.495,.067-.698,.206-.155-.377,.323-.576,.698-.525-.023,.015-.039,.041-.039,.072Zm3.065-.115s0,0,0,0c0,0,0,0,0,0,0,0,0,0,0,0Zm-3.113,1.798v.002s-.002,0-.003,.002c0-.001,.002-.003,.003-.003Z"
+        fill="#9b8028"/>
+    <path
+        d="M14.133,16.856c.275-.65,.201-.508-.319-.787v-.873c.149-.099-.094-.121,.05-.235h.072v-.339h-.99v.339h.075c.136,.102-.091,.146,.05,.235v.76c-.524-.007-.771,.066-.679,.576h.039s0,0,0,0l.016,.036c.14-.063,.372-.107,.624-.119v.224c-.384,.029-.42,.608,0,.8v1.291c-.053,.017-.069,.089-.024,.123,.007,.065-.058,.092-.113,.083,0,.026,0,.237,0,.269-.044,.024-.113,.03-.17,.028v.108s0,0,0,0v.107s0,0,0,0v.107s0,0,0,0v.108s0,0,0,0v.186c.459-.068,.895-.068,1.353,0v-.616c-.057,.002-.124-.004-.17-.028,0-.033,0-.241,0-.268-.054,.008-.118-.017-.113-.081,.048-.033,.034-.108-.021-.126v-.932c.038,.017,.073,.035,.105,.053-.105,.119-.092,.326,.031,.429l.057-.053c.222-.329,.396-.743-.193-.896v-.35c.177-.019,.289-.074,.319-.158Z"
+        fill="#9b8028"/>
+    <path
+        d="M8.36,16.058c-.153-.062-.39-.098-.653-.102v-.76c.094-.041,.034-.115-.013-.159,.02-.038,.092-.057,.056-.115h.043v-.261h-.912v.261h.039c-.037,.059,.039,.078,.057,.115-.047,.042-.108,.118-.014,.159v.873c-.644,.133-.611,.748,0,.945v.35c-.59,.154-.415,.567-.193,.896l.057,.053c.123-.103,.136-.31,.031-.429,.032-.018,.067-.036,.105-.053v.932c-.055,.018-.069,.093-.021,.126,.005,.064-.059,.089-.113,.081,0,.026,0,.236,0,.268-.045,.024-.113,.031-.17,.028v.401h0v.215c.459-.068,.895-.068,1.352,0v-.186s0,0,0,0v-.108s0,0,0,0v-.107s0,0,0,0v-.107s0,0,0,0v-.108c-.056,.002-.124-.004-.169-.028,0-.033,0-.241,0-.269-.055,.008-.119-.018-.113-.083,.045-.034,.03-.107-.024-.124v-1.29c.421-.192,.383-.772,0-.8v-.224c.575,.035,.796,.314,.653-.392Z"
+        fill="#9b8028"/>
+    <path
+        d="M12.531,14.533h-4.28l.003,2.572v1.485c0,.432,.226,.822,.591,1.019,.473,.252,1.024,.391,1.552,.391s1.064-.135,1.544-.391c.364-.197,.591-.587,.591-1.019v-4.057Z"
+        fill="#a0251e"/>
+</svg>
+</span>
+                                        <span>ES</span>
+                </a>
+                                                                <a href="/pt/" class="flex items-center gap-2 rounded px-4 py-2 transition hover:bg-primary-100"
+                   role="menuitem" data-lang="pt">
+                                            <span><?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18">
+    <rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#459a45"/>
+    <path
+        d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+        opacity=".15"/>
+    <path d="M3.472,16l12.528,8,12.528-8-12.528-8L3.472,16Z" fill="#fedf00"/>
+    <circle cx="16" cy="16" r="5" fill="#0a2172"/>
+    <path
+        d="M14,14.5c-.997,0-1.958,.149-2.873,.409-.078,.35-.126,.71-.127,1.083,.944-.315,1.951-.493,2.999-.493,2.524,0,4.816,.996,6.519,2.608,.152-.326,.276-.666,.356-1.026-1.844-1.604-4.245-2.583-6.875-2.583Z"
+        fill="#fff"/>
+    <path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+          fill="#fff" opacity=".2"/>
+</svg>
+</span>
+                                        <span>PT</span>
+                </a>
+                                                                <a href="/fr/" class="flex items-center gap-2 rounded px-4 py-2 transition hover:bg-primary-100"
+                   role="menuitem" data-lang="fr">
+                                            <span><?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18">
+    <path fill="#fff" d="M10 4H22V28H10z"/>
+    <path d="M5,4h6V28H5c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" fill="#092050"/>
+    <path d="M25,4h6V28h-6c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" transform="rotate(180 26 16)"
+          fill="#be2a2c"/>
+    <path
+        d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+        opacity=".15"/>
+    <path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+          fill="#fff" opacity=".2"/>
+</svg>
+</span>
+                                        <span>FR</span>
+                </a>
+                                                                <a href="/ja/" class="flex items-center gap-2 rounded px-4 py-2 transition hover:bg-primary-100"
+                   role="menuitem" data-lang="ja">
+                                            <span><?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18">
+    <rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#fff"/>
+    <circle cx="16" cy="16" r="6" fill="#bc002d"/>
+    <path d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z" opacity=".15"/>
+    <path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z" fill="#fff" opacity=".2"/>
+</svg>
+</span>
+                                        <span>JA</span>
+                </a>
+                                                                <a href="/de/" class="flex items-center gap-2 rounded px-4 py-2 transition hover:bg-primary-100"
+                   role="menuitem" data-lang="de">
+                                            <span><?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18">
+    <path d="M5,4H27c2.208,0,4,1.792,4,4v4H1V8c0-2.208,1.792-4,4-4Z" fill="#1f1f1f"/>
+    <rect x="1" y="12" width="30" height="8" fill="#d21f26"/>
+    <path d="M1,20H31v4c0,2.208-1.792,4-4,4H5c-2.208,0-4-1.792-4-4V20Z" fill="#f2c500"/>
+    <path
+        d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+        opacity=".15"/>
+    <path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3V8c0-1.657-1.343-3-3-3Z"
+          fill="#fff" opacity=".2"/>
+</svg>
+</span>
+                                        <span>DE</span>
+                </a>
+                        </div>
+</div>
+                                                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+            
+            <main class="flex w-full flex-col">
+                
+                                    <div class="mx-4 mt-4" id="android-app-banner">
+            <a
+                href="https://play.google.com/store/apps/details?id=co.randomiban"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group relative flex items-center gap-4 overflow-hidden rounded-2xl p-4 transition-all duration-300 active:scale-[0.98]"
+                style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%); box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.15), 0 0 20px rgba(59, 130, 246, 0.1), 0 4px 24px rgba(0, 0, 0, 0.4);"
+            >
+                <div class="absolute inset-0 rounded-2xl opacity-60" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 50%, rgba(34, 211, 238, 0.08) 100%);"></div>
+
+                <div class="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl">
+                    <img
+                        src="/apple-touch-icon.png"
+                        alt=""
+                        width="48"
+                        height="48"
+                        loading="lazy"
+                        decoding="async"
+                        class="h-12 w-12"
+                    >
+                </div>
+
+                <div class="relative min-w-0 flex-1">
+                    <div class="mb-0.5 flex items-center gap-2">
+                        <p class="truncate text-sm font-semibold text-white">RandomIBAN</p>
+                        <span class="rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(34, 211, 238, 0.25) 100%); color: #93c5fd;">New</span>
+                    </div>
+                    <p class="truncate text-xs text-slate-400">Download on Google Play</p>
+                </div>
+
+                <div class="relative shrink-0 text-slate-500 transition-colors group-active:text-blue-400">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </a>
+        </div>
+    
+        <section id="generator" class="w-full px-4 pt-8 pb-6 sm:px-6 lg:px-8" data-iban-root data-translations="&#x7B;&quot;length_label&quot;&#x3A;&quot;&#x25;count&#x25;&#x20;characters&quot;,&quot;copy_button&quot;&#x3A;&quot;Copy&quot;,&quot;feedback&quot;&#x3A;&#x7B;&quot;clipboard_unavailable&quot;&#x3A;&quot;Clipboard&#x20;access&#x20;is&#x20;not&#x20;available.&quot;,&quot;copy_success_generic&quot;&#x3A;&quot;IBAN&#x20;copied&#x20;to&#x20;the&#x20;clipboard.&quot;,&quot;copy_success_history&quot;&#x3A;&quot;&#x25;country&#x25;&#x20;IBAN&#x20;copied.&quot;,&quot;copy_error&quot;&#x3A;&quot;Couldn&#x27;t&#x20;copy&#x20;the&#x20;IBAN&#x20;automatically.&#x20;Please&#x20;copy&#x20;it&#x20;manually.&quot;,&quot;share_link_copied&quot;&#x3A;&quot;Share&#x20;link&#x20;copied&#x20;to&#x20;clipboard&#x21;&quot;&#x7D;,&quot;history_entry&quot;&#x3A;&quot;&#x25;country&#x25;&#x20;&#x28;&#x25;code&#x25;&#x29;&quot;,&quot;dropdown_option&quot;&#x3A;&quot;&#x25;country&#x25;&#x20;&#x28;&#x25;code&#x25;&#x29;&quot;,&quot;bulk&quot;&#x3A;&#x7B;&quot;generating&quot;&#x3A;&quot;Generating...&quot;,&quot;generate&quot;&#x3A;&quot;Generate&#x20;&amp;&#x20;Download&quot;,&quot;copied&quot;&#x3A;&quot;&#x25;count&#x25;&#x20;IBANs&#x20;copied&#x20;to&#x20;clipboard.&quot;,&quot;downloaded_title&quot;&#x3A;&quot;&#x25;count&#x25;&#x20;IBANs&#x20;Downloaded&#x21;&quot;,&quot;downloaded_share_text&quot;&#x3A;&quot;I&#x20;generated&#x20;&#x25;count&#x25;&#x20;valid&#x20;IBANs&#x20;for&#x20;testing&#x20;using&#x20;RandomIBAN&quot;&#x7D;,&quot;countries&quot;&#x3A;&#x7B;&quot;DE&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;8-digit&#x20;bank&#x20;code&#x20;&#x2B;&#x20;10-digit&#x20;account&#x20;number&quot;&#x7D;,&quot;ES&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;4&#x29;&#x20;&#x2B;&#x20;branch&#x20;&#x28;4&#x29;&#x20;&#x2B;&#x20;national&#x20;check&#x20;digits&#x20;&#x28;2&#x29;&#x20;&#x2B;&#x20;account&#x20;&#x28;10&#x29;&quot;&#x7D;,&quot;FR&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;5&#x29;&#x20;&#x2B;&#x20;branch&#x20;&#x28;5&#x29;&#x20;&#x2B;&#x20;alphanumeric&#x20;account&#x20;&#x28;11&#x29;&#x20;&#x2B;&#x20;national&#x20;key&#x20;&#x28;2&#x29;&quot;&#x7D;,&quot;IT&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;CIN&#x20;&#x28;1&#x20;letter&#x29;&#x20;&#x2B;&#x20;bank&#x20;&#x28;5&#x29;&#x20;&#x2B;&#x20;branch&#x20;&#x28;5&#x29;&#x20;&#x2B;&#x20;account&#x20;&#x28;12&#x29;&quot;&#x7D;,&quot;NL&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;code&#x20;&#x28;4&#x20;letters&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;10&#x29;&quot;&#x7D;,&quot;BE&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;code&#x20;&#x28;3&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;7&#x29;&#x20;&#x2B;&#x20;checksum&#x20;&#x28;2&#x29;&quot;&#x7D;,&quot;PT&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;4&#x29;&#x20;&#x2B;&#x20;branch&#x20;&#x28;4&#x29;&#x20;&#x2B;&#x20;account&#x20;&#x28;11&#x29;&#x20;&#x2B;&#x20;national&#x20;checksum&#x20;&#x28;2&#x29;&quot;&#x7D;,&quot;IE&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;code&#x20;&#x28;4&#x20;letters&#x29;&#x20;&#x2B;&#x20;branch&#x20;&#x28;6&#x29;&#x20;&#x2B;&#x20;account&#x20;&#x28;8&#x29;&quot;&#x7D;,&quot;GB&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;code&#x20;&#x28;4&#x20;letters&#x29;&#x20;&#x2B;&#x20;sort&#x20;code&#x20;&#x28;6&#x29;&#x20;&#x2B;&#x20;account&#x20;&#x28;8&#x29;&quot;&#x7D;,&quot;CH&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;5&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;12&#x29;&quot;&#x7D;,&quot;AT&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;5&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;11&#x29;&quot;&#x7D;,&quot;SE&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;3&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;17&#x29;&quot;&#x7D;,&quot;NO&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;4&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;7&#x29;&quot;&#x7D;,&quot;FI&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;identifier&#x20;&#x28;6&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;8&#x29;&quot;&#x7D;,&quot;DK&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;4&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;9&#x29;&#x20;&#x2B;&#x20;checksum&#x20;&#x28;1&#x29;&quot;&#x7D;,&quot;PL&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;8&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;16&#x29;&quot;&#x7D;,&quot;CZ&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;4&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;16&#x29;&quot;&#x7D;,&quot;SK&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;4&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;16&#x29;&quot;&#x7D;,&quot;HU&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;3&#x29;&#x20;&#x2B;&#x20;branch&#x20;&#x28;4&#x29;&#x20;&#x2B;&#x20;checksum&#x20;&#x28;1&#x29;&#x20;&#x2B;&#x20;account&#x20;&#x28;15&#x29;&#x20;&#x2B;&#x20;checksum&#x20;&#x28;1&#x29;&quot;&#x7D;,&quot;RO&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;code&#x20;&#x28;4&#x20;letters&#x29;&#x20;&#x2B;&#x20;alphanumeric&#x20;account&#x20;identifier&#x20;&#x28;16&#x29;&quot;&#x7D;,&quot;GR&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;3&#x29;&#x20;&#x2B;&#x20;branch&#x20;&#x28;4&#x29;&#x20;&#x2B;&#x20;alphanumeric&#x20;account&#x20;&#x28;16&#x29;&quot;&#x7D;,&quot;EE&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;2&#x29;&#x20;&#x2B;&#x20;branch&#x20;&#x28;2&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;11&#x29;&#x20;&#x2B;&#x20;checksum&#x20;&#x28;1&#x29;&quot;&#x7D;,&quot;LV&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;code&#x20;&#x28;4&#x20;letters&#x29;&#x20;&#x2B;&#x20;alphanumeric&#x20;account&#x20;&#x28;13&#x29;&quot;&#x7D;,&quot;LT&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;5&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;11&#x29;&quot;&#x7D;,&quot;LU&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;identifier&#x20;&#x28;3&#x29;&#x20;&#x2B;&#x20;alphanumeric&#x20;account&#x20;&#x28;13&#x29;&quot;&#x7D;,&quot;HR&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;7&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;10&#x29;&quot;&#x7D;,&quot;SI&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;5&#x29;&#x20;&#x2B;&#x20;account&#x20;&#x28;8&#x29;&#x20;&#x2B;&#x20;checksum&#x20;&#x28;2&#x29;&quot;&#x7D;,&quot;RS&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;3&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;13&#x29;&#x20;&#x2B;&#x20;checksum&#x20;&#x28;2&#x29;&quot;&#x7D;,&quot;IS&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;4&#x29;&#x20;&#x2B;&#x20;type&#x20;&#x28;2&#x29;&#x20;&#x2B;&#x20;account&#x20;&#x28;6&#x29;&#x20;&#x2B;&#x20;additional&#x20;identifier&#x20;&#x28;10&#x29;&quot;&#x7D;,&quot;TR&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;5&#x29;&#x20;&#x2B;&#x20;type&#x20;&#x28;1&#x29;&#x20;&#x2B;&#x20;alphanumeric&#x20;account&#x20;&#x28;16&#x29;&quot;&#x7D;,&quot;CY&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;3&#x29;&#x20;&#x2B;&#x20;branch&#x20;&#x28;5&#x29;&#x20;&#x2B;&#x20;alphanumeric&#x20;account&#x20;&#x28;16&#x29;&quot;&#x7D;,&quot;MT&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;4&#x20;letters&#x29;&#x20;&#x2B;&#x20;branch&#x20;&#x28;5&#x29;&#x20;&#x2B;&#x20;alphanumeric&#x20;account&#x20;&#x28;18&#x29;&quot;&#x7D;,&quot;AD&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;4&#x29;&#x20;&#x2B;&#x20;branch&#x20;&#x28;4&#x29;&#x20;&#x2B;&#x20;alphanumeric&#x20;account&#x20;&#x28;12&#x29;&quot;&#x7D;,&quot;LI&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;5&#x29;&#x20;&#x2B;&#x20;alphanumeric&#x20;account&#x20;&#x28;12&#x29;&quot;&#x7D;,&quot;BG&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;4&#x20;letters&#x29;&#x20;&#x2B;&#x20;branch&#x20;&#x28;4&#x29;&#x20;&#x2B;&#x20;type&#x20;&#x28;2&#x29;&#x20;&#x2B;&#x20;alphanumeric&#x20;account&#x20;&#x28;8&#x29;&quot;&#x7D;,&quot;SA&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;code&#x20;&#x28;2&#x29;&#x20;&#x2B;&#x20;alphanumeric&#x20;account&#x20;number&#x20;&#x28;18&#x29;&quot;&#x7D;,&quot;AE&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;3&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;16&#x29;&quot;&#x7D;,&quot;QA&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;4&#x20;letters&#x29;&#x20;&#x2B;&#x20;alphanumeric&#x20;account&#x20;&#x28;21&#x29;&quot;&#x7D;,&quot;BR&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;8&#x29;&#x20;&#x2B;&#x20;branch&#x20;&#x28;5&#x29;&#x20;&#x2B;&#x20;account&#x20;&#x28;10&#x29;&#x20;&#x2B;&#x20;additional&#x20;identifiers&#x20;&#x28;2&#x29;&quot;&#x7D;,&quot;CR&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;3&#x29;&#x20;&#x2B;&#x20;account&#x20;&#x28;14&#x29;&#x20;&#x2B;&#x20;checksum&#x20;&#x28;1&#x29;&quot;&#x7D;,&quot;DO&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;4&#x20;letters&#x29;&#x20;&#x2B;&#x20;account&#x20;number&#x20;&#x28;20&#x29;&quot;&#x7D;,&quot;IL&quot;&#x3A;&#x7B;&quot;structure&quot;&#x3A;&quot;Bank&#x20;&#x28;3&#x29;&#x20;&#x2B;&#x20;branch&#x20;&#x28;3&#x29;&#x20;&#x2B;&#x20;account&#x20;&#x28;13&#x29;&quot;&#x7D;&#x7D;&#x7D;" data-default-country="">
+        <div class="mx-auto flex w-full max-w-6xl flex-col gap-6">
+                        <div class="flex flex-col gap-2 text-center sm:text-left">
+                <h1 class="text-3xl font-bold leading-tight text-text-main">Valid random IBAN generator</h1>
+                <p class="text-lg text-text-light max-w-2xl mt-2">
+                    Generate valid random IBANs with correct MOD-97 check digits for 40+ countries, including Spain, Germany, France and the UK. Create a single test IBAN or bulk-export up to 100 values to CSV, JSON, or TXT for QA, payment-form testing, demos, and fixtures — all in your browser, with no real banking data and no sign-up.
+                </p>
+            </div>
+
+                        <div class="rounded-2xl border border-border bg-surface p-6 shadow-lg shadow-black/5 sm:p-10">
+                <div class="space-y-6">
+                    <div>
+                        <h2 class="text-2xl font-semibold text-text-main">Configure your IBAN</h2>
+                        <p class="text-sm text-text-light">More than thirty countries with official formats and dynamically calculated checksum digits.</p>
+                    </div>
+
+                    <form class="flex flex-col gap-6">
+                                                <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+                            <label for="iban-country" class="text-sm font-medium text-text-main sm:w-52">Account country</label>
+                                                        <select id="iban-country" data-iban-country class="sr-only" aria-hidden="true">
+                                <option value="" disabled selected>Select a country</option>
+                            </select>
+                                                        <div class="relative w-full" data-country-search-root>
+                                <button type="button" data-country-search-toggle class="flex w-full items-center justify-between rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text-main focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/40">
+                                    <span data-country-search-label class="truncate">Select a country</span>
+                                    <svg class="h-4 w-4 shrink-0 text-text-light ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                                </button>
+                                <div data-country-search-panel class="absolute z-50 mt-1 hidden w-full rounded-lg border border-border bg-surface shadow-lg dark:bg-surface">
+                                    <div class="p-2">
+                                        <input type="text" data-country-search-input placeholder="Search country..." class="w-full rounded-md border border-border bg-muted px-3 py-2 text-sm text-text-main placeholder-text-light focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500/40 dark:bg-surface" autocomplete="off">
+                                    </div>
+                                    <ul data-country-search-list class="max-h-[280px] overflow-y-auto py-1" role="listbox">
+                                                                            </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                                                <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+                            <label for="iban-quantity" class="text-sm font-medium text-text-main sm:w-52">Quantity</label>
+                            <div class="flex w-full items-center gap-4">
+                                <input type="range" id="iban-quantity" data-iban-quantity min="1" max="100" value="1" class="flex-1 h-2 accent-primary-600 cursor-pointer">
+                                <span data-iban-quantity-value class="font-mono text-primary-500 font-semibold min-w-[3ch] text-right">1</span>
+                            </div>
+                        </div>
+
+                                                <div class="flex flex-col sm:flex-row gap-3">
+                            <button type="button" data-iban-generate class="w-full sm:max-w-md sm:mx-auto inline-flex items-center justify-center rounded-lg bg-primary-600 px-5 py-3 text-sm font-semibold text-white dark:text-primary-50 shadow-sm transition hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500/40">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                Generate IBAN
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                                <div data-iban-single-result class="mt-8 space-y-4">
+                    <div class="relative rounded-lg bg-surface border border-border dark:border-border p-6">
+                        <button type="button" data-iban-copy class="absolute top-4 right-4 p-2 rounded-md text-text-light hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/30 transition" title="Copy to clipboard" disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        </button>
+                        <p data-iban-result class="font-mono text-xl tracking-wider font-semibold text-text-main pr-10">Select a country to generate an IBAN.</p>
+                        <div class="mt-3 flex flex-wrap gap-4 text-sm text-text-light">
+                            <div class="flex items-center gap-1.5">
+                                <span class="inline-block w-3 h-3 rounded bg-blue-100 dark:bg-blue-900/30 border border-blue-300 dark:border-blue-700"></span>
+                                <span>Country Code</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <span class="inline-block w-3 h-3 rounded bg-primary-100 dark:bg-primary-900/30 border border-primary-300 dark:border-primary-700"></span>
+                                <span>Check Digits</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <span class="inline-block w-3 h-3 rounded bg-surface border border-border"></span>
+                                <span>BBAN</span>
+                            </div>
+                        </div>
+                        <p data-iban-feedback class="mt-2 text-sm font-medium"></p>
+                    </div>
+
+                                        <div class="grid gap-4 rounded-xl border border-dashed border-border px-5 py-4 sm:grid-cols-2">
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-wide text-text-light">Length</p>
+                            <p data-iban-length class="text-base font-semibold text-text-main">—</p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-wide text-text-light">BBAN structure</p>
+                            <p data-iban-structure class="text-base text-text-main">—</p>
+                        </div>
+                    </div>
+                </div>
+
+                                <div data-iban-bulk-result class="mt-6 hidden">
+                    <div class="max-h-[400px] overflow-y-auto rounded-lg border border-border divide-y divide-border" data-iban-bulk-list>
+                                            </div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <button type="button" data-bulk-copy-all class="inline-flex items-center gap-1.5 rounded-lg border border-border px-4 py-2 text-sm font-medium text-text-main hover:border-primary-500 hover:text-primary-600 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            Copy All
+                        </button>
+                        <button type="button" data-bulk-export="csv" class="inline-flex items-center gap-1.5 rounded-lg border border-border px-4 py-2 text-sm font-medium text-text-main hover:border-primary-500 hover:text-primary-600 transition">CSV</button>
+                        <button type="button" data-bulk-export="json" class="inline-flex items-center gap-1.5 rounded-lg border border-border px-4 py-2 text-sm font-medium text-text-main hover:border-primary-500 hover:text-primary-600 transition">JSON</button>
+                        <button type="button" data-bulk-export="txt" class="inline-flex items-center gap-1.5 rounded-lg border border-border px-4 py-2 text-sm font-medium text-text-main hover:border-primary-500 hover:text-primary-600 transition">TXT</button>
+                    </div>
+                </div>
+
+                                <div class="mt-6 flex justify-end">
+                    <div class="relative inline-block">
+    <button
+        type="button"
+        id="history-toggle-btn"
+        class="inline-flex items-center gap-1.5 text-sm text-secondary-500 hover:text-primary-500 transition font-medium"
+        aria-expanded="false"
+        aria-haspopup="true"
+        title="Recent history"
+    >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        History
+        <span id="history-count" class="hidden text-xs bg-primary-500 text-white rounded-full px-1.5 py-0.5 leading-none font-semibold min-w-[1.25rem] text-center"></span>
+    </button>
+
+    <div
+        id="history-panel"
+        class="hidden absolute right-0 top-full mt-2 w-80 max-h-96 overflow-y-auto bg-muted border border-secondary-200 dark:border-secondary-700 rounded-xl shadow-xl z-50"
+        role="menu"
+        aria-label="Recent history"
+    >
+        <div class="flex items-center justify-between px-4 py-3 border-b border-secondary-200 dark:border-secondary-700">
+            <span class="text-sm font-semibold text-text-main">🕐 Recent History</span>
+            <button
+                type="button"
+                id="history-clear-btn"
+                class="hidden text-xs text-red-400 hover:text-red-500 font-medium transition"
+            >
+                Clear
+            </button>
+        </div>
+        <div id="history-items" class="p-2 space-y-1">
+                    </div>
+        <div class="px-4 py-2 border-t border-secondary-200 dark:border-secondary-700">
+            <p class="text-[11px] text-secondary-400">History stored locally. Clear anytime.</p>
+        </div>
+    </div>
+</div>
+                </div>
+            </div>
+
+                        <div class="flex flex-wrap items-center justify-center gap-4 py-4 text-sm text-text-light">
+                <span class="inline-flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                    IBAN generation runs in your browser
+                </span>
+                <span class="text-secondary-300 dark:text-secondary-600">&bull;</span>
+                <span class="inline-flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                    IBAN values are not sent by the tool
+                </span>
+                <span class="text-secondary-300 dark:text-secondary-600">&bull;</span>
+                <span class="inline-flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    Up to 100 per batch
+                </span>
+                <span class="text-secondary-300 dark:text-secondary-600">&bull;</span>
+                <span class="inline-flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/><line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    No Signup Required
+                </span>
+            </div>
+        </div>
+    </section>
+
+        
+            <section class="w-full px-4 py-8 sm:px-6 lg:px-8">
+        <div class="mx-auto w-full max-w-6xl">
+            <div class="mb-5">
+                <h2 class="text-2xl font-bold text-text-main">Popular country IBAN generators</h2>
+                <p class="mt-2 text-sm text-text-light">Jump straight to a country-specific test IBAN generator with the right length, structure, and checksum.</p>
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                                    <a href="/generate-andorra-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Andorra IBAN Generator
+                    </a>
+                                    <a href="/generate-austria-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Austria IBAN Generator
+                    </a>
+                                    <a href="/generate-belgium-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Belgium IBAN Generator
+                    </a>
+                                    <a href="/generate-brazil-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Brazil IBAN Generator
+                    </a>
+                                    <a href="/generate-bulgaria-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Bulgaria IBAN Generator
+                    </a>
+                                    <a href="/generate-costa-rica-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Costa Rica IBAN Generator
+                    </a>
+                                    <a href="/generate-croatia-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Croatia IBAN Generator
+                    </a>
+                                    <a href="/generate-cyprus-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Cyprus IBAN Generator
+                    </a>
+                                    <a href="/generate-czech-republic-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Czechia IBAN Generator
+                    </a>
+                                    <a href="/generate-denmark-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Denmark IBAN Generator
+                    </a>
+                                    <a href="/generate-dominican-republic-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Dominican Republic IBAN Generator
+                    </a>
+                                    <a href="/generate-estonia-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Estonia IBAN Generator
+                    </a>
+                                    <a href="/generate-finland-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Finland IBAN Generator
+                    </a>
+                                    <a href="/generate-france-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        France IBAN Generator
+                    </a>
+                                    <a href="/generate-germany-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Germany IBAN Generator
+                    </a>
+                                    <a href="/generate-greece-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Greece IBAN Generator
+                    </a>
+                                    <a href="/generate-hungary-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Hungary IBAN Generator
+                    </a>
+                                    <a href="/generate-iceland-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Iceland IBAN Generator
+                    </a>
+                                    <a href="/generate-ireland-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Ireland IBAN Generator
+                    </a>
+                                    <a href="/generate-israel-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Israel IBAN Generator
+                    </a>
+                                    <a href="/generate-italy-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Italy IBAN Generator
+                    </a>
+                                    <a href="/generate-latvia-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Latvia IBAN Generator
+                    </a>
+                                    <a href="/generate-liechtenstein-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Liechtenstein IBAN Generator
+                    </a>
+                                    <a href="/generate-lithuania-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Lithuania IBAN Generator
+                    </a>
+                                    <a href="/generate-luxembourg-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Luxembourg IBAN Generator
+                    </a>
+                                    <a href="/generate-malta-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Malta IBAN Generator
+                    </a>
+                                    <a href="/generate-netherlands-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Netherlands IBAN Generator
+                    </a>
+                                    <a href="/generate-norway-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Norway IBAN Generator
+                    </a>
+                                    <a href="/generate-poland-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Poland IBAN Generator
+                    </a>
+                                    <a href="/generate-portugal-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Portugal IBAN Generator
+                    </a>
+                                    <a href="/generate-qatar-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Qatar IBAN Generator
+                    </a>
+                                    <a href="/generate-romania-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Romania IBAN Generator
+                    </a>
+                                    <a href="/generate-saudi-arabia-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Saudi Arabia IBAN Generator
+                    </a>
+                                    <a href="/generate-serbia-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Serbia IBAN Generator
+                    </a>
+                                    <a href="/generate-slovakia-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Slovakia IBAN Generator
+                    </a>
+                                    <a href="/generate-slovenia-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Slovenia IBAN Generator
+                    </a>
+                                    <a href="/generate-spain-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Spain IBAN Generator
+                    </a>
+                                    <a href="/generate-sweden-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Sweden IBAN Generator
+                    </a>
+                                    <a href="/generate-switzerland-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Switzerland IBAN Generator
+                    </a>
+                                    <a href="/generate-turkey-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        Türkiye IBAN Generator
+                    </a>
+                                    <a href="/generate-united-arab-emirates-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        United Arab Emirates IBAN Generator
+                    </a>
+                                    <a href="/generate-uk-iban" class="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-semibold text-text-main transition hover:border-primary-500 hover:text-primary-600">
+                        United Kingdom IBAN Generator
+                    </a>
+                            </div>
+        </div>
+    </section>
+    
+    <section class="w-full px-4 py-10 sm:px-6 lg:px-8" aria-labelledby="methodology-heading">
+        <div class="mx-auto max-w-5xl rounded-2xl border border-border bg-surface p-6 shadow-sm sm:p-8">
+            <p class="text-sm font-semibold uppercase tracking-wide text-primary-600">Methodology &amp; sources</p>
+            <h2 id="methodology-heading" class="mt-2 text-2xl font-bold text-text-main">What the generator verifies — and what it cannot</h2>
+            <div class="mt-4 space-y-3 text-sm leading-7 text-text-light">
+                <p>The browser selects characters that fit the configured national BBAN pattern and computes the two international check digits with MOD97-10. Some supported countries also use curated bank-code lists or domestic check-digit logic where implemented.</p>
+                <p>Passing length, pattern, and MOD-97 checks proves only structural validity. It does not prove that a bank code is current, that an account exists, that it can receive funds, or that a generated value is unassigned.</p>
+                <p>
+                    Country lengths and BBAN patterns are reviewed against the public
+                    <a class="font-semibold text-primary-600 hover:text-primary-700"
+                       href="https://www.swift.com/resource/iban-registry-pdf"
+                       rel="noopener noreferrer">SWIFT IBAN Registry, version 102 (June 2026)</a>.
+                </p>
+                <p class="text-xs">Methodology last reviewed July 18, 2026. RandomIBAN is not affiliated with SWIFT, ISO, or any bank.</p>
+            </div>
+        </div>
+    </section>
+
+        <section class="w-full px-4 py-12 sm:px-6 lg:px-8">
+        <div class="mx-auto w-full max-w-5xl">
+            <div class="rounded-lg bg-muted border border-border p-6 sm:p-8">
+                <h2 class="text-2xl font-bold text-text-main mb-6">Understanding IBAN Structure</h2>
+                <div class="font-mono text-lg sm:text-xl tracking-wider text-center mb-6">
+                    <span class="text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-900/30 px-2 py-1 rounded">ES</span><span class="text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/30 px-2 py-1 rounded">76</span>
+                    <span class="text-text-main"> 2100 0418 4502 0005 1332</span>
+                </div>
+                <div class="flex flex-wrap justify-center gap-6 text-sm">
+                    <div class="flex items-center gap-2">
+                        <span class="inline-block w-4 h-4 rounded bg-blue-50 dark:bg-blue-900/30 border border-blue-300 dark:border-blue-700"></span>
+                        <div>
+                            <span class="font-semibold text-text-main">CC</span>
+                            <span class="text-text-light"> — ISO 3166-1 country code</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="inline-block w-4 h-4 rounded bg-primary-50 dark:bg-primary-900/30 border border-primary-300 dark:border-primary-700"></span>
+                        <div>
+                            <span class="font-semibold text-text-main">CD</span>
+                            <span class="text-text-light"> — Check digits (mod 97)</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="inline-block w-4 h-4 rounded bg-surface border border-border"></span>
+                        <div>
+                            <span class="font-semibold text-text-main">BBAN</span>
+                            <span class="text-text-light"> — Basic Bank Account Number</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <section class="w-full bg-gradient-to-b via-surface px-4 sm:px-6 lg:px-8 dark:via-surface">
+        <div class="mx-auto flex w-full max-w-5xl flex-col gap-12 text-text-light">
+            <div class="text-center">
+                <p class="text-sm font-semibold uppercase tracking-wide text-primary-600">History &amp; purpose</p>
+                <h2 class="mt-2 text-3xl font-bold tracking-tight text-text-main sm:text-4xl">Discover the story behind the IBAN</h2>
+                <p class="mt-4 text-base sm:text-lg">Every IBAN reflects decades of cross-border collaboration. The International Bank Account Number emerged in the 1990s to solve a persistent challenge: moving money between European banks with inconsistent account data. The European Committee for Banking Standards and ISO joined forces to design a structure that would be instantly recognisable worldwide. Today, more than seventy territories rely on the IBAN to route payments without friction.</p>
+            </div>
+
+            <div class="grid gap-10 rounded-3xl border border-border bg-surface p-8 shadow-xl shadow-black/5 lg:grid-cols-2 dark:border-primary-500/20 dark:bg-surface/80">
+                <div class="space-y-5">
+                    <h3 class="text-2xl font-semibold text-text-main">Why the IBAN matters</h3>
+                    <p>A well-formed IBAN allows banks to validate an account number automatically before they move any funds. The checksum digits catch typing mistakes and dramatically reduce the risk of rejected or delayed transfers. Each segment in the code identifies the country, the financial institution, and the internal account reference, creating a consistent language for reconciliation and customer experiences.</p>
+                    <p>Organisations that operate across multiple markets rely on accurate test IBANs while they configure payment gateways, automation scenarios, or QA suites. This generator mirrors each country’s official format so you can validate integrations without exposing sensitive production data.</p>
+                </div>
+                <div class="space-y-5">
+                    <h3 class="text-2xl font-semibold text-text-main">Evolution and curiosities</h3>
+                    <p>Since its official adoption in 1997, the IBAN has expanded far beyond Europe to markets across the Middle East, the Caribbean, and North Africa. Some jurisdictions lengthen the structure to include regional banking codes, while others keep compact versions that favour mobile-first banking journeys.</p>
+                    <ul class="space-y-3 rounded-2xl bg-muted/60 p-5 text-sm text-text-main dark:bg-muted/40">
+                        <li class="flex items-start gap-3"><span class="mt-1 h-2.5 w-2.5 flex-none rounded-full bg-primary-500"></span><span>ISO 13616 permits IBANs of up to 34 characters. In this generator, supported formats range from Norway at 15 characters to Malta at 31.</span></li>
+                        <li class="flex items-start gap-3"><span class="mt-1 h-2.5 w-2.5 flex-none rounded-full bg-primary-500"></span><span>Modern open-banking platforms validate IBANs in real time, displaying contextual messages when an account exists and is ready to receive funds.</span></li>
+                        <li class="flex items-start gap-3"><span class="mt-1 h-2.5 w-2.5 flex-none rounded-full bg-primary-500"></span><span>Training teams rely on synthetic IBANs like the ones you can generate here to simulate reimbursements or refunds without risking real balances.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="rounded-2xl border border-border bg-surface p-6 shadow-lg shadow-black/5 sm:p-8">
+                <h3 class="text-xl font-semibold text-text-main">How is an IBAN validated?</h3>
+                <p class="mt-3 text-sm text-text-light">Generation creates synthetic test data; validation checks a value you already have. Use the dedicated validator for country, length, format and MOD-97 checksum results.</p>
+                <a href="/iban-validator" class="mt-4 inline-flex text-sm font-semibold text-primary-600 hover:text-primary-700">
+                    Open the IBAN validator →
+                </a>
+            </div>
+
+            <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+                <div class="space-y-5 rounded-3xl border border-dashed border-primary-200/80 bg-primary-50/50 p-8 dark:border-primary-500/30 dark:bg-primary-500/10">
+                    <h3 class="text-2xl font-semibold text-primary-700 dark:text-primary-300">Make the most of this generator</h3>
+                    <p>Experiment with different countries and save your favourite examples in the built-in history. Whenever you prepare a new environment, you can instantly recover the IBANs that already work with your payment flows.</p>
+                    <p>Share curated lists with QA or engineering peers to maintain a shared library of fictitious financial data. Every IBAN produced here includes the correct structure and checksum, making them perfect for automated tests, sales demos, or educational workshops.</p>
+                </div>
+                <div class="space-y-5 rounded-3xl border border-border bg-surface p-8 shadow-lg shadow-black/5 dark:border-primary-500/20 dark:bg-surface/80">
+                    <h3 class="text-2xl font-semibold text-text-main">Best practices for your projects</h3>
+                    <p>Document your testing scenarios in internal wikis or repositories and reference the IBANs alongside the expected outcomes. Clean up old datasets when you migrate environments and limit access to sensitive records so that only synthetic accounts are used in each sprint.</p>
+                    <p>Complement the IBAN with other synthetic attributes, such as account holder names or BIC codes, to recreate full user journeys. This approach reveals cross-validation bugs, approval workflows, and event-driven automations within minutes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <section class="w-full px-4 py-16 sm:px-6 lg:px-8">
+        <div class="mx-auto w-full max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold tracking-tight text-text-main sm:text-4xl">Supported Countries</h2>
+                <p class="mt-4 text-base text-text-light">Click any country to generate an IBAN for it.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" data-supported-countries-grid>
+                            </div>
+        </div>
+    </section>
+
+        <section class="w-full px-4 py-16 sm:px-6 lg:px-8">
+        <div class="mx-auto w-full max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold tracking-tight text-text-main sm:text-4xl">Frequently Asked Questions</h2>
+                <p class="mt-4 text-base text-text-light">Common questions about IBAN generation and usage</p>
+            </div>
+
+            <div class="space-y-3" data-faq-accordion>
+                                                <details class="group rounded-xl border border-border bg-surface shadow-sm">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 text-lg font-semibold text-text-main hover:text-primary-600 transition-colors">
+                        <span>What is an IBAN?</span>
+                        <svg class="h-5 w-5 shrink-0 text-text-light transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-6 pb-6 text-text-light">
+                        <p>An IBAN (International Bank Account Number) is a standardized international numbering system developed to identify bank accounts across national borders. It consists of a country code, two check digits, and a Basic Bank Account Number (BBAN) that includes the bank identifier and account number. IBANs were introduced to reduce errors in cross-border transactions and are used in over 70 countries worldwide.</p>
+                    </div>
+                </details>
+                                <details class="group rounded-xl border border-border bg-surface shadow-sm">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 text-lg font-semibold text-text-main hover:text-primary-600 transition-colors">
+                        <span>Are the generated IBANs safe to use?</span>
+                        <svg class="h-5 w-5 shrink-0 text-text-light transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-6 pb-6 text-text-light">
+                        <p>Generated IBANs are intended for isolated testing, development, and demonstrations. They include a country pattern and correct MOD-97 check digits, but are not checked against bank or account directories, so an accidental match cannot be ruled out. Never use them for a payment, a live customer record, or a production payment system.</p>
+                    </div>
+                </details>
+                                <details class="group rounded-xl border border-border bg-surface shadow-sm">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 text-lg font-semibold text-text-main hover:text-primary-600 transition-colors">
+                        <span>Which countries are supported?</span>
+                        <svg class="h-5 w-5 shrink-0 text-text-light transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-6 pb-6 text-text-light">
+                        <p>Our generator supports over 30 countries including all major European markets (Germany, France, Spain, Italy, United Kingdom, Netherlands, Belgium, Portugal, Ireland, Switzerland, Austria), Nordic countries (Sweden, Norway, Finland, Denmark, Iceland), Eastern European countries (Poland, Czech Republic, Slovakia, Hungary, Romania, Bulgaria, Croatia, Slovenia, Serbia), Baltic states (Estonia, Latvia, Lithuania), and select Middle Eastern and other regions (Saudi Arabia, UAE, Qatar, Turkey, Cyprus, Malta, Brazil, Costa Rica, Dominican Republic, Israel). Each country implementation follows the official IBAN format specifications published by national banking authorities.</p>
+                    </div>
+                </details>
+                                <details class="group rounded-xl border border-border bg-surface shadow-sm">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 text-lg font-semibold text-text-main hover:text-primary-600 transition-colors">
+                        <span>How does IBAN validation work?</span>
+                        <svg class="h-5 w-5 shrink-0 text-text-light transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-6 pb-6 text-text-light">
+                        <p>IBAN validation uses the modulo 97 algorithm defined in ISO 13616. The process involves moving the first four characters (country code and check digits) to the end of the IBAN, converting all letters to numbers (A=10, B=11, ... Z=35), and performing a modulo 97 operation on the resulting number. If the result equals 1, the IBAN is valid. Our generator automatically calculates the correct check digits for each generated IBAN to ensure they pass this validation.</p>
+                    </div>
+                </details>
+                                <details class="group rounded-xl border border-border bg-surface shadow-sm">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 text-lg font-semibold text-text-main hover:text-primary-600 transition-colors">
+                        <span>Can I use these IBANs in production systems?</span>
+                        <svg class="h-5 w-5 shrink-0 text-text-light transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-6 pb-6 text-text-light">
+                        <p>No, absolutely not. The generated IBANs are synthetic test data and must never be used in production payment systems, live transactions, or any real financial operations. They are intended solely for testing environments, quality assurance, demonstrations, training materials, and documentation. Using fake IBANs in production could lead to payment failures, compliance issues, and potential legal problems.</p>
+                    </div>
+                </details>
+                                <details class="group rounded-xl border border-border bg-surface shadow-sm">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 text-lg font-semibold text-text-main hover:text-primary-600 transition-colors">
+                        <span>Can I generate multiple IBANs at once?</span>
+                        <svg class="h-5 w-5 shrink-0 text-text-light transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-6 pb-6 text-text-light">
+                        <p>Yes. The quantity control creates between 1 and 100 IBANs in one batch. You can copy the batch or export CSV, JSON, or plain text. Larger datasets should be generated with reviewed code in an isolated test environment.</p>
+                    </div>
+                </details>
+                                <details class="group rounded-xl border border-border bg-surface shadow-sm">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 text-lg font-semibold text-text-main hover:text-primary-600 transition-colors">
+                        <span>What is the structure of an IBAN?</span>
+                        <svg class="h-5 w-5 shrink-0 text-text-light transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-6 pb-6 text-text-light">
+                        <p>An IBAN consists of up to 34 alphanumeric characters with the following structure: a two-letter country code (e.g., DE for Germany), two check digits calculated using modulo 97, and a Basic Bank Account Number (BBAN) that varies by country. The BBAN typically includes a bank code, branch identifier, and account number. For example, a German IBAN has 22 characters, while a UK IBAN has 22 characters, and a French IBAN has 27 characters. The exact length and format depend on each country&#039;&#039;s banking standards.</p>
+                    </div>
+                </details>
+                                <details class="group rounded-xl border border-border bg-surface shadow-sm">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 text-lg font-semibold text-text-main hover:text-primary-600 transition-colors">
+                        <span>What is a test IBAN?</span>
+                        <svg class="h-5 w-5 shrink-0 text-text-light transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-6 pb-6 text-text-light">
+                        <p>A test IBAN is a synthetic value used in development, QA, or demonstrations. It can match a configured country pattern and pass MOD-97, but it is not checked against bank directories, account assignments, or provider sandboxes; an accidental match cannot be ruled out. Use generated values only in isolated format tests and use a provider&#039;s current designated values for integration testing.</p>
+                    </div>
+                </details>
+                                <details class="group rounded-xl border border-border bg-surface shadow-sm">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 text-lg font-semibold text-text-main hover:text-primary-600 transition-colors">
+                        <span>How do I generate a valid fake IBAN?</span>
+                        <svg class="h-5 w-5 shrink-0 text-text-light transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-6 pb-6 text-text-light">
+                        <p>Select a country and click &quot;Generate IBAN&quot;. The tool builds a BBAN matching its configured national pattern and calculates the MOD-97 check digits. The result can pass structural validation, but bank-code currency, account existence, and assignment are not verified. Generate up to 100 values and export CSV, JSON, or plain text.</p>
+                    </div>
+                </details>
+                                <details class="group rounded-xl border border-border bg-surface shadow-sm">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 text-lg font-semibold text-text-main hover:text-primary-600 transition-colors">
+                        <span>What is the format of a Spanish IBAN?</span>
+                        <svg class="h-5 w-5 shrink-0 text-text-light transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-6 pb-6 text-text-light">
+                        <p>A Spanish IBAN has 24 characters with the format ES + 2 check digits + 20-digit BBAN. The BBAN consists of: bank code (4 digits), branch code (4 digits), national check digits (2 digits), and account number (10 digits). For example: ES76 2100 0418 4502 0005 1332. Major Spanish banks include Santander (0049), BBVA (0182), CaixaBank (2100), and Sabadell (0081). Our generator draws Spanish bank codes from a configured reference list, but does not certify that a code is current or that an account exists.</p>
+                    </div>
+                </details>
+                                <details class="group rounded-xl border border-border bg-surface shadow-sm">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 text-lg font-semibold text-text-main hover:text-primary-600 transition-colors">
+                        <span>How do I validate an IBAN number?</span>
+                        <svg class="h-5 w-5 shrink-0 text-text-light transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-6 pb-6 text-text-light">
+                        <p>IBAN checksum validation uses the MOD-97 algorithm defined in ISO 13616. The process involves moving the first 4 characters to the end, converting all letters to numbers (A=10, B=11... Z=35), and dividing the resulting number by 97. A remainder of 1 means the checksum passes, not that the bank or account exists. Our validator performs this check in your browser without submitting the IBAN value to RandomIBAN.</p>
+                    </div>
+                </details>
+                                <details class="group rounded-xl border border-border bg-surface shadow-sm">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 text-lg font-semibold text-text-main hover:text-primary-600 transition-colors">
+                        <span>What is an IBAN calculator?</span>
+                        <svg class="h-5 w-5 shrink-0 text-text-light transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-6 pb-6 text-text-light">
+                        <p>An IBAN calculator is a tool that computes valid IBAN numbers from basic bank account details. It takes a country code and BBAN (bank code, branch, and account number) and calculates the two check digits using the MOD-97 algorithm defined in ISO 13616. Our IBAN generator works as a full IBAN calculator — it generates structurally correct BBANs for supported countries and automatically calculates the check digits, producing valid IBANs ready for testing, QA, and development environments.</p>
+                    </div>
+                </details>
+                                <details class="group rounded-xl border border-border bg-surface shadow-sm">
+                    <summary class="flex cursor-pointer items-center justify-between p-6 text-lg font-semibold text-text-main hover:text-primary-600 transition-colors">
+                        <span>How is an IBAN number generated?</span>
+                        <svg class="h-5 w-5 shrink-0 text-text-light transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-6 pb-6 text-text-light">
+                        <p>An IBAN is generated in three steps: first, a Basic Bank Account Number (BBAN) is created following the configured character pattern for the target country. Where implemented, the generator also uses a curated bank-code list or national checksum rule; otherwise those positions are synthetic pattern-matching values. Second, the check digits are calculated using the MOD-97 algorithm. Third, the final IBAN is assembled as country code + check digits + BBAN. Passing these checks establishes structural validity only, not bank-code currency or account existence.</p>
+                    </div>
+                </details>
+                            </div>
+        </div>
+    </section>
+
+        <section class="w-full bg-gradient-to-b from-surface to-muted px-4 py-16 sm:px-6 lg:px-8">
+        <div class="mx-auto w-full max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold tracking-tight text-text-main sm:text-4xl">Explore More IBAN Tools</h2>
+                <p class="mt-4 text-base text-text-light">Discover other useful tools for working with IBAN numbers.</p>
+            </div>
+
+                        <div class="grid gap-8 md:grid-cols-2 mb-10">
+                <a href="/iban-validator" class="group rounded-2xl border border-border bg-surface p-8 shadow-lg shadow-black/5 transition-all hover:border-primary-500 hover:shadow-xl hover:shadow-primary-500/10">
+                    <div class="flex items-start gap-4">
+                        <div class="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-primary-500/10 text-primary-600 group-hover:bg-primary-500/20">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-text-main group-hover:text-primary-600 transition-colors">IBAN Validator</h3>
+                            <p class="mt-2 text-sm text-text-light">Paste any IBAN to check its format, country, and MOD-97 check digits, with a full breakdown of bank code and account number.</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="/articles" class="group rounded-2xl border border-border bg-surface p-8 shadow-lg shadow-black/5 transition-all hover:border-primary-500 hover:shadow-xl hover:shadow-primary-500/10">
+                    <div class="flex items-start gap-4">
+                        <div class="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-primary-500/10 text-primary-600 group-hover:bg-primary-500/20">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-text-main group-hover:text-primary-600 transition-colors">IBAN Articles &amp; Guides</h3>
+                            <p class="mt-2 text-sm text-text-light">Practical guides on IBAN format by country, MOD-97 checksums, SEPA payments, and generating safe test data for development.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+        <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-8">
+        <div class="rounded-xl border border-amber-200 dark:border-amber-700/30 bg-amber-50 dark:bg-amber-900/20 px-6 py-4 text-sm text-amber-800 dark:text-amber-300">
+            <p>Important: generated IBANs are structurally valid and include correct check digits, but RandomIBAN does not query any bank or account directory. An accidental match with an issued account cannot be ruled out. Use values only in isolated test or demo environments, never for payments or production customer records.</p>
+        </div>
+    </div>
+
+                </main>
+
+                            <footer class="border-t border-border bg-surface text-sm text-text-light">
+    <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+        <div class="grid gap-8 md:grid-cols-[1.4fr_1fr_1fr]">
+            <div class="max-w-xl">
+                <h2 class="font-semibold text-text-main">Random IBAN</h2>
+                <p class="mt-3 leading-relaxed">RandomIBAN creates checksum-valid synthetic IBANs for testing, QA, demos, and documentation.</p>
+                <p class="mt-3 text-xs leading-relaxed">The generator and validator do not submit IBAN values to RandomIBAN. The site does use analytics and, on eligible content pages, Google advertising as described in the privacy policy.</p>
+            </div>
+
+            <nav aria-label="IBAN resources">
+                <h2 class="font-semibold text-text-main">IBAN resources</h2>
+                <ul class="mt-3 space-y-2">
+                    <li><a class="hover:text-primary-600" href="/">Home</a></li>
+                    <li><a class="hover:text-primary-600" href="/iban-validator">IBAN Validator</a></li>
+                    <li><a class="hover:text-primary-600" href="/articles">Articles</a></li>
+                    <li><a class="hover:text-primary-600" href="/about-us">About Us</a></li>
+                </ul>
+            </nav>
+
+            <nav aria-label="Site information">
+                <h2 class="font-semibold text-text-main">Site information</h2>
+                <ul class="mt-3 space-y-2">
+                    <li><a class="hover:text-primary-600" href="/contact">Contact</a></li>
+                    <li><a class="hover:text-primary-600" href="/terms-of-use">Terms of Use</a></li>
+                    <li><a class="hover:text-primary-600" href="/privacy-policy">Privacy Policy</a></li>
+                    <li><a class="hover:text-primary-600" href="/sitemap">Sitemap</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="mt-8 border-t border-border pt-6 text-xs">
+            &copy; 2026 RandomIBAN, an independently operated online project.
+        </div>
+    </div>
+</footer>
+                    </div>
+
+
+                    <script defer src="/build/runtime.1b618080.js" defer></script><script defer src="/build/743.89fb3438.js" defer></script><script defer src="/build/911.0d6356d6.js" defer></script><script defer src="/build/app.a89af37c.js" defer></script>
+            <script defer src="/build/styles.77054d96.js" defer></script>
+        
+
+        <script>
+                setTimeout(function(){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM\u002DK5XGFMCV')},3500);
+        </script>
+    
+
+            <script>
+        (function (l) {
+            if (document.cookie.indexOf('locale=' + l) === -1) {
+                document.cookie = 'locale=' + l + ';path=/;max-age=31536000;samesite=lax' + (location.protocol === 'https:' ? ';secure' : '');
+            }
+        })("en");
+    </script>
+</body>
+</html>

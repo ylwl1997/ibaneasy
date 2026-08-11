@@ -1,0 +1,64 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" type="text/css" href="static/sample.css">
+	<meta name="viewport" content="initial-scale=1"/>
+    <script type="text/javascript" src="lodash/4.17.4/lodash.min.js"></script>
+    <script src="ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="chance.min.js"></script>
+    <script type="text/javascript" src="static/mapp4.js"></script>
+    <script type="text/javascript" src="static/countries.js"></script>
+    <script type="text/javascript" src="static/functions.js"></script>
+	<link rel="canonical" href="http://randomiban.com" />
+</head>
+<body>
+    <nav>
+    	<ul>
+            <li><a href="#">IBANs</a>
+		        <div>
+		        	<ul>
+		                <li><a href="/">Generate IBANs</a></li>
+		                <li><a href="#">Validate IBANs</a></li>
+		                <li><a href="#">IBAN Info</a></li>
+		            </ul>
+		        </div>    
+            </li>
+            <li>
+                <a href="#">Tax Numbers</a>
+                <div>
+                    <ul>
+                        <li><a href="cif.html">Spanish</a></li>
+                        <li><a href="#">British</a></li>
+                        <li><a href="#">Netherlands</a></li>
+                        <li><a href="#">Australia</a></li>
+                        <li><a href="#">New Zealand</a></li>
+                    </ul>
+                </div>    
+            </li>
+            <li>
+            	<a href="#">Bank Numbers</a>
+            	<div>
+                    <ul>
+                        <li><a href="#">Spanish</a></li>
+                        <li><a href="#">British</a></li>
+                        <li><a href="#">Netherlands</a></li>
+                        <li><a href="#">New Zealand</a></li>
+                        <li><a href="#">Australia</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="#">Help</a></li>
+        </ul>
+    </nav>
+<h1>Random Iban Generator</h1>
+<p id="demo" class="ibandisplay"></p>
+<div class="center_align">
+<select id="country_input" align="middle" onchange="display(this.value);">
+</select>
+</div>
+<br>
+<div class="center_align">
+	<button onclick="display()" id="gen_button" align="middle" class="generate_button">Generate IBAN</button>
+</div>
+</body>
+</html>
