@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://ibaneasy.com/countries/dz/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the IBAN format for Algeria?", "acceptedAnswer": {"@type": "Answer", "text": "Algeria uses a 24-character IBAN with the country code \"DZ\" followed by two check digits and a 20-character BBAN. The format is <code>5!n5!n10!c</code>. The bank code occupies positions 5 to 9."}}, {"@type": "Question", "name": "Is Algeria a SEPA country?", "acceptedAnswer": {"@type": "Answer", "text": "No, Algeria is not a SEPA member, but uses IBAN for international transfers."}}, {"@type": "Question", "name": "How long is a Algeria IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "A Algeria IBAN is exactly 24 characters long. The BBAN portion accounts for 20 characters."}}, {"@type": "Question", "name": "How do I find my Algeria IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "Your IBAN is printed on your bank statement, available in your online banking portal, or can be obtained from your bank. It typically appears alongside your BIC/SWIFT code for international transfers."}}, {"@type": "Question", "name": "Can I generate a valid Algeria IBAN for testing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Use the IBAN generator on this page or visit the <a href=\"/\">IBAN Easy homepage</a> to generate mathematically valid IBANs for any supported country. All generation is client-side and private."}}]}</script>
 </head>
@@ -27,6 +28,11 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -64,9 +70,9 @@
 </table></div><h2>Example Algeria IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> Algeria IBANs for testing:</p>
 <ul>
-<li><code>DZ91 3355 6245 36A7 VFFF MTCQ</code></li>
-<li><code>DZ61 5371 1389 19SQ 28P5 SO95</code></li>
-<li><code>DZ68 7008 4803 82O6 GCRS AS5N</code></li>
+<li><code>DZ18 4991 8693 4366 M3U3 0EH8</code></li>
+<li><code>DZ81 1552 0212 15U6 GGPD BRWO</code></li>
+<li><code>DZ41 6299 2868 101L 75RG NG2E</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
 <h2>Generate Algeria IBANs for Testing</h2>
@@ -164,6 +170,7 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
