@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Online IBAN Generator — Generate Valid IBAN Numbers Instantly</title>
+<meta name="description" content="Generate valid random IBAN numbers for 96+ countries. Free IBAN generator and validator — no signup, pure client-side, no data sent to any server. Supports all SEPA and international IBAN formats.">
+<link rel="canonical" href="https://ibaneasy.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IBAN Easy">
+<meta property="og:title" content="Free Online IBAN Generator — Generate Valid IBAN Numbers Instantly">
+<meta property="og:description" content="Generate valid random IBAN numbers for 96+ countries. Free, no signup, client-side only.">
+<meta property="og:url" content="https://ibaneasy.com/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"IBAN Easy","url":"https://ibaneasy.com","description":"Free online IBAN generator and validator for 96+ countries. Pure client-side, no data sent to any server.","applicationCategory":"FinanceApplication","operatingSystem":"Any"}</script>
+</head>
+<body>
+<header class="barwrap">
+  <div class="bar">
+    <a class="brand" href="/"><span>IBAN</span> Easy</a>
+    <nav>
+      <a href="/countries/">Countries</a>
+      <a href="/validate/">Validator</a>
+      <a href="/sepa-countries/">SEPA</a>
+      <a href="/iban-check-digit/">How Check Digits Work</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="tool-hero">
+    <h1>Free IBAN Generator</h1>
+    <p class="lede">Generate valid random IBAN numbers for 96+ countries. Everything runs in your browser — no data is ever sent to any server.</p>
+
+    <div class="controls">
+      <select id="country-select" aria-label="Select country">
+        <option value="">-- Select a country --</option>
+      </select>
+      <button class="btn btn-primary" id="btn-generate" aria-label="Generate IBAN">&#x21bb; Generate IBAN</button>
+      <button class="btn btn-outline btn-sm" id="btn-bulk" aria-label="Generate 10 IBANs">Generate 10</button>
+    </div>
+
+    <div class="iban-display" id="iban-display">Select a country and click Generate</div>
+
+    <div style="margin-top:0.75rem">
+      <button class="btn btn-outline btn-sm" id="btn-copy" style="display:none">&#x2398; Copy IBAN</button>
+      <span id="copy-msg" style="display:none;color:var(--success);font-weight:600;margin-left:0.5rem">Copied!</span>
+    </div>
+  </section>
+
+  <!-- Native Ad -->
+  <div class="ad-slot ad-native">
+    <script async="async" data-cfasync="false" src="https://pl30774768.effectivecpmnetwork.com/f95daa4035d01d0dbb3f7c2c7af03073/invoke.js"></script>
+    <div id="container-f95daa4035d01d0dbb3f7c2c7af03073"></div>
+  </div>
+
+  <section style="margin-top:3rem">
+    <h2>How it works</h2>
+    <div class="specs-grid">
+      <div>
+        <h3>1. Select a country</h3>
+        <p>Pick any country from the dropdown. We support all 36 SEPA countries plus 60+ international IBAN formats — from Germany and France to Brazil and the UAE.</p>
+      </div>
+      <div>
+        <h3>2. Click Generate</h3>
+        <p>A random but <strong>mathematically valid</strong> IBAN is created using the MOD-97 check digit algorithm (ISO 13616). The check digits are computed correctly so every generated IBAN passes validation.</p>
+      </div>
+      <div>
+        <h3>3. Copy &amp; use</h3>
+        <p>Use generated IBANs for testing payment forms, validating software, or learning how IBAN formats work across different countries. Never use for real transactions.</p>
+      </div>
+      <div>
+        <h3>4. 100% Private</h3>
+        <p>No server, no database, no tracking. The entire IBAN generation runs in your browser using JavaScript. Your data never leaves your device.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:3rem">
+    <h2>What is an IBAN?</h2>
+    <p>IBAN stands for <strong>International Bank Account Number</strong>. It's a standardised way of identifying bank accounts across national borders, used in over 95 countries worldwide. An IBAN contains a country code, two check digits, and a Basic Bank Account Number (BBAN) that includes the domestic bank code, branch code, and account number.</p>
+    <p>The IBAN system was developed by the European Committee for Banking Standards (ECBS) and later adopted as ISO 13616. Today, all SEPA (Single Euro Payments Area) transfers require an IBAN, making it essential for international banking in Europe and beyond.</p>
+  </section>
+
+  <section style="margin-top:2rem">
+    <h2>IBAN Format by Region</h2>
+    <div class="specs-grid">
+      <div>
+        <h3>SEPA Countries (36 countries)</h3>
+        <p>SEPA IBANs are used for euro-denominated transfers within the EU/EEA, Switzerland, Monaco, San Marino, Andorra, Vatican City, and UK crown dependencies. Lengths range from 15 (Norway) to 31 (Malta) characters.</p>
+        <p><a href="/sepa-countries/">View all SEPA countries &rarr;</a></p>
+      </div>
+      <div>
+        <h3>Non-SEPA IBAN Countries (60+ countries)</h3>
+        <p>Many countries outside Europe have adopted IBAN, including Brazil, UAE, Saudi Arabia, Pakistan, Turkey, and many African nations. These use IBAN for international transfers alongside domestic systems.</p>
+        <p><a href="/countries/">Browse all 96 countries &rarr;</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:2rem">
+    <h2>Popular IBAN Formats</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Country</th><th>IBAN Length</th><th>Format Example</th><th>SEPA</th></tr></thead>
+        <tbody>
+          <tr><td><a href="/countries/de/">Germany</a></td><td>22</td><td><code>DE89 3704 0044 0532 0130 00</code></td><td>&check;</td></tr>
+          <tr><td><a href="/countries/fr/">France</a></td><td>27</td><td><code>FR14 2004 1010 0505 0001 3M02 606</code></td><td>&check;</td></tr>
+          <tr><td><a href="/countries/gb/">United Kingdom</a></td><td>22</td><td><code>GB29 NWBK 6016 1331 9268 19</code></td><td>&check;</td></tr>
+          <tr><td><a href="/countries/es/">Spain</a></td><td>24</td><td><code>ES91 2100 0418 4502 0005 1332</code></td><td>&check;</td></tr>
+          <tr><td><a href="/countries/it/">Italy</a></td><td>27</td><td><code>IT60 X054 2811 1010 0000 0123 456</code></td><td>&check;</td></tr>
+          <tr><td><a href="/countries/nl/">Netherlands</a></td><td>18</td><td><code>NL91 ABNA 0417 1643 00</code></td><td>&check;</td></tr>
+          <tr><td><a href="/countries/pl/">Poland</a></td><td>28</td><td><code>PL61 1090 1014 0000 0712 1981 2874</code></td><td>&check;</td></tr>
+          <tr><td><a href="/countries/ch/">Switzerland</a></td><td>21</td><td><code>CH93 0076 2011 6238 5295 7</code></td><td>&check;</td></tr>
+          <tr><td><a href="/countries/br/">Brazil</a></td><td>29</td><td><code>BR97 0036 0305 0000 1000 9795 493P 1</code></td><td>&cross;</td></tr>
+          <tr><td><a href="/countries/tr/">Turkey</a></td><td>26</td><td><code>TR33 0006 1005 1978 6457 8413 26</code></td><td>&cross;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section style="margin-top:3rem">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <div class="faq-q">Are these real IBANs?</div>
+      <div class="faq-a"><p>No. The IBANs generated here are <strong>mathematically valid</strong> (they pass the MOD-97 check digit verification) but they use randomly generated bank codes and account numbers. They are intended for <strong>testing purposes only</strong> — do not use them for actual bank transfers.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How does the IBAN check digit work?</div>
+      <div class="faq-a"><p>IBAN uses the MOD-97 algorithm (ISO 7064). The country code letters are converted to numbers (A=10, B=11, ..., Z=35), then the entire string is rearranged and checked modulo 97. A valid IBAN always gives remainder 1. <a href="/iban-check-digit/">Learn more &rarr;</a></p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is my data safe?</div>
+      <div class="faq-a"><p>Yes — 100%. All IBAN generation and validation happens in your browser. No data is ever sent to any server. We don't use cookies, analytics trackers, or any form of data collection.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Which countries are supported?</div>
+      <div class="faq-a"><p>We support 96 countries and territories, covering all SEPA members and most IBAN-adopting countries worldwide. <a href="/countries/">Browse the full list &rarr;</a></p></div>
+    </div>
+  </section>
+</main>
+
+<!-- Banner Ad -->
+<div class="ad-slot ad-banner">
+  <script>
+    atOptions = {
+      'key' : 'e952f34ad033773cc0c7f8577847b6f3',
+      'format' : 'iframe',
+      'height' : 90,
+      'width' : 728,
+      'params' : {}
+    };
+  </script>
+  <script src="https://www.highperformanceformat.com/e952f34ad033773cc0c7f8577847b6f3/invoke.js"></script>
+</div>
+
+<footer class="foot">
+  <nav>
+    <a href="/">IBAN Generator</a>
+    <a href="/countries/">All Countries</a>
+    <a href="/validate/">Validator</a>
+    <a href="/sepa-countries/">SEPA Countries</a>
+    <a href="/iban-check-digit/">How Check Digits Work</a>
+  </nav>
+  <p>IBAN Easy — Free online IBAN tools. All generation and validation runs client-side. No data is collected or stored. Generated IBANs are for testing only.</p>
+</footer>
+
+<script src="/js/iban-core.js"></script>
+<script src="/js/tool-ui.js"></script>
+</body>
+</html>
