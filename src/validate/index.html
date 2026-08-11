@@ -17,15 +17,23 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "IBAN Validator", "url": "https://ibaneasy.com/validate/", "description": "Free online IBAN validator \u2014 check any IBAN for correctness using MOD-97 algorithm", "applicationCategory": "FinanceApplication"}</script>
 </head>
 <body>
-<header class="barwrap">
-  <div class="bar">
-  <a class="brand" href="/"><span>IBAN</span> Easy</a>
-  <nav><a href="/countries/">Countries</a><a href="/validate/">Validator</a><a href="/sepa-countries/">SEPA</a><a href="/iban-check-digit/">Check Digits</a></nav>
+<div class="app-container">
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="/"><span class="lg-accent">IBAN</span><span class="lg-dim"> Easy</span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/countries/">Countries</a>
+      <a href="/validate/">Validator</a>
+      <a href="/sepa-countries/">SEPA</a>
+      <a href="/iban-check-digit/">Check Digits</a>
+    </div>
   </div>
-</header>
-<main class="prose">
+</nav>
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">Validator</span></nav>
+<main class="main-content prose-content">
 <h1>IBAN Validator</h1>
-<p class="lede">Enter any IBAN to check if it's valid. We verify the country code, total length, character format, and MOD-97 check digits.</p>
+<p>Enter any IBAN to check if it's valid. We verify the country code, total length, character format, and MOD-97 check digits.</p>
 <input type="text" class="validator-input" id="iban-input" placeholder="Enter IBAN (e.g., DE89 3704 0044 0532 0130 00)" autocomplete="off" aria-label="Enter IBAN to validate">
 <div class="validator-result" id="result" style="display:none"></div>
 <div style="margin-top:1rem" id="details" style="display:none"></div>
@@ -114,11 +122,21 @@
   inp.addEventListener('paste', function() { setTimeout(check, 50); });
 })();
 </script></main>
-<footer class="foot">
-  <nav>
-    <a href="/">IBAN Generator</a><a href="/countries/">All Countries</a><a href="/validate/">Validator</a><a href="/sepa-countries/">SEPA Countries</a><a href="/iban-check-digit/">Check Digits</a>
-  </nav>
-  <p>IBAN Easy &mdash; Free online IBAN tools. All generation and validation runs client-side. No data is collected or stored. Generated IBANs are for testing only.</p>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><span class="fb-accent">IBAN</span><span class="fb-dim"> Easy</span></div>
+      <p class="footer-note">Free online IBAN tools. All generation and validation runs client-side. No data is collected or stored. Generated IBANs are for testing only.</p>
+    </div>
+    <div class="footer-links">
+      <a href="/">IBAN Generator</a>
+      <a href="/countries/">All Countries</a>
+      <a href="/validate/">Validator</a>
+      <a href="/sepa-countries/">SEPA Countries</a>
+      <a href="/iban-check-digit/">Check Digits</a>
+    </div>
+  </div>
 </footer>
+</div><!-- /app-container -->
 </body>
 </html>
