@@ -48,8 +48,8 @@
     <h1>The <span class="text-gradient">IBAN Generator</span><br>for Every Country</h1>
     <p>Generate <strong class="text-gold">mathematically valid</strong> IBANs for 96+ countries in your browser. ISO 13616 compliant, MOD-97 verified, zero data sent to any server.</p>
     <div class="hero-actions">
-      <button class="btn btn-primary btn-lg" id="btn-generate">&#x21bb; Generate IBAN</button>
-      <button class="btn btn-ghost btn-lg" id="btn-bulk">Generate 10</button>
+      <a class="btn btn-primary btn-lg" href="#generate-now">&#x21bb; Generate IBAN</a>
+      <a class="btn btn-ghost btn-lg" href="/validate/">&#x2714; Validate an IBAN</a>
     </div>
     <div class="hero-trust">
       <div><span class="ht-v">96+</span><span class="ht-l">Countries</span></div>
@@ -59,20 +59,86 @@
     </div>
   </div>
 
-  <div class="hero-dial">
+  <div class="hero-dial" id="generate-now">
     <span class="hd-caption">Generate an IBAN</span>
-    <select id="country-select" aria-label="Select country">
-      <option value="">Select a country</option>
-    </select>
-    <div class="iban-output" id="iban-display">
-      <span class="placeholder">Select a country and click Generate</span>
+
+    <!-- Searchable country selector -->
+    <div class="country-combobox" id="country-combobox">
+      <button class="country-button" id="country-button" type="button" aria-expanded="false" aria-controls="country-menu">
+        <span class="country-button-main">
+          <span id="country-flag">🌍</span>
+          <span id="country-label">Select a country</span>
+        </span>
+        <svg class="co-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="country-menu" id="country-menu">
+        <div class="country-search-wrap">
+          <svg class="co-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input class="country-search" id="country-search" type="text" placeholder="Search country..." autocomplete="off">
+        </div>
+        <div class="country-options" id="country-list"></div>
+      </div>
     </div>
+
+    <!-- Quantity slider -->
+    <div class="quantity-row">
+      <label for="quantity-slider">Quantity</label>
+      <div class="quantity-control">
+        <input type="range" id="quantity-slider" min="1" max="100" value="1">
+        <span class="quantity-num" id="quantity-value">1</span>
+      </div>
+    </div>
+
+    <!-- Generate button -->
+    <button class="btn btn-primary btn-lg" id="btn-generate" style="width:100%">&#x21bb; Generate IBAN</button>
+
+    <!-- Single result + legend -->
+    <div id="single-result" style="display:none;width:100%">
+      <div class="iban-output generated" id="iban-display" style="min-height:auto;margin-bottom:0.5rem"></div>
+      <div class="result-meta">
+        <div><span class="rm-label">Length</span><span class="rm-value" id="iban-length">—</span></div>
+        <div><span class="rm-label">BBAN</span><span class="rm-value" id="iban-structure">—</span></div>
+      </div>
+      <div class="format-legend" id="iban-feedback" style="display:none"></div>
+    </div>
+
+    <!-- Actions -->
     <div class="hd-actions">
-      <button class="btn btn-outline btn-sm" id="btn-copy" style="display:none">&#x2398; Copy IBAN</button>
+      <button class="btn btn-outline btn-sm" id="btn-copy" style="display:none">&#x2398; Copy</button>
       <span id="copy-msg" style="display:none;color:var(--green);font-weight:600;font-size:0.85rem">Copied!</span>
     </div>
   </div>
 </section>
+
+<!-- ── Bulk Results ────────────────────────────────────────────── -->
+<div id="bulk-result" style="display:none" class="bulk-section">
+  <div class="bulk-head">
+    <h3>Generated IBANs</h3>
+    <div class="bulk-export-btns">
+      <button class="btn btn-ghost btn-sm" id="btn-copy-all">&#x2398; Copy All</button>
+      <button class="btn btn-ghost btn-sm" id="btn-export-csv">CSV</button>
+      <button class="btn btn-ghost btn-sm" id="btn-export-json">JSON</button>
+      <button class="btn btn-ghost btn-sm" id="btn-export-txt">TXT</button>
+    </div>
+  </div>
+  <div class="bulk-list" id="bulk-list"></div>
+</div>
+
+<!-- ── History ─────────────────────────────────────────────────── -->
+<div class="history-wrap">
+  <button type="button" id="history-toggle" class="history-btn" aria-expanded="false">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    History
+    <span id="history-count" class="hidden hist-badge">0</span>
+  </button>
+  <div id="history-panel" class="history-panel">
+    <div class="hist-panel-head">
+      <span>Recent History</span>
+      <button type="button" id="history-clear" class="hist-clear">Clear</button>
+    </div>
+    <div id="history-items"></div>
+  </div>
+</div>
 
 <!-- ── Marquee ─────────────────────────────────────────────────── -->
 <div class="marquee" aria-hidden="true">
@@ -240,6 +306,10 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/sitemap/">Sitemap</a>
     </div>
   </div>
 </footer>
