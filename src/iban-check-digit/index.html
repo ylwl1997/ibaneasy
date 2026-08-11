@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IBAN Check Digits Explained — How MOD-97 Validates Your IBAN</title>
+<meta name="description" content="Learn how IBAN check digits work using the MOD-97 algorithm. Step-by-step explanation with examples. Understand why IBANs are so reliable for international banking.">
+<link rel="canonical" href="https://ibaneasy.com/iban-check-digit/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IBAN Easy">
+<meta property="og:title" content="IBAN Check Digits Explained — How MOD-97 Validates Your IBAN">
+<meta property="og:description" content="Learn how IBAN check digits work using the MOD-97 algorithm. Step-by-step explanation with examples. Understand why IBANs are so reliable for international banking.">
+<meta property="og:url" content="https://ibaneasy.com/iban-check-digit/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+<header class="barwrap">
+  <div class="bar">
+  <a class="brand" href="/"><span>IBAN</span> Easy</a>
+  <nav><a href="/countries/">Countries</a><a href="/validate/">Validator</a><a href="/sepa-countries/">SEPA</a><a href="/iban-check-digit/">Check Digits</a></nav>
+  </div>
+</header>
+<main class="prose">
+<h1>How IBAN Check Digits Work</h1>
+<p class="lede">Every IBAN includes two check digits that catch 99.9% of typing errors. They use a mathematical formula called MOD-97, first published in ISO 7064. Here's how it works.</p>
+<div class="ad-slot ad-native">
+  <script async="async" data-cfasync="false" src="https://pl30774768.effectivecpmnetwork.com/f95daa4035d01d0dbb3f7c2c7af03073/invoke.js"></script>
+  <div id="container-f95daa4035d01d0dbb3f7c2c7af03073"></div>
+</div>
+<h2>The MOD-97 Algorithm</h2>
+<p>The check digits (positions 3-4 in every IBAN) are computed using the MOD-97 algorithm. Here is the step-by-step process:</p>
+<h3>Step 1: Rearrange the IBAN</h3>
+<p>Move the first four characters (country code + check digits) to the end of the string.</p>
+<p>Example for <code>GB29 NWBK 6016 1331 9268 19</code>:</p>
+<pre>Original:  GB29 NWBK 6016 1331 9268 19
+Rearrange: NWBK 6016 1331 9268 19 GB29</pre>
+<h3>Step 2: Convert Letters to Numbers</h3>
+<p>Replace each letter with its numeric value: A=10, B=11, ..., Z=35.</p>
+<pre>A=10, B=11, C=12, ..., Z=35
+N → 23, W → 32, B → 11, K → 20, G → 16, B → 11</pre>
+<h3>Step 3: Compute MOD-97</h3>
+<p>Interpret the resulting string as a huge integer and divide by 97. A valid IBAN always gives <strong>remainder 1</strong>.</p>
+<pre>NWBK60161331926819GB29 → (huge integer) mod 97 = 1 ✓</pre>
+<h2>How Check Digits Are Generated</h2>
+<p>When a bank creates an IBAN, it:</p>
+<ol>
+<li>Starts with the country code + "00" + BBAN (domestic account details)</li>
+<li>Moves the first 4 chars to the end</li>
+<li>Converts letters to numbers</li>
+<li>Computes <code>remainder = big_number mod 97</code></li>
+<li>Check digits = <code>98 − remainder</code> (zero-padded to 2 digits)</li>
+</ol>
+<h2>Why 97?</h2>
+<p>97 was chosen because:</p>
+<ul>
+<li>It's the largest two-digit prime number</li>
+<li>It catches 99.94% of single-digit typos and transposition errors</li>
+<li>The math works efficiently for numbers of any length</li>
+</ul>
+<h2>Computing MOD-97 in JavaScript</h2>
+<p>Since IBAN numeric strings can be 30+ digits (too large for JavaScript's Number type), we process in chunks:</p>
+<pre>function mod97(numStr) {
+  let remainder = numStr;
+  while (remainder.length > 2) {
+    let chunk = remainder.slice(0, 9); // 9 digits safely &lt; MAX_SAFE_INTEGER
+    remainder = (parseInt(chunk, 10) % 97).toString() + remainder.slice(chunk.length);
+  }
+  return parseInt(remainder, 10) % 97;
+}</pre>
+<p><a href="/">Try our IBAN generator &rarr;</a></p>
+</main>
+<div class="ad-slot ad-banner">
+  <script>
+    atOptions = {{'key' : 'e952f34ad033773cc0c7f8577847b6f3','format' : 'iframe','height' : 90,'width' : 728,'params' : {{}}}};
+  </script>
+  <script src="https://www.highperformanceformat.com/e952f34ad033773cc0c7f8577847b6f3/invoke.js"></script>
+</div>
+<footer class="foot">
+  <nav>
+    <a href="/">IBAN Generator</a><a href="/countries/">All Countries</a><a href="/validate/">Validator</a><a href="/sepa-countries/">SEPA Countries</a><a href="/iban-check-digit/">Check Digits</a>
+  </nav>
+  <p>IBAN Easy &mdash; Free online IBAN tools. All generation and validation runs client-side. No data is collected or stored. Generated IBANs are for testing only.</p>
+</footer>
+</body>
+</html>
