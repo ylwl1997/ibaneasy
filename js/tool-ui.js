@@ -61,6 +61,7 @@
     ssn: document.getElementById('ds-ssn'),
   };
   var currentDataset = null;
+  var currentDatasets = [];
   var datasetEnabled = false;
 
   var countries = [];
@@ -191,28 +192,34 @@
     var c = selectedCountry;
     var results = [];
 
+    // Build datasets first (needed for bulk "Data Set" buttons)
+    var banks = (window.Dataset && Dataset.getBanks) ? Dataset.getBanks(c.code) : null;
+    var wantsDataset = datasetEnable && datasetEnable.checked;
+    currentDatasets = [];
     for (var i = 0; i < count; i++) {
       var iban = IBAN.generate(c.code, c.bbanFormat);
+      var ds = null;
+      if (wantsDataset && window.Dataset) {
+        ds = Dataset.generate(c.code, iban, banks);
+      }
       results.push({
         raw: iban,
-        formatted: IBAN.format(iban)
+        formatted: IBAN.format(iban),
+        dataset: ds
       });
+      if (ds) currentDatasets.push(ds);
     }
 
     currentIBANs = results;
     showResults(results, c);
     addToHistory(results, c);
 
-    // Full dataset (identity + bank) for the first IBAN
-    if (datasetEnable && datasetEnable.checked) {
-      var banks = (window.Dataset && Dataset.getBanks) ? Dataset.getBanks(c.code) : null;
-      currentDataset = (window.Dataset && Dataset.generate)
-        ? Dataset.generate(c.code, results[0].raw, banks)
-        : null;
+    if (wantsDataset) {
+      currentDataset = currentDatasets.length ? currentDatasets[0] : null;
       renderDataset();
     } else {
       currentDataset = null;
-      if (datasetPanel) datasetPanel.style.display = 'none';
+      hideDataset();
     }
   }
 
@@ -242,7 +249,49 @@
     dsFields.vehicle.textContent = d.documents.vehicleReg;
     dsFields.ssn.textContent = d.documents.socialSecurity;
 
-    datasetPanel.style.display = '';
+    var wrap = document.getElementById('dataset-wrap');
+    if (wrap) wrap.style.display = '';
+  }
+
+  function hideDataset() {
+    var wrap = document.getElementById('dataset-wrap');
+    if (wrap) wrap.style.display = 'none';
+  }
+
+  // Show the dataset for a specific bulk row
+  function showDatasetFor(idx) {
+    if (!currentDatasets || !currentDatasets[idx]) return;
+    currentDataset = currentDatasets[idx];
+    renderDataset();
+    // Scroll the panel into view if it's below the fold
+    var wrap = document.getElementById('dataset-wrap');
+    if (wrap) wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Add a "Data Set" button to each bulk row
+  function updateBulkDatasetButtons() {
+    if (!currentDatasets || !currentDatasets.length) return;
+    var rows = bulkList.querySelectorAll('.bulk-row');
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i].querySelector('.bulk-ds-btn')) continue;
+      var btn = document.createElement('button');
+      btn.className = 'bulk-ds-btn';
+      btn.setAttribute('data-idx', String(i));
+      btn.title = 'View full data set for this IBAN';
+      btn.innerHTML = '&#x1F4CB; Data Set';
+      rows[i].appendChild(btn);
+    }
+    // Bind clicks
+    var btns = bulkList.querySelectorAll('.bulk-ds-btn');
+    for (var k = 0; k < btns.length; k++) {
+      if (btns[k].getAttribute('data-bound') === '1') continue;
+      btns[k].setAttribute('data-bound', '1');
+      (function(idx) {
+        btns[k].addEventListener('click', function() {
+          showDatasetFor(idx);
+        });
+      })(parseInt(btns[k].getAttribute('data-idx'), 10));
+    }
   }
 
   function showResults(results, c) {
@@ -284,11 +333,14 @@
       for (var i = 0; i < results.length; i++) {
         listHtml += '<div class="bulk-row" data-idx="' + i + '">' +
           '<span class="bulk-iban">' + results[i].formatted + '</span>' +
-          '<button class="bulk-copy-one" data-idx="' + i + '" title="Copy">&#x2398;</button>' +
+          '<div class="bulk-actions">' +
+            '<button class="bulk-copy-one" data-idx="' + i + '" title="Copy">&#x2398;</button>' +
+          '</div>' +
         '</div>';
       }
       bulkList.innerHTML = listHtml;
       bulkResult.style.display = '';
+      if (datasetEnable && datasetEnable.checked) updateBulkDatasetButtons();
 
       // Per-row copy buttons
       var copyBtns = bulkList.querySelectorAll('.bulk-copy-one');
