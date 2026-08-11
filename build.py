@@ -102,6 +102,19 @@ HEAD = '''<!DOCTYPE html>
       <a href="/swift-codes/">SWIFT Codes</a>
       <a href="/iban-calculator/">Calculator</a>
       <a href="/learn/">Learn</a>
+      <div class="lang-switch">
+        <button class="lang-btn" type="button" aria-expanded="false" aria-controls="lang-menu" onclick="toggleLangMenu()">
+          <span id="lang-current">🌐</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="lang-menu" id="lang-menu">
+          <a href="/" data-lang="en">🇬🇧 English</a>
+          <a href="/de/" data-lang="de">🇩🇪 Deutsch</a>
+          <a href="/es/" data-lang="es">🇪🇸 Español</a>
+          <a href="/fr/" data-lang="fr">🇫🇷 Français</a>
+          <a href="/zh/" data-lang="zh">🇨🇳 中文</a>
+        </div>
+      </div>
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
@@ -1604,6 +1617,9 @@ def build_sitemap():
         '  <url><loc>{}/iban-check-digit/</loc><lastmod>{}</lastmod><priority>0.7</priority></url>'.format(SITE, today),
         '  <url><loc>{}/swift-codes/</loc><lastmod>{}</lastmod><priority>0.7</priority></url>'.format(SITE, today),
         '  <url><loc>{}/zh/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
+        '  <url><loc>{}/de/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
+        '  <url><loc>{}/es/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
+        '  <url><loc>{}/fr/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
         '  <url><loc>{}/contact/</loc><lastmod>{}</lastmod><priority>0.3</priority></url>'.format(SITE, today),
         '  <url><loc>{}/privacy/</loc><lastmod>{}</lastmod><priority>0.3</priority></url>'.format(SITE, today),
         '  <url><loc>{}/terms/</loc><lastmod>{}</lastmod><priority>0.3</priority></url>'.format(SITE, today),
@@ -1626,9 +1642,517 @@ def build_robots():
 
 
 # ── Multi-Language Homepage ─────────────────────────────────────────
+# Per-language translations for the homepage (string replacements applied to index.html)
+LANG_CONFIG = {
+    'zh': {
+        'lang_name': '简体中文',
+        'title': '免费在线IBAN生成器 — 即时生成有效IBAN号码',
+        'desc': '为96+个国家生成有效的随机IBAN号码。免费的IBAN生成器和验证器，无需注册，纯客户端运行，不向任何服务器发送数据。支持所有SEPA和国际IBAN格式。',
+        'nav': [
+            ('>Home<', '>首页<'),
+            ('>What is IBAN<', '>IBAN是什么<'),
+            ('>Countries<', '>国家<'),
+            ('>Validator<', '>验证器<'),
+            ('>SEPA<', '>SEPA<'),
+            ('>Check Digits<', '>校验位<'),
+            ('>SWIFT Codes<', '>SWIFT代码<'),
+            ('>Calculator<', '>计算器<'),
+            ('>Learn<', '>学习<'),
+        ],
+        'crumb_home': ('<span class="crumb-current">Home</span>', '<span class="crumb-current">首页</span>'),
+        'hero': [
+            ('Free · No sign-up · 100% Client-Side', '免费 · 无需注册 · 100% 客户端运行'),
+            ('The <span class="text-gradient">IBAN Generator</span><br>for Every Country',
+             '<span>适用于所有国家的</span><span class="text-gradient">IBAN 生成器</span>'),
+            ('Generate <strong class="text-gold">mathematically valid</strong> IBANs for 96+ countries in your browser. ISO 13616 compliant, MOD-97 verified, zero data sent to any server.',
+             '在浏览器中为 96+ 个国家生成<strong class="text-gold">数学上有效</strong>的 IBAN。符合 ISO 13616 标准，MOD-97 验证，零数据传输至任何服务器。'),
+            ('>&#x21bb; Generate IBAN<', '>&#x21bb; 生成 IBAN<'),
+            ('>&#x2714; Validate an IBAN<', '>&#x2714; 验证 IBAN<'),
+            ('<span class="ht-l">+ International</span>', '<span class="ht-l">+ 国际</span>'),
+            ('<span class="ht-l">Server Calls</span>', '<span class="ht-l">服务器调用</span>'),
+            ('<span class="ht-l">Forever</span>', '<span class="ht-l">永久免费</span>'),
+        ],
+        'dial': [
+            ('>Generate an IBAN<', '>生成 IBAN<'),
+            ('placeholder="Search country..."', 'placeholder="搜索国家..."'),
+            ('>Select a country<', '>选择国家<'),
+            ('for="quantity-slider">Quantity<', 'for="quantity-slider">数量<'),
+            ('>Length<', '>长度<'),
+            ('>&#x2398; Copy<', '>&#x2398; 复制<'),
+            ('>Copied!<', '>已复制！<'),
+        ],
+        'bulk': [
+            ('>Generated IBANs<', '>生成的 IBAN<'),
+            ('>&#x2398; Copy All<', '>&#x2398; 复制全部<'),
+        ],
+        'history': [
+            ('>History<', '>历史记录<'),
+            ('>Recent History<', '>最近历史<'),
+            ('>Clear<', '>清空<'),
+        ],
+        'how': [
+            ('>How It Works<', '>使用方法<'),
+            ('>1. Select a Country<', '>1. 选择国家<'),
+            ('>Pick any country from the dropdown — all 96+ IBAN-using countries, from Germany and France to Brazil and the UAE. SEPA and international formats supported.<',
+             '>从下拉菜单选择任何使用 IBAN 的国家 — 涵盖全部 96+ 个国家，支持 SEPA 和国际格式。<'),
+            ('>2. Generate an IBAN<', '>2. 生成 IBAN<'),
+            ('>A <strong>mathematically valid</strong> IBAN is created using the MOD-97 check digit algorithm (ISO 13616). Every generated IBAN passes full validation.<',
+             '>使用 MOD-97 校验位算法（ISO 13616）创建<strong>数学上有效</strong>的 IBAN。每个生成的 IBAN 都通过完整验证。<'),
+            ('>3. Copy &amp; Use for Testing<', '>3. 复制用于测试<'),
+            ('>Use generated IBANs to test payment forms, validate software, or learn how IBAN formats work across countries. Built for developers and QA engineers.<',
+             '>使用生成的 IBAN 测试支付表单、验证软件或了解各国的 IBAN 格式。专为开发者和 QA 工程师设计。<'),
+            ('>4. 100% Private &amp; Secure<', '>4. 100% 私密安全<'),
+            ('>No server, no database, no analytics. Everything runs in your browser. Your data never leaves your device — inspect the source to verify.<',
+             '>无服务器、无数据库、无分析追踪。一切在您的浏览器中运行。数据永远不会离开您的设备 — 可查看源代码验证。<'),
+        ],
+        'whatis': [
+            ('>What is an IBAN?<', '>什么是 IBAN？<'),
+            ('>IBAN stands for <strong>International Bank Account Number</strong>. It is a standardised way of identifying bank accounts across national borders, used in over 95 countries worldwide. An IBAN contains a two-letter country code, two check digits, and a Basic Bank Account Number (BBAN) that includes the domestic bank code, branch code, and account number.<',
+             '>IBAN 代表<strong>国际银行账号</strong>。它是一种跨国境识别银行账户的标准化方式，在全球 95+ 个国家使用。IBAN 包含两位字母国家代码、两位校验位，以及包含国内银行代码、分行代码和账号的基本银行账号（BBAN）。<'),
+            ('>The IBAN system was developed by the European Committee for Banking Standards (ECBS) and later adopted as <strong>ISO 13616</strong>. Today, all SEPA (Single Euro Payments Area) transfers require an IBAN, making it essential for international banking in Europe and beyond.<',
+             '>IBAN 系统由欧洲银行标准委员会（ECBS）开发，后被采纳为 <strong>ISO 13616</strong> 标准。如今，所有 SEPA（单一欧元支付区）转账都需要 IBAN，使其成为欧洲及全球国际银行业务的必需品。<'),
+        ],
+        'region': [
+            ('>IBAN by Region<', '>按地区查看 IBAN<'),
+            ('>SEPA Countries<', '>SEPA 国家<'),
+            ('>36 European countries — unified euro payment zone<', '>36 个欧洲国家 — 统一欧元支付区<'),
+            ('>Worldwide IBAN<', '>全球 IBAN<'),
+            ('>60+ non-SEPA countries — Brazil, UAE, Saudi Arabia, Turkey &amp; more<', '>60+ 个非 SEPA 国家 — 巴西、阿联酋、沙特阿拉伯、土耳其等<'),
+            ('>International<', '>国际<'),
+        ],
+        'formats': [
+            ('>Popular IBAN Formats<', '>常用 IBAN 格式<'),
+            ('>Country</th><th>Length</th><th>Format Example</th><th>SEPA</th>',
+             '>国家</th><th>长度</th><th>格式示例</th><th>SEPA</th>'),
+        ],
+        'faq': [
+            ('>Frequently Asked Questions<', '>常见问题<'),
+            ('>Are these real IBANs?<', '>这些 IBAN 是真实的吗？<'),
+            ('>No. The IBANs generated here are <strong>mathematically valid</strong> (they pass the MOD-97 check digit verification) but use randomly generated bank codes and account numbers. They are intended for <strong>testing purposes only</strong> — do not use them for actual bank transfers.<',
+             '>不是。这里生成的 IBAN <strong>数学上有效</strong>（通过 MOD-97 校验位验证），但使用随机生成的银行代码和账号。它们仅供<strong>测试用途</strong> — 请勿用于实际的银行转账。<'),
+            ('>How does the IBAN check digit work?<', '>IBAN 校验位如何工作？<'),
+            ('>IBAN uses the MOD-97 algorithm (ISO 7064). The country code letters are converted to numbers (A=10, B=11, ..., Z=35), the string is rearranged, and the result must equal 1 modulo 97. This catches 99.94% of typing errors. <a href="/iban-check-digit/">Learn more &rarr;</a><',
+             '>IBAN 使用 MOD-97 算法（ISO 7064）。将国家代码字母转换为数字（A=10，B=11，...，Z=35），重新排列字符串，结果必须等于 1 对 97 取模。这能捕捉 99.94% 的输入错误。<a href="/iban-check-digit/">了解更多 →</a><'),
+            ('>Is my data safe?<', '>我的数据安全吗？<'),
+            ('>Yes — 100%. All IBAN generation and validation happens in your browser using JavaScript. No data is ever sent to any server. We do not use cookies, analytics trackers, or any form of data collection. You can verify this by inspecting the source code.<',
+             '>是的 — 100%。所有 IBAN 生成和验证都在您的浏览器中使用 JavaScript 完成。没有任何数据发送到任何服务器。我们不使用 Cookie、分析追踪器或任何形式的数据收集。您可以通过查看源代码来验证。<'),
+            ('>Which countries are supported?<', '>支持哪些国家？<'),
+            ('>We support 96 countries and territories — covering all 36 SEPA members plus 60+ international IBAN formats. <a href="/countries/">Browse the full list &rarr;</a><',
+             '>我们支持 96 个国家和地区 — 涵盖所有 36 个 SEPA 成员国以及 60+ 个国际 IBAN 格式。<a href="/countries/">浏览完整列表 →</a><'),
+        ],
+        'cta': [
+            ('>Ready to start?<', '>准备开始？<'),
+            ('>96 Countries. <span class="text-gradient">One Tool.</span><', '>96 个国家。<span class="text-gradient">一个工具。</span><'),
+            ('>Generate valid IBANs for any supported country, validate existing IBANs, or explore the complete IBAN format reference — all from one place, all running locally in your browser.<',
+             '>为任何支持的国家生成有效的 IBAN，验证现有 IBAN，或浏览完整的 IBAN 格式参考 — 全部在一个地方，在您的浏览器中本地运行。<'),
+            ('>&#x1F30D; Browse All Countries<', '>&#x1F30D; 浏览所有国家<'),
+            ('>&#x2714; Validate an IBAN<', '>&#x2714; 验证 IBAN<'),
+            ('>SEPA countries<', '>SEPA 国家<'),
+            ('>How check digits work<', '>校验位如何工作<'),
+            ('>Germany IBAN<', '>德国 IBAN<'),
+            ('>France IBAN<', '>法国 IBAN<'),
+            ('>UK IBAN<', '>英国 IBAN<'),
+            ('>Spain IBAN<', '>西班牙 IBAN<'),
+        ],
+        'footer': [
+            ('>Free online IBAN generator and validator. All generation runs client-side — no data is ever collected, stored, or transmitted. Generated IBANs are for testing purposes only.<',
+             '>免费的在线 IBAN 生成器和验证器。所有生成均在客户端运行 — 不会收集、存储或传输任何数据。生成的 IBAN 仅供测试使用。<'),
+            ('>IBAN Generator<', '>IBAN 生成器<'),
+            ('>All Countries<', '>所有国家<'),
+            ('>Validator<', '>验证器<'),
+            ('>SEPA Countries<', '>SEPA 国家<'),
+            ('>SWIFT/BIC Codes<', '>SWIFT/BIC 代码<'),
+            ('>Contact<', '>联系我们<'),
+            ('>Privacy<', '>隐私政策<'),
+            ('>Terms<', '>使用条款<'),
+            ('>Sitemap<', '>网站地图<'),
+        ],
+    },
+    'de': {
+        'lang_name': 'Deutsch',
+        'title': 'Kostenloser Online-IBAN-Generator — Gültige IBAN-Nummern sofort generieren',
+        'desc': 'Generieren Sie gültige zufällige IBAN-Nummern für 96+ Länder. Kostenloser IBAN-Generator und -Validator, keine Anmeldung, rein clientseitig, keine Daten an Server. Unterstützt alle SEPA- und internationalen IBAN-Formate.',
+        'nav': [
+            ('>Home<', '>Startseite<'),
+            ('>What is IBAN<', '>Was ist IBAN<'),
+            ('>Countries<', '>Länder<'),
+            ('>Validator<', '>Validator<'),
+            ('>SEPA<', '>SEPA<'),
+            ('>Check Digits<', '>Prüfziffern<'),
+            ('>SWIFT Codes<', '>SWIFT-Codes<'),
+            ('>Calculator<', '>Rechner<'),
+            ('>Learn<', '>Lernen<'),
+        ],
+        'crumb_home': ('<span class="crumb-current">Home</span>', '<span class="crumb-current">Startseite</span>'),
+        'hero': [
+            ('Free · No sign-up · 100% Client-Side', 'Kostenlos · Keine Anmeldung · 100% Clientseitig'),
+            ('The <span class="text-gradient">IBAN Generator</span><br>for Every Country',
+             'Der <span class="text-gradient">IBAN-Generator</span><br>für jedes Land'),
+            ('Generate <strong class="text-gold">mathematically valid</strong> IBANs for 96+ countries in your browser. ISO 13616 compliant, MOD-97 verified, zero data sent to any server.',
+             'Generieren Sie <strong class="text-gold">mathematisch gültige</strong> IBANs für 96+ Länder direkt im Browser. ISO 13616-konform, MOD-97-geprüft, keine Daten an Server.'),
+            ('>&#x21bb; Generate IBAN<', '>&#x21bb; IBAN generieren<'),
+            ('>&#x2714; Validate an IBAN<', '>&#x2714; IBAN prüfen<'),
+            ('<span class="ht-l">+ International</span>', '<span class="ht-l">+ International</span>'),
+            ('<span class="ht-l">Server Calls</span>', '<span class="ht-l">Serveraufrufe</span>'),
+            ('<span class="ht-l">Forever</span>', '<span class="ht-l">Für immer</span>'),
+        ],
+        'dial': [
+            ('>Generate an IBAN<', '>IBAN generieren<'),
+            ('placeholder="Search country..."', 'placeholder="Land suchen..."'),
+            ('>Select a country<', '>Land auswählen<'),
+            ('for="quantity-slider">Quantity<', 'for="quantity-slider">Anzahl<'),
+            ('>Length<', '>Länge<'),
+            ('>&#x2398; Copy<', '>&#x2398; Kopieren<'),
+            ('>Copied!<', '>Kopiert!<'),
+        ],
+        'bulk': [
+            ('>Generated IBANs<', '>Generierte IBANs<'),
+            ('>&#x2398; Copy All<', '>&#x2398; Alle kopieren<'),
+        ],
+        'history': [
+            ('>History<', '>Verlauf<'),
+            ('>Recent History<', '>Letzter Verlauf<'),
+            ('>Clear<', '>Löschen<'),
+        ],
+        'how': [
+            ('>How It Works<', '>So funktioniert es<'),
+            ('>1. Select a Country<', '>1. Land auswählen<'),
+            ('>Pick any country from the dropdown — all 96+ IBAN-using countries, from Germany and France to Brazil and the UAE. SEPA and international formats supported.<',
+             '>Wählen Sie ein beliebiges Land aus dem Dropdown — alle 96+ IBAN-Länder, von Deutschland und Frankreich bis Brasilien und den VAE. SEPA- und internationale Formate werden unterstützt.<'),
+            ('>2. Generate an IBAN<', '>2. IBAN generieren<'),
+            ('>A <strong>mathematically valid</strong> IBAN is created using the MOD-97 check digit algorithm (ISO 13616). Every generated IBAN passes full validation.<',
+             '>Eine <strong>mathematisch gültige</strong> IBAN wird mit dem MOD-97-Prüfziffernalgorithmus (ISO 13616) erstellt. Jede generierte IBAN besteht die vollständige Validierung.<'),
+            ('>3. Copy &amp; Use for Testing<', '>3. Kopieren &amp; zum Testen verwenden<'),
+            ('>Use generated IBANs to test payment forms, validate software, or learn how IBAN formats work across countries. Built for developers and QA engineers.<',
+             '>Verwenden Sie generierte IBANs zum Testen von Zahlungsformularen, zur Software-Validierung oder um IBAN-Formate verschiedener Länder kennenzulernen. Für Entwickler und QA-Ingenieure.<'),
+            ('>4. 100% Private &amp; Secure<', '>4. 100% privat &amp; sicher<'),
+            ('>No server, no database, no analytics. Everything runs in your browser. Your data never leaves your device — inspect the source to verify.<',
+             '>Kein Server, keine Datenbank, keine Analysen. Alles läuft in Ihrem Browser. Ihre Daten verlassen nie Ihr Gerät — prüfen Sie den Quellcode zur Bestätigung.<'),
+        ],
+        'whatis': [
+            ('>What is an IBAN?<', '>Was ist eine IBAN?<'),
+            ('>IBAN stands for <strong>International Bank Account Number</strong>. It is a standardised way of identifying bank accounts across national borders, used in over 95 countries worldwide. An IBAN contains a two-letter country code, two check digits, and a Basic Bank Account Number (BBAN) that includes the domestic bank code, branch code, and account number.<',
+             '>IBAN steht für <strong>International Bank Account Number</strong> (Internationale Bankkontonummer). Es ist eine standardisierte Möglichkeit, Bankkonten über Ländergrenzen hinweg zu identifizieren, die in über 95 Ländern weltweit verwendet wird. Eine IBAN enthält einen zweistelligen Ländercode, zwei Prüfziffern und eine Basic Bank Account Number (BBAN) mit Bankleitzahl, Filialcode und Kontonummer.<'),
+            ('>The IBAN system was developed by the European Committee for Banking Standards (ECBS) and later adopted as <strong>ISO 13616</strong>. Today, all SEPA (Single Euro Payments Area) transfers require an IBAN, making it essential for international banking in Europe and beyond.<',
+             '>Das IBAN-System wurde vom European Committee for Banking Standards (ECBS) entwickelt und später als <strong>ISO 13616</strong> übernommen. Heute erfordern alle SEPA-Überweisungen (Single Euro Payments Area) eine IBAN, was sie für das internationale Bankwesen in Europa und darüber hinaus unverzichtbar macht.<'),
+        ],
+        'region': [
+            ('>IBAN by Region<', '>IBAN nach Region<'),
+            ('>SEPA Countries<', '>SEPA-Länder<'),
+            ('>36 European countries — unified euro payment zone<', '>36 europäische Länder — einheitliche Euro-Zahlungszone<'),
+            ('>Worldwide IBAN<', '>Weltweit IBAN<'),
+            ('>60+ non-SEPA countries — Brazil, UAE, Saudi Arabia, Turkey &amp; more<', '>60+ Nicht-SEPA-Länder — Brasilien, VAE, Saudi-Arabien, Türkei &amp; mehr<'),
+            ('>International<', '>International<'),
+        ],
+        'formats': [
+            ('>Popular IBAN Formats<', '>Beliebte IBAN-Formate<'),
+            ('>Country</th><th>Length</th><th>Format Example</th><th>SEPA</th>',
+             '>Land</th><th>Länge</th><th>Format-Beispiel</th><th>SEPA</th>'),
+        ],
+        'faq': [
+            ('>Frequently Asked Questions<', '>Häufig gestellte Fragen<'),
+            ('>Are these real IBANs?<', '>Sind das echte IBANs?<'),
+            ('>No. The IBANs generated here are <strong>mathematically valid</strong> (they pass the MOD-97 check digit verification) but use randomly generated bank codes and account numbers. They are intended for <strong>testing purposes only</strong> — do not use them for actual bank transfers.<',
+             '>Nein. Die hier generierten IBANs sind <strong>mathematisch gültig</strong> (sie bestehen die MOD-97-Prüfziffernprüfung), verwenden aber zufällig generierte Bankcodes und Kontonummern. Sie sind nur für <strong>Testzwecke</strong> gedacht — verwenden Sie sie nicht für echte Banküberweisungen.<'),
+            ('>How does the IBAN check digit work?<', '>Wie funktioniert die IBAN-Prüfziffer?<'),
+            ('>IBAN uses the MOD-97 algorithm (ISO 7064). The country code letters are converted to numbers (A=10, B=11, ..., Z=35), the string is rearranged, and the result must equal 1 modulo 97. This catches 99.94% of typing errors. <a href="/iban-check-digit/">Learn more &rarr;</a><',
+             '>Die IBAN verwendet den MOD-97-Algorithmus (ISO 7064). Die Buchstaben des Ländercodes werden in Zahlen umgewandelt (A=10, B=11, ..., Z=35), die Zeichenfolge wird umgeordnet, und das Ergebnis muss Modulo 97 gleich 1 sein. Dies erkennt 99,94% der Tippfehler.<a href="/iban-check-digit/">Mehr erfahren →</a><'),
+            ('>Is my data safe?<', '>Sind meine Daten sicher?<'),
+            ('>Yes — 100%. All IBAN generation and validation happens in your browser using JavaScript. No data is ever sent to any server. We do not use cookies, analytics trackers, or any form of data collection. You can verify this by inspecting the source code.<',
+             '>Ja — 100%. Alle IBAN-Generierung und -Validierung erfolgt in Ihrem Browser mit JavaScript. Es werden keine Daten an Server gesendet. Wir verwenden keine Cookies, Analyse-Tracker oder Datenkollektion. Sie können dies im Quellcode überprüfen.<'),
+            ('>Which countries are supported?<', '>Welche Länder werden unterstützt?<'),
+            ('>We support 96 countries and territories — covering all 36 SEPA members plus 60+ international IBAN formats. <a href="/countries/">Browse the full list &rarr;</a><',
+             '>Wir unterstützen 96 Länder und Gebiete — alle 36 SEPA-Mitglieder plus 60+ internationale IBAN-Formate.<a href="/countries/">Vollständige Liste ansehen →</a><'),
+        ],
+        'cta': [
+            ('>Ready to start?<', '>Bereit zu starten?<'),
+            ('>96 Countries. <span class="text-gradient">One Tool.</span><', '>96 Länder. <span class="text-gradient">Ein Tool.</span><'),
+            ('>Generate valid IBANs for any supported country, validate existing IBANs, or explore the complete IBAN format reference — all from one place, all running locally in your browser.<',
+             '>Generieren Sie gültige IBANs für jedes unterstützte Land, validieren Sie bestehende IBANs oder erkunden Sie die vollständige IBAN-Formatreferenz — alles an einem Ort, alles lokal im Browser.<'),
+            ('>&#x1F30D; Browse All Countries<', '>&#x1F30D; Alle Länder ansehen<'),
+            ('>&#x2714; Validate an IBAN<', '>&#x2714; IBAN prüfen<'),
+            ('>SEPA countries<', '>SEPA-Länder<'),
+            ('>How check digits work<', '>So funktionieren Prüfziffern<'),
+            ('>Germany IBAN<', '>Deutschland IBAN<'),
+            ('>France IBAN<', '>Frankreich IBAN<'),
+            ('>UK IBAN<', '>Großbritannien IBAN<'),
+            ('>Spain IBAN<', '>Spanien IBAN<'),
+        ],
+        'footer': [
+            ('>Free online IBAN generator and validator. All generation runs client-side — no data is ever collected, stored, or transmitted. Generated IBANs are for testing purposes only.<',
+             '>Kostenloser Online-IBAN-Generator und -Validator. Alle Generierung läuft clientseitig — es werden keine Daten gesammelt, gespeichert oder übertragen. Generierte IBANs sind nur für Testzwecke.<'),
+            ('>IBAN Generator<', '>IBAN-Generator<'),
+            ('>All Countries<', '>Alle Länder<'),
+            ('>Validator<', '>Validator<'),
+            ('>SEPA Countries<', '>SEPA-Länder<'),
+            ('>SWIFT/BIC Codes<', '>SWIFT/BIC-Codes<'),
+            ('>Contact<', '>Kontakt<'),
+            ('>Privacy<', '>Datenschutz<'),
+            ('>Terms<', '>AGB<'),
+            ('>Sitemap<', '>Sitemap<'),
+        ],
+    },
+    'es': {
+        'lang_name': 'Español',
+        'title': 'Generador de IBAN en línea gratuito — Genera números IBAN válidos al instante',
+        'desc': 'Genera números IBAN aleatorios válidos para 96+ países. Generador y validador de IBAN gratuito, sin registro, 100% en tu navegador, sin enviar datos a ningún servidor. Soporta todos los formatos SEPA e internacionales.',
+        'nav': [
+            ('>Home<', '>Inicio<'),
+            ('>What is IBAN<', '>Qué es IBAN<'),
+            ('>Countries<', '>Países<'),
+            ('>Validator<', '>Validador<'),
+            ('>SEPA<', '>SEPA<'),
+            ('>Check Digits<', '>Dígitos de control<'),
+            ('>SWIFT Codes<', '>Códigos SWIFT<'),
+            ('>Calculator<', '>Calculadora<'),
+            ('>Learn<', '>Aprende<'),
+        ],
+        'crumb_home': ('<span class="crumb-current">Home</span>', '<span class="crumb-current">Inicio</span>'),
+        'hero': [
+            ('Free · No sign-up · 100% Client-Side', 'Gratis · Sin registro · 100% en tu navegador'),
+            ('The <span class="text-gradient">IBAN Generator</span><br>for Every Country',
+             'El <span class="text-gradient">generador de IBAN</span><br>para cada país'),
+            ('Generate <strong class="text-gold">mathematically valid</strong> IBANs for 96+ countries in your browser. ISO 13616 compliant, MOD-97 verified, zero data sent to any server.',
+             'Genera IBAN <strong class="text-gold">matemáticamente válidos</strong> para 96+ países en tu navegador. Conforme a ISO 13616, verificado con MOD-97, cero datos enviados a servidores.'),
+            ('>&#x21bb; Generate IBAN<', '>&#x21bb; Generar IBAN<'),
+            ('>&#x2714; Validate an IBAN<', '>&#x2714; Validar un IBAN<'),
+            ('<span class="ht-l">+ International</span>', '<span class="ht-l">+ Internacional</span>'),
+            ('<span class="ht-l">Server Calls</span>', '<span class="ht-l">Llamadas al servidor</span>'),
+            ('<span class="ht-l">Forever</span>', '<span class="ht-l">Para siempre</span>'),
+        ],
+        'dial': [
+            ('>Generate an IBAN<', '>Generar un IBAN<'),
+            ('placeholder="Search country..."', 'placeholder="Buscar país..."'),
+            ('>Select a country<', '>Seleccionar un país<'),
+            ('for="quantity-slider">Quantity<', 'for="quantity-slider">Cantidad<'),
+            ('>Length<', '>Longitud<'),
+            ('>&#x2398; Copy<', '>&#x2398; Copiar<'),
+            ('>Copied!<', '>¡Copiado!<'),
+        ],
+        'bulk': [
+            ('>Generated IBANs<', '>IBANs generados<'),
+            ('>&#x2398; Copy All<', '>&#x2398; Copiar todo<'),
+        ],
+        'history': [
+            ('>History<', '>Historial<'),
+            ('>Recent History<', '>Historial reciente<'),
+            ('>Clear<', '>Borrar<'),
+        ],
+        'how': [
+            ('>How It Works<', '>Cómo funciona<'),
+            ('>1. Select a Country<', '>1. Selecciona un país<'),
+            ('>Pick any country from the dropdown — all 96+ IBAN-using countries, from Germany and France to Brazil and the UAE. SEPA and international formats supported.<',
+             '>Elige cualquier país del menú — los 96+ países que usan IBAN, desde Alemania y Francia hasta Brasil y los EAU. Se admiten formatos SEPA e internacionales.<'),
+            ('>2. Generate an IBAN<', '>2. Genera un IBAN<'),
+            ('>A <strong>mathematically valid</strong> IBAN is created using the MOD-97 check digit algorithm (ISO 13616). Every generated IBAN passes full validation.<',
+             '>Se crea un IBAN <strong>matemáticamente válido</strong> con el algoritmo de dígitos de control MOD-97 (ISO 13616). Cada IBAN generado pasa la validación completa.<'),
+            ('>3. Copy &amp; Use for Testing<', '>3. Copia y úsalo para pruebas<'),
+            ('>Use generated IBANs to test payment forms, validate software, or learn how IBAN formats work across countries. Built for developers and QA engineers.<',
+             '>Usa los IBAN generados para probar formularios de pago, validar software o aprender cómo funcionan los formatos IBAN en distintos países. Hecho para desarrolladores e ingenieros de QA.<'),
+            ('>4. 100% Private &amp; Secure<', '>4. 100% privado y seguro<'),
+            ('>No server, no database, no analytics. Everything runs in your browser. Your data never leaves your device — inspect the source to verify.<',
+             '>Sin servidor, sin base de datos, sin análisis. Todo funciona en tu navegador. Tus datos nunca salen de tu dispositivo — inspecciona el código para verificar.<'),
+        ],
+        'whatis': [
+            ('>What is an IBAN?<', '>¿Qué es un IBAN?<'),
+            ('>IBAN stands for <strong>International Bank Account Number</strong>. It is a standardised way of identifying bank accounts across national borders, used in over 95 countries worldwide. An IBAN contains a two-letter country code, two check digits, and a Basic Bank Account Number (BBAN) that includes the domestic bank code, branch code, and account number.<',
+             '>IBAN significa <strong>International Bank Account Number</strong> (Número de Cuenta Bancaria Internacional). Es una forma estandarizada de identificar cuentas bancarias a través de fronteras, usada en más de 95 países. Un IBAN contiene un código de país de dos letras, dos dígitos de control y una Basic Bank Account Number (BBAN) con el código bancario nacional, sucursal y número de cuenta.<'),
+            ('>The IBAN system was developed by the European Committee for Banking Standards (ECBS) and later adopted as <strong>ISO 13616</strong>. Today, all SEPA (Single Euro Payments Area) transfers require an IBAN, making it essential for international banking in Europe and beyond.<',
+             '>El sistema IBAN fue desarrollado por el European Committee for Banking Standards (ECBS) y adoptado como <strong>ISO 13616</strong>. Hoy, todas las transferencias SEPA (Single Euro Payments Area) requieren IBAN, siendo esencial para la banca internacional en Europa y más allá.<'),
+        ],
+        'region': [
+            ('>IBAN by Region<', '>IBAN por región<'),
+            ('>SEPA Countries<', '>Países SEPA<'),
+            ('>36 European countries — unified euro payment zone<', '>36 países europeos — zona de pago en euros unificada<'),
+            ('>Worldwide IBAN<', '>IBAN mundial<'),
+            ('>60+ non-SEPA countries — Brazil, UAE, Saudi Arabia, Turkey &amp; more<', '>60+ países no SEPA — Brasil, EAU, Arabia Saudita, Turquía y más<'),
+            ('>International<', '>Internacional<'),
+        ],
+        'formats': [
+            ('>Popular IBAN Formats<', '>Formatos IBAN populares<'),
+            ('>Country</th><th>Length</th><th>Format Example</th><th>SEPA</th>',
+             '>País</th><th>Longitud</th><th>Ejemplo de formato</th><th>SEPA</th>'),
+        ],
+        'faq': [
+            ('>Frequently Asked Questions<', '>Preguntas frecuentes<'),
+            ('>Are these real IBANs?<', '>¿Son IBAN reales?<'),
+            ('>No. The IBANs generated here are <strong>mathematically valid</strong> (they pass the MOD-97 check digit verification) but use randomly generated bank codes and account numbers. They are intended for <strong>testing purposes only</strong> — do not use them for actual bank transfers.<',
+             '>No. Los IBAN generados aquí son <strong>matemáticamente válidos</strong> (pasan la verificación MOD-97) pero usan códigos bancarios y números de cuenta aleatorios. Son solo para <strong>fines de prueba</strong> — no los uses para transferencias reales.<'),
+            ('>How does the IBAN check digit work?<', '>¿Cómo funciona el dígito de control del IBAN?<'),
+            ('>IBAN uses the MOD-97 algorithm (ISO 7064). The country code letters are converted to numbers (A=10, B=11, ..., Z=35), the string is rearranged, and the result must equal 1 modulo 97. This catches 99.94% of typing errors. <a href="/iban-check-digit/">Learn more &rarr;</a><',
+             '>El IBAN usa el algoritmo MOD-97 (ISO 7064). Las letras del código de país se convierten a números (A=10, B=11, ..., Z=35), la cadena se reordena y el resultado debe ser igual a 1 módulo 97. Esto detecta el 99,94% de los errores de escritura.<a href="/iban-check-digit/">Aprende más →</a><'),
+            ('>Is my data safe?<', '>¿Mis datos están seguros?<'),
+            ('>Yes — 100%. All IBAN generation and validation happens in your browser using JavaScript. No data is ever sent to any server. We do not use cookies, analytics trackers, or any form of data collection. You can verify this by inspecting the source code.<',
+             '>Sí — 100%. Toda la generación y validación de IBAN ocurre en tu navegador con JavaScript. No se envía ningún dato a servidores. No usamos cookies, rastreadores de análisis ni recolección de datos. Puedes verificarlo inspeccionando el código fuente.<'),
+            ('>Which countries are supported?<', '>¿Qué países se admiten?<'),
+            ('>We support 96 countries and territories — covering all 36 SEPA members plus 60+ international IBAN formats. <a href="/countries/">Browse the full list &rarr;</a><',
+             '>Soportamos 96 países y territorios — los 36 miembros SEPA más 60+ formatos IBAN internacionales.<a href="/countries/">Ver la lista completa →</a><'),
+        ],
+        'cta': [
+            ('>Ready to start?<', '>¿Listo para empezar?<'),
+            ('>96 Countries. <span class="text-gradient">One Tool.</span><', '>96 países. <span class="text-gradient">Una herramienta.</span><'),
+            ('>Generate valid IBANs for any supported country, validate existing IBANs, or explore the complete IBAN format reference — all from one place, all running locally in your browser.<',
+             '>Genera IBAN válidos para cualquier país compatible, valida IBAN existentes o explora la referencia completa de formatos IBAN — todo en un lugar, todo local en tu navegador.<'),
+            ('>&#x1F30D; Browse All Countries<', '>&#x1F30D; Ver todos los países<'),
+            ('>&#x2714; Validate an IBAN<', '>&#x2714; Validar un IBAN<'),
+            ('>SEPA countries<', '>Países SEPA<'),
+            ('>How check digits work<', '>Cómo funcionan los dígitos de control<'),
+            ('>Germany IBAN<', '>IBAN de Alemania<'),
+            ('>France IBAN<', '>IBAN de Francia<'),
+            ('>UK IBAN<', '>IBAN de Reino Unido<'),
+            ('>Spain IBAN<', '>IBAN de España<'),
+        ],
+        'footer': [
+            ('>Free online IBAN generator and validator. All generation runs client-side — no data is ever collected, stored, or transmitted. Generated IBANs are for testing purposes only.<',
+             '>Generador y validador de IBAN gratuito en línea. Toda la generación se ejecuta en tu navegador — no se recopilan, almacenan ni transmiten datos. Los IBAN generados son solo para pruebas.<'),
+            ('>IBAN Generator<', '>Generador de IBAN<'),
+            ('>All Countries<', '>Todos los países<'),
+            ('>Validator<', '>Validador<'),
+            ('>SEPA Countries<', '>Países SEPA<'),
+            ('>SWIFT/BIC Codes<', '>Códigos SWIFT/BIC<'),
+            ('>Contact<', '>Contacto<'),
+            ('>Privacy<', '>Privacidad<'),
+            ('>Terms<', '>Términos<'),
+            ('>Sitemap<', '>Mapa del sitio<'),
+        ],
+    },
+    'fr': {
+        'lang_name': 'Français',
+        'title': 'Générateur d\'IBAN en ligne gratuit — Générez des numéros IBAN valides instantanément',
+        'desc': 'Générez des numéros IBAN aléatoires valides pour 96+ pays. Générateur et validateur d\'IBAN gratuit, sans inscription, 100% côté client, aucune donnée envoyée à un serveur. Prend en charge tous les formats SEPA et internationaux.',
+        'nav': [
+            ('>Home<', '>Accueil<'),
+            ('>What is IBAN<', '>Qu\'est-ce que l\'IBAN<'),
+            ('>Countries<', '>Pays<'),
+            ('>Validator<', '>Validateur<'),
+            ('>SEPA<', '>SEPA<'),
+            ('>Check Digits<', '>Chiffres de contrôle<'),
+            ('>SWIFT Codes<', '>Codes SWIFT<'),
+            ('>Calculator<', '>Calculateur<'),
+            ('>Learn<', '>Apprendre<'),
+        ],
+        'crumb_home': ('<span class="crumb-current">Home</span>', '<span class="crumb-current">Accueil</span>'),
+        'hero': [
+            ('Free · No sign-up · 100% Client-Side', 'Gratuit · Sans inscription · 100% côté client'),
+            ('The <span class="text-gradient">IBAN Generator</span><br>for Every Country',
+             'Le <span class="text-gradient">générateur d\'IBAN</span><br>pour chaque pays'),
+            ('Generate <strong class="text-gold">mathematically valid</strong> IBANs for 96+ countries in your browser. ISO 13616 compliant, MOD-97 verified, zero data sent to any server.',
+             'Générez des IBAN <strong class="text-gold">mathématiquement valides</strong> pour 96+ pays dans votre navigateur. Conforme ISO 13616, vérifié MOD-97, zéro donnée envoyée à un serveur.'),
+            ('>&#x21bb; Generate IBAN<', '>&#x21bb; Générer un IBAN<'),
+            ('>&#x2714; Validate an IBAN<', '>&#x2714; Valider un IBAN<'),
+            ('<span class="ht-l">+ International</span>', '<span class="ht-l">+ International</span>'),
+            ('<span class="ht-l">Server Calls</span>', '<span class="ht-l">Appels serveur</span>'),
+            ('<span class="ht-l">Forever</span>', '<span class="ht-l">Pour toujours</span>'),
+        ],
+        'dial': [
+            ('>Generate an IBAN<', '>Générer un IBAN<'),
+            ('placeholder="Search country..."', 'placeholder="Rechercher un pays..."'),
+            ('>Select a country<', '>Sélectionner un pays<'),
+            ('for="quantity-slider">Quantity<', 'for="quantity-slider">Quantité<'),
+            ('>Length<', '>Longueur<'),
+            ('>&#x2398; Copy<', '>&#x2398; Copier<'),
+            ('>Copied!<', '>Copié !<'),
+        ],
+        'bulk': [
+            ('>Generated IBANs<', '>IBAN générés<'),
+            ('>&#x2398; Copy All<', '>&#x2398; Tout copier<'),
+        ],
+        'history': [
+            ('>History<', '>Historique<'),
+            ('>Recent History<', '>Historique récent<'),
+            ('>Clear<', '>Effacer<'),
+        ],
+        'how': [
+            ('>How It Works<', '>Comment ça marche<'),
+            ('>1. Select a Country<', '>1. Sélectionnez un pays<'),
+            ('>Pick any country from the dropdown — all 96+ IBAN-using countries, from Germany and France to Brazil and the UAE. SEPA and international formats supported.<',
+             '>Choisissez n\'importe quel pays dans la liste — les 96+ pays utilisant l\'IBAN, de l\'Allemagne et la France au Brésil et aux EAU. Formats SEPA et internationaux pris en charge.<'),
+            ('>2. Generate an IBAN<', '>2. Générez un IBAN<'),
+            ('>A <strong>mathematically valid</strong> IBAN is created using the MOD-97 check digit algorithm (ISO 13616). Every generated IBAN passes full validation.<',
+             '>Un IBAN <strong>mathématiquement valide</strong> est créé avec l\'algorithme MOD-97 (ISO 13616). Chaque IBAN généré passe la validation complète.<'),
+            ('>3. Copy &amp; Use for Testing<', '>3. Copiez et utilisez pour tester<'),
+            ('>Use generated IBANs to test payment forms, validate software, or learn how IBAN formats work across countries. Built for developers and QA engineers.<',
+             '>Utilisez les IBAN générés pour tester des formulaires de paiement, valider des logiciels ou apprendre comment fonctionnent les formats IBAN selon les pays. Conçu pour les développeurs et ingénieurs QA.<'),
+            ('>4. 100% Private &amp; Secure<', '>4. 100% privé et sécurisé<'),
+            ('>No server, no database, no analytics. Everything runs in your browser. Your data never leaves your device — inspect the source to verify.<',
+             '>Pas de serveur, pas de base de données, pas d\'analyse. Tout fonctionne dans votre navigateur. Vos données ne quittent jamais votre appareil — inspectez le code pour vérifier.<'),
+        ],
+        'whatis': [
+            ('>What is an IBAN?<', '>Qu\'est-ce qu\'un IBAN ?<'),
+            ('>IBAN stands for <strong>International Bank Account Number</strong>. It is a standardised way of identifying bank accounts across national borders, used in over 95 countries worldwide. An IBAN contains a two-letter country code, two check digits, and a Basic Bank Account Number (BBAN) that includes the domestic bank code, branch code, and account number.<',
+             '>IBAN signifie <strong>International Bank Account Number</strong> (Numéro de Compte Bancaire International). C\'est un moyen standardisé d\'identifier les comptes bancaires à travers les frontières, utilisé dans plus de 95 pays. Un IBAN contient un code pays de deux lettres, deux chiffres de contrôle et un Basic Bank Account Number (BBAN) avec le code bancaire national, l\'agence et le numéro de compte.<'),
+            ('>The IBAN system was developed by the European Committee for Banking Standards (ECBS) and later adopted as <strong>ISO 13616</strong>. Today, all SEPA (Single Euro Payments Area) transfers require an IBAN, making it essential for international banking in Europe and beyond.<',
+             '>Le système IBAN a été développé par l\'European Committee for Banking Standards (ECBS) et adopté comme <strong>ISO 13616</strong>. Aujourd\'hui, tous les virements SEPA (Single Euro Payments Area) exigent un IBAN, ce qui le rend essentiel pour la banque internationale en Europe et au-delà.<'),
+        ],
+        'region': [
+            ('>IBAN by Region<', '>IBAN par région<'),
+            ('>SEPA Countries<', '>Pays SEPA<'),
+            ('>36 European countries — unified euro payment zone<', '>36 pays européens — zone de paiement en euros unifiée<'),
+            ('>Worldwide IBAN<', '>IBAN mondial<'),
+            ('>60+ non-SEPA countries — Brazil, UAE, Saudi Arabia, Turkey &amp; more<', '>60+ pays hors SEPA — Brésil, EAU, Arabie saoudite, Turquie et plus<'),
+            ('>International<', '>International<'),
+        ],
+        'formats': [
+            ('>Popular IBAN Formats<', '>Formats IBAN populaires<'),
+            ('>Country</th><th>Length</th><th>Format Example</th><th>SEPA</th>',
+             '>Pays</th><th>Longueur</th><th>Exemple de format</th><th>SEPA</th>'),
+        ],
+        'faq': [
+            ('>Frequently Asked Questions<', '>Questions fréquentes<'),
+            ('>Are these real IBANs?<', '>Sont-ce de vrais IBAN ?<'),
+            ('>No. The IBANs generated here are <strong>mathematically valid</strong> (they pass the MOD-97 check digit verification) but use randomly generated bank codes and account numbers. They are intended for <strong>testing purposes only</strong> — do not use them for actual bank transfers.<',
+             '>Non. Les IBAN générés ici sont <strong>mathématiquement valides</strong> (ils passent la vérification MOD-97) mais utilisent des codes bancaires et numéros de compte aléatoires. Ils sont destinés <strong>uniquement aux tests</strong> — ne les utilisez pas pour de vrais virements.<'),
+            ('>How does the IBAN check digit work?<', '>Comment fonctionne le chiffre de contrôle de l\'IBAN ?<'),
+            ('>IBAN uses the MOD-97 algorithm (ISO 7064). The country code letters are converted to numbers (A=10, B=11, ..., Z=35), the string is rearranged, and the result must equal 1 modulo 97. This catches 99.94% of typing errors. <a href="/iban-check-digit/">Learn more &rarr;</a><',
+             '>L\'IBAN utilise l\'algorithme MOD-97 (ISO 7064). Les lettres du code pays sont converties en nombres (A=10, B=11, ..., Z=35), la chaîne est réorganisée et le résultat doit être égal à 1 modulo 97. Cela détecte 99,94% des erreurs de frappe.<a href="/iban-check-digit/">En savoir plus →</a><'),
+            ('>Is my data safe?<', '>Mes données sont-elles sûres ?<'),
+            ('>Yes — 100%. All IBAN generation and validation happens in your browser using JavaScript. No data is ever sent to any server. We do not use cookies, analytics trackers, or any form of data collection. You can verify this by inspecting the source code.<',
+             '>Oui — 100%. Toute la génération et validation d\'IBAN se fait dans votre navigateur avec JavaScript. Aucune donnée n\'est envoyée à un serveur. Nous n\'utilisons pas de cookies, traceurs d\'analyse ou collecte de données. Vous pouvez vérifier en inspectant le code source.<'),
+            ('>Which countries are supported?<', '>Quels pays sont pris en charge ?<'),
+            ('>We support 96 countries and territories — covering all 36 SEPA members plus 60+ international IBAN formats. <a href="/countries/">Browse the full list &rarr;</a><',
+             '>Nous prenons en charge 96 pays et territoires — les 36 membres SEPA plus 60+ formats IBAN internationaux.<a href="/countries/">Voir la liste complète →</a><'),
+        ],
+        'cta': [
+            ('>Ready to start?<', '>Prêt à commencer ?<'),
+            ('>96 Countries. <span class="text-gradient">One Tool.</span><', '>96 pays. <span class="text-gradient">Un outil.</span><'),
+            ('>Generate valid IBANs for any supported country, validate existing IBANs, or explore the complete IBAN format reference — all from one place, all running locally in your browser.<',
+             '>Générez des IBAN valides pour n\'importe quel pays pris en charge, validez des IBAN existants ou explorez la référence complète des formats IBAN — tout au même endroit, tout en local dans votre navigateur.<'),
+            ('>&#x1F30D; Browse All Countries<', '>&#x1F30D; Voir tous les pays<'),
+            ('>&#x2714; Validate an IBAN<', '>&#x2714; Valider un IBAN<'),
+            ('>SEPA countries<', '>Pays SEPA<'),
+            ('>How check digits work<', '>Comment fonctionnent les chiffres de contrôle<'),
+            ('>Germany IBAN<', '>IBAN Allemagne<'),
+            ('>France IBAN<', '>IBAN France<'),
+            ('>UK IBAN<', '>IBAN Royaume-Uni<'),
+            ('>Spain IBAN<', '>IBAN Espagne<'),
+        ],
+        'footer': [
+            ('>Free online IBAN generator and validator. All generation runs client-side — no data is ever collected, stored, or transmitted. Generated IBANs are for testing purposes only.<',
+             '>Générateur et validateur d\'IBAN gratuit en ligne. Toute la génération se fait côté client — aucune donnée n\'est collectée, stockée ou transmise. Les IBAN générés sont uniquement pour les tests.<'),
+            ('>IBAN Generator<', '>Générateur d\'IBAN<'),
+            ('>All Countries<', '>Tous les pays<'),
+            ('>Validator<', '>Validateur<'),
+            ('>SEPA Countries<', '>Pays SEPA<'),
+            ('>SWIFT/BIC Codes<', '>Codes SWIFT/BIC<'),
+            ('>Contact<', '>Contact<'),
+            ('>Privacy<', '>Confidentialité<'),
+            ('>Terms<', '>Conditions<'),
+            ('>Sitemap<', '>Plan du site<'),
+        ],
+    },
+}
 
-def build_translated_homepage(lang_code, title_zh, desc_zh):
-    """Build Chinese homepage at /zh/index.html by translating the English version."""
+# Order of hreflang alternates (default/en first, then all supported)
+SUPPORTED_LANGS = ['zh', 'de', 'es', 'fr']
+
+
+def build_translated_homepage(lang_code, title=None, desc=None):
+    """Build a translated homepage at /<lang>/index.html by applying string replacements."""
+    cfg = LANG_CONFIG.get(lang_code)
+    if not cfg:
+        print('  WARNING: no translation config for {}'.format(lang_code))
+        return None
+
     src_index = os.path.join(ROOT, 'index.html')
     if not os.path.exists(src_index):
         print('  WARNING: index.html not found, skipping {}'.format(lang_code))
@@ -1637,29 +2161,27 @@ def build_translated_homepage(lang_code, title_zh, desc_zh):
     with open(src_index, 'r', encoding='utf-8') as f:
         html = f.read()
 
+    title = title or cfg['title']
+    desc = desc or cfg['desc']
     can_path = '/{}/'.format(lang_code)
 
     # Metadata replacements
     html = html.replace('<html lang="en">', '<html lang="{}">'.format(lang_code))
-    # Title
     html = html.replace(
         '<title>Free Online IBAN Generator — Generate Valid IBAN Numbers Instantly</title>',
-        '<title>{}</title>'.format(title_zh)
+        '<title>{}</title>'.format(title)
     )
-    # Meta description
     html = html.replace(
         '<meta name="description" content="Generate valid random IBAN numbers for 96+ countries. Free IBAN generator and validator — no signup, pure client-side, no data sent to any server. Supports all SEPA and international IBAN formats.">',
-        '<meta name="description" content="{}">'.format(desc_zh)
+        '<meta name="description" content="{}">'.format(desc)
     )
-    # OG title
     html = html.replace(
         '<meta property="og:title" content="Free Online IBAN Generator — Generate Valid IBAN Numbers Instantly">',
-        '<meta property="og:title" content="{}">'.format(title_zh)
+        '<meta property="og:title" content="{}">'.format(title)
     )
-    # OG description
     html = html.replace(
         '<meta property="og:description" content="Generate valid random IBAN numbers for 96+ countries. Free, no signup, client-side only.">',
-        '<meta property="og:description" content="{}">'.format(desc_zh[:160])
+        '<meta property="og:description" content="{}">'.format(desc[:160])
     )
     html = html.replace(
         '<link rel="canonical" href="https://ibaneasy.com/">',
@@ -1670,10 +2192,10 @@ def build_translated_homepage(lang_code, title_zh, desc_zh):
         '<meta property="og:url" content="{}{}">'.format(SITE, can_path)
     )
 
-    # Add hreflang and i18n script before </head>
+    # Add hreflang for all supported languages + i18n script before </head>
     hreflang = (
         '<link rel="alternate" hreflang="en" href="{}">\n'.format(SITE + '/') +
-        '<link rel="alternate" hreflang="zh" href="{}">\n'.format(SITE + '/zh/') +
+        '<link rel="alternate" hreflang="{}" href="{}">\n'.format(lang_code, SITE + can_path) +
         '<link rel="alternate" hreflang="x-default" href="{}">\n'.format(SITE + '/') +
         '<script src="/js/i18n.js" defer></script>'
     )
@@ -1685,138 +2207,15 @@ def build_translated_homepage(lang_code, title_zh, desc_zh):
         '"url":"{}{}"'.format(SITE, can_path)
     )
 
-    # ── Nav translations ──
-    html = html.replace('>Home<', '>首页<')
-    html = html.replace('>Countries<', '>国家<')
-    html = html.replace('>Validator<', '>验证器<')
-    html = html.replace('>SWIFT Codes<', '>SWIFT代码<')
-    html = html.replace('>SEPA<', '>SEPA<')  # Keep acronym
-    html = html.replace('>Check Digits<', '>校验位<')
-    html = html.replace('>Calculator<', '>计算器<')
-    html = html.replace('>Learn<', '>学习<')
+    # Apply all string replacements from config
+    for group_key in ['nav', 'hero', 'dial', 'bulk', 'history', 'how', 'whatis',
+                      'region', 'formats', 'faq', 'cta', 'footer']:
+        for old, new in cfg.get(group_key, []):
+            html = html.replace(old, new)
 
-    # ── Breadcrumb ──
-    html = html.replace('<span class="crumb-current">Home</span>',
-                        '<span class="crumb-current">首页</span>')
-
-    # ── Hero section ──
-    html = html.replace('Free · No sign-up · 100% Client-Side',
-                        '免费 · 无需注册 · 100% 客户端运行')
-    html = html.replace('The <span class="text-gradient">IBAN Generator</span><br>for Every Country',
-                        '<span>适用于所有国家的</span><span class="text-gradient">IBAN 生成器</span>')
-    html = html.replace('Generate <strong class="text-gold">mathematically valid</strong> IBANs for 96+ countries in your browser. ISO 13616 compliant, MOD-97 verified, zero data sent to any server.',
-                        '在浏览器中为 96+ 个国家生成<strong class="text-gold">数学上有效</strong>的 IBAN。符合 ISO 13616 标准，MOD-97 验证，零数据传输至任何服务器。')
-    html = html.replace('>&#x21bb; Generate IBAN<', '>&#x21bb; 生成 IBAN<')
-    html = html.replace('>&#x2714; Validate an IBAN<', '>&#x2714; 验证 IBAN<')
-    html = html.replace('>Countries<', '>96+ 国家<', 1)  # First occurrence is nav, already replaced. This catches hero-trust.
-    # Fix hero-trust labels
-    html = html.replace('<span class="ht-l">+ International</span>',
-                        '<span class="ht-l">+ 国际</span>')
-    html = html.replace('<span class="ht-l">Server Calls</span>',
-                        '<span class="ht-l">服务器调用</span>')
-    html = html.replace('<span class="ht-l">Forever</span>',
-                        '<span class="ht-l">永久免费</span>')
-
-    # ── Generator dial ──
-    html = html.replace('>Generate an IBAN<', '>生成 IBAN<')
-    html = html.replace('placeholder="Search country..."',
-                        'placeholder="搜索国家..."')
-    html = html.replace('>Select a country<', '>选择国家<')
-    html = html.replace('for="quantity-slider">Quantity<',
-                        'for="quantity-slider">数量<')
-    html = html.replace('>&#x21bb; Generate IBAN<', '>&#x21bb; 生成 IBAN<')  # Generate button (dup of hero btn)
-    html = html.replace('>Length<', '>长度<')
-    html = html.replace('>&#x2398; Copy<', '>&#x2398; 复制<')
-    html = html.replace('>Copied!<', '>已复制！<')
-
-    # ── Bulk results ──
-    html = html.replace('>Generated IBANs<', '>生成的 IBAN<')
-    html = html.replace('>&#x2398; Copy All<', '>&#x2398; 复制全部<')
-
-    # ── History ──
-    html = html.replace('>History<', '>历史记录<')
-    html = html.replace('>Recent History<', '>最近历史<')
-    html = html.replace('>Clear<', '>清空<')
-
-    # ── How It Works ──
-    html = html.replace('>How It Works<', '>使用方法<')
-    html = html.replace('>1. Select a Country<', '>1. 选择国家<')
-    html = html.replace('>Pick any country from the dropdown — all 96+ IBAN-using countries, from Germany and France to Brazil and the UAE. SEPA and international formats supported.<',
-                        '>从下拉菜单选择任何使用 IBAN 的国家 — 涵盖全部 96+ 个国家，支持 SEPA 和国际格式。<')
-    html = html.replace('>2. Generate an IBAN<', '>2. 生成 IBAN<')
-    html = html.replace('>A <strong>mathematically valid</strong> IBAN is created using the MOD-97 check digit algorithm (ISO 13616). Every generated IBAN passes full validation.<',
-                        '>使用 MOD-97 校验位算法（ISO 13616）创建<strong>数学上有效</strong>的 IBAN。每个生成的 IBAN 都通过完整验证。<')
-    html = html.replace('>3. Copy &amp; Use for Testing<', '>3. 复制用于测试<')
-    html = html.replace('>Use generated IBANs to test payment forms, validate software, or learn how IBAN formats work across countries. Built for developers and QA engineers.<',
-                        '>使用生成的 IBAN 测试支付表单、验证软件或了解各国的 IBAN 格式。专为开发者和 QA 工程师设计。<')
-    html = html.replace('>4. 100% Private &amp; Secure<', '>4. 100% 私密安全<')
-    html = html.replace('>No server, no database, no analytics. Everything runs in your browser. Your data never leaves your device — inspect the source to verify.<',
-                        '>无服务器、无数据库、无分析追踪。一切在您的浏览器中运行。数据永远不会离开您的设备 — 可查看源代码验证。<')
-
-    # ── What is IBAN ──
-    html = html.replace('>What is an IBAN?<', '>什么是 IBAN？<')
-    html = html.replace('>IBAN stands for <strong>International Bank Account Number</strong>. It is a standardised way of identifying bank accounts across national borders, used in over 95 countries worldwide. An IBAN contains a two-letter country code, two check digits, and a Basic Bank Account Number (BBAN) that includes the domestic bank code, branch code, and account number.<',
-                        '>IBAN 代表<strong>国际银行账号</strong>。它是一种跨国境识别银行账户的标准化方式，在全球 95+ 个国家使用。IBAN 包含两位字母国家代码、两位校验位，以及包含国内银行代码、分行代码和账号的基本银行账号（BBAN）。<')
-    html = html.replace('>The IBAN system was developed by the European Committee for Banking Standards (ECBS) and later adopted as <strong>ISO 13616</strong>. Today, all SEPA (Single Euro Payments Area) transfers require an IBAN, making it essential for international banking in Europe and beyond.<',
-                        '>IBAN 系统由欧洲银行标准委员会（ECBS）开发，后被采纳为 <strong>ISO 13616</strong> 标准。如今，所有 SEPA（单一欧元支付区）转账都需要 IBAN，使其成为欧洲及全球国际银行业务的必需品。<')
-
-    # ── IBAN by Region ──
-    html = html.replace('>IBAN by Region<', '>按地区查看 IBAN<')
-    html = html.replace('>SEPA Countries<', '>SEPA 国家<')
-    html = html.replace('>36 European countries — unified euro payment zone<',
-                        '>36 个欧洲国家 — 统一欧元支付区<')
-    html = html.replace('>Worldwide IBAN<', '>全球 IBAN<')
-    html = html.replace('>60+ non-SEPA countries — Brazil, UAE, Saudi Arabia, Turkey &amp; more<',
-                        '>60+ 个非 SEPA 国家 — 巴西、阿联酋、沙特阿拉伯、土耳其等<')
-    html = html.replace('>International<', '>国际<')
-
-    # ── Popular IBAN Formats ──
-    html = html.replace('>Popular IBAN Formats<', '>常用 IBAN 格式<')
-    html = html.replace('>Country</th><th>Length</th><th>Format Example</th><th>SEPA</th>',
-                        '>国家</th><th>长度</th><th>格式示例</th><th>SEPA</th>')
-
-    # ── FAQ ──
-    html = html.replace('>Frequently Asked Questions<', '>常见问题<')
-    html = html.replace('>Are these real IBANs?<', '>这些 IBAN 是真实的吗？<')
-    html = html.replace('>No. The IBANs generated here are <strong>mathematically valid</strong> (they pass the MOD-97 check digit verification) but use randomly generated bank codes and account numbers. They are intended for <strong>testing purposes only</strong> — do not use them for actual bank transfers.<',
-                        '>不是。这里生成的 IBAN <strong>数学上有效</strong>（通过 MOD-97 校验位验证），但使用随机生成的银行代码和账号。它们仅供<strong>测试用途</strong> — 请勿用于实际的银行转账。<')
-    html = html.replace('>How does the IBAN check digit work?<', '>IBAN 校验位如何工作？<')
-    html = html.replace('>IBAN uses the MOD-97 algorithm (ISO 7064). The country code letters are converted to numbers (A=10, B=11, ..., Z=35), the string is rearranged, and the result must equal 1 modulo 97. This catches 99.94% of typing errors. <a href="/iban-check-digit/">Learn more &rarr;</a><',
-                        '>IBAN 使用 MOD-97 算法（ISO 7064）。将国家代码字母转换为数字（A=10，B=11，...，Z=35），重新排列字符串，结果必须等于 1 对 97 取模。这能捕捉 99.94% 的输入错误。<a href="/iban-check-digit/">了解更多 →</a><')
-    html = html.replace('>Is my data safe?<', '>我的数据安全吗？<')
-    html = html.replace('>Yes — 100%. All IBAN generation and validation happens in your browser using JavaScript. No data is ever sent to any server. We do not use cookies, analytics trackers, or any form of data collection. You can verify this by inspecting the source code.<',
-                        '>是的 — 100%。所有 IBAN 生成和验证都在您的浏览器中使用 JavaScript 完成。没有任何数据发送到任何服务器。我们不使用 Cookie、分析追踪器或任何形式的数据收集。您可以通过查看源代码来验证。<')
-    html = html.replace('>Which countries are supported?<', '>支持哪些国家？<')
-    html = html.replace('>We support 96 countries and territories — covering all 36 SEPA members plus 60+ international IBAN formats. <a href="/countries/">Browse the full list &rarr;</a><',
-                        '>我们支持 96 个国家和地区 — 涵盖所有 36 个 SEPA 成员国以及 60+ 个国际 IBAN 格式。<a href="/countries/">浏览完整列表 →</a><')
-
-    # ── CTA ──
-    html = html.replace('>Ready to start?<', '>准备开始？<')
-    html = html.replace('>96 Countries. <span class="text-gradient">One Tool.</span><',
-                        '>96 个国家。<span class="text-gradient">一个工具。</span><')
-    html = html.replace('>Generate valid IBANs for any supported country, validate existing IBANs, or explore the complete IBAN format reference — all from one place, all running locally in your browser.<',
-                        '>为任何支持的国家生成有效的 IBAN，验证现有 IBAN，或浏览完整的 IBAN 格式参考 — 全部在一个地方，在您的浏览器中本地运行。<')
-    html = html.replace('>&#x1F30D; Browse All Countries<', '>&#x1F30D; 浏览所有国家<')
-    html = html.replace('>&#x2714; Validate an IBAN<', '>&#x2714; 验证 IBAN<')  # CTA validate button
-    html = html.replace('>SEPA countries<', '>SEPA 国家<')
-    html = html.replace('>How check digits work<', '>校验位如何工作<')
-    html = html.replace('>Germany IBAN<', '>德国 IBAN<')
-    html = html.replace('>France IBAN<', '>法国 IBAN<')
-    html = html.replace('>UK IBAN<', '>英国 IBAN<')
-    html = html.replace('>Spain IBAN<', '>西班牙 IBAN<')
-
-    # ── Footer ──
-    html = html.replace('>Free online IBAN generator and validator. All generation runs client-side — no data is ever collected, stored, or transmitted. Generated IBANs are for testing purposes only.<',
-                        '>免费的在线 IBAN 生成器和验证器。所有生成均在客户端运行 — 不会收集、存储或传输任何数据。生成的 IBAN 仅供测试使用。<')
-    html = html.replace('>IBAN Generator<', '>IBAN 生成器<')
-    html = html.replace('>All Countries<', '>所有国家<')
-    html = html.replace('>Validator<', '>验证器<')
-    html = html.replace('>SEPA Countries<', '>SEPA 国家<')
-    html = html.replace('>SWIFT/BIC Codes<', '>SWIFT/BIC 代码<')
-    html = html.replace('>Contact<', '>联系我们<')
-    html = html.replace('>Privacy<', '>隐私政策<')
-    html = html.replace('>Terms<', '>使用条款<')
-    html = html.replace('>Sitemap<', '>网站地图<')
+    # Breadcrumb home
+    if 'crumb_home' in cfg:
+        html = html.replace(cfg['crumb_home'][0], cfg['crumb_home'][1])
 
     return html
 
@@ -1927,19 +2326,16 @@ def main():
         total += 1
         print('  /learn/{}/ done'.format(art['slug']))
 
-    # 10. Translated homepage (Chinese)
-    print('\n[10/10] Chinese homepage (/zh/)...')
-    zh_html = build_translated_homepage(
-        'zh',
-        '免费在线IBAN生成器 — 即时生成有效IBAN号码',
-        '为96+个国家生成有效的随机IBAN号码。免费的IBAN生成器和验证器，无需注册，纯客户端运行，不向任何服务器发送数据。支持所有SEPA和国际IBAN格式。'
-    )
-    if zh_html:
-        page('zh', zh_html)
-        total += 1
-        print('  /zh/ done')
-    else:
-        print('  /zh/ SKIPPED (index.html not found)')
+    # 10. Translated homepages (zh, de, es, fr)
+    print('\n[10/10] Translated homepages...')
+    for lang in SUPPORTED_LANGS:
+        html = build_translated_homepage(lang)
+        if html:
+            page(lang, html)
+            total += 1
+            print('  /{}/ done'.format(lang))
+        else:
+            print('  /{}/ SKIPPED'.format(lang))
 
     print('\n=== Done: {} files generated ==='.format(total))
 
