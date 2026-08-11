@@ -1077,8 +1077,12 @@ p {
 }
 
 /* ── Data Set Panel ─────────────────────────────────────────────── */
+.dataset-wrap {
+  max-width: var(--max-width);
+  margin: 0 auto 1.5rem;
+  padding: 0 1.5rem;
+}
 .dataset-panel {
-  margin-top: 1rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--bg-card);
@@ -1225,6 +1229,28 @@ p {
 }
 
 .bulk-copy-one:hover { color: var(--accent-light); background: var(--accent-subtle); }
+
+.bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.bulk-ds-btn {
+  background: var(--accent-subtle);
+  border: 1px solid var(--border-active);
+  color: var(--accent-light);
+  cursor: pointer;
+  padding: 0.25rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.bulk-ds-btn:hover { background: var(--accent-light); color: #fff; }
 
 /* ── History Panel ──────────────────────────────────────────────── */
 .history-wrap {
