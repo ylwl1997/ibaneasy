@@ -83,6 +83,7 @@ HEAD = '''<!DOCTYPE html>
 <meta property="og:url" content="{canon}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
 {extra}
 </head>
@@ -97,6 +98,11 @@ HEAD = '''<!DOCTYPE html>
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -115,6 +121,7 @@ FOOT = '''</main>
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
@@ -358,6 +365,24 @@ def build_country_page(c):
                 r['code'].lower(), r['name'], r['ibanLen'],
                 ', SEPA' if r['sepa'] else '')
         body += '</ul>\n'
+
+    # BIC/SWIFT codes section for this country
+    bic_file = os.path.join(ROOT, 'swift_codes.json')
+    if os.path.exists(bic_file):
+        with open(bic_file, 'r', encoding='utf-8') as f:
+            bic_data = json.load(f)
+        country_bics = [item for item in bic_data if item['country'] == code]
+        if country_bics:
+            body += '<h2>Major Bank BIC/SWIFT Codes in {}</h2>\n'.format(name)
+            body += '<p>BIC (Bank Identifier Code) / SWIFT codes for major banks in {}. These codes are used for international wire transfers alongside the IBAN.</p>\n'.format(name)
+            body += '<div class="tablewrap"><table>\n'
+            body += '<thead><tr><th>BIC Code</th><th>Bank Name</th><th>City</th></tr></thead>\n<tbody>\n'
+            for b in sorted(country_bics, key=lambda x: x['bankName'])[:25]:
+                body += '<tr><td><code class="swift-bic-code">{}</code></td><td>{}</td><td>{}</td></tr>\n'.format(
+                    esc(b['bic']), esc(b['bankName']), esc(b.get('city', '—')))
+            body += '</tbody>\n</table></div>\n'
+            if len(country_bics) > 25:
+                body += '<p style="font-size:0.85rem;color:var(--text-muted)">Showing 25 of {} banks. <a href="/swift-codes/">Search all SWIFT/BIC codes &rarr;</a></p>\n'.format(len(country_bics))
 
     body += FOOT
     return body
@@ -781,6 +806,54 @@ def build_terms_page():
     return body
 
 
+def build_swift_page():
+    """Build the /swift-codes/ search page."""
+    title = 'SWIFT/BIC Code Lookup — Find Bank BIC Codes Worldwide'
+    desc = 'Free SWIFT/BIC code lookup. Search by bank name, country, or BIC code. Database of major banks worldwide. All searches are client-side and private.'
+
+    body = HEAD.format(
+        title=esc(title), desc=esc(desc),
+        canon=SITE + '/swift-codes/',
+        og_title=esc(title), og_desc=esc(desc),
+        extra=''
+    )
+
+    body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">SWIFT/BIC Codes</span></nav>\n'
+    body += '<main class="main-content prose-content">\n'
+    body += '<h1>SWIFT/BIC Code Lookup</h1>\n'
+    body += '<p>Search for bank SWIFT/BIC codes worldwide. A BIC (Bank Identifier Code) identifies banks for international wire transfers. Search by bank name, country, or BIC code. All searches are private and run locally in your browser.</p>\n'
+
+    # Search UI
+    body += '<div class="swift-search-wrap">\n'
+    body += '<input type="text" class="swift-search-input" id="swift-search" placeholder="Search bank name, BIC, country, or city..." oninput="SwiftSearch.filter()" aria-label="Search SWIFT/BIC codes">\n'
+    body += '<select class="swift-country-filter" id="swift-country-filter" onchange="SwiftSearch.filter()" aria-label="Filter by country">\n'
+    body += '<option value="">All Countries</option>\n'
+    body += '</select>\n'
+    body += '</div>\n'
+
+    body += '<p class="swift-result-count" id="swift-count"></p>\n'
+
+    body += '<div class="tablewrap">\n'
+    body += '<table id="swift-table">\n'
+    body += '<thead><tr><th>BIC Code</th><th>Bank Name</th><th>Country</th><th>City</th><th>Branch</th></tr></thead>\n'
+    body += '<tbody id="swift-tbody"></tbody>\n'
+    body += '</table>\n</div>\n'
+
+    body += '<h2>What is a SWIFT/BIC Code?</h2>\n'
+    body += '<p>A <strong>SWIFT code</strong> (also called a <strong>BIC</strong> — Bank Identifier Code) is an 8 or 11 character code that identifies a specific bank worldwide. It is used for international wire transfers and messages between financial institutions.</p>\n'
+    body += '<h3>BIC Format</h3>\n'
+    body += '<ul>\n'
+    body += '<li><strong>Bank code</strong> (4 letters): Identifies the bank (e.g., DEUT = Deutsche Bank)</li>\n'
+    body += '<li><strong>Country code</strong> (2 letters): ISO country code (e.g., DE = Germany)</li>\n'
+    body += '<li><strong>Location code</strong> (2 chars): City or region (e.g., FF = Frankfurt)</li>\n'
+    body += '<li><strong>Branch code</strong> (3 chars, optional): Specific branch (XXX = head office)</li>\n'
+    body += '</ul>\n'
+
+    body += '<script src="/js/swift-lookup.js"></script>\n'
+    body += FOOT
+    return body
+
+
 def build_sitemap_html():
     """Build the /sitemap/ HTML page."""
     title = 'Sitemap — IBAN Easy'
@@ -802,6 +875,7 @@ def build_sitemap_html():
     body += '<ul>\n'
     body += '<li><a href="/">IBAN Generator (Home)</a></li>\n'
     body += '<li><a href="/validate/">IBAN Validator</a></li>\n'
+    body += '<li><a href="/swift-codes/">SWIFT/BIC Code Lookup</a></li>\n'
     body += '</ul>\n'
 
     body += '<h2>Reference Pages</h2>\n'
@@ -841,6 +915,7 @@ def build_sitemap():
         '  <url><loc>{}/validate/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
         '  <url><loc>{}/sepa-countries/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
         '  <url><loc>{}/iban-check-digit/</loc><lastmod>{}</lastmod><priority>0.7</priority></url>'.format(SITE, today),
+        '  <url><loc>{}/swift-codes/</loc><lastmod>{}</lastmod><priority>0.7</priority></url>'.format(SITE, today),
         '  <url><loc>{}/contact/</loc><lastmod>{}</lastmod><priority>0.3</priority></url>'.format(SITE, today),
         '  <url><loc>{}/privacy/</loc><lastmod>{}</lastmod><priority>0.3</priority></url>'.format(SITE, today),
         '  <url><loc>{}/terms/</loc><lastmod>{}</lastmod><priority>0.3</priority></url>'.format(SITE, today),
@@ -868,7 +943,7 @@ def main():
     total = 0
 
     # 1. Country pages
-    print('\n[1/6] Generating {} country pages...'.format(len(countries)))
+    print('\n[1/8] Generating {} country pages...'.format(len(countries)))
     for i, c in enumerate(countries):
         html = build_country_page(c)
         page('countries/{}'.format(c['code'].lower()), html)
@@ -878,57 +953,58 @@ def main():
     print('  {} country pages done'.format(len(countries)))
 
     # 2. Countries index
-    print('\n[2/6] Countries index page...')
+    print('\n[2/8] Countries index page...')
     html = build_countries_index()
     page('countries', html)
     total += 1
     print('  /countries/ done')
 
     # 3. Validator page
-    print('\n[3/6] Validator page...')
+    print('\n[3/8] Validator page...')
     html = build_validator_page()
     page('validate', html)
     total += 1
     print('  /validate/ done')
 
     # 4. SEPA page
-    print('\n[4/6] SEPA countries page...')
+    print('\n[4/8] SEPA countries page...')
     html = build_sepa_page()
     page('sepa-countries', html)
     total += 1
     print('  /sepa-countries/ done')
 
     # 5. Check digit page
-    print('\n[5/6] Check digit explanation page...')
+    print('\n[5/8] Check digit explanation page...')
     html = build_check_digit_page()
     page('iban-check-digit', html)
     total += 1
     print('  /iban-check-digit/ done')
 
-    # 6. Sitemap + Robots + Legal pages
-    print('\n[6/9] Sitemap, robots.txt, and legal pages...')
+    # 6. SWIFT/BIC page
+    print('\n[6/8] SWIFT/BIC codes page...')
+    html = build_swift_page()
+    page('swift-codes', html)
+    total += 1
+    print('  /swift-codes/ done')
+
+    # 7. Sitemap + Robots + Legal pages
+    print('\n[7/8] Sitemap, robots.txt, and legal pages...')
     with open(os.path.join(SRC, 'sitemap.xml'), 'w', encoding='utf-8') as f:
         f.write(build_sitemap())
     with open(os.path.join(SRC, 'robots.txt'), 'w', encoding='utf-8') as f:
         f.write(build_robots())
     total += 2
 
-    # 7. Contact
-    print('\n[7/9] Contact page...')
+    # 8. Contact, Privacy, Terms, Sitemap HTML
+    print('\n[8/8] Contact, Privacy, Terms, and HTML Sitemap...')
     html = build_contact_page()
     page('contact', html)
     total += 1
     print('  /contact/ done')
-
-    # 8. Privacy
-    print('\n[8/9] Privacy Policy page...')
     html = build_privacy_page()
     page('privacy', html)
     total += 1
     print('  /privacy/ done')
-
-    # 9. Terms
-    print('\n[9/9] Terms of Use + HTML Sitemap...')
     html = build_terms_page()
     page('terms', html)
     total += 1
