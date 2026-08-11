@@ -15,7 +15,15 @@
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
+<link rel="alternate" hreflang="en" href="https://ibaneasy.com/">
+<link rel="alternate" hreflang="de" href="https://ibaneasy.com/de/">
+<link rel="alternate" hreflang="es" href="https://ibaneasy.com/es/">
+<link rel="alternate" hreflang="fr" href="https://ibaneasy.com/fr/">
+<link rel="alternate" hreflang="zh" href="https://ibaneasy.com/zh/">
+<link rel="alternate" hreflang="x-default" href="https://ibaneasy.com/">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the IBAN format for Jersey?", "acceptedAnswer": {"@type": "Answer", "text": "Jersey uses a 22-character IBAN with the country code \"JE\" followed by two check digits and a 18-character BBAN. The format is <code>4!a6!n8!n</code>. The bank code occupies positions 5 to 8."}}, {"@type": "Question", "name": "Is Jersey a SEPA country?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, Jersey is part of the SEPA (Single Euro Payments Area) and uses IBAN for all domestic and international transfers."}}, {"@type": "Question", "name": "How long is a Jersey IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "A Jersey IBAN is exactly 22 characters long. The BBAN portion accounts for 18 characters."}}, {"@type": "Question", "name": "How do I find my Jersey IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "Your IBAN is printed on your bank statement, available in your online banking portal, or can be obtained from your bank. It typically appears alongside your BIC/SWIFT code for international transfers."}}, {"@type": "Question", "name": "Can I generate a valid Jersey IBAN for testing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Use the IBAN generator on this page or visit the <a href=\"/\">IBAN Easy homepage</a> to generate mathematically valid IBANs for any supported country. All generation is client-side and private."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ibaneasy.com/"}, {"@type": "ListItem", "position": 2, "name": "Countries", "item": "https://ibaneasy.com/countries/"}, {"@type": "ListItem", "position": 3, "name": "Jersey IBAN", "item": "https://ibaneasy.com/countries/je/"}]}</script>
+
 </head>
 <body>
 <div class="app-container">
@@ -32,6 +40,19 @@
       <a href="/swift-codes/">SWIFT Codes</a>
       <a href="/iban-calculator/">Calculator</a>
       <a href="/learn/">Learn</a>
+      <div class="lang-switch">
+        <button class="lang-btn" type="button" aria-expanded="false" aria-controls="lang-menu" onclick="toggleLangMenu()">
+          <span id="lang-current">🌐</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="lang-menu" id="lang-menu">
+          <a href="/" data-lang="en">🇬🇧 English</a>
+          <a href="/de/" data-lang="de">🇩🇪 Deutsch</a>
+          <a href="/es/" data-lang="es">🇪🇸 Español</a>
+          <a href="/fr/" data-lang="fr">🇫🇷 Français</a>
+          <a href="/zh/" data-lang="zh">🇨🇳 中文</a>
+        </div>
+      </div>
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
@@ -75,9 +96,9 @@
 <h2>Example Jersey IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> Jersey IBANs for testing:</p>
 <ul>
-<li><code>JE79 XGSK 6104 3696 5204 45</code></li>
-<li><code>JE93 KTTJ 2268 6322 7911 71</code></li>
-<li><code>JE04 NPJO 9624 6510 6242 67</code></li>
+<li><code>JE29 GGRR 9787 2885 7557 81</code></li>
+<li><code>JE95 SCTX 5461 5771 0257 41</code></li>
+<li><code>JE98 HKBO 5371 4011 8631 58</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
 <h2>Generate Jersey IBANs for Testing</h2>
@@ -162,6 +183,15 @@
 <li><a href="/countries/by/">Belarus IBAN (28 chars)</a></li>
 <li><a href="/countries/ch/">Switzerland IBAN (21 chars, SEPA)</a></li>
 </ul>
+<h2>IBAN Tools &amp; Resources</h2>
+<div class="card-grid card-grid-2" style="margin-top:0.5rem">
+<a class="country-card" href="/iban-calculator/"><div class="cc-badge">&#x1F522;</div><div class="cc-name">IBAN Calculator</div><div class="cc-meta">Compute check digits for Jersey IBANs from domestic account details</div></a>
+<a class="country-card" href="/validate/"><div class="cc-badge">&#x2714;</div><div class="cc-name">IBAN Validator</div><div class="cc-meta">Check any IBAN (including Jersey IBANs) with MOD-97</div></a>
+<a class="country-card" href="/what-is-iban/"><div class="cc-badge">&#x2753;</div><div class="cc-name">What is an IBAN?</div><div class="cc-meta">Complete guide to IBAN structure and how it works</div></a>
+<a class="country-card" href="/learn/iban-vs-swift/"><div class="cc-badge">&#x1F4E8;</div><div class="cc-name">IBAN vs SWIFT</div><div class="cc-meta">When do you need an IBAN, a SWIFT code, or both?</div></a>
+<a class="country-card" href="/learn/how-to-get-an-iban/"><div class="cc-badge">&#x1F4CD;</div><div class="cc-name">How to Find Your IBAN</div><div class="cc-meta">5 ways to locate your Jersey IBAN quickly</div></a>
+<a class="country-card" href="/swift-codes/"><div class="cc-badge">&#x1F4E8;</div><div class="cc-name">SWIFT/BIC Lookup</div><div class="cc-meta">Find bank BIC codes for international transfers</div></a>
+</div>
 </main>
 <footer class="site-footer">
   <div class="footer-inner">
