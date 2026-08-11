@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<!-- ibaneasy.com — dark theme v2.1 -->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kostenloser Online-IBAN-Generator — Gültige IBAN-Nummern sofort generieren</title>
+<meta name="description" content="Generieren Sie gültige zufällige IBAN-Nummern für 96+ Länder. Kostenloser IBAN-Generator und -Validator, keine Anmeldung, rein clientseitig, keine Daten an Server. Unterstützt alle SEPA- und internationalen IBAN-Formate.">
+<link rel="canonical" href="https://ibaneasy.com/de/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IBAN Easy">
+<meta property="og:title" content="Kostenloser Online-IBAN-Generator — Gültige IBAN-Nummern sofort generieren">
+<meta property="og:description" content="Generieren Sie gültige zufällige IBAN-Nummern für 96+ Länder. Kostenloser IBAN-Generator und -Validator, keine Anmeldung, rein clientseitig, keine Daten an Serv">
+<meta property="og:url" content="https://ibaneasy.com/de/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"IBAN Easy","url":"https://ibaneasy.com/de/","description":"Free online IBAN generator and validator for 96+ countries. Pure client-side, no data sent to any server.","applicationCategory":"FinanceApplication","operatingSystem":"Any"}</script>
+<link rel="alternate" hreflang="en" href="https://ibaneasy.com/">
+<link rel="alternate" hreflang="de" href="https://ibaneasy.com/de/">
+<link rel="alternate" hreflang="x-default" href="https://ibaneasy.com/">
+<script src="/js/i18n.js" defer></script>
+</head>
+<body>
+<div class="app-container">
+
+<!-- ── Navigation ──────────────────────────────────────────────── -->
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="/"><span class="lg-accent">IBAN</span><span class="lg-dim"> Easy</span></a>
+    <div class="nav-links">
+      <a class="active" href="/">Startseite</a>
+      <a href="/what-is-iban/">Was ist IBAN</a>
+      <a href="/countries/">Länder</a>
+      <a href="/validate/">Validator</a>
+      <a href="/sepa-countries/">SEPA</a>
+      <a href="/iban-check-digit/">Prüfziffern</a>
+      <a href="/swift-codes/">SWIFT-Codes</a>
+	      <a href="/iban-calculator/">Rechner</a>
+	      <a href="/learn/">Lernen</a>
+	      <div class="lang-switch">
+	        <button class="lang-btn" type="button" aria-expanded="false" aria-controls="lang-menu" onclick="toggleLangMenu()">
+	          <span id="lang-current">🌐</span>
+	          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+	        </button>
+	        <div class="lang-menu" id="lang-menu">
+	          <a href="/" data-lang="en">🇬🇧 English</a>
+	          <a href="/de/" data-lang="de">🇩🇪 Deutsch</a>
+	          <a href="/es/" data-lang="es">🇪🇸 Español</a>
+	          <a href="/fr/" data-lang="fr">🇫🇷 Français</a>
+	          <a href="/zh/" data-lang="zh">🇨🇳 中文</a>
+	        </div>
+	      </div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Breadcrumbs ─────────────────────────────────────────────── -->
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <span class="crumb-current">Startseite</span>
+</nav>
+
+<main class="main-content">
+
+<!-- ── Hero ────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">Kostenlos · Keine Anmeldung · 100% Clientseitig</span>
+    <h1>Der <span class="text-gradient">IBAN-Generator</span><br>für jedes Land</h1>
+    <p>Generieren Sie <strong class="text-gold">mathematisch gültige</strong> IBANs für 96+ Länder direkt im Browser. ISO 13616-konform, MOD-97-geprüft, keine Daten an Server.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary btn-lg" href="#generate-now">&#x21bb; IBAN generieren</a>
+      <a class="btn btn-ghost btn-lg" href="/validate/">&#x2714; IBAN prüfen</a>
+    </div>
+    <div class="hero-trust">
+      <div><span class="ht-v">96+</span><span class="ht-l">Länder</span></div>
+      <div><span class="ht-v">SEPA</span><span class="ht-l">+ International</span></div>
+      <div><span class="ht-v">Zero</span><span class="ht-l">Serveraufrufe</span></div>
+      <div><span class="ht-v">Free</span><span class="ht-l">Für immer</span></div>
+    </div>
+  </div>
+
+  <div class="hero-dial" id="generate-now">
+    <span class="hd-caption">IBAN generieren</span>
+
+    <!-- Searchable country selector -->
+    <div class="country-combobox" id="country-combobox">
+      <button class="country-button" id="country-button" type="button" aria-expanded="false" aria-controls="country-menu">
+        <span class="country-button-main">
+          <span id="country-flag">🌍</span>
+          <span id="country-label">Land auswählen</span>
+        </span>
+        <svg class="co-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="country-menu" id="country-menu">
+        <div class="country-search-wrap">
+          <svg class="co-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input class="country-search" id="country-search" type="text" placeholder="Land suchen..." autocomplete="off">
+        </div>
+        <div class="country-options" id="country-list"></div>
+      </div>
+    </div>
+
+    <!-- Quantity slider -->
+    <div class="quantity-row">
+      <label for="quantity-slider">Anzahl</label>
+      <div class="quantity-control">
+        <input type="range" id="quantity-slider" min="1" max="100" value="1">
+        <span class="quantity-num" id="quantity-value">1</span>
+      </div>
+    </div>
+
+    <!-- Generate button -->
+    <button class="btn btn-primary btn-lg" id="btn-generate" style="width:100%">&#x21bb; IBAN generieren</button>
+
+    <!-- Single result + legend -->
+    <div id="single-result" style="display:none;width:100%">
+      <div class="iban-output generated" id="iban-display" style="min-height:auto;margin-bottom:0.5rem"></div>
+      <div class="result-meta">
+        <div><span class="rm-label">Länge</span><span class="rm-value" id="iban-length">—</span></div>
+        <div><span class="rm-label">BBAN</span><span class="rm-value" id="iban-structure">—</span></div>
+      </div>
+      <div class="format-legend" id="iban-feedback" style="display:none"></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="hd-actions">
+      <button class="btn btn-outline btn-sm" id="btn-copy" style="display:none">&#x2398; Kopieren</button>
+      <span id="copy-msg" style="display:none;color:var(--green);font-weight:600;font-size:0.85rem">Kopiert!</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── Bulk Results ────────────────────────────────────────────── -->
+<div id="bulk-result" style="display:none" class="bulk-section">
+  <div class="bulk-head">
+    <h3>Generierte IBANs</h3>
+    <div class="bulk-export-btns">
+      <button class="btn btn-ghost btn-sm" id="btn-copy-all">&#x2398; Alle kopieren</button>
+      <button class="btn btn-ghost btn-sm" id="btn-export-csv">CSV</button>
+      <button class="btn btn-ghost btn-sm" id="btn-export-json">JSON</button>
+      <button class="btn btn-ghost btn-sm" id="btn-export-txt">TXT</button>
+    </div>
+  </div>
+  <div class="bulk-list" id="bulk-list"></div>
+</div>
+
+<!-- ── History ─────────────────────────────────────────────────── -->
+<div class="history-wrap">
+  <button type="button" id="history-toggle" class="history-btn" aria-expanded="false">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    History
+    <span id="history-count" class="hidden hist-badge">0</span>
+  </button>
+  <div id="history-panel" class="history-panel">
+    <div class="hist-panel-head">
+      <span>Letzter Verlauf</span>
+      <button type="button" id="history-clear" class="hist-clear">Löschen</button>
+    </div>
+    <div id="history-items"></div>
+  </div>
+</div>
+
+<!-- ── Marquee ─────────────────────────────────────────────────── -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="mq-item"><span class="mq-dot"></span><b>ISO 13616</b> compliant IBAN generation</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>MOD-97</b> check digit algorithm</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>96+</b> countries &amp; territories</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>SEPA</b> + international formats</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>100%</b> client-side, no server</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>Format</b> &amp; validate instantly</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>ISO 13616</b> compliant IBAN generation</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>MOD-97</b> check digit algorithm</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>96+</b> countries &amp; territories</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>SEPA</b> + international formats</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>100%</b> client-side, no server</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>Format</b> &amp; validate instantly</span>
+  </div>
+</div>
+
+<!-- ── How it Works ────────────────────────────────────────────── -->
+<section>
+  <div class="section-header">
+    <h2>So funktioniert es</h2>
+    <span class="section-line"></span>
+  </div>
+  <div class="card-grid card-grid-2">
+    <div class="feature-card">
+      <div class="fc-icon">&#x1F310;</div>
+      <div class="fc-title">1. Land auswählen</div>
+      <p class="fc-desc">Wählen Sie ein beliebiges Land aus dem Dropdown — alle 96+ IBAN-Länder, von Deutschland und Frankreich bis Brasilien und den VAE. SEPA- und internationale Formate werden unterstützt.</p>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">&#x2699;</div>
+      <div class="fc-title">2. IBAN generieren</div>
+      <p class="fc-desc">Eine <strong>mathematisch gültige</strong> IBAN wird mit dem MOD-97-Prüfziffernalgorithmus (ISO 13616) erstellt. Jede generierte IBAN besteht die vollständige Validierung.</p>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">&#x1F4CB;</div>
+      <div class="fc-title">3. Kopieren &amp; zum Testen verwenden</div>
+      <p class="fc-desc">Verwenden Sie generierte IBANs zum Testen von Zahlungsformularen, zur Software-Validierung oder um IBAN-Formate verschiedener Länder kennenzulernen. Für Entwickler und QA-Ingenieure.</p>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">&#x1F512;</div>
+      <div class="fc-title">4. 100% privat &amp; sicher</div>
+      <p class="fc-desc">Kein Server, keine Datenbank, keine Analysen. Alles läuft in Ihrem Browser. Ihre Daten verlassen nie Ihr Gerät — prüfen Sie den Quellcode zur Bestätigung.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── What is IBAN ────────────────────────────────────────────── -->
+<section class="mt-3">
+  <div class="section-header">
+    <h2>Was ist eine IBAN?</h2>
+    <span class="section-line"></span>
+  </div>
+  <p>IBAN steht für <strong>International Bank Account Number</strong> (Internationale Bankkontonummer). Es ist eine standardisierte Möglichkeit, Bankkonten über Ländergrenzen hinweg zu identifizieren, die in über 95 Ländern weltweit verwendet wird. Eine IBAN enthält einen zweistelligen Ländercode, zwei Prüfziffern und eine Basic Bank Account Number (BBAN) mit Bankleitzahl, Filialcode und Kontonummer.</p>
+  <p>Das IBAN-System wurde vom European Committee for Banking Standards (ECBS) entwickelt und später als <strong>ISO 13616</strong> übernommen. Heute erfordern alle SEPA-Überweisungen (Single Euro Payments Area) eine IBAN, was sie für das internationale Bankwesen in Europa und darüber hinaus unverzichtbar macht.</p>
+</section>
+
+<!-- ── IBAN Format by Region ───────────────────────────────────── -->
+<section class="mt-3">
+  <div class="section-header">
+    <h2>IBAN nach Region</h2>
+    <span class="section-line"></span>
+  </div>
+  <div class="card-grid card-grid-2">
+    <a class="country-card" href="/sepa-countries/">
+      <div class="cc-badge">&#x1F1EA;&#x1F1FA;</div>
+      <div class="cc-name">SEPA-Länder</div>
+      <div class="cc-meta">36 europäische Länder — einheitliche Euro-Zahlungszone</div>
+      <span class="tag tag-green" style="margin-top:auto">&#x2705; SEPA</span>
+    </a>
+    <a class="country-card" href="/countries/">
+      <div class="cc-badge">&#x1F30D;</div>
+      <div class="cc-name">Weltweit IBAN</div>
+      <div class="cc-meta">60+ Nicht-SEPA-Länder — Brasilien, VAE, Saudi-Arabien, Türkei &amp; mehr</div>
+      <span class="tag tag-gold" style="margin-top:auto">International</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── Popular IBAN Formats ────────────────────────────────────── -->
+<section class="mt-3">
+  <div class="section-header">
+    <h2>Beliebte IBAN-Formate</h2>
+    <span class="section-line"></span>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Country</th><th>Länge</th><th>Format Example</th><th>SEPA</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/countries/de/">Germany</a></td><td>22</td><td><code>DE89 3704 0044 0532 0130 00</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/fr/">France</a></td><td>27</td><td><code>FR14 2004 1010 0505 0001 3M02 606</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/gb/">United Kingdom</a></td><td>22</td><td><code>GB29 NWBK 6016 1331 9268 19</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/es/">Spain</a></td><td>24</td><td><code>ES91 2100 0418 4502 0005 1332</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/it/">Italy</a></td><td>27</td><td><code>IT60 X054 2811 1010 0000 0123 456</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/nl/">Netherlands</a></td><td>18</td><td><code>NL91 ABNA 0417 1643 00</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/pl/">Poland</a></td><td>28</td><td><code>PL61 1090 1014 0000 0712 1981 2874</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/ch/">Switzerland</a></td><td>21</td><td><code>CH93 0076 2011 6238 5295 7</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/br/">Brazil</a></td><td>29</td><td><code>BR97 0036 0305 0000 1000 9795 493P 1</code></td><td>&#x274C;</td></tr>
+        <tr><td><a href="/countries/tr/">Turkey</a></td><td>26</td><td><code>TR33 0006 1005 1978 6457 8413 26</code></td><td>&#x274C;</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── FAQ ─────────────────────────────────────────────────────── -->
+<section class="mt-3">
+  <div class="section-header">
+    <h2>Häufig gestellte Fragen</h2>
+    <span class="section-line"></span>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary class="faq-q">Sind das echte IBANs?</summary>
+      <div class="faq-a"><p>Nein. Die hier generierten IBANs sind <strong>mathematisch gültig</strong> (sie bestehen die MOD-97-Prüfziffernprüfung), verwenden aber zufällig generierte Bankcodes und Kontonummern. Sie sind nur für <strong>Testzwecke</strong> gedacht — verwenden Sie sie nicht für echte Banküberweisungen.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Wie funktioniert die IBAN-Prüfziffer?</summary>
+      <div class="faq-a"><p>Die IBAN verwendet den MOD-97-Algorithmus (ISO 7064). Die Buchstaben des Ländercodes werden in Zahlen umgewandelt (A=10, B=11, ..., Z=35), die Zeichenfolge wird umgeordnet, und das Ergebnis muss Modulo 97 gleich 1 sein. Dies erkennt 99,94% der Tippfehler.<a href="/iban-check-digit/">Mehr erfahren →</a></p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Sind meine Daten sicher?</summary>
+      <div class="faq-a"><p>Ja — 100%. Alle IBAN-Generierung und -Validierung erfolgt in Ihrem Browser mit JavaScript. Es werden keine Daten an Server gesendet. Wir verwenden keine Cookies, Analyse-Tracker oder Datenkollektion. Sie können dies im Quellcode überprüfen.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Welche Länder werden unterstützt?</summary>
+      <div class="faq-a"><p>Wir unterstützen 96 Länder und Gebiete — alle 36 SEPA-Mitglieder plus 60+ internationale IBAN-Formate.<a href="/countries/">Vollständige Liste ansehen →</a></p></div>
+    </details>
+  </div>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are these real IBANs?","acceptedAnswer":{"@type":"Answer","text":"No. The IBANs generated here are mathematically valid but use randomly generated bank codes and account numbers. They are intended for testing purposes only."}},{"@type":"Question","name":"How does the IBAN check digit work?","acceptedAnswer":{"@type":"Answer","text":"IBAN uses the MOD-97 algorithm (ISO 7064). The country code letters are converted to numbers (A=10, B=11, ..., Z=35), the string is rearranged, and the result must equal 1 modulo 97."}},{"@type":"Question","name":"Is my data safe?","acceptedAnswer":{"@type":"Answer","text":"Yes — 100%. All IBAN generation and validation happens in your browser. No data is ever sent to any server. We do not use cookies, analytics trackers, or any form of data collection."}},{"@type":"Question","name":"Which countries are supported?","acceptedAnswer":{"@type":"Answer","text":"We support 96 countries and territories, covering all 36 SEPA members plus 60+ international IBAN formats."}}]}</script>
+</section>
+
+<!-- ── CTA Band ────────────────────────────────────────────────── -->
+<section class="cta-band mt-3">
+  <span class="eyebrow" style="justify-content:center">Bereit zu starten?</span>
+  <h2>96 Länder. <span class="text-gradient">Ein Tool.</span></h2>
+  <p>Generieren Sie gültige IBANs für jedes unterstützte Land, validieren Sie bestehende IBANs oder erkunden Sie die vollständige IBAN-Formatreferenz — alles an einem Ort, alles lokal im Browser.</p>
+  <div class="flex-center gap-1" style="flex-wrap:wrap">
+    <a class="btn btn-primary btn-lg" href="/countries/">&#x1F30D; Alle Länder ansehen</a>
+    <a class="btn btn-ghost btn-lg" href="/validate/">&#x2714; IBAN prüfen</a>
+  </div>
+  <nav class="explore-links" aria-label="Explore">
+    <a href="/sepa-countries/">SEPA-Länder</a>
+    <a href="/iban-check-digit/">So funktionieren Prüfziffern</a>
+    <a href="/countries/de/">Deutschland IBAN</a>
+    <a href="/countries/fr/">Frankreich IBAN</a>
+    <a href="/countries/gb/">Großbritannien IBAN</a>
+    <a href="/countries/es/">Spanien IBAN</a>
+  </nav>
+</section>
+
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><span class="fb-accent">IBAN</span><span class="fb-dim"> Easy</span></div>
+      <p class="footer-note">Kostenloser Online-IBAN-Generator und -Validator. Alle Generierung läuft clientseitig — es werden keine Daten gesammelt, gespeichert oder übertragen. Generierte IBANs sind nur für Testzwecke.</p>
+    </div>
+    <div class="footer-links">
+      <a href="/">IBAN-Generator</a>
+      <a href="/what-is-iban/">What is IBAN?</a>
+      <a href="/countries/">Alle Länder</a>
+      <a href="/validate/">Validator</a>
+      <a href="/sepa-countries/">SEPA-Länder</a>
+      <a href="/iban-check-digit/">Prüfziffern</a>
+      <a href="/swift-codes/">SWIFT/BIC-Codes</a>
+	      <a href="/iban-calculator/">IBAN Calculator</a>
+	      <a href="/learn/">Lernen</a>
+      <a href="/contact/">Kontakt</a>
+      <a href="/privacy/">Datenschutz</a>
+      <a href="/terms/">AGB</a>
+      <a href="/sitemap/">Sitemap</a>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /app-container -->
+
+<div class="toast" id="toast"></div>
+
+<script src="/js/iban-core.js"></script>
+<script src="/js/tool-ui.js"></script>
+</body>
+</html>
