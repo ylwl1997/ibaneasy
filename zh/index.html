@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<!-- ibaneasy.com — dark theme v2.1 -->
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>免费在线IBAN生成器 — 即时生成有效IBAN号码</title>
+<meta name="description" content="为96+个国家生成有效的随机IBAN号码。免费的IBAN生成器和验证器，无需注册，纯客户端运行，不向任何服务器发送数据。支持所有SEPA和国际IBAN格式。">
+<link rel="canonical" href="https://ibaneasy.com/zh/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IBAN Easy">
+<meta property="og:title" content="免费在线IBAN生成器 — 即时生成有效IBAN号码">
+<meta property="og:description" content="为96+个国家生成有效的随机IBAN号码。免费的IBAN生成器和验证器，无需注册，纯客户端运行，不向任何服务器发送数据。支持所有SEPA和国际IBAN格式。">
+<meta property="og:url" content="https://ibaneasy.com/zh/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"IBAN Easy","url":"https://ibaneasy.com/zh/","description":"Free online IBAN generator and validator for 96+ countries. Pure client-side, no data sent to any server.","applicationCategory":"FinanceApplication","operatingSystem":"Any"}</script>
+<link rel="alternate" hreflang="en" href="https://ibaneasy.com/">
+<link rel="alternate" hreflang="zh" href="https://ibaneasy.com/zh/">
+<link rel="alternate" hreflang="x-default" href="https://ibaneasy.com/">
+<script src="/js/i18n.js" defer></script>
+</head>
+<body>
+<div class="app-container">
+
+<!-- ── Navigation ──────────────────────────────────────────────── -->
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="/"><span class="lg-accent">IBAN</span><span class="lg-dim"> Easy</span></a>
+    <div class="nav-links">
+      <a class="active" href="/">首页</a>
+      <a href="/countries/">国家</a>
+      <a href="/validate/">验证器</a>
+      <a href="/sepa-countries/">SEPA</a>
+      <a href="/iban-check-digit/">校验位</a>
+      <a href="/swift-codes/">SWIFT代码</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Breadcrumbs ─────────────────────────────────────────────── -->
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <span class="crumb-current">首页</span>
+</nav>
+
+<main class="main-content">
+
+<!-- ── Hero ────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">免费 · 无需注册 · 100% 客户端运行</span>
+    <h1><span>适用于所有国家的</span><span class="text-gradient">IBAN 生成器</span></h1>
+    <p>在浏览器中为 96+ 个国家生成<strong class="text-gold">数学上有效</strong>的 IBAN。符合 ISO 13616 标准，MOD-97 验证，零数据传输至任何服务器。</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary btn-lg" href="#generate-now">&#x21bb; 生成 IBAN</a>
+      <a class="btn btn-ghost btn-lg" href="/validate/">&#x2714; 验证 IBAN</a>
+    </div>
+    <div class="hero-trust">
+      <div><span class="ht-v">96+</span><span class="ht-l">国家</span></div>
+      <div><span class="ht-v">SEPA</span><span class="ht-l">+ 国际</span></div>
+      <div><span class="ht-v">Zero</span><span class="ht-l">服务器调用</span></div>
+      <div><span class="ht-v">Free</span><span class="ht-l">永久免费</span></div>
+    </div>
+  </div>
+
+  <div class="hero-dial" id="generate-now">
+    <span class="hd-caption">生成 IBAN</span>
+
+    <!-- Searchable country selector -->
+    <div class="country-combobox" id="country-combobox">
+      <button class="country-button" id="country-button" type="button" aria-expanded="false" aria-controls="country-menu">
+        <span class="country-button-main">
+          <span id="country-flag">🌍</span>
+          <span id="country-label">选择国家</span>
+        </span>
+        <svg class="co-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="country-menu" id="country-menu">
+        <div class="country-search-wrap">
+          <svg class="co-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input class="country-search" id="country-search" type="text" placeholder="搜索国家..." autocomplete="off">
+        </div>
+        <div class="country-options" id="country-list"></div>
+      </div>
+    </div>
+
+    <!-- Quantity slider -->
+    <div class="quantity-row">
+      <label for="quantity-slider">数量</label>
+      <div class="quantity-control">
+        <input type="range" id="quantity-slider" min="1" max="100" value="1">
+        <span class="quantity-num" id="quantity-value">1</span>
+      </div>
+    </div>
+
+    <!-- Generate button -->
+    <button class="btn btn-primary btn-lg" id="btn-generate" style="width:100%">&#x21bb; 生成 IBAN</button>
+
+    <!-- Single result + legend -->
+    <div id="single-result" style="display:none;width:100%">
+      <div class="iban-output generated" id="iban-display" style="min-height:auto;margin-bottom:0.5rem"></div>
+      <div class="result-meta">
+        <div><span class="rm-label">长度</span><span class="rm-value" id="iban-length">—</span></div>
+        <div><span class="rm-label">BBAN</span><span class="rm-value" id="iban-structure">—</span></div>
+      </div>
+      <div class="format-legend" id="iban-feedback" style="display:none"></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="hd-actions">
+      <button class="btn btn-outline btn-sm" id="btn-copy" style="display:none">&#x2398; 复制</button>
+      <span id="copy-msg" style="display:none;color:var(--green);font-weight:600;font-size:0.85rem">已复制！</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── Bulk Results ────────────────────────────────────────────── -->
+<div id="bulk-result" style="display:none" class="bulk-section">
+  <div class="bulk-head">
+    <h3>生成的 IBAN</h3>
+    <div class="bulk-export-btns">
+      <button class="btn btn-ghost btn-sm" id="btn-copy-all">&#x2398; 复制全部</button>
+      <button class="btn btn-ghost btn-sm" id="btn-export-csv">CSV</button>
+      <button class="btn btn-ghost btn-sm" id="btn-export-json">JSON</button>
+      <button class="btn btn-ghost btn-sm" id="btn-export-txt">TXT</button>
+    </div>
+  </div>
+  <div class="bulk-list" id="bulk-list"></div>
+</div>
+
+<!-- ── History ─────────────────────────────────────────────────── -->
+<div class="history-wrap">
+  <button type="button" id="history-toggle" class="history-btn" aria-expanded="false">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    History
+    <span id="history-count" class="hidden hist-badge">0</span>
+  </button>
+  <div id="history-panel" class="history-panel">
+    <div class="hist-panel-head">
+      <span>最近历史</span>
+      <button type="button" id="history-clear" class="hist-clear">清空</button>
+    </div>
+    <div id="history-items"></div>
+  </div>
+</div>
+
+<!-- ── Marquee ─────────────────────────────────────────────────── -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="mq-item"><span class="mq-dot"></span><b>ISO 13616</b> compliant IBAN generation</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>MOD-97</b> check digit algorithm</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>96+</b> countries &amp; territories</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>SEPA</b> + international formats</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>100%</b> client-side, no server</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>Format</b> &amp; validate instantly</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>ISO 13616</b> compliant IBAN generation</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>MOD-97</b> check digit algorithm</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>96+</b> countries &amp; territories</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>SEPA</b> + international formats</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>100%</b> client-side, no server</span>
+    <span class="mq-item"><span class="mq-dot"></span><b>Format</b> &amp; validate instantly</span>
+  </div>
+</div>
+
+<!-- ── How it Works ────────────────────────────────────────────── -->
+<section>
+  <div class="section-header">
+    <h2>使用方法</h2>
+    <span class="section-line"></span>
+  </div>
+  <div class="card-grid card-grid-2">
+    <div class="feature-card">
+      <div class="fc-icon">&#x1F310;</div>
+      <div class="fc-title">1. 选择国家</div>
+      <p class="fc-desc">从下拉菜单选择任何使用 IBAN 的国家 — 涵盖全部 96+ 个国家，支持 SEPA 和国际格式。</p>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">&#x2699;</div>
+      <div class="fc-title">2. 生成 IBAN</div>
+      <p class="fc-desc">使用 MOD-97 校验位算法（ISO 13616）创建<strong>数学上有效</strong>的 IBAN。每个生成的 IBAN 都通过完整验证。</p>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">&#x1F4CB;</div>
+      <div class="fc-title">3. 复制用于测试</div>
+      <p class="fc-desc">使用生成的 IBAN 测试支付表单、验证软件或了解各国的 IBAN 格式。专为开发者和 QA 工程师设计。</p>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">&#x1F512;</div>
+      <div class="fc-title">4. 100% 私密安全</div>
+      <p class="fc-desc">无服务器、无数据库、无分析追踪。一切在您的浏览器中运行。数据永远不会离开您的设备 — 可查看源代码验证。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── What is IBAN ────────────────────────────────────────────── -->
+<section class="mt-3">
+  <div class="section-header">
+    <h2>什么是 IBAN？</h2>
+    <span class="section-line"></span>
+  </div>
+  <p>IBAN 代表<strong>国际银行账号</strong>。它是一种跨国境识别银行账户的标准化方式，在全球 95+ 个国家使用。IBAN 包含两位字母国家代码、两位校验位，以及包含国内银行代码、分行代码和账号的基本银行账号（BBAN）。</p>
+  <p>IBAN 系统由欧洲银行标准委员会（ECBS）开发，后被采纳为 <strong>ISO 13616</strong> 标准。如今，所有 SEPA（单一欧元支付区）转账都需要 IBAN，使其成为欧洲及全球国际银行业务的必需品。</p>
+</section>
+
+<!-- ── IBAN Format by Region ───────────────────────────────────── -->
+<section class="mt-3">
+  <div class="section-header">
+    <h2>按地区查看 IBAN</h2>
+    <span class="section-line"></span>
+  </div>
+  <div class="card-grid card-grid-2">
+    <a class="country-card" href="/sepa-countries/">
+      <div class="cc-badge">&#x1F1EA;&#x1F1FA;</div>
+      <div class="cc-name">SEPA 国家</div>
+      <div class="cc-meta">36 个欧洲国家 — 统一欧元支付区</div>
+      <span class="tag tag-green" style="margin-top:auto">&#x2705; SEPA</span>
+    </a>
+    <a class="country-card" href="/countries/">
+      <div class="cc-badge">&#x1F30D;</div>
+      <div class="cc-name">全球 IBAN</div>
+      <div class="cc-meta">60+ 个非 SEPA 国家 — 巴西、阿联酋、沙特阿拉伯、土耳其等</div>
+      <span class="tag tag-gold" style="margin-top:auto">国际</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── Popular IBAN Formats ────────────────────────────────────── -->
+<section class="mt-3">
+  <div class="section-header">
+    <h2>常用 IBAN 格式</h2>
+    <span class="section-line"></span>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Country</th><th>长度</th><th>Format Example</th><th>SEPA</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/countries/de/">Germany</a></td><td>22</td><td><code>DE89 3704 0044 0532 0130 00</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/fr/">France</a></td><td>27</td><td><code>FR14 2004 1010 0505 0001 3M02 606</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/gb/">United Kingdom</a></td><td>22</td><td><code>GB29 NWBK 6016 1331 9268 19</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/es/">Spain</a></td><td>24</td><td><code>ES91 2100 0418 4502 0005 1332</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/it/">Italy</a></td><td>27</td><td><code>IT60 X054 2811 1010 0000 0123 456</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/nl/">Netherlands</a></td><td>18</td><td><code>NL91 ABNA 0417 1643 00</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/pl/">Poland</a></td><td>28</td><td><code>PL61 1090 1014 0000 0712 1981 2874</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/ch/">Switzerland</a></td><td>21</td><td><code>CH93 0076 2011 6238 5295 7</code></td><td>&#x2705;</td></tr>
+        <tr><td><a href="/countries/br/">Brazil</a></td><td>29</td><td><code>BR97 0036 0305 0000 1000 9795 493P 1</code></td><td>&#x274C;</td></tr>
+        <tr><td><a href="/countries/tr/">Turkey</a></td><td>26</td><td><code>TR33 0006 1005 1978 6457 8413 26</code></td><td>&#x274C;</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── FAQ ─────────────────────────────────────────────────────── -->
+<section class="mt-3">
+  <div class="section-header">
+    <h2>常见问题</h2>
+    <span class="section-line"></span>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary class="faq-q">这些 IBAN 是真实的吗？</summary>
+      <div class="faq-a"><p>不是。这里生成的 IBAN <strong>数学上有效</strong>（通过 MOD-97 校验位验证），但使用随机生成的银行代码和账号。它们仅供<strong>测试用途</strong> — 请勿用于实际的银行转账。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">IBAN 校验位如何工作？</summary>
+      <div class="faq-a"><p>IBAN 使用 MOD-97 算法（ISO 7064）。将国家代码字母转换为数字（A=10，B=11，...，Z=35），重新排列字符串，结果必须等于 1 对 97 取模。这能捕捉 99.94% 的输入错误。<a href="/iban-check-digit/">了解更多 →</a></p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">我的数据安全吗？</summary>
+      <div class="faq-a"><p>是的 — 100%。所有 IBAN 生成和验证都在您的浏览器中使用 JavaScript 完成。没有任何数据发送到任何服务器。我们不使用 Cookie、分析追踪器或任何形式的数据收集。您可以通过查看源代码来验证。</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">支持哪些国家？</summary>
+      <div class="faq-a"><p>我们支持 96 个国家和地区 — 涵盖所有 36 个 SEPA 成员国以及 60+ 个国际 IBAN 格式。<a href="/countries/">浏览完整列表 →</a></p></div>
+    </details>
+  </div>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are these real IBANs?","acceptedAnswer":{"@type":"Answer","text":"No. The IBANs generated here are mathematically valid but use randomly generated bank codes and account numbers. They are intended for testing purposes only."}},{"@type":"Question","name":"How does the IBAN check digit work?","acceptedAnswer":{"@type":"Answer","text":"IBAN uses the MOD-97 algorithm (ISO 7064). The country code letters are converted to numbers (A=10, B=11, ..., Z=35), the string is rearranged, and the result must equal 1 modulo 97."}},{"@type":"Question","name":"Is my data safe?","acceptedAnswer":{"@type":"Answer","text":"Yes — 100%. All IBAN generation and validation happens in your browser. No data is ever sent to any server. We do not use cookies, analytics trackers, or any form of data collection."}},{"@type":"Question","name":"Which countries are supported?","acceptedAnswer":{"@type":"Answer","text":"We support 96 countries and territories, covering all 36 SEPA members plus 60+ international IBAN formats."}}]}</script>
+</section>
+
+<!-- ── CTA Band ────────────────────────────────────────────────── -->
+<section class="cta-band mt-3">
+  <span class="eyebrow" style="justify-content:center">准备开始？</span>
+  <h2>96 个国家。<span class="text-gradient">一个工具。</span></h2>
+  <p>为任何支持的国家生成有效的 IBAN，验证现有 IBAN，或浏览完整的 IBAN 格式参考 — 全部在一个地方，在您的浏览器中本地运行。</p>
+  <div class="flex-center gap-1" style="flex-wrap:wrap">
+    <a class="btn btn-primary btn-lg" href="/countries/">&#x1F30D; 浏览所有国家</a>
+    <a class="btn btn-ghost btn-lg" href="/validate/">&#x2714; 验证 IBAN</a>
+  </div>
+  <nav class="explore-links" aria-label="Explore">
+    <a href="/sepa-countries/">SEPA 国家</a>
+    <a href="/iban-check-digit/">校验位如何工作</a>
+    <a href="/countries/de/">德国 IBAN</a>
+    <a href="/countries/fr/">法国 IBAN</a>
+    <a href="/countries/gb/">英国 IBAN</a>
+    <a href="/countries/es/">西班牙 IBAN</a>
+  </nav>
+</section>
+
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><span class="fb-accent">IBAN</span><span class="fb-dim"> Easy</span></div>
+      <p class="footer-note">免费的在线 IBAN 生成器和验证器。所有生成均在客户端运行 — 不会收集、存储或传输任何数据。生成的 IBAN 仅供测试使用。</p>
+    </div>
+    <div class="footer-links">
+      <a href="/">IBAN 生成器</a>
+      <a href="/countries/">所有国家</a>
+      <a href="/validate/">验证器</a>
+      <a href="/sepa-countries/">SEPA 国家</a>
+      <a href="/iban-check-digit/">校验位</a>
+      <a href="/swift-codes/">SWIFT/BIC 代码</a>
+      <a href="/contact/">联系我们</a>
+      <a href="/privacy/">隐私政策</a>
+      <a href="/terms/">使用条款</a>
+      <a href="/sitemap/">网站地图</a>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /app-container -->
+
+<div class="toast" id="toast"></div>
+
+<script src="/js/iban-core.js"></script>
+<script src="/js/tool-ui.js"></script>
+</body>
+</html>
