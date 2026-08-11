@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SWIFT/BIC Code Lookup — Find Bank BIC Codes Worldwide</title>
+<meta name="description" content="Free SWIFT/BIC code lookup. Search by bank name, country, or BIC code. Database of major banks worldwide. All searches are client-side and private.">
+<link rel="canonical" href="https://ibaneasy.com/swift-codes/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IBAN Easy">
+<meta property="og:title" content="SWIFT/BIC Code Lookup — Find Bank BIC Codes Worldwide">
+<meta property="og:description" content="Free SWIFT/BIC code lookup. Search by bank name, country, or BIC code. Database of major banks worldwide. All searches are client-side and private.">
+<meta property="og:url" content="https://ibaneasy.com/swift-codes/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
+<link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+<div class="app-container">
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="/"><span class="lg-accent">IBAN</span><span class="lg-dim"> Easy</span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/countries/">Countries</a>
+      <a href="/validate/">Validator</a>
+      <a href="/sepa-countries/">SEPA</a>
+      <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">SWIFT/BIC Codes</span></nav>
+<main class="main-content prose-content">
+<h1>SWIFT/BIC Code Lookup</h1>
+<p>Search for bank SWIFT/BIC codes worldwide. A BIC (Bank Identifier Code) identifies banks for international wire transfers. Search by bank name, country, or BIC code. All searches are private and run locally in your browser.</p>
+<div class="swift-search-wrap">
+<input type="text" class="swift-search-input" id="swift-search" placeholder="Search bank name, BIC, country, or city..." oninput="SwiftSearch.filter()" aria-label="Search SWIFT/BIC codes">
+<select class="swift-country-filter" id="swift-country-filter" onchange="SwiftSearch.filter()" aria-label="Filter by country">
+<option value="">All Countries</option>
+</select>
+</div>
+<p class="swift-result-count" id="swift-count"></p>
+<div class="tablewrap">
+<table id="swift-table">
+<thead><tr><th>BIC Code</th><th>Bank Name</th><th>Country</th><th>City</th><th>Branch</th></tr></thead>
+<tbody id="swift-tbody"></tbody>
+</table>
+</div>
+<h2>What is a SWIFT/BIC Code?</h2>
+<p>A <strong>SWIFT code</strong> (also called a <strong>BIC</strong> — Bank Identifier Code) is an 8 or 11 character code that identifies a specific bank worldwide. It is used for international wire transfers and messages between financial institutions.</p>
+<h3>BIC Format</h3>
+<ul>
+<li><strong>Bank code</strong> (4 letters): Identifies the bank (e.g., DEUT = Deutsche Bank)</li>
+<li><strong>Country code</strong> (2 letters): ISO country code (e.g., DE = Germany)</li>
+<li><strong>Location code</strong> (2 chars): City or region (e.g., FF = Frankfurt)</li>
+<li><strong>Branch code</strong> (3 chars, optional): Specific branch (XXX = head office)</li>
+</ul>
+<script src="/js/swift-lookup.js"></script>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><span class="fb-accent">IBAN</span><span class="fb-dim"> Easy</span></div>
+      <p class="footer-note">Free online IBAN tools. All generation and validation runs client-side. No data is collected or stored. Generated IBANs are for testing only.</p>
+    </div>
+    <div class="footer-links">
+      <a href="/">IBAN Generator</a>
+      <a href="/countries/">All Countries</a>
+      <a href="/validate/">Validator</a>
+      <a href="/sepa-countries/">SEPA Countries</a>
+      <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/sitemap/">Sitemap</a>
+    </div>
+  </div>
+</footer>
+</div><!-- /app-container -->
+</body>
+</html>
