@@ -1,0 +1,13 @@
+# CF Pages _redirects — 让已删除的竞品/重复路径返回真正的 404（避免 soft-404）
+# 旧竞品参考页路径
+/_ref_ibangen_com.html      /404.html 404
+/_ref_play38.html           /404.html 404
+/_ref_play38.css            /404.html 404
+/_ref_randomiban_co.html    /404.html 404
+/_ref_randomiban_com.html   /404.html 404
+/_verify2.html              /404.html 404
+/_verify3.html              /404.html 404
+# 旧重复内容目录 src/
+/src/*                      /404.html 404
+# 旧版 sitemap 残留
+/src/sitemap.xml            /404.html 404
