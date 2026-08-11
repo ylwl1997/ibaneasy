@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://ibaneasy.com/countries/ua/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the IBAN format for Ukraine?", "acceptedAnswer": {"@type": "Answer", "text": "Ukraine uses a 29-character IBAN with the country code \"UA\" followed by two check digits and a 25-character BBAN. The format is <code>6!n19!c</code>. The bank code occupies positions 5 to 10."}}, {"@type": "Question", "name": "Is Ukraine a SEPA country?", "acceptedAnswer": {"@type": "Answer", "text": "No, Ukraine is not a SEPA member, but uses IBAN for international transfers."}}, {"@type": "Question", "name": "How long is a Ukraine IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "A Ukraine IBAN is exactly 29 characters long. The BBAN portion accounts for 25 characters."}}, {"@type": "Question", "name": "How do I find my Ukraine IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "Your IBAN is printed on your bank statement, available in your online banking portal, or can be obtained from your bank. It typically appears alongside your BIC/SWIFT code for international transfers."}}, {"@type": "Question", "name": "Can I generate a valid Ukraine IBAN for testing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Use the IBAN generator on this page or visit the <a href=\"/\">IBAN Easy homepage</a> to generate mathematically valid IBANs for any supported country. All generation is client-side and private."}}]}</script>
 </head>
@@ -27,6 +28,11 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -61,9 +67,9 @@
 </table></div><h2>Example Ukraine IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> Ukraine IBANs for testing:</p>
 <ul>
-<li><code>UA32 1615 25GX GQIX 71AY UJ10 6ZHF O</code></li>
-<li><code>UA78 3795 79HZ L8JB 4XXO OOXC BPZT 3</code></li>
-<li><code>UA15 6130 04SM MJVY ZW60 C85E 1F97 L</code></li>
+<li><code>UA42 2329 38CT V035 4CU5 8VCU C3DO 5</code></li>
+<li><code>UA91 8172 88R2 QJA6 S7GW YBBH Z74X E</code></li>
+<li><code>UA56 4097 75A7 VPJO 61DL 9XMI 87CW 9</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
 <h2>Generate Ukraine IBANs for Testing</h2>
@@ -161,6 +167,7 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
