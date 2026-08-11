@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://ibaneasy.com/countries/no/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the IBAN format for Norway?", "acceptedAnswer": {"@type": "Answer", "text": "Norway uses a 15-character IBAN with the country code \"NO\" followed by two check digits and a 11-character BBAN. The format is <code>4!n7!n</code>. The bank code occupies positions 5 to 8."}}, {"@type": "Question", "name": "Is Norway a SEPA country?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, Norway is part of the SEPA (Single Euro Payments Area) and uses IBAN for all domestic and international transfers."}}, {"@type": "Question", "name": "How long is a Norway IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "A Norway IBAN is exactly 15 characters long. The BBAN portion accounts for 11 characters."}}, {"@type": "Question", "name": "How do I find my Norway IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "Your IBAN is printed on your bank statement, available in your online banking portal, or can be obtained from your bank. It typically appears alongside your BIC/SWIFT code for international transfers."}}, {"@type": "Question", "name": "Can I generate a valid Norway IBAN for testing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Use the IBAN generator on this page or visit the <a href=\"/\">IBAN Easy homepage</a> to generate mathematically valid IBANs for any supported country. All generation is client-side and private."}}]}</script>
 </head>
@@ -27,6 +28,11 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -61,9 +67,9 @@
 </table></div><h2>Example Norway IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> Norway IBANs for testing:</p>
 <ul>
-<li><code>NO80 1105 9167 353</code></li>
-<li><code>NO49 0926 5952 870</code></li>
-<li><code>NO45 2111 8788 984</code></li>
+<li><code>NO19 9971 6800 433</code></li>
+<li><code>NO81 3386 9190 792</code></li>
+<li><code>NO33 7239 3394 757</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
 <h2>Generate Norway IBANs for Testing</h2>
@@ -148,6 +154,19 @@
 <li><a href="/countries/by/">Belarus IBAN (28 chars)</a></li>
 <li><a href="/countries/ch/">Switzerland IBAN (21 chars, SEPA)</a></li>
 </ul>
+<h2>Major Bank BIC/SWIFT Codes in Norway</h2>
+<p>BIC (Bank Identifier Code) / SWIFT codes for major banks in Norway. These codes are used for international wire transfers alongside the IBAN.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>BIC Code</th><th>Bank Name</th><th>City</th></tr></thead>
+<tbody>
+<tr><td><code class="swift-bic-code">DNBANOKK</code></td><td>DNB Bank</td><td>Oslo</td></tr>
+<tr><td><code class="swift-bic-code">HANDNOKK</code></td><td>Handelsbanken Norway</td><td>Oslo</td></tr>
+<tr><td><code class="swift-bic-code">NDEANOKK</code></td><td>Nordea Bank</td><td>Oslo</td></tr>
+<tr><td><code class="swift-bic-code">NBHKNOKK</code></td><td>Norges Bank</td><td>Oslo</td></tr>
+<tr><td><code class="swift-bic-code">SB1NOKK</code></td><td>SpareBank 1</td><td>Oslo</td></tr>
+<tr><td><code class="swift-bic-code">SPARNO22</code></td><td>Sparebanken Sør</td><td>Kristiansand</td></tr>
+</tbody>
+</table></div>
 </main>
 <footer class="site-footer">
   <div class="footer-inner">
@@ -161,6 +180,7 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
