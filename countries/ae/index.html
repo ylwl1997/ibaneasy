@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://ibaneasy.com/countries/ae/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the IBAN format for United Arab Emirates?", "acceptedAnswer": {"@type": "Answer", "text": "United Arab Emirates uses a 23-character IBAN with the country code \"AE\" followed by two check digits and a 19-character BBAN. The format is <code>3!n16!n</code>. The bank code occupies positions 5 to 7."}}, {"@type": "Question", "name": "Is United Arab Emirates a SEPA country?", "acceptedAnswer": {"@type": "Answer", "text": "No, United Arab Emirates is not a SEPA member, but uses IBAN for international transfers."}}, {"@type": "Question", "name": "How long is a United Arab Emirates IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "A United Arab Emirates IBAN is exactly 23 characters long. The BBAN portion accounts for 19 characters."}}, {"@type": "Question", "name": "How do I find my United Arab Emirates IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "Your IBAN is printed on your bank statement, available in your online banking portal, or can be obtained from your bank. It typically appears alongside your BIC/SWIFT code for international transfers."}}, {"@type": "Question", "name": "Can I generate a valid United Arab Emirates IBAN for testing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Use the IBAN generator on this page or visit the <a href=\"/\">IBAN Easy homepage</a> to generate mathematically valid IBANs for any supported country. All generation is client-side and private."}}]}</script>
 </head>
@@ -27,6 +28,11 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -61,9 +67,9 @@
 </table></div><h2>Example United Arab Emirates IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> United Arab Emirates IBANs for testing:</p>
 <ul>
-<li><code>AE67 0055 3398 1401 7986 194</code></li>
-<li><code>AE33 3015 4013 3452 5696 164</code></li>
-<li><code>AE84 8048 5271 4854 8049 415</code></li>
+<li><code>AE80 2080 5171 2842 5488 224</code></li>
+<li><code>AE61 4262 3560 3005 7260 471</code></li>
+<li><code>AE86 6918 3444 7922 4554 625</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
 <h2>Generate United Arab Emirates IBANs for Testing</h2>
@@ -148,6 +154,27 @@
 <li><a href="/countries/jo/">Jordan IBAN (30 chars)</a></li>
 <li><a href="/countries/kg/">Kyrgyzstan IBAN (26 chars)</a></li>
 </ul>
+<h2>Major Bank BIC/SWIFT Codes in United Arab Emirates</h2>
+<p>BIC (Bank Identifier Code) / SWIFT codes for major banks in United Arab Emirates. These codes are used for international wire transfers alongside the IBAN.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>BIC Code</th><th>Bank Name</th><th>City</th></tr></thead>
+<tbody>
+<tr><td><code class="swift-bic-code">ADIBAEAA</code></td><td>Abu Dhabi Islamic Bank</td><td>Abu Dhabi</td></tr>
+<tr><td><code class="swift-bic-code">AUBAAEAA</code></td><td>Ahli United Bank UAE</td><td>Dubai</td></tr>
+<tr><td><code class="swift-bic-code">ARNBAEAD</code></td><td>Arab Bank Dubai</td><td>Dubai</td></tr>
+<tr><td><code class="swift-bic-code">BOMLAEAD</code></td><td>Bank of Baroda UAE</td><td>Dubai</td></tr>
+<tr><td><code class="swift-bic-code">CITIAEAD</code></td><td>Citibank UAE</td><td>Dubai</td></tr>
+<tr><td><code class="swift-bic-code">CCBAAEAD</code></td><td>Commercial Bank of Dubai</td><td>Dubai</td></tr>
+<tr><td><code class="swift-bic-code">DUIBAEAD</code></td><td>Dubai Islamic Bank</td><td>Dubai</td></tr>
+<tr><td><code class="swift-bic-code">EBILAEAD</code></td><td>Emirates NBD</td><td>Dubai</td></tr>
+<tr><td><code class="swift-bic-code">FABMAEAA</code></td><td>First Abu Dhabi Bank</td><td>Abu Dhabi</td></tr>
+<tr><td><code class="swift-bic-code">NBADAEAA</code></td><td>First Abu Dhabi Bank (FAB)</td><td>Abu Dhabi</td></tr>
+<tr><td><code class="swift-bic-code">BBRUAEAD</code></td><td>HSBC Bank Middle East</td><td>Dubai</td></tr>
+<tr><td><code class="swift-bic-code">MASHREAA</code></td><td>Mashreq Bank</td><td>Dubai</td></tr>
+<tr><td><code class="swift-bic-code">NBOKAEAA</code></td><td>National Bank of Abu Dhabi (First Abu Dhabi Bank)</td><td>Abu Dhabi</td></tr>
+<tr><td><code class="swift-bic-code">SBINAEAD</code></td><td>State Bank of India Dubai</td><td>Dubai</td></tr>
+</tbody>
+</table></div>
 </main>
 <footer class="site-footer">
   <div class="footer-inner">
@@ -161,6 +188,7 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
