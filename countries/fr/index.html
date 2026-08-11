@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://ibaneasy.com/countries/fr/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the IBAN format for France?", "acceptedAnswer": {"@type": "Answer", "text": "France uses a 27-character IBAN with the country code \"FR\" followed by two check digits and a 23-character BBAN. The format is <code>5!n5!n11!c2!n</code>. The bank code occupies positions 5 to 9."}}, {"@type": "Question", "name": "Is France a SEPA country?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, France is part of the SEPA (Single Euro Payments Area) and uses IBAN for all domestic and international transfers."}}, {"@type": "Question", "name": "How long is a France IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "A France IBAN is exactly 27 characters long. The BBAN portion accounts for 23 characters."}}, {"@type": "Question", "name": "How do I find my France IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "Your IBAN is printed on your bank statement, available in your online banking portal, or can be obtained from your bank. It typically appears alongside your BIC/SWIFT code for international transfers."}}, {"@type": "Question", "name": "Can I generate a valid France IBAN for testing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Use the IBAN generator on this page or visit the <a href=\"/\">IBAN Easy homepage</a> to generate mathematically valid IBANs for any supported country. All generation is client-side and private."}}]}</script>
 </head>
@@ -27,6 +28,11 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -64,9 +70,9 @@
 </table></div><h2>Example France IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> France IBANs for testing:</p>
 <ul>
-<li><code>FR35 8939 4279 77UT L3ZO 0ZA3 409</code></li>
-<li><code>FR65 2939 5538 19HQ 8YDX 67BK R24</code></li>
-<li><code>FR31 2746 1691 361Z VJEX K7D1 K38</code></li>
+<li><code>FR75 6201 3178 75P3 RJS4 FMR4 W08</code></li>
+<li><code>FR73 7961 0239 432J MC8K WT73 007</code></li>
+<li><code>FR37 3578 8786 75U6 CMLO AJ1M F93</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
 <h2>Generate France IBANs for Testing</h2>
@@ -151,6 +157,33 @@
 <li><a href="/countries/by/">Belarus IBAN (28 chars)</a></li>
 <li><a href="/countries/ch/">Switzerland IBAN (21 chars, SEPA)</a></li>
 </ul>
+<h2>Major Bank BIC/SWIFT Codes in France</h2>
+<p>BIC (Bank Identifier Code) / SWIFT codes for major banks in France. These codes are used for international wire transfers alongside the IBAN.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>BIC Code</th><th>Bank Name</th><th>City</th></tr></thead>
+<tbody>
+<tr><td><code class="swift-bic-code">AXABFRPP</code></td><td>AXA Banque</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">ARABFRPP</code></td><td>Arab Bank Paris</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">BNPAFRPP</code></td><td>BNP Paribas</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">BNPPFRPP</code></td><td>BNP Paribas Securities</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">BOFAFRPP</code></td><td>Bank of America Merrill Lynch Paris</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">CCBPFRPP</code></td><td>Banque Populaire</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">BDFEFRPP</code></td><td>Banque de France</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">BOUSFRPP</code></td><td>Boursorama</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">CEPAFRPP</code></td><td>Caisse d'Épargne</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">CITIFRPP</code></td><td>Citibank France</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">AGRIFRPP</code></td><td>Crédit Agricole</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">COLOFR2X</code></td><td>Crédit Lyonnais</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">CRLYFRPP</code></td><td>Crédit Lyonnais (LCL)</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">CMCIFRPP</code></td><td>Crédit Mutuel</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">HSBCFRPP</code></td><td>HSBC France</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">NATXFRPP</code></td><td>Natixis</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">RABOFRPP</code></td><td>Rabobank Paris</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">SOGEFRPP</code></td><td>Société Générale</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">SICOFRAX</code></td><td>Société Générale S.A.</td><td>Paris</td></tr>
+<tr><td><code class="swift-bic-code">SMBCFRPP</code></td><td>Sumitomo Mitsui Banking Corporation Paris</td><td>Paris</td></tr>
+</tbody>
+</table></div>
 </main>
 <footer class="site-footer">
   <div class="footer-inner">
@@ -164,6 +197,7 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
