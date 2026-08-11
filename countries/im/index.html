@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://ibaneasy.com/countries/im/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the IBAN format for Isle of Man?", "acceptedAnswer": {"@type": "Answer", "text": "Isle of Man uses a 22-character IBAN with the country code \"IM\" followed by two check digits and a 18-character BBAN. The format is <code>4!a6!n8!n</code>. The bank code occupies positions 5 to 8."}}, {"@type": "Question", "name": "Is Isle of Man a SEPA country?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, Isle of Man is part of the SEPA (Single Euro Payments Area) and uses IBAN for all domestic and international transfers."}}, {"@type": "Question", "name": "How long is a Isle of Man IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "A Isle of Man IBAN is exactly 22 characters long. The BBAN portion accounts for 18 characters."}}, {"@type": "Question", "name": "How do I find my Isle of Man IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "Your IBAN is printed on your bank statement, available in your online banking portal, or can be obtained from your bank. It typically appears alongside your BIC/SWIFT code for international transfers."}}, {"@type": "Question", "name": "Can I generate a valid Isle of Man IBAN for testing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Use the IBAN generator on this page or visit the <a href=\"/\">IBAN Easy homepage</a> to generate mathematically valid IBANs for any supported country. All generation is client-side and private."}}]}</script>
 </head>
@@ -27,6 +28,11 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -64,9 +70,9 @@
 </table></div><h2>Example Isle of Man IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> Isle of Man IBANs for testing:</p>
 <ul>
-<li><code>IM33 UPEG 2977 7491 9659 82</code></li>
-<li><code>IM52 DQQS 6634 6255 0947 10</code></li>
-<li><code>IM61 SPLX 9808 7552 0910 28</code></li>
+<li><code>IM28 IVAI 2451 2282 1709 27</code></li>
+<li><code>IM44 ZIJU 1882 9966 5994 19</code></li>
+<li><code>IM04 ARTY 5932 4577 4113 90</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
 <h2>Generate Isle of Man IBANs for Testing</h2>
@@ -164,6 +170,7 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
