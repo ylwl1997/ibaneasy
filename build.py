@@ -87,22 +87,38 @@ HEAD = '''<!DOCTYPE html>
 {extra}
 </head>
 <body>
-<header class="barwrap">
-  <div class="bar">
-  <a class="brand" href="/"><span>IBAN</span> Easy</a>
-  <nav><a href="/countries/">Countries</a><a href="/validate/">Validator</a><a href="/sepa-countries/">SEPA</a><a href="/iban-check-digit/">Check Digits</a></nav>
+<div class="app-container">
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="/"><span class="lg-accent">IBAN</span><span class="lg-dim"> Easy</span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/countries/">Countries</a>
+      <a href="/validate/">Validator</a>
+      <a href="/sepa-countries/">SEPA</a>
+      <a href="/iban-check-digit/">Check Digits</a>
+    </div>
   </div>
-</header>
-<main class="prose">
+</nav>
 '''
 
 FOOT = '''</main>
-<footer class="foot">
-  <nav>
-    <a href="/">IBAN Generator</a><a href="/countries/">All Countries</a><a href="/validate/">Validator</a><a href="/sepa-countries/">SEPA Countries</a><a href="/iban-check-digit/">Check Digits</a>
-  </nav>
-  <p>IBAN Easy &mdash; Free online IBAN tools. All generation and validation runs client-side. No data is collected or stored. Generated IBANs are for testing only.</p>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><span class="fb-accent">IBAN</span><span class="fb-dim"> Easy</span></div>
+      <p class="footer-note">Free online IBAN tools. All generation and validation runs client-side. No data is collected or stored. Generated IBANs are for testing only.</p>
+    </div>
+    <div class="footer-links">
+      <a href="/">IBAN Generator</a>
+      <a href="/countries/">All Countries</a>
+      <a href="/validate/">Validator</a>
+      <a href="/sepa-countries/">SEPA Countries</a>
+      <a href="/iban-check-digit/">Check Digits</a>
+    </div>
+  </div>
 </footer>
+</div><!-- /app-container -->
 </body>
 </html>'''
 
@@ -135,12 +151,12 @@ def build_structure_diagram(c):
     """Generate the visual IBAN structure block diagram."""
     parts = []
     parts.append('<div class="iban-legend">')
-    parts.append('<span><span class="swatch" style="background:var(--accent-light);border-color:var(--accent)"></span> Country ({})</span>'.format(c['code']))
-    parts.append('<span><span class="swatch" style="background:var(--success-light);border-color:var(--success)"></span> Check digits</span>')
-    parts.append('<span><span class="swatch" style="background:var(--warning-light);border-color:var(--warning)"></span> Bank code ({} {})</span>'.format(c['bankLen'], 'letters' if c['bbanFormat'].startswith(str(c['bankLen'])+'!a') else 'digits'))
+    parts.append('<span><span class="swatch" style="background:var(--accent-subtle);border-color:var(--accent-light)"></span> Country ({})</span>'.format(c['code']))
+    parts.append('<span><span class="swatch" style="background:#2ed5731a;border-color:var(--green)"></span> Check digits</span>')
+    parts.append('<span><span class="swatch" style="background:#ffc94a1a;border-color:var(--gold)"></span> Bank code ({} {})</span>'.format(c['bankLen'], 'letters' if c['bbanFormat'].startswith(str(c['bankLen'])+'!a') else 'digits'))
     if c.get('branchStart') and c.get('branchLen'):
-        parts.append('<span><span class="swatch" style="background:#f0f9ff;border-color:#0284c7"></span> Branch ({} chars)</span>'.format(c['branchLen']))
-    parts.append('<span><span class="swatch" style="background:var(--surface);border-color:var(--muted)"></span> Account ({} chars)</span>'.format(c['accountLen']))
+        parts.append('<span><span class="swatch" style="background:#a855f71a;border-color:var(--purple)"></span> Branch ({} chars)</span>'.format(c['branchLen']))
+    parts.append('<span><span class="swatch" style="background:var(--bg-elev-1);border-color:var(--text-muted)"></span> Account ({} chars)</span>'.format(c['accountLen']))
     parts.append('</div>')
 
     parts.append('<div class="iban-structure">')
@@ -232,9 +248,10 @@ def build_country_page(c):
         extra=extra
     )
 
-    body += '<nav class="crumbs"><a href="/">Home</a><span class="sep">/</span><a href="/countries/">Countries</a><span class="sep">/</span>{}</nav>\n'.format(name)
+    body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><a href="/countries/">Countries</a><span class="crumb-sep">/</span><span class="crumb-current">{}</span></nav>\n'.format(name)
+    body += '<main class="main-content prose-content">\n'
     body += '<h1>{} IBAN Format &amp; Generator</h1>\n'.format(esc(name))
-    body += '<p class="lede">Complete reference for {} IBANs: format structure, bank codes, account numbers, examples, and a free generator for testing.</p>\n'.format(name)
+    body += '<p>Complete reference for {} IBANs: format structure, bank codes, account numbers, examples, and a free generator for testing.</p>\n'.format(name)
 
     # Structure diagram
     body += '<h2>IBAN Structure for {}</h2>\n'.format(name)
@@ -252,19 +269,17 @@ def build_country_page(c):
     for ex in examples:
         body += '<li><code>{}</code></li>\n'.format(ex)
     body += '</ul>\n'
-    body += '<p style="font-size:0.85rem;color:var(--muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>\n'
+    body += '<p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>\n'
 
     # In-page mini generator note
     body += '<h2>Generate More {} IBANs</h2>\n'.format(name)
     body += '<p>Use our <a href="/">free IBAN generator</a> to create more test IBANs for {}. The tool runs entirely in your browser — no data is sent to any server.</p>\n'.format(name)
 
-    # Native Ad
     body += '<h2>Frequently Asked Questions</h2>\n'
-    body += '\n'
-
-    # FAQs
+    body += '<div class="faq-list">\n'
     for q, a in country_faqs(c):
-        body += '<h3>{}</h3>\n<p>{}</p>\n'.format(q, a)
+        body += '<details class="faq-item"><summary class="faq-q">{}</summary><div class="faq-a"><p>{}</p></div></details>\n'.format(q, a)
+    body += '</div>\n'
 
     # Related countries
     continent = c['continent']
@@ -294,18 +309,17 @@ def build_countries_index():
         extra=''
     )
 
+    body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">Countries</span></nav>\n'
+    body += '<main class="main-content">\n'
     body += '<h1>All IBAN Countries</h1>\n'
-    body += '<p class="lede">96 countries and territories worldwide use the IBAN system. Browse by continent or SEPA membership. Click any country for full IBAN format details, examples, and a generator.</p>\n'
-
-    # Native Ad
-    body += '\n'
+    body += '<p>96 countries and territories worldwide use the IBAN system. Browse by continent or SEPA membership. Click any country for full IBAN format details, examples, and a generator.</p>\n'
 
     # Search
     body += '<input type="text" class="search-box" id="country-search" placeholder="Search countries..." oninput="filterCountries()" aria-label="Search countries">\n'
 
     # Stats
     sepa_count = sum(1 for c in countries if c['sepa'])
-    body += '<p><strong>{}</strong> SEPA countries | <strong>{}</strong> non-SEPA IBAN countries | <strong>{}</strong> total</p>\n'.format(
+    body += '<p class="text-secondary" style="margin-bottom:1.5rem"><strong style="color:var(--text)">{}</strong> SEPA countries | <strong style="color:var(--text)">{}</strong> non-SEPA IBAN countries | <strong style="color:var(--text)">{}</strong> total</p>\n'.format(
         sepa_count, len(countries) - sepa_count, len(countries))
 
     # Group by continent
@@ -318,28 +332,28 @@ def build_countries_index():
 
     for cont in sorted(continents, key=continent_order):
         body += '<h2>{}</h2>\n'.format(cont)
-        body += '<ul class="grid">\n'
+        body += '<div class="card-grid card-grid-4">\n'
         for c in sorted(continents[cont], key=lambda x: x['name']):
-            badge = ' <span class="badge badge-sepa">SEPA</span>' if c['sepa'] else ''
-            body += '<li><a class="card" href="/countries/{}/"><div class="cc">{}</div><div class="name">{}{}</div><div class="meta">{} chars</div></a></li>\n'.format(
+            badge = ' <span class="tag tag-green">SEPA</span>' if c['sepa'] else ''
+            body += '<a class="country-card" href="/countries/{}/"><div class="cc-badge">{}</div><div class="cc-name">{} {}</div><div class="cc-meta">{} chars</div></a>\n'.format(
                 c['code'].lower(), c['code'], c['name'], badge, c['ibanLen'])
-        body += '</ul>\n'
+        body += '</div>\n'
 
     # Search script
     body += '''<script>
 function filterCountries() {
   var q = document.getElementById('country-search').value.toLowerCase();
   var sections = document.querySelectorAll('h2');
-  var grids = document.querySelectorAll('.grid');
+  var grids = document.querySelectorAll('.card-grid');
   for (var i = 0; i < grids.length; i++) {
-    var cards = grids[i].querySelectorAll('.card');
+    var cards = grids[i].querySelectorAll('.country-card');
     var visible = 0;
     for (var j = 0; j < cards.length; j++) {
       var text = cards[j].textContent.toLowerCase();
       if (text.indexOf(q) !== -1) { cards[j].style.display = ''; visible++; }
       else { cards[j].style.display = 'none'; }
     }
-    sections[i+1].style.display = visible > 0 ? '' : 'none';
+    if (sections[i+1]) sections[i+1].style.display = visible > 0 ? '' : 'none';
     if (grids[i].previousElementSibling && grids[i].previousElementSibling.tagName === 'H2') {
       grids[i].previousElementSibling.style.display = visible > 0 ? '' : 'none';
     }
@@ -372,8 +386,10 @@ def build_validator_page():
         extra=extra
     )
 
+    body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">Validator</span></nav>\n'
+    body += '<main class="main-content prose-content">\n'
     body += '<h1>IBAN Validator</h1>\n'
-    body += '<p class="lede">Enter any IBAN to check if it\'s valid. We verify the country code, total length, character format, and MOD-97 check digits.</p>\n'
+    body += '<p>Enter any IBAN to check if it\'s valid. We verify the country code, total length, character format, and MOD-97 check digits.</p>\n'
 
     body += '<input type="text" class="validator-input" id="iban-input" placeholder="Enter IBAN (e.g., DE89 3704 0044 0532 0130 00)" autocomplete="off" aria-label="Enter IBAN to validate">\n'
     body += '<div class="validator-result" id="result" style="display:none"></div>\n'
@@ -484,8 +500,10 @@ def build_sepa_page():
         extra=''
     )
 
+    body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">SEPA Countries</span></nav>\n'
+    body += '<main class="main-content prose-content">\n'
     body += '<h1>SEPA Countries List</h1>\n'
-    body += '<p class="lede">The Single Euro Payments Area (SEPA) includes 36 countries. All SEPA transfers require an IBAN. Here is the complete list with IBAN formats.</p>\n'
+    body += '<p>The Single Euro Payments Area (SEPA) includes 36 countries. All SEPA transfers require an IBAN. Here is the complete list with IBAN formats.</p>\n'
 
     body += '\n'
 
@@ -525,8 +543,10 @@ def build_check_digit_page():
         extra=''
     )
 
+    body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">IBAN Check Digits</span></nav>\n'
+    body += '<main class="main-content prose-content">\n'
     body += '<h1>How IBAN Check Digits Work</h1>\n'
-    body += '<p class="lede">Every IBAN includes two check digits that catch 99.9% of typing errors. They use a mathematical formula called MOD-97, first published in ISO 7064. Here\'s how it works.</p>\n'
+    body += '<p>Every IBAN includes two check digits that catch 99.9% of typing errors. They use a mathematical formula called MOD-97, first published in ISO 7064. Here\'s how it works.</p>\n'
 
     body += '\n'
 
