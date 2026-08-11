@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://ibaneasy.com/countries/dk/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the IBAN format for Denmark?", "acceptedAnswer": {"@type": "Answer", "text": "Denmark uses a 18-character IBAN with the country code \"DK\" followed by two check digits and a 14-character BBAN. The format is <code>4!n10!n</code>. The bank code occupies positions 5 to 8."}}, {"@type": "Question", "name": "Is Denmark a SEPA country?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, Denmark is part of the SEPA (Single Euro Payments Area) and uses IBAN for all domestic and international transfers."}}, {"@type": "Question", "name": "How long is a Denmark IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "A Denmark IBAN is exactly 18 characters long. The BBAN portion accounts for 14 characters."}}, {"@type": "Question", "name": "How do I find my Denmark IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "Your IBAN is printed on your bank statement, available in your online banking portal, or can be obtained from your bank. It typically appears alongside your BIC/SWIFT code for international transfers."}}, {"@type": "Question", "name": "Can I generate a valid Denmark IBAN for testing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Use the IBAN generator on this page or visit the <a href=\"/\">IBAN Easy homepage</a> to generate mathematically valid IBANs for any supported country. All generation is client-side and private."}}]}</script>
 </head>
@@ -27,6 +28,11 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -61,9 +67,9 @@
 </table></div><h2>Example Denmark IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> Denmark IBANs for testing:</p>
 <ul>
-<li><code>DK28 1765 5499 8160 51</code></li>
-<li><code>DK65 8684 0844 6142 61</code></li>
-<li><code>DK26 3703 8473 3314 94</code></li>
+<li><code>DK68 5741 3718 2811 76</code></li>
+<li><code>DK75 5102 8069 5353 54</code></li>
+<li><code>DK52 5647 5642 7319 26</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
 <h2>Generate Denmark IBANs for Testing</h2>
@@ -148,6 +154,19 @@
 <li><a href="/countries/by/">Belarus IBAN (28 chars)</a></li>
 <li><a href="/countries/ch/">Switzerland IBAN (21 chars, SEPA)</a></li>
 </ul>
+<h2>Major Bank BIC/SWIFT Codes in Denmark</h2>
+<p>BIC (Bank Identifier Code) / SWIFT codes for major banks in Denmark. These codes are used for international wire transfers alongside the IBAN.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>BIC Code</th><th>Bank Name</th><th>City</th></tr></thead>
+<tbody>
+<tr><td><code class="swift-bic-code">DABADKKK</code></td><td>Danske Bank</td><td>Copenhagen</td></tr>
+<tr><td><code class="swift-bic-code">JYBADKKK</code></td><td>Jyske Bank</td><td>Silkeborg</td></tr>
+<tr><td><code class="swift-bic-code">NDEADKKK</code></td><td>Nordea Bank Danmark</td><td>Copenhagen</td></tr>
+<tr><td><code class="swift-bic-code">NYKBDKKK</code></td><td>Nykredit Bank</td><td>Copenhagen</td></tr>
+<tr><td><code class="swift-bic-code">SXPYDKKK</code></td><td>Saxo Bank</td><td>Copenhagen</td></tr>
+<tr><td><code class="swift-bic-code">SYBKDK22</code></td><td>Sydbank</td><td>Aabenraa</td></tr>
+</tbody>
+</table></div>
 </main>
 <footer class="site-footer">
   <div class="footer-inner">
@@ -161,6 +180,7 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
