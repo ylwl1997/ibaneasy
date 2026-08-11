@@ -85,6 +85,12 @@ HEAD = '''<!DOCTYPE html>
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
+<link rel="alternate" hreflang="en" href="https://ibaneasy.com/">
+<link rel="alternate" hreflang="de" href="https://ibaneasy.com/de/">
+<link rel="alternate" hreflang="es" href="https://ibaneasy.com/es/">
+<link rel="alternate" hreflang="fr" href="https://ibaneasy.com/fr/">
+<link rel="alternate" hreflang="zh" href="https://ibaneasy.com/zh/">
+<link rel="alternate" hreflang="x-default" href="https://ibaneasy.com/">
 {extra}
 </head>
 <body>
