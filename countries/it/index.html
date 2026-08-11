@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://ibaneasy.com/countries/it/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the IBAN format for Italy?", "acceptedAnswer": {"@type": "Answer", "text": "Italy uses a 27-character IBAN with the country code \"IT\" followed by two check digits and a 23-character BBAN. The format is <code>1!a5!n5!n12!c</code>. The bank code occupies positions 5 to 9."}}, {"@type": "Question", "name": "Is Italy a SEPA country?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, Italy is part of the SEPA (Single Euro Payments Area) and uses IBAN for all domestic and international transfers."}}, {"@type": "Question", "name": "How long is a Italy IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "A Italy IBAN is exactly 27 characters long. The BBAN portion accounts for 23 characters."}}, {"@type": "Question", "name": "How do I find my Italy IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "Your IBAN is printed on your bank statement, available in your online banking portal, or can be obtained from your bank. It typically appears alongside your BIC/SWIFT code for international transfers."}}, {"@type": "Question", "name": "Can I generate a valid Italy IBAN for testing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Use the IBAN generator on this page or visit the <a href=\"/\">IBAN Easy homepage</a> to generate mathematically valid IBANs for any supported country. All generation is client-side and private."}}]}</script>
 </head>
@@ -27,6 +28,11 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -64,9 +70,9 @@
 </table></div><h2>Example Italy IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> Italy IBANs for testing:</p>
 <ul>
-<li><code>IT70 U143 2716 269F AJQY DWJY J0C</code></li>
-<li><code>IT08 L146 3885 651T O6UP JF9D NAP</code></li>
-<li><code>IT09 P410 4680 018G 7YFY 17LM 9IK</code></li>
+<li><code>IT46 G079 7799 360W B00C HCKD Q3X</code></li>
+<li><code>IT18 X405 0130 567Q RF03 6H1U 0LP</code></li>
+<li><code>IT03 D183 1152 0463 VTJ7 8F36 SCK</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
 <h2>Generate Italy IBANs for Testing</h2>
@@ -151,6 +157,27 @@
 <li><a href="/countries/by/">Belarus IBAN (28 chars)</a></li>
 <li><a href="/countries/ch/">Switzerland IBAN (21 chars, SEPA)</a></li>
 </ul>
+<h2>Major Bank BIC/SWIFT Codes in Italy</h2>
+<p>BIC (Bank Identifier Code) / SWIFT codes for major banks in Italy. These codes are used for international wire transfers alongside the IBAN.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>BIC Code</th><th>Bank Name</th><th>City</th></tr></thead>
+<tbody>
+<tr><td><code class="swift-bic-code">BPERIT22</code></td><td>BPER Banca</td><td>Modena</td></tr>
+<tr><td><code class="swift-bic-code">ANIBIT22</code></td><td>Banca Nazionale del Lavoro (BNL)</td><td>Rome</td></tr>
+<tr><td><code class="swift-bic-code">VEBHIT2M</code></td><td>Banca Popolare di Vicenza</td><td>Vicenza</td></tr>
+<tr><td><code class="swift-bic-code">BITAITRR</code></td><td>Banca d'Italia</td><td>Rome</td></tr>
+<tr><td><code class="swift-bic-code">BPMIITMM</code></td><td>Banco BPM</td><td>Milan</td></tr>
+<tr><td><code class="swift-bic-code">BPAAIT2B</code></td><td>Banco Popolare</td><td>Verona</td></tr>
+<tr><td><code class="swift-bic-code">BRELIT22</code></td><td>Banco di Sardegna</td><td>Cagliari</td></tr>
+<tr><td><code class="swift-bic-code">CIPBITMM</code></td><td>Cassa Depositi e Prestiti</td><td>Rome</td></tr>
+<tr><td><code class="swift-bic-code">ICRAITRR</code></td><td>ICCREA Banca</td><td>Rome</td></tr>
+<tr><td><code class="swift-bic-code">BCITITMM</code></td><td>Intesa Sanpaolo</td><td>Milan</td></tr>
+<tr><td><code class="swift-bic-code">MEDBITMM</code></td><td>Mediobanca</td><td>Milan</td></tr>
+<tr><td><code class="swift-bic-code">MONTITMM</code></td><td>Monte dei Paschi di Siena (MPS)</td><td>Siena</td></tr>
+<tr><td><code class="swift-bic-code">BLOPIT22</code></td><td>UBI Banca</td><td>Bergamo</td></tr>
+<tr><td><code class="swift-bic-code">UNCRITMM</code></td><td>UniCredit</td><td>Milan</td></tr>
+</tbody>
+</table></div>
 </main>
 <footer class="site-footer">
   <div class="footer-inner">
@@ -164,6 +191,7 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
