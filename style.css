@@ -56,6 +56,74 @@
   --nav-height: 62px;
 }
 
+/* ── Light Theme Overrides ──────────────────────────────────────── */
+[data-theme="light"] {
+  --bg-deep: #f0f4f8;
+  --bg-body: #ffffff;
+  --bg-elev-1: #f1f5f9;
+  --bg-elev-2: #e2e8f0;
+  --bg-card: #ffffffee;
+  --bg-glass: #ffffffdd;
+  --nav-bg: #ffffffee;
+
+  --accent: #2563eb;
+  --accent-light: #3b82f6;
+  --accent-deep: #1e40af;
+  --accent-glow: #2563eb30;
+  --accent-subtle: #2563eb12;
+
+  --gold: #b8860b;
+  --gold-light: #8b6914;
+  --gold-glow: #b8860b30;
+
+  --green: #16a34a;
+  --red: #dc2626;
+  --orange: #ea580c;
+  --purple: #7c3aed;
+
+  --text: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+
+  --border: #00000014;
+  --border-active: #2563eb40;
+
+  --shadow-card: 0 2px 16px -6px #00000015;
+  --shadow-lift: 0 12px 40px -16px #00000020;
+
+  /* Disable aurora + grid for light mode (cleaner look) */
+  &::before { display: none; }
+  &::after { opacity: 0.3; }
+}
+
+/* ── Theme Toggle Button ────────────────────────────────────────── */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border);
+  background: var(--bg-elev-1);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  margin-left: 0.5rem;
+  font-size: 1rem;
+}
+.theme-toggle:hover {
+  background: var(--accent-subtle);
+  color: var(--accent-light);
+  border-color: var(--border-active);
+}
+.theme-toggle svg { width: 18px; height: 18px; }
+/* Show sun in dark mode, moon in light mode */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: inline; }
+[data-theme="light"] .theme-toggle .icon-sun { display: inline; }
+[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
 /* ── Reset & Base ──────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
