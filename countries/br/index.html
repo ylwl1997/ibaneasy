@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://ibaneasy.com/countries/br/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the IBAN format for Brazil?", "acceptedAnswer": {"@type": "Answer", "text": "Brazil uses a 29-character IBAN with the country code \"BR\" followed by two check digits and a 25-character BBAN. The format is <code>8!n5!n10!n1!a1!c</code>. The bank code occupies positions 5 to 12."}}, {"@type": "Question", "name": "Is Brazil a SEPA country?", "acceptedAnswer": {"@type": "Answer", "text": "No, Brazil is not a SEPA member, but uses IBAN for international transfers."}}, {"@type": "Question", "name": "How long is a Brazil IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "A Brazil IBAN is exactly 29 characters long. The BBAN portion accounts for 25 characters."}}, {"@type": "Question", "name": "How do I find my Brazil IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "Your IBAN is printed on your bank statement, available in your online banking portal, or can be obtained from your bank. It typically appears alongside your BIC/SWIFT code for international transfers."}}, {"@type": "Question", "name": "Can I generate a valid Brazil IBAN for testing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Use the IBAN generator on this page or visit the <a href=\"/\">IBAN Easy homepage</a> to generate mathematically valid IBANs for any supported country. All generation is client-side and private."}}]}</script>
 </head>
@@ -27,6 +28,11 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -64,9 +70,9 @@
 </table></div><h2>Example Brazil IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> Brazil IBANs for testing:</p>
 <ul>
-<li><code>BR72 9477 4337 8652 1424 5118 853N 8</code></li>
-<li><code>BR32 7602 5548 5366 1142 4328 685K T</code></li>
-<li><code>BR82 5910 8838 5661 2478 4816 747Q N</code></li>
+<li><code>BR62 3577 0687 9083 2673 3565 378L X</code></li>
+<li><code>BR90 1387 2240 0863 7962 4489 306B A</code></li>
+<li><code>BR91 8260 2003 0340 8618 2112 461C W</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
 <h2>Generate Brazil IBANs for Testing</h2>
@@ -145,6 +151,23 @@
 <li><a href="/countries/fk/">Falkland Islands IBAN (18 chars)</a></li>
 <li><a href="/countries/gf/">French Guiana IBAN (27 chars, SEPA)</a></li>
 </ul>
+<h2>Major Bank BIC/SWIFT Codes in Brazil</h2>
+<p>BIC (Bank Identifier Code) / SWIFT codes for major banks in Brazil. These codes are used for international wire transfers alongside the IBAN.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>BIC Code</th><th>Bank Name</th><th>City</th></tr></thead>
+<tbody>
+<tr><td><code class="swift-bic-code">BBMDBRRJ</code></td><td>Banco BMG</td><td>São Paulo</td></tr>
+<tr><td><code class="swift-bic-code">BOTKBRSX</code></td><td>Banco BTG Pactual</td><td>São Paulo</td></tr>
+<tr><td><code class="swift-bic-code">BBDEBRSP</code></td><td>Banco Bradesco</td><td>São Paulo</td></tr>
+<tr><td><code class="swift-bic-code">BBICBRSP</code></td><td>Banco Original</td><td>São Paulo</td></tr>
+<tr><td><code class="swift-bic-code">SAFBBRSP</code></td><td>Banco Safra</td><td>São Paulo</td></tr>
+<tr><td><code class="swift-bic-code">SABRBRSP</code></td><td>Banco Santander Brasil</td><td>São Paulo</td></tr>
+<tr><td><code class="swift-bic-code">BRASBRRJ</code></td><td>Banco do Brasil</td><td>Brasília</td></tr>
+<tr><td><code class="swift-bic-code">BCBBBRRJ</code></td><td>Banco do Brasil Central (BCB)</td><td>Brasília</td></tr>
+<tr><td><code class="swift-bic-code">CEFXBRSP</code></td><td>Caixa Econômica Federal</td><td>Brasília</td></tr>
+<tr><td><code class="swift-bic-code">ITAUBRSP</code></td><td>Itaú Unibanco</td><td>São Paulo</td></tr>
+</tbody>
+</table></div>
 </main>
 <footer class="site-footer">
   <div class="footer-inner">
@@ -158,6 +181,7 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
