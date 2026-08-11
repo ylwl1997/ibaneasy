@@ -137,6 +137,65 @@ FOOT = '''</main>
 </body>
 </html>'''
 
+# ── Country Banking System Descriptions ───────────────────────────
+# Used to add unique descriptive content to each country page
+BANKING_NOTES = {
+    'DE': 'Germany has one of the largest banking sectors in Europe, with over 1,600 banks including Deutsche Bank, Commerzbank, and hundreds of cooperative and savings banks (Sparkassen, Volksbanken). All German IBANs start with DE followed by 20 characters including the 8-digit BLZ (Bankleitzahl) bank code. IBAN has been mandatory for all domestic and cross-border SEPA transfers since 2014.',
+    'FR': 'France has a highly developed banking system with major institutions like BNP Paribas, Societe Generale, and Credit Agricole. French IBANs are 27 characters long and include a 5-digit bank code (code banque), 5-digit branch code (code guichet), and an 11-digit account number. IBAN is required for all SEPA transfers in France.',
+    'GB': 'The United Kingdom uses a 22-character IBAN that incorporates the 6-digit sort code and 8-digit account number. Major UK banks include HSBC, Barclays, Lloyds, and NatWest. Despite leaving the EU, the UK remains part of SEPA, and IBAN is required for international transfers. The Faster Payments system handles domestic transfers without IBAN.',
+    'ES': 'Spain\'s banking system features major banks like Banco Santander, BBVA, and CaixaBank. Spanish IBANs are 24 characters and contain a 4-digit bank code, 4-digit branch code, 2-digit control code, and 10-digit account number. IBAN has been mandatory for all SEPA transfers in Spain since 2014.',
+    'IT': 'Italy has over 400 banks, led by UniCredit, Intesa Sanpaolo, and Banco BPM. Italian IBANs are 27 characters with a 5-digit bank code (ABI), 5-digit branch code (CAB), and 12-digit account number. The CIN (Control Internal Number) check character precedes the BBAN.',
+    'NL': 'The Netherlands has a modern banking system dominated by ING, Rabobank, and ABN AMRO. Dutch IBANs are 18 characters — the shortest in the EU — and use the bank\'s BIC-derived bank code. The Netherlands was an early adopter of IBAN and has fully transitioned away from the old domestic account numbering system.',
+    'CH': 'Switzerland is a global banking hub with major institutions like UBS, Credit Suisse (now part of UBS), and Raiffeisen. Swiss IBANs are 21 characters with a 5-digit bank clearing number and a 12-digit account identifier. Though not an EU member, Switzerland participates in SEPA and requires IBAN for cross-border transfers.',
+    'AT': 'Austria has a well-established banking system with Erste Group, Raiffeisen Bank International, and Bank Austria. Austrian IBANs are 20 characters and include a 5-digit bank code (BLZ) and an 11-digit account number. IBAN is mandatory for all SEPA transfers.',
+    'BE': 'Belgium has a sophisticated banking sector with KBC, BNP Paribas Fortis, and Belfius. Belgian IBANs are 16 characters with a 3-digit bank code and a 7+2 digit account number structure. Belgium was one of the first countries to mandate IBAN for domestic transfers.',
+    'PL': 'Poland has a well-regulated banking system with PKO Bank Polski, Pekao, and Santander Bank Polska. Polish IBANs are 28 characters — one of the longest in Europe — with an 8-digit bank sort code (including a 3-digit branch code) and a 16-digit account number.',
+    'SE': 'Sweden has a modern banking sector with Swedbank, SEB, Nordea, and Handelsbanken. Swedish IBANs are 24 characters with a 3-digit bank code and a 17-digit account number. Sweden has largely transitioned to digital payments, with bankgiro and plusgiro systems for domestic transfers.',
+    'DK': 'Denmark has a well-developed banking system with Danske Bank, Nordea, and Jyske Bank. Danish IBANs are 18 characters with a 4-digit bank code and a 10-digit account number. Denmark uses the PBS (Payment Business Services) system for domestic clearing.',
+    'NO': 'Norway has a robust banking sector with DNB, Sparebanken, and Nordea. Norwegian IBANs are 15 characters — among the shortest — with a 4-digit bank code and a 6-digit account number. Norway participates in SEPA despite not being an EU member.',
+    'FI': 'Finland has a highly digitised banking system with Nordea, OP Financial Group, and Danske Bank. Finnish IBANs are 18 characters with a 6-digit bank/branch code and a 7-8 digit account number. Finland was an early IBAN adopter.',
+    'PT': 'Portugal has a well-structured banking system with Caixa Geral de Depósitos, Millennium BCP, and Novo Banco. Portuguese IBANs are 25 characters with a 4-digit bank code, 4-digit branch code, and 11-digit account number. IBAN is mandatory for all SEPA transfers.',
+    'IE': 'Ireland has a modern banking sector with Allied Irish Banks (AIB), Bank of Ireland, and Permanent TSB. Irish IBANs are 22 characters with a 4-digit bank sort code and an 8-digit account number. Ireland uses IBAN for all SEPA transfers.',
+    'BR': 'Brazil has the largest banking sector in Latin America, with Itaú Unibanco, Banco do Brasil, Bradesco, and Santander Brasil. Brazilian IBANs are 29 characters with an 8-digit bank code (ISPB), 5-digit branch code, and 10-digit account number. IBAN is used for international transfers alongside the domestic PIX instant payment system.',
+    'TR': 'Turkey has a growing banking sector with Ziraat Bankası, İş Bankası, and Garanti BBVA. Turkish IBANs are 26 characters with a 5-digit bank code and a 16-digit account number. IBAN has been mandatory in Turkey since 2010.',
+    'AE': 'The United Arab Emirates has a well-capitalised banking system with Emirates NBD, First Abu Dhabi Bank, and Dubai Islamic Bank. UAE IBANs are 23 characters with a 3-digit bank code and a 14-digit account number. IBAN is mandatory for all cross-border transfers.',
+    'SA': 'Saudi Arabia has a strong banking sector with Saudi National Bank (SNB), Al Rajhi Bank, and Riyad Bank. Saudi IBANs are 24 characters with a 2-digit bank code and a variable-length account identifier. IBAN is mandatory for all domestic and international transfers.',
+    'HU': 'Hungary has a stable banking system with OTP Bank, K&H Bank, and Erste Bank Hungary. Hungarian IBANs are 28 characters with a 3-digit bank code, 4-digit branch code, and a 16+1 digit account number. IBAN is required for SEPA transfers.',
+    'CZ': 'The Czech Republic has a developed banking sector with Česká spořitelna, ČSOB, and Komerční banka. Czech IBANs are 24 characters with a 4-digit bank code and a 16-digit account number. IBAN is mandatory for SEPA transfers.',
+    'RO': 'Romania has a growing banking sector with Banca Transilvania, BCR, and BRD. Romanian IBANs are 24 characters with a 4-digit bank code and a 16-digit account number. IBAN is mandatory for all SEPA transfers.',
+    'GR': 'Greece has a well-established banking system with National Bank of Greece, Eurobank, Alpha Bank, and Piraeus Bank. Greek IBANs are 27 characters with a 3-digit bank code, 4-digit branch code, and a 16-digit account number.',
+    'BG': 'Bulgaria has a stable banking system with UniCredit Bulbank, DSK Bank, and United Bulgarian Bank. Bulgarian IBANs are 22 characters with a 4-digit bank code (BIC-based), 4-digit branch code, and a 10-digit account number.',
+    'HR': 'Croatia has a modern banking system with Zagrebačka banka, Privredna banka Zagreb, and Erste Bank Croatia. Croatian IBANs are 21 characters. Croatia adopted the euro in January 2023, making IBAN mandatory for all SEPA transfers.',
+    'LU': 'Luxembourg is a major international financial centre with BGL BNP Paribas, Banque Internationale à Luxembourg, and numerous private banks. Luxembourg IBANs are 20 characters with a 3-digit bank code and a 13-digit account number.',
+    'MT': 'Malta has a growing financial sector with Bank of Valletta, HSBC Malta, and APS Bank. Maltese IBANs are 31 characters with a 4-digit bank code, 5-digit branch code, and an 18-digit account number.',
+    'CY': 'Cyprus has a well-developed banking system with Bank of Cyprus, Hellenic Bank, and AstroBank. Cypriot IBANs are 28 characters with a 3-digit bank code, 5-digit branch code, and a 16-digit account number.',
+    'IS': 'Iceland has a small but robust banking system with Íslandsbanki, Landsbankinn, and Arion Bank. Icelandic IBANs are 26 characters with a 4-digit bank code and an 18-digit account number.',
+    'LI': 'Liechtenstein has a specialised financial centre with LGT Group, VP Bank, and Liechtensteinische Landesbank. Liechtenstein IBANs are 21 characters. The country uses the Swiss franc and participates in SEPA.',
+    'SG': 'Singapore is a global financial hub with DBS, OCBC, and UOB. Singapore does not officially use IBAN — international transfers use SWIFT/BIC codes with domestic account numbers.',
+    'HK': 'Hong Kong is a major international financial centre with HSBC, Bank of China (Hong Kong), and Standard Chartered. Hong Kong does not use IBAN — international transfers use SWIFT/BIC codes with domestic account numbers.',
+    'JP': 'Japan has a large banking system with MUFG Bank, Sumitomo Mitsui Banking Corporation, and Mizuho. Japan does not use IBAN — international transfers use SWIFT/BIC codes with domestic account numbers.',
+    'AU': 'Australia has a well-regulated banking system with Commonwealth Bank, Westpac, ANZ, and NAB. Australia does not use IBAN — domestic transfers use BSB (Bank State Branch) codes, and international transfers use SWIFT/BIC codes.',
+    'CA': 'Canada has a stable banking system with RBC, TD, Scotiabank, BMO, and CIBC. Canada does not use IBAN — international transfers use SWIFT/BIC codes with domestic transit and account numbers.',
+    'US': 'The United States has the world\'s largest banking system with JPMorgan Chase, Bank of America, Citibank, and Wells Fargo. The US does not use IBAN — domestic transfers use ABA routing numbers, and international transfers use SWIFT/BIC codes.',
+}
+
+def _banking_overview(c):
+    """Generate a banking system overview paragraph for a country page."""
+    code = c['code']
+    name = c['name']
+    if code in BANKING_NOTES:
+        return '<p>{}</p>\n'.format(BANKING_NOTES[code])
+    # Generic fallback based on SEPA status and continent
+    parts = []
+    if c['sepa']:
+        parts.append('{} is a SEPA member country.'.format(name))
+        parts.append('All SEPA credit transfers and direct debits in {} require a valid IBAN.'.format(name))
+    else:
+        parts.append('{} uses the IBAN system for international bank transfers.'.format(name))
+    parts.append('The {} IBAN is {} characters long and consists of the ISO country code "{}", two MOD-97 check digits, and a Basic Bank Account Number (BBAN) containing the domestic bank code ({} digits), account number, and any branch/routing identifiers.'.format(
+        name, c['ibanLen'], code, c['bankLen']))
+    return '<p>{}</p>\n'.format(' '.join(parts))
+
 # ── Helpers ──────────────────────────────────────────────────────
 def page(dirname, content):
     """Write content to src/<dirname>/index.html, creating dirs as needed."""
@@ -275,6 +334,10 @@ def build_country_page(c):
     # Specs table
     body += '<h2>{} IBAN Technical Specifications</h2>\n'.format(name)
     body += build_spec_table(c)
+
+    # Banking system overview
+    body += '<h2>Banking System in {}</h2>\n'.format(name)
+    body += _banking_overview(c)
 
     # Examples
     examples = build_examples(c, 3)
