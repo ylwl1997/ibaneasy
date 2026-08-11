@@ -916,6 +916,7 @@ def build_sitemap():
         '  <url><loc>{}/sepa-countries/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
         '  <url><loc>{}/iban-check-digit/</loc><lastmod>{}</lastmod><priority>0.7</priority></url>'.format(SITE, today),
         '  <url><loc>{}/swift-codes/</loc><lastmod>{}</lastmod><priority>0.7</priority></url>'.format(SITE, today),
+        '  <url><loc>{}/zh/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
         '  <url><loc>{}/contact/</loc><lastmod>{}</lastmod><priority>0.3</priority></url>'.format(SITE, today),
         '  <url><loc>{}/privacy/</loc><lastmod>{}</lastmod><priority>0.3</priority></url>'.format(SITE, today),
         '  <url><loc>{}/terms/</loc><lastmod>{}</lastmod><priority>0.3</priority></url>'.format(SITE, today),
@@ -932,6 +933,200 @@ def build_sitemap():
 def build_robots():
     """Generate robots.txt."""
     return 'User-agent: *\nAllow: /\n\nSitemap: {}/sitemap.xml\n'.format(SITE)
+
+
+# ── Multi-Language Homepage ─────────────────────────────────────────
+
+def build_translated_homepage(lang_code, title_zh, desc_zh):
+    """Build Chinese homepage at /zh/index.html by translating the English version."""
+    src_index = os.path.join(ROOT, 'index.html')
+    if not os.path.exists(src_index):
+        print('  WARNING: index.html not found, skipping {}'.format(lang_code))
+        return None
+
+    with open(src_index, 'r', encoding='utf-8') as f:
+        html = f.read()
+
+    can_path = '/{}/'.format(lang_code)
+
+    # Metadata replacements
+    html = html.replace('<html lang="en">', '<html lang="{}">'.format(lang_code))
+    # Title
+    html = html.replace(
+        '<title>Free Online IBAN Generator — Generate Valid IBAN Numbers Instantly</title>',
+        '<title>{}</title>'.format(title_zh)
+    )
+    # Meta description
+    html = html.replace(
+        '<meta name="description" content="Generate valid random IBAN numbers for 96+ countries. Free IBAN generator and validator — no signup, pure client-side, no data sent to any server. Supports all SEPA and international IBAN formats.">',
+        '<meta name="description" content="{}">'.format(desc_zh)
+    )
+    # OG title
+    html = html.replace(
+        '<meta property="og:title" content="Free Online IBAN Generator — Generate Valid IBAN Numbers Instantly">',
+        '<meta property="og:title" content="{}">'.format(title_zh)
+    )
+    # OG description
+    html = html.replace(
+        '<meta property="og:description" content="Generate valid random IBAN numbers for 96+ countries. Free, no signup, client-side only.">',
+        '<meta property="og:description" content="{}">'.format(desc_zh[:160])
+    )
+    html = html.replace(
+        '<link rel="canonical" href="https://ibaneasy.com/">',
+        '<link rel="canonical" href="{}{}">'.format(SITE, can_path)
+    )
+    html = html.replace(
+        '<meta property="og:url" content="https://ibaneasy.com/">',
+        '<meta property="og:url" content="{}{}">'.format(SITE, can_path)
+    )
+
+    # Add hreflang and i18n script before </head>
+    hreflang = (
+        '<link rel="alternate" hreflang="en" href="{}">\n'.format(SITE + '/') +
+        '<link rel="alternate" hreflang="zh" href="{}">\n'.format(SITE + '/zh/') +
+        '<link rel="alternate" hreflang="x-default" href="{}">\n'.format(SITE + '/') +
+        '<script src="/js/i18n.js" defer></script>'
+    )
+    html = html.replace('</head>', hreflang + '\n</head>')
+
+    # Update JSON-LD
+    html = html.replace(
+        '"url":"https://ibaneasy.com"',
+        '"url":"{}{}"'.format(SITE, can_path)
+    )
+
+    # ── Nav translations ──
+    html = html.replace('>Home<', '>首页<')
+    html = html.replace('>Countries<', '>国家<')
+    html = html.replace('>Validator<', '>验证器<')
+    html = html.replace('>SWIFT Codes<', '>SWIFT代码<')
+    html = html.replace('>SEPA<', '>SEPA<')  # Keep acronym
+    html = html.replace('>Check Digits<', '>校验位<')
+
+    # ── Breadcrumb ──
+    html = html.replace('<span class="crumb-current">Home</span>',
+                        '<span class="crumb-current">首页</span>')
+
+    # ── Hero section ──
+    html = html.replace('Free · No sign-up · 100% Client-Side',
+                        '免费 · 无需注册 · 100% 客户端运行')
+    html = html.replace('The <span class="text-gradient">IBAN Generator</span><br>for Every Country',
+                        '<span>适用于所有国家的</span><span class="text-gradient">IBAN 生成器</span>')
+    html = html.replace('Generate <strong class="text-gold">mathematically valid</strong> IBANs for 96+ countries in your browser. ISO 13616 compliant, MOD-97 verified, zero data sent to any server.',
+                        '在浏览器中为 96+ 个国家生成<strong class="text-gold">数学上有效</strong>的 IBAN。符合 ISO 13616 标准，MOD-97 验证，零数据传输至任何服务器。')
+    html = html.replace('>&#x21bb; Generate IBAN<', '>&#x21bb; 生成 IBAN<')
+    html = html.replace('>&#x2714; Validate an IBAN<', '>&#x2714; 验证 IBAN<')
+    html = html.replace('>Countries<', '>96+ 国家<', 1)  # First occurrence is nav, already replaced. This catches hero-trust.
+    # Fix hero-trust labels
+    html = html.replace('<span class="ht-l">+ International</span>',
+                        '<span class="ht-l">+ 国际</span>')
+    html = html.replace('<span class="ht-l">Server Calls</span>',
+                        '<span class="ht-l">服务器调用</span>')
+    html = html.replace('<span class="ht-l">Forever</span>',
+                        '<span class="ht-l">永久免费</span>')
+
+    # ── Generator dial ──
+    html = html.replace('>Generate an IBAN<', '>生成 IBAN<')
+    html = html.replace('placeholder="Search country..."',
+                        'placeholder="搜索国家..."')
+    html = html.replace('>Select a country<', '>选择国家<')
+    html = html.replace('for="quantity-slider">Quantity<',
+                        'for="quantity-slider">数量<')
+    html = html.replace('>&#x21bb; Generate IBAN<', '>&#x21bb; 生成 IBAN<')  # Generate button (dup of hero btn)
+    html = html.replace('>Length<', '>长度<')
+    html = html.replace('>&#x2398; Copy<', '>&#x2398; 复制<')
+    html = html.replace('>Copied!<', '>已复制！<')
+
+    # ── Bulk results ──
+    html = html.replace('>Generated IBANs<', '>生成的 IBAN<')
+    html = html.replace('>&#x2398; Copy All<', '>&#x2398; 复制全部<')
+
+    # ── History ──
+    html = html.replace('>History<', '>历史记录<')
+    html = html.replace('>Recent History<', '>最近历史<')
+    html = html.replace('>Clear<', '>清空<')
+
+    # ── How It Works ──
+    html = html.replace('>How It Works<', '>使用方法<')
+    html = html.replace('>1. Select a Country<', '>1. 选择国家<')
+    html = html.replace('>Pick any country from the dropdown — all 96+ IBAN-using countries, from Germany and France to Brazil and the UAE. SEPA and international formats supported.<',
+                        '>从下拉菜单选择任何使用 IBAN 的国家 — 涵盖全部 96+ 个国家，支持 SEPA 和国际格式。<')
+    html = html.replace('>2. Generate an IBAN<', '>2. 生成 IBAN<')
+    html = html.replace('>A <strong>mathematically valid</strong> IBAN is created using the MOD-97 check digit algorithm (ISO 13616). Every generated IBAN passes full validation.<',
+                        '>使用 MOD-97 校验位算法（ISO 13616）创建<strong>数学上有效</strong>的 IBAN。每个生成的 IBAN 都通过完整验证。<')
+    html = html.replace('>3. Copy &amp; Use for Testing<', '>3. 复制用于测试<')
+    html = html.replace('>Use generated IBANs to test payment forms, validate software, or learn how IBAN formats work across countries. Built for developers and QA engineers.<',
+                        '>使用生成的 IBAN 测试支付表单、验证软件或了解各国的 IBAN 格式。专为开发者和 QA 工程师设计。<')
+    html = html.replace('>4. 100% Private &amp; Secure<', '>4. 100% 私密安全<')
+    html = html.replace('>No server, no database, no analytics. Everything runs in your browser. Your data never leaves your device — inspect the source to verify.<',
+                        '>无服务器、无数据库、无分析追踪。一切在您的浏览器中运行。数据永远不会离开您的设备 — 可查看源代码验证。<')
+
+    # ── What is IBAN ──
+    html = html.replace('>What is an IBAN?<', '>什么是 IBAN？<')
+    html = html.replace('>IBAN stands for <strong>International Bank Account Number</strong>. It is a standardised way of identifying bank accounts across national borders, used in over 95 countries worldwide. An IBAN contains a two-letter country code, two check digits, and a Basic Bank Account Number (BBAN) that includes the domestic bank code, branch code, and account number.<',
+                        '>IBAN 代表<strong>国际银行账号</strong>。它是一种跨国境识别银行账户的标准化方式，在全球 95+ 个国家使用。IBAN 包含两位字母国家代码、两位校验位，以及包含国内银行代码、分行代码和账号的基本银行账号（BBAN）。<')
+    html = html.replace('>The IBAN system was developed by the European Committee for Banking Standards (ECBS) and later adopted as <strong>ISO 13616</strong>. Today, all SEPA (Single Euro Payments Area) transfers require an IBAN, making it essential for international banking in Europe and beyond.<',
+                        '>IBAN 系统由欧洲银行标准委员会（ECBS）开发，后被采纳为 <strong>ISO 13616</strong> 标准。如今，所有 SEPA（单一欧元支付区）转账都需要 IBAN，使其成为欧洲及全球国际银行业务的必需品。<')
+
+    # ── IBAN by Region ──
+    html = html.replace('>IBAN by Region<', '>按地区查看 IBAN<')
+    html = html.replace('>SEPA Countries<', '>SEPA 国家<')
+    html = html.replace('>36 European countries — unified euro payment zone<',
+                        '>36 个欧洲国家 — 统一欧元支付区<')
+    html = html.replace('>Worldwide IBAN<', '>全球 IBAN<')
+    html = html.replace('>60+ non-SEPA countries — Brazil, UAE, Saudi Arabia, Turkey &amp; more<',
+                        '>60+ 个非 SEPA 国家 — 巴西、阿联酋、沙特阿拉伯、土耳其等<')
+    html = html.replace('>International<', '>国际<')
+
+    # ── Popular IBAN Formats ──
+    html = html.replace('>Popular IBAN Formats<', '>常用 IBAN 格式<')
+    html = html.replace('>Country</th><th>Length</th><th>Format Example</th><th>SEPA</th>',
+                        '>国家</th><th>长度</th><th>格式示例</th><th>SEPA</th>')
+
+    # ── FAQ ──
+    html = html.replace('>Frequently Asked Questions<', '>常见问题<')
+    html = html.replace('>Are these real IBANs?<', '>这些 IBAN 是真实的吗？<')
+    html = html.replace('>No. The IBANs generated here are <strong>mathematically valid</strong> (they pass the MOD-97 check digit verification) but use randomly generated bank codes and account numbers. They are intended for <strong>testing purposes only</strong> — do not use them for actual bank transfers.<',
+                        '>不是。这里生成的 IBAN <strong>数学上有效</strong>（通过 MOD-97 校验位验证），但使用随机生成的银行代码和账号。它们仅供<strong>测试用途</strong> — 请勿用于实际的银行转账。<')
+    html = html.replace('>How does the IBAN check digit work?<', '>IBAN 校验位如何工作？<')
+    html = html.replace('>IBAN uses the MOD-97 algorithm (ISO 7064). The country code letters are converted to numbers (A=10, B=11, ..., Z=35), the string is rearranged, and the result must equal 1 modulo 97. This catches 99.94% of typing errors. <a href="/iban-check-digit/">Learn more &rarr;</a><',
+                        '>IBAN 使用 MOD-97 算法（ISO 7064）。将国家代码字母转换为数字（A=10，B=11，...，Z=35），重新排列字符串，结果必须等于 1 对 97 取模。这能捕捉 99.94% 的输入错误。<a href="/iban-check-digit/">了解更多 →</a><')
+    html = html.replace('>Is my data safe?<', '>我的数据安全吗？<')
+    html = html.replace('>Yes — 100%. All IBAN generation and validation happens in your browser using JavaScript. No data is ever sent to any server. We do not use cookies, analytics trackers, or any form of data collection. You can verify this by inspecting the source code.<',
+                        '>是的 — 100%。所有 IBAN 生成和验证都在您的浏览器中使用 JavaScript 完成。没有任何数据发送到任何服务器。我们不使用 Cookie、分析追踪器或任何形式的数据收集。您可以通过查看源代码来验证。<')
+    html = html.replace('>Which countries are supported?<', '>支持哪些国家？<')
+    html = html.replace('>We support 96 countries and territories — covering all 36 SEPA members plus 60+ international IBAN formats. <a href="/countries/">Browse the full list &rarr;</a><',
+                        '>我们支持 96 个国家和地区 — 涵盖所有 36 个 SEPA 成员国以及 60+ 个国际 IBAN 格式。<a href="/countries/">浏览完整列表 →</a><')
+
+    # ── CTA ──
+    html = html.replace('>Ready to start?<', '>准备开始？<')
+    html = html.replace('>96 Countries. <span class="text-gradient">One Tool.</span><',
+                        '>96 个国家。<span class="text-gradient">一个工具。</span><')
+    html = html.replace('>Generate valid IBANs for any supported country, validate existing IBANs, or explore the complete IBAN format reference — all from one place, all running locally in your browser.<',
+                        '>为任何支持的国家生成有效的 IBAN，验证现有 IBAN，或浏览完整的 IBAN 格式参考 — 全部在一个地方，在您的浏览器中本地运行。<')
+    html = html.replace('>&#x1F30D; Browse All Countries<', '>&#x1F30D; 浏览所有国家<')
+    html = html.replace('>&#x2714; Validate an IBAN<', '>&#x2714; 验证 IBAN<')  # CTA validate button
+    html = html.replace('>SEPA countries<', '>SEPA 国家<')
+    html = html.replace('>How check digits work<', '>校验位如何工作<')
+    html = html.replace('>Germany IBAN<', '>德国 IBAN<')
+    html = html.replace('>France IBAN<', '>法国 IBAN<')
+    html = html.replace('>UK IBAN<', '>英国 IBAN<')
+    html = html.replace('>Spain IBAN<', '>西班牙 IBAN<')
+
+    # ── Footer ──
+    html = html.replace('>Free online IBAN generator and validator. All generation runs client-side — no data is ever collected, stored, or transmitted. Generated IBANs are for testing purposes only.<',
+                        '>免费的在线 IBAN 生成器和验证器。所有生成均在客户端运行 — 不会收集、存储或传输任何数据。生成的 IBAN 仅供测试使用。<')
+    html = html.replace('>IBAN Generator<', '>IBAN 生成器<')
+    html = html.replace('>All Countries<', '>所有国家<')
+    html = html.replace('>Validator<', '>验证器<')
+    html = html.replace('>SEPA Countries<', '>SEPA 国家<')
+    html = html.replace('>SWIFT/BIC Codes<', '>SWIFT/BIC 代码<')
+    html = html.replace('>Contact<', '>联系我们<')
+    html = html.replace('>Privacy<', '>隐私政策<')
+    html = html.replace('>Terms<', '>使用条款<')
+    html = html.replace('>Sitemap<', '>网站地图<')
+
+    return html
 
 
 # ── Main ─────────────────────────────────────────────────────────
@@ -996,7 +1191,7 @@ def main():
     total += 2
 
     # 8. Contact, Privacy, Terms, Sitemap HTML
-    print('\n[8/8] Contact, Privacy, Terms, and HTML Sitemap...')
+    print('\n[8/9] Contact, Privacy, Terms, and HTML Sitemap...')
     html = build_contact_page()
     page('contact', html)
     total += 1
@@ -1013,6 +1208,20 @@ def main():
     page('sitemap', html)
     total += 1
     print('  /sitemap/ done')
+
+    # 9. Translated homepage (Chinese)
+    print('\n[9/9] Chinese homepage (/zh/)...')
+    zh_html = build_translated_homepage(
+        'zh',
+        '免费在线IBAN生成器 — 即时生成有效IBAN号码',
+        '为96+个国家生成有效的随机IBAN号码。免费的IBAN生成器和验证器，无需注册，纯客户端运行，不向任何服务器发送数据。支持所有SEPA和国际IBAN格式。'
+    )
+    if zh_html:
+        page('zh', zh_html)
+        total += 1
+        print('  /zh/ done')
+    else:
+        print('  /zh/ SKIPPED (index.html not found)')
 
     print('\n=== Done: {} files generated ==='.format(total))
 
