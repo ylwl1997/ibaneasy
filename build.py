@@ -97,12 +97,6 @@ HEAD = '''<!DOCTYPE html>
 '''
 
 FOOT = '''</main>
-<div class="ad-slot ad-banner">
-  <script>
-    atOptions = {{'key' : 'e952f34ad033773cc0c7f8577847b6f3','format' : 'iframe','height' : 90,'width' : 728,'params' : {{}}}};
-  </script>
-  <script src="https://www.highperformanceformat.com/e952f34ad033773cc0c7f8577847b6f3/invoke.js"></script>
-</div>
 <footer class="foot">
   <nav>
     <a href="/">IBAN Generator</a><a href="/countries/">All Countries</a><a href="/validate/">Validator</a><a href="/sepa-countries/">SEPA Countries</a><a href="/iban-check-digit/">Check Digits</a>
@@ -111,11 +105,6 @@ FOOT = '''</main>
 </footer>
 </body>
 </html>'''
-
-NATIVE_AD = '''<div class="ad-slot ad-native">
-  <script async="async" data-cfasync="false" src="https://pl30774768.effectivecpmnetwork.com/f95daa4035d01d0dbb3f7c2c7af03073/invoke.js"></script>
-  <div id="container-f95daa4035d01d0dbb3f7c2c7af03073"></div>
-</div>'''
 
 # ── Helpers ──────────────────────────────────────────────────────
 def page(dirname, content):
@@ -271,7 +260,7 @@ def build_country_page(c):
 
     # Native Ad
     body += '<h2>Frequently Asked Questions</h2>\n'
-    body += NATIVE_AD + '\n'
+    body += '\n'
 
     # FAQs
     for q, a in country_faqs(c):
@@ -309,7 +298,7 @@ def build_countries_index():
     body += '<p class="lede">96 countries and territories worldwide use the IBAN system. Browse by continent or SEPA membership. Click any country for full IBAN format details, examples, and a generator.</p>\n'
 
     # Native Ad
-    body += NATIVE_AD + '\n'
+    body += '\n'
 
     # Search
     body += '<input type="text" class="search-box" id="country-search" placeholder="Search countries..." oninput="filterCountries()" aria-label="Search countries">\n'
@@ -390,7 +379,7 @@ def build_validator_page():
     body += '<div class="validator-result" id="result" style="display:none"></div>\n'
     body += '<div style="margin-top:1rem" id="details" style="display:none"></div>\n'
 
-    body += NATIVE_AD + '\n'
+    body += '\n'
 
     body += '<h2>How IBAN Validation Works</h2>\n'
     body += '<p>IBAN validation involves three checks:</p>\n'
@@ -498,7 +487,7 @@ def build_sepa_page():
     body += '<h1>SEPA Countries List</h1>\n'
     body += '<p class="lede">The Single Euro Payments Area (SEPA) includes 36 countries. All SEPA transfers require an IBAN. Here is the complete list with IBAN formats.</p>\n'
 
-    body += NATIVE_AD + '\n'
+    body += '\n'
 
     sepa = [c for c in countries if c['sepa']]
     body += '<h2>All {} SEPA Members</h2>\n'.format(len(sepa))
@@ -539,7 +528,7 @@ def build_check_digit_page():
     body += '<h1>How IBAN Check Digits Work</h1>\n'
     body += '<p class="lede">Every IBAN includes two check digits that catch 99.9% of typing errors. They use a mathematical formula called MOD-97, first published in ISO 7064. Here\'s how it works.</p>\n'
 
-    body += NATIVE_AD + '\n'
+    body += '\n'
 
     body += '<h2>The MOD-97 Algorithm</h2>\n'
     body += '<p>The check digits (positions 3-4 in every IBAN) are computed using the MOD-97 algorithm. Here is the step-by-step process:</p>\n'
