@@ -100,6 +100,7 @@ HEAD = '''<!DOCTYPE html>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
       <a href="/swift-codes/">SWIFT Codes</a>
+      <a href="/iban-calculator/">Calculator</a>
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
@@ -124,6 +125,7 @@ FOOT = '''</main>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
       <a href="/swift-codes/">SWIFT/BIC Codes</a>
+      <a href="/iban-calculator/">IBAN Calculator</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
@@ -1052,6 +1054,195 @@ def build_what_is_iban_page():
     return body
 
 
+def build_iban_calculator_page():
+    """Build the /iban-calculator/ interactive check digit calculator."""
+    title = 'IBAN Calculator — Calculate & Validate IBAN Check Digits'
+    desc = 'Free online IBAN calculator. Enter a country code and account details to compute the correct IBAN check digits using MOD-97. See step-by-step calculation. Supports all 96 IBAN countries.'
+
+    body = HEAD.format(
+        title=esc(title), desc=esc(desc),
+        canon=SITE + '/iban-calculator/',
+        og_title=esc(title), og_desc=esc(desc),
+        extra=''
+    )
+
+    body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">IBAN Calculator</span></nav>\n'
+    body += '<main class="main-content prose-content">\n'
+    body += '<h1>IBAN Calculator — Compute Check Digits</h1>\n'
+    body += '<p>Use this calculator to compute IBAN check digits from a country code and domestic account details. Enter a country, type the BBAN (domestic bank + account number), and we\'ll calculate the correct check digits using the MOD-97 algorithm.</p>\n'
+
+    # Calculator UI
+    body += '<div class="glass-panel" style="margin:1.5rem 0">\n'
+    body += '<h2 style="margin-bottom:1rem">Calculate IBAN Check Digits</h2>\n'
+
+    # Country selector
+    body += '<div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem">\n'
+    body += '<select id="calc-country" style="flex:1;min-width:200px;font-family:var(--font);padding:0.65rem 1rem;background:var(--bg-elev-1);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.92rem;cursor:pointer">\n'
+    body += '<option value="">Select a country...</option>\n'
+    for c in sorted(countries, key=lambda x: x['name']):
+        body += '<option value="{}">{}</option>\n'.format(c['code'], esc(c['name']))
+    body += '</select>\n'
+    body += '</div>\n'
+
+    # BBAN input
+    body += '<div style="margin-bottom:1rem">\n'
+    body += '<label for="calc-bban" style="display:block;color:var(--text-secondary);font-size:0.82rem;margin-bottom:0.35rem">BBAN (domestic bank code + account number, without country code or check digits)</label>\n'
+    body += "<input type=\"text\" id=\"calc-bban\" placeholder=\"e.g., 370400440532013000 for Germany\" style=\"width:100%;font-family:var(--font-display);padding:0.75rem 1rem;background:var(--bg-elev-1);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.95rem;outline:none\" oninput=\"calculateIban()\" onfocus=\"this.style.borderColor='var(--accent-light)'\" onblur=\"this.style.borderColor='var(--border)'\">\n"
+    body += '<p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.3rem" id="calc-format-hint"></p>\n'
+    body += '</div>\n'
+
+    # Calculate button
+    body += '<button class="btn btn-primary" id="calc-btn" onclick="calculateIban()" style="margin-bottom:1rem">&#x2699; Calculate IBAN</button>\n'
+
+    # Results
+    body += '<div id="calc-result" style="display:none">\n'
+    body += '<h3>Result</h3>\n'
+    body += '<div style="font-family:var(--font-display);font-size:1.3rem;font-weight:700;padding:0.75rem 1rem;background:var(--bg-elev-1);border:1px solid var(--border-active);border-radius:var(--radius-sm);margin-bottom:0.75rem;letter-spacing:0.02em" id="calc-iban-output"></div>\n'
+
+    body += '<h3>Step-by-Step Calculation</h3>\n'
+    body += '<div style="font-size:0.88rem;line-height:1.8;color:var(--text-secondary)" id="calc-steps"></div>\n'
+    body += '</div>\n'
+
+    body += '</div>\n'  # glass-panel
+
+    # JavaScript
+    body += '<script src="/js/iban-core.js"></script>\n'
+    body += '<script>\n'
+    body += '(function() {\n'
+    body += '  var countries = {};\n'
+    body += '  var xhr = new XMLHttpRequest();\n'
+    body += '  xhr.open("GET", "/iban_countries.json", true);\n'
+    body += '  xhr.onload = function() {\n'
+    body += '    if (xhr.status === 200) {\n'
+    body += '      var data = JSON.parse(xhr.responseText);\n'
+    body += '      for (var i = 0; i < data.length; i++) {\n'
+    body += '        countries[data[i].code] = data[i];\n'
+    body += '      }\n'
+    body += '    }\n'
+    body += '  };\n'
+    body += '  xhr.send();\n'
+    body += '\n'
+    body += '  window.calculateIban = function() {\n'
+    body += '    var cc = document.getElementById("calc-country").value;\n'
+    body += '    var bban = document.getElementById("calc-bban").value.replace(/\\s/g, "").toUpperCase();\n'
+    body += '    var resultDiv = document.getElementById("calc-result");\n'
+    body += '    var output = document.getElementById("calc-iban-output");\n'
+    body += '    var steps = document.getElementById("calc-steps");\n'
+    body += '    var hint = document.getElementById("calc-format-hint");\n'
+    body += '\n'
+    body += '    if (!cc || !bban) { hint.textContent = "Please select a country and enter the BBAN."; return; }\n'
+    body += '    var c = countries[cc];\n'
+    body += '    if (!c) { hint.textContent = "Country not found in database."; return; }\n'
+    body += '    if (bban.length !== c.bbanLen) { hint.textContent = "BBAN should be " + c.bbanLen + " characters for " + c.name + " (you entered " + bban.length + ")."; resultDiv.style.display = "none"; return; }\n'
+    body += '\n'
+    body += '    hint.textContent = c.name + " — " + c.bbanLen + "-character BBAN, format: " + c.bbanFormat;\n'
+    body += '\n'
+    body += '    // Step 1: Assemble country + "00" + BBAN\n'
+    body += '    var step1 = cc + "00" + bban;\n'
+    body += '    var s = [];\n'
+    body += '    s.push("<strong>Step 1:</strong> Start with country code + \\"00\\" + BBAN = <code>" + step1 + "</code>");\n'
+    body += '\n'
+    body += '    // Step 2: Move first 4 chars to end\n'
+    body += '    var step2 = step1.slice(4) + step1.slice(0, 4);\n'
+    body += '    s.push("<strong>Step 2:</strong> Move first 4 characters to the end = <code>" + step2 + "</code>");\n'
+    body += '\n'
+    body += '    // Step 3: Convert letters to numbers\n'
+    body += '    var step3 = "";\n'
+    body += '    for (var i = 0; i < step2.length; i++) {\n'
+    body += '      var ch = step2[i];\n'
+    body += '      if (ch >= "A" && ch <= "Z") { step3 += (ch.charCodeAt(0) - 55).toString(); }\n'
+    body += '      else { step3 += ch; }\n'
+    body += '    }\n'
+    body += '    s.push("<strong>Step 3:</strong> Convert letters to numbers (A=10, B=11, ...) = <code>" + step3.slice(0, 20) + "..." + step3.slice(-10) + "</code>");\n'
+    body += '\n'
+    body += '    // Step 4: MOD-97\n'
+    body += '    var remainder = IBAN.mod97(step3);\n'
+    body += '    s.push("<strong>Step 4:</strong> Compute MOD-97: the huge number mod 97 = <code>" + remainder + "</code>");\n'
+    body += '\n'
+    body += '    // Step 5: Check digits = 98 - remainder\n'
+    body += '    var checkDigits = 98 - remainder;\n'
+    body += '    var checkStr = ("0" + checkDigits).slice(-2);\n'
+    body += '    s.push("<strong>Step 5:</strong> Check digits = 98 − " + remainder + " = <code>" + checkStr + "</code>");\n'
+    body += '\n'
+    body += '    // Final IBAN\n'
+    body += '    var iban = cc + checkStr + bban;\n'
+    body += '    var formatted = IBAN.format(iban);\n'
+    body += '    output.textContent = formatted;\n'
+    body += '    s.push("<br><strong style=\\"color:var(--accent-light)\\">Final IBAN:</strong> <code style=\\"font-size:1rem\\">" + formatted + "</code>");\n'
+    body += '    s.push("<span style=\\"color:var(--text-muted);font-size:0.82rem\\">This IBAN passes MOD-97 validation.</span>");\n'
+    body += '\n'
+    body += '    steps.innerHTML = s.join("<br>");\n'
+    body += '    resultDiv.style.display = "";\n'
+    body += '  };\n'
+    body += '\n'
+    body += '  // Country change handler\n'
+    body += '  document.getElementById("calc-country").addEventListener("change", function() {\n'
+    body += '    var cc = this.value;\n'
+    body += '    var c = countries[cc];\n'
+    body += '    var hint = document.getElementById("calc-format-hint");\n'
+    body += '    var ibanBban = document.getElementById("calc-bban");\n'
+    body += '    if (c) {\n'
+    body += '      hint.textContent = c.name + " — BBAN: " + c.bbanLen + " chars, format " + c.bbanFormat;\n'
+    body += '      ibanBban.placeholder = "Enter " + c.bbanLen + "-character BBAN...";\n'
+    body += '    }\n'
+    body += '    calculateIban();\n'
+    body += '  });\n'
+    body += '})();\n'
+    body += '</script>\n'
+
+    # Educational content below calculator
+    body += '<h2>How the IBAN Calculator Works</h2>\n'
+    body += '<p>The calculator follows the official ISO 13616 algorithm for computing IBAN check digits:</p>\n'
+    body += '<ol>\n'
+    body += '<li><strong>Assemble</strong>: Take the country code + "00" (placeholder check digits) + BBAN (domestic account details)</li>\n'
+    body += '<li><strong>Rearrange</strong>: Move the first 4 characters (country code + "00") to the end of the string</li>\n'
+    body += '<li><strong>Convert</strong>: Replace each letter with its numeric value (A=10, B=11, ..., Z=35)</li>\n'
+    body += '<li><strong>Divide</strong>: Interpret the result as a single large integer and compute remainder modulo 97</li>\n'
+    body += '<li><strong>Finalise</strong>: Check digits = 98 − remainder (zero-padded to 2 digits)</li>\n'
+    body += '</ol>\n'
+
+    body += '<h2>Why Would You Need an IBAN Calculator?</h2>\n'
+    body += '<ul>\n'
+    body += '<li><strong>Verify your IBAN</strong>: If you know your domestic bank code and account number, use this calculator to verify your IBAN\'s check digits are correct</li>\n'
+    body += '<li><strong>Understand the algorithm</strong>: See each step of the MOD-97 calculation to understand how IBAN validation works</li>\n'
+    body += '<li><strong>Educational purposes</strong>: Students and developers learning about international banking can explore the IBAN structure interactively</li>\n'
+    body += '<li><strong>Testing and QA</strong>: Validate that your payment system\'s IBAN generation logic produces correct check digits</li>\n'
+    body += '</ul>\n'
+
+    body += '<h2>IBAN Calculator vs IBAN Generator</h2>\n'
+    body += '<p>This <strong>calculator</strong> computes check digits from your existing domestic bank details. Our <a href="/">IBAN Generator</a> creates entirely random (but mathematically valid) IBANs for testing. Use the calculator when you have real bank data and need to verify the check digits; use the generator when you need test data.</p>\n'
+
+    # FAQ
+    body += '<h2>Frequently Asked Questions</h2>\n'
+    calc_faqs = [
+        ('Can I calculate an IBAN from just a sort code and account number?',
+         'Yes! The IBAN calculator does exactly this. Enter the country, type your domestic bank code + account number (the BBAN), and we compute the correct check digits using MOD-97.'),
+        ('What if my calculated IBAN doesn\'t match the one on my bank statement?',
+         'Your bank\'s IBAN is the authoritative source. If there\'s a discrepancy, double-check that you entered the correct domestic bank code and account number. Some banks use proprietary BBAN formats that differ slightly from the standard.'),
+        ('Is the MOD-97 algorithm the same for all countries?',
+         'Yes. All IBAN countries use the same MOD-97 check digit algorithm (ISO 7064). The only difference between countries is the BBAN format — the length and structure of the domestic bank/account details.'),
+        ('Can I use this calculator for any IBAN country?',
+         'Yes! The calculator supports all 96 IBAN countries. Select your country from the dropdown, enter the BBAN in the correct format, and we\'ll compute the check digits.'),
+    ]
+    body += '<div class="faq-list">\n'
+    for q, a in calc_faqs:
+        body += '<details class="faq-item"><summary class="faq-q">{}</summary><div class="faq-a"><p>{}</p></div></details>\n'.format(q, a)
+    body += '</div>\n'
+
+    # Internal links
+    body += '<h2>Related Tools</h2>\n'
+    body += '<div class="card-grid card-grid-2" style="margin-top:1rem">\n'
+    body += '<a class="country-card" href="/"><div class="cc-badge">&#x1F4A0;</div><div class="cc-name">IBAN Generator</div><div class="cc-meta">Generate random valid IBANs for testing</div></a>\n'
+    body += '<a class="country-card" href="/validate/"><div class="cc-badge">&#x2714;</div><div class="cc-name">IBAN Validator</div><div class="cc-meta">Check if any IBAN is valid using MOD-97</div></a>\n'
+    body += '<a class="country-card" href="/what-is-iban/"><div class="cc-badge">&#x2753;</div><div class="cc-name">What is an IBAN?</div><div class="cc-meta">Complete guide to international bank account numbers</div></a>\n'
+    body += '<a class="country-card" href="/iban-check-digit/"><div class="cc-badge">&#x1F522;</div><div class="cc-name">Check Digits Explained</div><div class="cc-meta">Deep dive into the MOD-97 algorithm</div></a>\n'
+    body += '</div>\n'
+
+    body += FOOT
+    return body
+
+
+
 def build_sitemap():
     """Generate sitemap.xml."""
     today = TODAY
@@ -1060,6 +1251,7 @@ def build_sitemap():
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
         '  <url><loc>{}/</loc><lastmod>{}</lastmod><priority>1.0</priority></url>'.format(SITE, today),
         '  <url><loc>{}/what-is-iban/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
+        '  <url><loc>{}/iban-calculator/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
         '  <url><loc>{}/countries/</loc><lastmod>{}</lastmod><priority>0.9</priority></url>'.format(SITE, today),
         '  <url><loc>{}/validate/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
         '  <url><loc>{}/sepa-countries/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
@@ -1151,6 +1343,7 @@ def build_translated_homepage(lang_code, title_zh, desc_zh):
     html = html.replace('>SWIFT Codes<', '>SWIFT代码<')
     html = html.replace('>SEPA<', '>SEPA<')  # Keep acronym
     html = html.replace('>Check Digits<', '>校验位<')
+    html = html.replace('>Calculator<', '>计算器<')
 
     # ── Breadcrumb ──
     html = html.replace('<span class="crumb-current">Home</span>',
@@ -1330,6 +1523,13 @@ def main():
     page('what-is-iban', html)
     total += 1
     print('  /what-is-iban/ done')
+
+    # 5b. IBAN Calculator page
+    print('\n[5b/9] IBAN Calculator page...')
+    html = build_iban_calculator_page()
+    page('iban-calculator', html)
+    total += 1
+    print('  /iban-calculator/ done')
 
     # 6. SWIFT/BIC page
     print('\n[6/9] SWIFT/BIC codes page...')
