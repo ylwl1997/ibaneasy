@@ -1487,6 +1487,72 @@ td a:hover { text-decoration: underline; }
   border: 1px solid #ff4d6d33;
 }
 
+/* ── SWIFT/BIC Lookup ──────────────────────────────────────────── */
+.swift-search-wrap {
+  display: flex;
+  gap: 0.75rem;
+  margin: 1.5rem 0 0.5rem;
+  flex-wrap: wrap;
+}
+
+.swift-search-input {
+  flex: 1 1 300px;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  padding: 0.7rem 1rem;
+  background: var(--bg-elev-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  outline: none;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.swift-search-input::placeholder { color: var(--text-muted); }
+
+.swift-search-input:focus {
+  border-color: var(--accent-light);
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+
+.swift-country-filter {
+  flex: 0 0 auto;
+  min-width: 180px;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  padding: 0.7rem 2.2rem 0.7rem 1rem;
+  background: var(--bg-elev-1);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%238695ad'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+  outline: none;
+  transition: border-color var(--duration-fast);
+}
+
+.swift-country-filter:hover { border-color: var(--border-active); }
+.swift-country-filter:focus { border-color: var(--accent-light); box-shadow: 0 0 0 3px var(--accent-subtle); }
+
+.swift-result-count {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0.4rem 0 0.8rem;
+}
+
+.swift-bic-code {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--accent-light);
+  background: var(--accent-subtle);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.88rem;
+}
+
 /* ── Toast ─────────────────────────────────────────────────────── */
 .toast {
   position: fixed;
