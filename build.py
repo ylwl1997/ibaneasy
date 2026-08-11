@@ -94,6 +94,7 @@ HEAD = '''<!DOCTYPE html>
     <a class="nav-logo" href="/"><span class="lg-accent">IBAN</span><span class="lg-dim"> Easy</span></a>
     <div class="nav-links">
       <a href="/">Home</a>
+      <a href="/what-is-iban/">What is IBAN</a>
       <a href="/countries/">Countries</a>
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
@@ -117,6 +118,7 @@ FOOT = '''</main>
     </div>
     <div class="footer-links">
       <a href="/">IBAN Generator</a>
+      <a href="/what-is-iban/">What is an IBAN?</a>
       <a href="/countries/">All Countries</a>
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
@@ -878,11 +880,16 @@ def build_sitemap_html():
     body += '<li><a href="/swift-codes/">SWIFT/BIC Code Lookup</a></li>\n'
     body += '</ul>\n'
 
+    body += '<h2>Guides</h2>\n'
+    body += '<ul>\n'
+    body += '<li><a href="/what-is-iban/">What is an IBAN? — Complete Guide</a></li>\n'
+    body += '<li><a href="/iban-check-digit/">How IBAN Check Digits Work</a></li>\n'
+    body += '</ul>\n'
+
     body += '<h2>Reference Pages</h2>\n'
     body += '<ul>\n'
     body += '<li><a href="/countries/">All IBAN Countries</a></li>\n'
     body += '<li><a href="/sepa-countries/">SEPA Countries List</a></li>\n'
-    body += '<li><a href="/iban-check-digit/">How IBAN Check Digits Work</a></li>\n'
     body += '</ul>\n'
 
     body += '<h2>Country IBAN Guides ({})</h2>\n'.format(len(countries))
@@ -904,6 +911,147 @@ def build_sitemap_html():
     return body
 
 
+def build_what_is_iban_page():
+    """Build the /what-is-iban/ comprehensive guide page."""
+    title = 'What is an IBAN? — Complete Guide to International Bank Account Numbers'
+    desc = 'Learn what an IBAN is, how it works, its structure, and why it matters for international banking. Covers IBAN format, country codes, check digits, SEPA, and how to find your IBAN.'
+
+    body = HEAD.format(
+        title=esc(title), desc=esc(desc),
+        canon=SITE + '/what-is-iban/',
+        og_title=esc(title), og_desc=esc(desc),
+        extra=''
+    )
+
+    body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">What is an IBAN?</span></nav>\n'
+    body += '<main class="main-content prose-content">\n'
+    body += '<h1>What is an IBAN? The Complete Guide to International Bank Account Numbers</h1>\n'
+    body += '<p>An <strong>IBAN</strong> (International Bank Account Number) is a standardised system for identifying bank accounts across national borders. Developed in 1997, IBANs now span 96 countries and territories, making international money transfers safer, faster, and more reliable.</p>\n'
+
+    body += '<p>Every IBAN contains a two-letter country code, two check digits, and a domestic bank account identifier (BBAN). Together, these elements uniquely identify a specific bank account anywhere in the world. Whether you\'re sending money to Germany, receiving payments from France, or setting up direct debits across SEPA countries, the IBAN is the universal key to cross-border banking.</p>\n'
+
+    # Structure section
+    body += '<h2>IBAN Structure: How an IBAN is Built</h2>\n'
+    body += '<p>An IBAN consists of up to 34 alphanumeric characters, divided into two main parts:</p>\n'
+
+    body += '<h3>1. Country Code (2 letters)</h3>\n'
+    body += '<p>The first two characters are the ISO 3166-1 alpha-2 country code. For example:</p>\n'
+    body += '<ul>\n'
+    body += '<li><strong>DE</strong> — Germany</li>\n'
+    body += '<li><strong>FR</strong> — France</li>\n'
+    body += '<li><strong>GB</strong> — United Kingdom</li>\n'
+    body += '<li><strong>ES</strong> — Spain</li>\n'
+    body += '<li><strong>BR</strong> — Brazil</li>\n'
+    body += '</ul>\n'
+
+    body += '<h3>2. Check Digits (2 digits)</h3>\n'
+    body += '<p>Positions 3 and 4 are the check digits, computed using the MOD-97 algorithm (ISO 7064). These two digits catch 99.94% of typing errors. <a href="/iban-check-digit/">Learn how MOD-97 works →</a></p>\n'
+
+    body += '<h3>3. BBAN — Basic Bank Account Number (up to 30 characters)</h3>\n'
+    body += '<p>The remaining characters form the BBAN, which varies by country. The BBAN typically contains:</p>\n'
+    body += '<ul>\n'
+    body += '<li><strong>Bank code</strong>: Identifies the financial institution (e.g., sort code in the UK, BLZ in Germany)</li>\n'
+    body += '<li><strong>Branch code</strong>: Identifies a specific branch (used in some countries like France and Italy)</li>\n'
+    body += '<li><strong>Account number</strong>: The individual bank account</li>\n'
+    body += '</ul>\n'
+
+    # Examples section
+    body += '<h2>IBAN Examples by Country</h2>\n'
+    body += '<p>Here are examples of IBANs from major countries, showing how the format varies:</p>\n'
+    body += '<div class="tablewrap"><table>\n'
+    body += '<thead><tr><th>Country</th><th>IBAN Length</th><th>Example</th><th>SEPA</th></tr></thead>\n<tbody>\n'
+    examples = [
+        ('Germany', 'DE', 22, 'DE89 3704 0044 0532 0130 00', True),
+        ('France', 'FR', 27, 'FR14 2004 1010 0505 0001 3M02 606', True),
+        ('United Kingdom', 'GB', 22, 'GB29 NWBK 6016 1331 9268 19', True),
+        ('Spain', 'ES', 24, 'ES91 2100 0418 4502 0005 1332', True),
+        ('Italy', 'IT', 27, 'IT60 X054 2811 1010 0000 0123 456', True),
+        ('Netherlands', 'NL', 18, 'NL91 ABNA 0417 1643 00', True),
+        ('Switzerland', 'CH', 21, 'CH93 0076 2011 6238 5295 7', True),
+        ('Poland', 'PL', 28, 'PL61 1090 1014 0000 0712 1981 2874', True),
+        ('Brazil', 'BR', 29, 'BR97 0036 0305 0000 1000 9795 493P 1', False),
+        ('UAE', 'AE', 23, 'AE07 0331 2345 6789 0123 456', False),
+    ]
+    for name, code, length, example, sepa in examples:
+        body += '<tr><td><a href="/countries/{}/">{}</a></td><td>{}</td><td><code>{}</code></td><td>{}</td></tr>\n'.format(
+            code.lower(), name, length, example, '&#x2705;' if sepa else '&#x274C;')
+    body += '</tbody>\n</table></div>\n'
+
+    # History section
+    body += '<h2>History: Why Was IBAN Created?</h2>\n'
+    body += '<p>Before IBAN, international bank transfers were error-prone. Different countries used different account numbering systems, and there was no standard way to identify accounts across borders. Routing errors were common, transfers were slow, and banks charged high fees for manual processing.</p>\n'
+    body += '<p>The <strong>European Committee for Banking Standards (ECBS)</strong> developed the IBAN system in 1997 to solve these problems. It was later adopted as the international standard <strong>ISO 13616</strong>. The European Union mandated IBAN usage through the <strong>Payment Services Directive (PSD)</strong>, and today all SEPA transfers require both IBAN and BIC/SWIFT codes.</p>\n'
+
+    # Which countries
+    body += '<h2>Which Countries Use IBAN?</h2>\n'
+    body += '<p>As of 2026, <strong>96 countries and territories</strong> use the IBAN system. These include:</p>\n'
+    body += '<ul>\n'
+    body += '<li><strong>All 36 SEPA countries</strong>: Every EU/EEA member state plus Switzerland, Monaco, San Marino, Andorra, Vatican City, and UK crown dependencies</li>\n'
+    body += '<li><strong>60+ non-SEPA countries</strong>: Including Brazil, Turkey, UAE, Saudi Arabia, Pakistan, Costa Rica, Dominican Republic, and many Middle Eastern and African nations</li>\n'
+    body += '</ul>\n'
+    body += '<p>Notable countries that <strong>do not</strong> use IBAN include the United States, Canada, Australia, China, and Japan — though they can still <em>receive</em> IBAN payments.</p>\n'
+    body += '<p><a href="/countries/">Browse the complete list of IBAN countries →</a></p>\n'
+
+    # IBAN vs SWIFT
+    body += '<h2>IBAN vs SWIFT/BIC: What\'s the Difference?</h2>\n'
+    body += '<p>People often confuse IBANs and SWIFT/BIC codes, but they serve different purposes:</p>\n'
+    body += '<div class="tablewrap"><table>\n'
+    body += '<thead><tr><th>Feature</th><th>IBAN</th><th>SWIFT/BIC</th></tr></thead>\n<tbody>\n'
+    body += '<tr><td><strong>Purpose</strong></td><td>Identifies a specific bank account</td><td>Identifies a specific bank</td></tr>\n'
+    body += '<tr><td><strong>Format</strong></td><td>Up to 34 alphanumeric characters</td><td>8 or 11 alphanumeric characters</td></tr>\n'
+    body += '<tr><td><strong>Contains</strong></td><td>Country code + check digits + bank/account details</td><td>Bank code + country code + location + branch</td></tr>\n'
+    body += '<tr><td><strong>Example</strong></td><td><code>DE89 3704 0044 0532 0130 00</code></td><td><code>DEUTDEFFXXX</code></td></tr>\n'
+    body += '<tr><td><strong>When needed</strong></td><td>SEPA transfers, most international wires</td><td>International wires, interbank messages</td></tr>\n'
+    body += '</tbody>\n</table></div>\n'
+    body += '<p>For international transfers, you typically need <strong>both</strong> the recipient\'s IBAN and the bank\'s BIC/SWIFT code. <a href="/swift-codes/">Look up SWIFT/BIC codes →</a></p>\n'
+
+    # How to find
+    body += '<h2>How to Find Your IBAN</h2>\n'
+    body += '<p>You can find your IBAN in several ways:</p>\n'
+    body += '<ol>\n'
+    body += '<li><strong>Bank statement</strong>: Most banks print your IBAN on every statement</li>\n'
+    body += '<li><strong>Online banking</strong>: Log into your bank\'s website or app — your IBAN is usually displayed in your account details</li>\n'
+    body += '<li><strong>Bank card</strong>: Some countries print the IBAN on debit/credit cards</li>\n'
+    body += '<li><strong>Contact your bank</strong>: Customer service can provide your IBAN</li>\n'
+    body += '<li><strong>IBAN calculator</strong>: If you know your domestic bank code and account number, you can calculate your IBAN. Try our <a href="/">IBAN generator</a></li>\n'
+    body += '</ol>\n'
+
+    # FAQ
+    body += '<h2>Frequently Asked Questions</h2>\n'
+    faqs = [
+        ('What does IBAN stand for?',
+         'IBAN stands for <strong>International Bank Account Number</strong>. It is a standardised format for identifying bank accounts internationally, defined by ISO 13616.'),
+        ('Is IBAN the same as an account number?',
+         'No. An IBAN <em>contains</em> your account number but adds a country code, check digits, and bank/branch identifiers. Your domestic account number is just one part of the full IBAN.'),
+        ('Do I need an IBAN to receive money from abroad?',
+         'If you live in an IBAN country: <strong>yes</strong>. Senders in SEPA countries and most international banks will ask for your IBAN. If you live outside IBAN countries (US, Canada, Australia, etc.), you\'ll use your domestic account number plus a SWIFT/BIC code instead.'),
+        ('Are IBAN and SWIFT code the same thing?',
+         'No. An IBAN identifies a <strong>specific bank account</strong>, while a SWIFT/BIC code identifies a <strong>specific bank</strong>. For international transfers, you often need both.'),
+        ('Can I calculate an IBAN from an account number?',
+         'Yes! If you know your country\'s IBAN format and your domestic bank/account numbers, you can compute the IBAN. The check digits are calculated using the MOD-97 algorithm. Try our <a href="/">IBAN generator</a> to see how it works.'),
+        ('Why doesn\'t the United States use IBAN?',
+         'The US uses a different system (ABA routing numbers + account numbers) for domestic transfers and SWIFT codes for international wires. While US banks can process incoming IBAN payments, they don\'t issue IBANs to their customers.'),
+        ('How long is an IBAN number?',
+         'IBAN length varies by country, from 15 characters (Norway) to 34 characters (Malta, Saint Lucia). Most European IBANs are 20-27 characters long. Each country chooses its own BBAN format within the ISO 13616 framework.'),
+    ]
+    body += '<div class="faq-list">\n'
+    for q, a in faqs:
+        body += '<details class="faq-item"><summary class="faq-q">{}</summary><div class="faq-a"><p>{}</p></div></details>\n'.format(q, a)
+    body += '</div>\n'
+
+    # Internal links
+    body += '<h2>Explore IBAN Tools & Resources</h2>\n'
+    body += '<div class="card-grid card-grid-2" style="margin-top:1rem">\n'
+    body += '<a class="country-card" href="/"><div class="cc-badge">&#x1F4A0;</div><div class="cc-name">IBAN Generator</div><div class="cc-meta">Generate valid IBANs for any country — free, no sign-up</div></a>\n'
+    body += '<a class="country-card" href="/validate/"><div class="cc-badge">&#x2714;</div><div class="cc-name">IBAN Validator</div><div class="cc-meta">Check any IBAN for correctness using MOD-97</div></a>\n'
+    body += '<a class="country-card" href="/countries/"><div class="cc-badge">&#x1F30D;</div><div class="cc-name">All IBAN Countries</div><div class="cc-meta">Complete reference for 96 IBAN formats worldwide</div></a>\n'
+    body += '<a class="country-card" href="/swift-codes/"><div class="cc-badge">&#x1F4E8;</div><div class="cc-name">SWIFT/BIC Lookup</div><div class="cc-meta">Find bank BIC codes for international transfers</div></a>\n'
+    body += '</div>\n'
+
+    body += FOOT
+    return body
+
+
 def build_sitemap():
     """Generate sitemap.xml."""
     today = TODAY
@@ -911,6 +1059,7 @@ def build_sitemap():
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
         '  <url><loc>{}/</loc><lastmod>{}</lastmod><priority>1.0</priority></url>'.format(SITE, today),
+        '  <url><loc>{}/what-is-iban/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
         '  <url><loc>{}/countries/</loc><lastmod>{}</lastmod><priority>0.9</priority></url>'.format(SITE, today),
         '  <url><loc>{}/validate/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
         '  <url><loc>{}/sepa-countries/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
@@ -1138,7 +1287,7 @@ def main():
     total = 0
 
     # 1. Country pages
-    print('\n[1/8] Generating {} country pages...'.format(len(countries)))
+    print('\n[1/9] Generating {} country pages...'.format(len(countries)))
     for i, c in enumerate(countries):
         html = build_country_page(c)
         page('countries/{}'.format(c['code'].lower()), html)
@@ -1148,42 +1297,49 @@ def main():
     print('  {} country pages done'.format(len(countries)))
 
     # 2. Countries index
-    print('\n[2/8] Countries index page...')
+    print('\n[2/9] Countries index page...')
     html = build_countries_index()
     page('countries', html)
     total += 1
     print('  /countries/ done')
 
     # 3. Validator page
-    print('\n[3/8] Validator page...')
+    print('\n[3/9] Validator page...')
     html = build_validator_page()
     page('validate', html)
     total += 1
     print('  /validate/ done')
 
     # 4. SEPA page
-    print('\n[4/8] SEPA countries page...')
+    print('\n[4/9] SEPA countries page...')
     html = build_sepa_page()
     page('sepa-countries', html)
     total += 1
     print('  /sepa-countries/ done')
 
     # 5. Check digit page
-    print('\n[5/8] Check digit explanation page...')
+    print('\n[5/9] Check digit explanation page...')
     html = build_check_digit_page()
     page('iban-check-digit', html)
     total += 1
     print('  /iban-check-digit/ done')
 
+    # 5a. What-is-IBAN guide page
+    print('\n[5a/9] What-is-IBAN guide page...')
+    html = build_what_is_iban_page()
+    page('what-is-iban', html)
+    total += 1
+    print('  /what-is-iban/ done')
+
     # 6. SWIFT/BIC page
-    print('\n[6/8] SWIFT/BIC codes page...')
+    print('\n[6/9] SWIFT/BIC codes page...')
     html = build_swift_page()
     page('swift-codes', html)
     total += 1
     print('  /swift-codes/ done')
 
     # 7. Sitemap + Robots + Legal pages
-    print('\n[7/8] Sitemap, robots.txt, and legal pages...')
+    print('\n[7/9] Sitemap, robots.txt, and legal pages...')
     with open(os.path.join(SRC, 'sitemap.xml'), 'w', encoding='utf-8') as f:
         f.write(build_sitemap())
     with open(os.path.join(SRC, 'robots.txt'), 'w', encoding='utf-8') as f:
