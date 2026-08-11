@@ -148,61 +148,63 @@
       <button class="btn btn-outline btn-sm" id="btn-copy" style="display:none">&#x2398; Copiar</button>
       <span id="copy-msg" style="display:none;color:var(--green);font-weight:600;font-size:0.85rem">¡Copiado!</span>
     </div>
-
-    <!-- Full dataset detail panel -->
-    <div id="dataset-panel" class="dataset-panel" style="display:none">
-      <div class="dataset-head">
-        <span>Generated Data Set</span>
-        <span class="ds-quality">Quality <b>100/100</b></span>
-      </div>
-
-      <div class="ds-section">
-        <div class="ds-sec-title">Bank Account</div>
-        <div class="ds-grid">
-          <div class="ds-field"><span class="ds-label">IBAN</span><span class="ds-value mono" id="ds-iban">—</span></div>
-          <div class="ds-field"><span class="ds-label">SWIFT / BIC</span><span class="ds-value mono" id="ds-bic">—</span></div>
-          <div class="ds-field"><span class="ds-label">Bank</span><span class="ds-value" id="ds-bank">—</span></div>
-          <div class="ds-field"><span class="ds-label">Bank City</span><span class="ds-value" id="ds-bank-city">—</span></div>
-          <div class="ds-field"><span class="ds-label">Account Type</span><span class="ds-value" id="ds-acct-type">Personal Current Account</span></div>
-          <div class="ds-field"><span class="ds-label">Status</span><span class="ds-value valid-tag">&#x2705; Valid (MOD-97)</span></div>
-        </div>
-      </div>
-
-      <div class="ds-section">
-        <div class="ds-sec-title">Personal Information</div>
-        <div class="ds-grid">
-          <div class="ds-field"><span class="ds-label">Full Name</span><span class="ds-value" id="ds-name">—</span></div>
-          <div class="ds-field"><span class="ds-label">Date of Birth</span><span class="ds-value" id="ds-dob">—</span></div>
-          <div class="ds-field"><span class="ds-label">Age</span><span class="ds-value" id="ds-age">—</span></div>
-          <div class="ds-field"><span class="ds-label">Country</span><span class="ds-value" id="ds-country">—</span></div>
-          <div class="ds-field"><span class="ds-label">City</span><span class="ds-value" id="ds-city">—</span></div>
-          <div class="ds-field"><span class="ds-label">Address</span><span class="ds-value" id="ds-address">—</span></div>
-          <div class="ds-field"><span class="ds-label">Postcode</span><span class="ds-value" id="ds-postcode">—</span></div>
-          <div class="ds-field"><span class="ds-label">Phone</span><span class="ds-value" id="ds-phone">—</span></div>
-          <div class="ds-field"><span class="ds-label">Email</span><span class="ds-value" id="ds-email">—</span></div>
-          <div class="ds-field"><span class="ds-label">Occupation</span><span class="ds-value" id="ds-occupation">—</span></div>
-        </div>
-      </div>
-
-      <div class="ds-section">
-        <div class="ds-sec-title">Identification Documents</div>
-        <div class="ds-grid">
-          <div class="ds-field"><span class="ds-label">Passport No.</span><span class="ds-value mono" id="ds-passport">—</span></div>
-          <div class="ds-field"><span class="ds-label">National ID</span><span class="ds-value mono" id="ds-nid">—</span></div>
-          <div class="ds-field"><span class="ds-label">Driving Licence</span><span class="ds-value mono" id="ds-licence">—</span></div>
-          <div class="ds-field"><span class="ds-label">Vehicle Reg.</span><span class="ds-value mono" id="ds-vehicle">—</span></div>
-          <div class="ds-field"><span class="ds-label">Social Security</span><span class="ds-value mono" id="ds-ssn">—</span></div>
-        </div>
-      </div>
-
-      <div class="ds-actions">
-        <button class="btn btn-outline btn-sm" id="btn-ds-copy-json">&#x2398; Copy JSON</button>
-        <button class="btn btn-ghost btn-sm" id="btn-ds-download">&#x2B07; Download .json</button>
-      </div>
-      <p class="ds-note">&#x26A0; All fields are randomly generated for testing purposes only. Do not use for real-world verification.</p>
-    </div>
   </div>
 </section>
+
+<!-- ── Full Data Set Panel (below hero, keeps hero layout stable) ── -->
+<div id="dataset-wrap" class="dataset-wrap" style="display:none">
+  <div id="dataset-panel" class="dataset-panel">
+    <div class="dataset-head">
+      <span>Generated Data Set</span>
+      <span class="ds-quality">Quality <b>100/100</b></span>
+    </div>
+
+    <div class="ds-section">
+      <div class="ds-sec-title">Bank Account</div>
+      <div class="ds-grid">
+        <div class="ds-field"><span class="ds-label">IBAN</span><span class="ds-value mono" id="ds-iban">—</span></div>
+        <div class="ds-field"><span class="ds-label">SWIFT / BIC</span><span class="ds-value mono" id="ds-bic">—</span></div>
+        <div class="ds-field"><span class="ds-label">Bank</span><span class="ds-value" id="ds-bank">—</span></div>
+        <div class="ds-field"><span class="ds-label">Bank City</span><span class="ds-value" id="ds-bank-city">—</span></div>
+        <div class="ds-field"><span class="ds-label">Account Type</span><span class="ds-value" id="ds-acct-type">Personal Current Account</span></div>
+        <div class="ds-field"><span class="ds-label">Status</span><span class="ds-value valid-tag">&#x2705; Valid (MOD-97)</span></div>
+      </div>
+    </div>
+
+    <div class="ds-section">
+      <div class="ds-sec-title">Personal Information</div>
+      <div class="ds-grid">
+        <div class="ds-field"><span class="ds-label">Full Name</span><span class="ds-value" id="ds-name">—</span></div>
+        <div class="ds-field"><span class="ds-label">Date of Birth</span><span class="ds-value" id="ds-dob">—</span></div>
+        <div class="ds-field"><span class="ds-label">Age</span><span class="ds-value" id="ds-age">—</span></div>
+        <div class="ds-field"><span class="ds-label">Country</span><span class="ds-value" id="ds-country">—</span></div>
+        <div class="ds-field"><span class="ds-label">City</span><span class="ds-value" id="ds-city">—</span></div>
+        <div class="ds-field"><span class="ds-label">Address</span><span class="ds-value" id="ds-address">—</span></div>
+        <div class="ds-field"><span class="ds-label">Postcode</span><span class="ds-value" id="ds-postcode">—</span></div>
+        <div class="ds-field"><span class="ds-label">Phone</span><span class="ds-value" id="ds-phone">—</span></div>
+        <div class="ds-field"><span class="ds-label">Email</span><span class="ds-value" id="ds-email">—</span></div>
+        <div class="ds-field"><span class="ds-label">Occupation</span><span class="ds-value" id="ds-occupation">—</span></div>
+      </div>
+    </div>
+
+    <div class="ds-section">
+      <div class="ds-sec-title">Identification Documents</div>
+      <div class="ds-grid">
+        <div class="ds-field"><span class="ds-label">Passport No.</span><span class="ds-value mono" id="ds-passport">—</span></div>
+        <div class="ds-field"><span class="ds-label">National ID</span><span class="ds-value mono" id="ds-nid">—</span></div>
+        <div class="ds-field"><span class="ds-label">Driving Licence</span><span class="ds-value mono" id="ds-licence">—</span></div>
+        <div class="ds-field"><span class="ds-label">Vehicle Reg.</span><span class="ds-value mono" id="ds-vehicle">—</span></div>
+        <div class="ds-field"><span class="ds-label">Social Security</span><span class="ds-value mono" id="ds-ssn">—</span></div>
+      </div>
+    </div>
+
+    <div class="ds-actions">
+      <button class="btn btn-outline btn-sm" id="btn-ds-copy-json">&#x2398; Copy JSON</button>
+      <button class="btn btn-ghost btn-sm" id="btn-ds-download">&#x2B07; Download .json</button>
+    </div>
+    <p class="ds-note">&#x26A0; All fields are randomly generated for testing purposes only. Do not use for real-world verification.</p>
+  </div>
+</div>
 
 <!-- ── Bulk Results ────────────────────────────────────────────── -->
 <div id="bulk-result" style="display:none" class="bulk-section">
