@@ -115,6 +115,10 @@ FOOT = '''</main>
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/sitemap/">Sitemap</a>
     </div>
   </div>
 </footer>
@@ -271,9 +275,71 @@ def build_country_page(c):
     body += '</ul>\n'
     body += '<p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>\n'
 
-    # In-page mini generator note
-    body += '<h2>Generate More {} IBANs</h2>\n'.format(name)
-    body += '<p>Use our <a href="/">free IBAN generator</a> to create more test IBANs for {}. The tool runs entirely in your browser — no data is sent to any server.</p>\n'.format(name)
+    # In-page mini generator
+    body += '<h2>Generate {} IBANs for Testing</h2>\n'.format(name)
+    body += '<p>Generate valid {} IBANs right here. All generation is client-side — no data leaves your browser.</p>\n'.format(name)
+    body += '<div class="glass-panel" style="text-align:center">\n'
+    body += '<div class="quantity-row" style="max-width:320px;margin:0 auto 0.85rem">\n'
+    body += '<label for="mini-qty">Quantity</label>\n'
+    body += '<div class="quantity-control">\n'
+    body += '<input type="range" id="mini-qty" min="1" max="100" value="5">\n'
+    body += '<span class="quantity-num" id="mini-qty-val">5</span>\n'
+    body += '</div></div>\n'
+    body += '<button class="btn btn-primary" id="mini-gen" style="margin-bottom:0.85rem">&#x21bb; Generate {} IBANs</button>\n'.format(name)
+    body += '<div id="mini-results" style="text-align:left;max-height:300px;overflow-y:auto"></div>\n'
+    body += '<div style="margin-top:0.75rem;display:none" id="mini-actions">\n'
+    body += '<button class="btn btn-ghost btn-sm" id="mini-copy-all">&#x2398; Copy All</button>\n'
+    body += '<button class="btn btn-ghost btn-sm" id="mini-csv">CSV</button>\n'
+    body += '<button class="btn btn-ghost btn-sm" id="mini-json">JSON</button>\n'
+    body += '<button class="btn btn-ghost btn-sm" id="mini-txt">TXT</button>\n'
+    body += '</div></div>\n'
+
+    body += '<script src="/js/iban-core.js"></script>\n'
+    body += '<script>\n'
+    body += '(function() {\n'
+    body += '  var COUNTRY = "{}";\n'.format(code)
+    body += '  var FORMAT = "{}";\n'.format(c['bbanFormat'])
+    body += '  var results = [];\n'
+    body += '  var qty = document.getElementById("mini-qty");\n'
+    body += '  var qtyVal = document.getElementById("mini-qty-val");\n'
+    body += '  qty.addEventListener("input", function() { qtyVal.textContent = qty.value; });\n'
+    body += '  document.getElementById("mini-gen").addEventListener("click", function() {\n'
+    body += '    var n = parseInt(qty.value, 10);\n'
+    body += '    results = [];\n'
+    body += '    var html = "";\n'
+    body += '    for (var i = 0; i < n; i++) {\n'
+    body += '      var iban = IBAN.generate(COUNTRY, FORMAT);\n'
+    body += '      var fmt = IBAN.format(iban);\n'
+    body += '      results.push({raw: iban, formatted: fmt});\n'
+    body += '      html += "<div style=\\"font-family:var(--font-display);padding:0.35rem 0;border-bottom:1px solid #ffffff08;font-size:0.88rem\\">" + fmt + "</div>";\n'
+    body += '    }\n'
+    body += '    document.getElementById("mini-results").innerHTML = html;\n'
+    body += '    document.getElementById("mini-actions").style.display = "";\n'
+    body += '  });\n'
+    body += '  function download(filename, content, mime) {\n'
+    body += '    var b = new Blob([content], {type: mime + ";charset=utf-8"});\n'
+    body += '    var u = URL.createObjectURL(b);\n'
+    body += '    var a = document.createElement("a");\n'
+    body += '    a.href = u; a.download = filename;\n'
+    body += '    document.body.appendChild(a); a.click();\n'
+    body += '    document.body.removeChild(a); URL.revokeObjectURL(u);\n'
+    body += '  }\n'
+    body += '  function copyAll() {\n'
+    body += '    var t = results.map(function(r) { return r.formatted; }).join("\\n");\n'
+    body += '    navigator.clipboard.writeText(t);\n'
+    body += '  }\n'
+    body += '  document.getElementById("mini-copy-all").addEventListener("click", copyAll);\n'
+    body += '  document.getElementById("mini-csv").addEventListener("click", function() {\n'
+    body += '    download("ibans.csv", "IBAN\\n" + results.map(function(r) { return r.raw; }).join("\\n"), "text/csv");\n'
+    body += '  });\n'
+    body += '  document.getElementById("mini-json").addEventListener("click", function() {\n'
+    body += '    download("ibans.json", JSON.stringify(results.map(function(r) { return {iban: r.raw, formatted: r.formatted}; }), null, 2), "application/json");\n'
+    body += '  });\n'
+    body += '  document.getElementById("mini-txt").addEventListener("click", function() {\n'
+    body += '    download("ibans.txt", results.map(function(r) { return r.raw; }).join("\\n"), "text/plain");\n'
+    body += '  });\n'
+    body += '})();\n'
+    body += '</script>\n'
 
     body += '<h2>Frequently Asked Questions</h2>\n'
     body += '<div class="faq-list">\n'
@@ -594,6 +660,176 @@ def build_check_digit_page():
     return body
 
 
+def build_contact_page():
+    """Build the /contact/ page."""
+    title = 'Contact IBAN Easy — Get in Touch'
+    desc = 'Contact the IBAN Easy team. Questions, feedback, or suggestions about our free IBAN generator and validator tools.'
+
+    body = HEAD.format(
+        title=esc(title), desc=esc(desc),
+        canon=SITE + '/contact/',
+        og_title=esc(title), og_desc=esc(desc),
+        extra=''
+    )
+
+    body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">Contact</span></nav>\n'
+    body += '<main class="main-content prose-content">\n'
+    body += '<h1>Contact Us</h1>\n'
+    body += '<p>Have a question, suggestion, or found an issue? We\'d love to hear from you.</p>\n'
+
+    body += '<h2>Email</h2>\n'
+    body += '<p>For general inquiries, bug reports, or feature requests, email us at:</p>\n'
+    body += '<p><strong>hello@ibaneasy.com</strong></p>\n'
+
+    body += '<h2>Response Time</h2>\n'
+    body += '<p>We aim to respond within 2-3 business days. For urgent issues, please include as much detail as possible in your email.</p>\n'
+
+    body += '<h2>Before You Write</h2>\n'
+    body += '<ul>\n'
+    body += '<li><strong>IBAN questions?</strong> Check our <a href="/iban-check-digit/">Check Digits guide</a> or <a href="/countries/">country pages</a>.</li>\n'
+    body += '<li><strong>Need test IBANs?</strong> Use our <a href="/">free generator</a> — no sign-up needed.</li>\n'
+    body += '<li><strong>Privacy concerns?</strong> Read our <a href="/privacy/">Privacy Policy</a> to understand how we handle data (spoiler: we don\'t collect any).</li>\n'
+    body += '</ul>\n'
+
+    body += FOOT
+    return body
+
+
+def build_privacy_page():
+    """Build the /privacy/ page."""
+    title = 'Privacy Policy — IBAN Easy'
+    desc = 'IBAN Easy privacy policy. We do not collect, store, or transmit any personal data. All IBAN generation and validation runs entirely in your browser.'
+
+    body = HEAD.format(
+        title=esc(title), desc=esc(desc),
+        canon=SITE + '/privacy/',
+        og_title=esc(title), og_desc=esc(desc),
+        extra=''
+    )
+
+    body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">Privacy Policy</span></nav>\n'
+    body += '<main class="main-content prose-content">\n'
+    body += '<h1>Privacy Policy</h1>\n'
+    body += '<p><em>Last updated: {}</em></p>\n'.format(TODAY)
+
+    body += '<h2>1. No Data Collection</h2>\n'
+    body += '<p>IBAN Easy does <strong>not</strong> collect, store, or transmit any personal data. All IBAN generation and validation is performed entirely in your browser using JavaScript. No data is ever sent to any server.</p>\n'
+
+    body += '<h2>2. No Cookies</h2>\n'
+    body += '<p>We do not use cookies for tracking or advertising. The only data stored locally is your generation history (stored in your browser\'s localStorage), which never leaves your device.</p>\n'
+
+    body += '<h2>3. No Analytics</h2>\n'
+    body += '<p>We do not use any third-party analytics services (no Google Analytics, no tracking pixels). We may review server-side request logs (anonymized) for security and performance purposes only.</p>\n'
+
+    body += '<h2>4. Third-Party Services</h2>\n'
+    body += '<p>Our site loads Google Fonts (Space Grotesk, Inter) for typography. Google may collect usage data according to their own privacy policy when these fonts are loaded. No other third-party services are used.</p>\n'
+
+    body += '<h2>5. Security</h2>\n'
+    body += '<p>Since all processing happens client-side, there is no risk of a data breach exposing your information — we simply never have it. The site is served over HTTPS via Cloudflare.</p>\n'
+
+    body += '<h2>6. Contact</h2>\n'
+    body += '<p>For any privacy-related questions, contact us at <strong>hello@ibaneasy.com</strong>.</p>\n'
+
+    body += FOOT
+    return body
+
+
+def build_terms_page():
+    """Build the /terms/ page."""
+    title = 'Terms of Use — IBAN Easy'
+    desc = 'Terms of use for IBAN Easy. Our IBAN generator and validator are free tools for testing and development. Read our terms before using the service.'
+
+    body = HEAD.format(
+        title=esc(title), desc=esc(desc),
+        canon=SITE + '/terms/',
+        og_title=esc(title), og_desc=esc(desc),
+        extra=''
+    )
+
+    body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">Terms of Use</span></nav>\n'
+    body += '<main class="main-content prose-content">\n'
+    body += '<h1>Terms of Use</h1>\n'
+    body += '<p><em>Last updated: {}</em></p>\n'.format(TODAY)
+
+    body += '<h2>1. Acceptance of Terms</h2>\n'
+    body += '<p>By using ibaneasy.com, you agree to these terms. If you do not agree, please do not use the site.</p>\n'
+
+    body += '<h2>2. Service Description</h2>\n'
+    body += '<p>IBAN Easy provides a free online IBAN generator and validator for testing and development purposes. The service is provided "as is" without any warranty.</p>\n'
+
+    body += '<h2>3. No Financial Advice</h2>\n'
+    body += '<p>This website does not provide financial advice. The IBANs generated are <strong>mathematically valid but not real bank accounts</strong>. They must not be used for actual financial transactions, payments, or any production system involving real money.</p>\n'
+
+    body += '<h2>4. Disclaimer</h2>\n'
+    body += '<p>IBAN Easy makes no guarantees about the accuracy, completeness, or suitability of the generated data. We are not responsible for any damages resulting from the use of generated IBANs. Users are responsible for verifying any IBAN data against production bank records.</p>\n'
+
+    body += '<h2>5. Acceptable Use</h2>\n'
+    body += '<p>You agree not to:</p>\n'
+    body += '<ul>\n'
+    body += '<li>Use generated IBANs for fraud, money laundering, or any illegal activity</li>\n'
+    body += '<li>Attempt to use generated IBANs for real bank transfers</li>\n'
+    body += '<li>Scrape, overload, or attempt to disrupt the service</li>\n'
+    body += '</ul>\n'
+
+    body += '<h2>6. Changes to Terms</h2>\n'
+    body += '<p>We may update these terms at any time. Continued use of the site after changes constitutes acceptance of the new terms.</p>\n'
+
+    body += '<h2>7. Contact</h2>\n'
+    body += '<p>Questions about these terms? Email <strong>hello@ibaneasy.com</strong>.</p>\n'
+
+    body += FOOT
+    return body
+
+
+def build_sitemap_html():
+    """Build the /sitemap/ HTML page."""
+    title = 'Sitemap — IBAN Easy'
+    desc = 'Complete sitemap for ibaneasy.com. Browse all pages including country IBAN guides, tools, and informational pages.'
+
+    body = HEAD.format(
+        title=esc(title), desc=esc(desc),
+        canon=SITE + '/sitemap/',
+        og_title=esc(title), og_desc=esc(desc),
+        extra=''
+    )
+
+    body += '<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">Sitemap</span></nav>\n'
+    body += '<main class="main-content prose-content">\n'
+    body += '<h1>Sitemap</h1>\n'
+    body += '<p>Complete directory of all pages on ibaneasy.com.</p>\n'
+
+    body += '<h2>Tools</h2>\n'
+    body += '<ul>\n'
+    body += '<li><a href="/">IBAN Generator (Home)</a></li>\n'
+    body += '<li><a href="/validate/">IBAN Validator</a></li>\n'
+    body += '</ul>\n'
+
+    body += '<h2>Reference Pages</h2>\n'
+    body += '<ul>\n'
+    body += '<li><a href="/countries/">All IBAN Countries</a></li>\n'
+    body += '<li><a href="/sepa-countries/">SEPA Countries List</a></li>\n'
+    body += '<li><a href="/iban-check-digit/">How IBAN Check Digits Work</a></li>\n'
+    body += '</ul>\n'
+
+    body += '<h2>Country IBAN Guides ({})</h2>\n'.format(len(countries))
+    body += '<ul>\n'
+    for c in sorted(countries, key=lambda x: x['name']):
+        body += '<li><a href="/countries/{}/">{} IBAN ({} chars{})</a></li>\n'.format(
+            c['code'].lower(), c['name'], c['ibanLen'],
+            ' · SEPA' if c['sepa'] else '')
+    body += '</ul>\n'
+
+    body += '<h2>Information</h2>\n'
+    body += '<ul>\n'
+    body += '<li><a href="/contact/">Contact</a></li>\n'
+    body += '<li><a href="/privacy/">Privacy Policy</a></li>\n'
+    body += '<li><a href="/terms/">Terms of Use</a></li>\n'
+    body += '</ul>\n'
+
+    body += FOOT
+    return body
+
+
 def build_sitemap():
     """Generate sitemap.xml."""
     today = TODAY
@@ -605,6 +841,10 @@ def build_sitemap():
         '  <url><loc>{}/validate/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
         '  <url><loc>{}/sepa-countries/</loc><lastmod>{}</lastmod><priority>0.8</priority></url>'.format(SITE, today),
         '  <url><loc>{}/iban-check-digit/</loc><lastmod>{}</lastmod><priority>0.7</priority></url>'.format(SITE, today),
+        '  <url><loc>{}/contact/</loc><lastmod>{}</lastmod><priority>0.3</priority></url>'.format(SITE, today),
+        '  <url><loc>{}/privacy/</loc><lastmod>{}</lastmod><priority>0.3</priority></url>'.format(SITE, today),
+        '  <url><loc>{}/terms/</loc><lastmod>{}</lastmod><priority>0.3</priority></url>'.format(SITE, today),
+        '  <url><loc>{}/sitemap/</loc><lastmod>{}</lastmod><priority>0.4</priority></url>'.format(SITE, today),
     ]
     for c in sorted(countries, key=lambda x: x['name']):
         p = 0.7 if c['sepa'] else 0.5
@@ -665,14 +905,38 @@ def main():
     total += 1
     print('  /iban-check-digit/ done')
 
-    # 6. Sitemap + Robots
-    print('\n[6/6] Sitemap and robots.txt...')
+    # 6. Sitemap + Robots + Legal pages
+    print('\n[6/9] Sitemap, robots.txt, and legal pages...')
     with open(os.path.join(SRC, 'sitemap.xml'), 'w', encoding='utf-8') as f:
         f.write(build_sitemap())
     with open(os.path.join(SRC, 'robots.txt'), 'w', encoding='utf-8') as f:
         f.write(build_robots())
     total += 2
-    print('  sitemap.xml + robots.txt done')
+
+    # 7. Contact
+    print('\n[7/9] Contact page...')
+    html = build_contact_page()
+    page('contact', html)
+    total += 1
+    print('  /contact/ done')
+
+    # 8. Privacy
+    print('\n[8/9] Privacy Policy page...')
+    html = build_privacy_page()
+    page('privacy', html)
+    total += 1
+    print('  /privacy/ done')
+
+    # 9. Terms
+    print('\n[9/9] Terms of Use + HTML Sitemap...')
+    html = build_terms_page()
+    page('terms', html)
+    total += 1
+    print('  /terms/ done')
+    html = build_sitemap_html()
+    page('sitemap', html)
+    total += 1
+    print('  /sitemap/ done')
 
     print('\n=== Done: {} files generated ==='.format(total))
 
