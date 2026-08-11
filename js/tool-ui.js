@@ -36,6 +36,33 @@
   var historyClear = document.getElementById('history-clear');
   var historyCount = document.getElementById('history-count');
 
+  // Full dataset elements
+  var datasetEnable = document.getElementById('dataset-enable');
+  var datasetPanel = document.getElementById('dataset-panel');
+  var dsFields = {
+    iban: document.getElementById('ds-iban'),
+    bic: document.getElementById('ds-bic'),
+    bank: document.getElementById('ds-bank'),
+    bankCity: document.getElementById('ds-bank-city'),
+    name: document.getElementById('ds-name'),
+    dob: document.getElementById('ds-dob'),
+    age: document.getElementById('ds-age'),
+    country: document.getElementById('ds-country'),
+    city: document.getElementById('ds-city'),
+    address: document.getElementById('ds-address'),
+    postcode: document.getElementById('ds-postcode'),
+    phone: document.getElementById('ds-phone'),
+    email: document.getElementById('ds-email'),
+    occupation: document.getElementById('ds-occupation'),
+    passport: document.getElementById('ds-passport'),
+    nid: document.getElementById('ds-nid'),
+    licence: document.getElementById('ds-licence'),
+    vehicle: document.getElementById('ds-vehicle'),
+    ssn: document.getElementById('ds-ssn'),
+  };
+  var currentDataset = null;
+  var datasetEnabled = false;
+
   var countries = [];
   var selectedCountry = null;
   var currentIBANs = [];
@@ -175,6 +202,47 @@
     currentIBANs = results;
     showResults(results, c);
     addToHistory(results, c);
+
+    // Full dataset (identity + bank) for the first IBAN
+    if (datasetEnable && datasetEnable.checked) {
+      var banks = (window.Dataset && Dataset.getBanks) ? Dataset.getBanks(c.code) : null;
+      currentDataset = (window.Dataset && Dataset.generate)
+        ? Dataset.generate(c.code, results[0].raw, banks)
+        : null;
+      renderDataset();
+    } else {
+      currentDataset = null;
+      if (datasetPanel) datasetPanel.style.display = 'none';
+    }
+  }
+
+  function renderDataset() {
+    if (!datasetPanel || !currentDataset) return;
+    var d = currentDataset;
+
+    dsFields.iban.textContent = d.iban;
+    dsFields.bic.textContent = d.swiftBic || '—';
+    dsFields.bank.textContent = d.bank.bankName || '—';
+    dsFields.bankCity.textContent = d.bank.bankCity || '—';
+
+    dsFields.name.textContent = d.identity.fullName;
+    dsFields.dob.textContent = d.identity.dob;
+    dsFields.age.textContent = d.identity.age;
+    dsFields.country.textContent = d.identity.country;
+    dsFields.city.textContent = d.identity.city;
+    dsFields.address.textContent = d.identity.address;
+    dsFields.postcode.textContent = d.identity.postcode;
+    dsFields.phone.textContent = d.identity.phone;
+    dsFields.email.textContent = d.identity.email;
+    dsFields.occupation.textContent = d.identity.occupation;
+
+    dsFields.passport.textContent = d.documents.passport;
+    dsFields.nid.textContent = d.documents.nationalId;
+    dsFields.licence.textContent = d.documents.drivingLicence;
+    dsFields.vehicle.textContent = d.documents.vehicleReg;
+    dsFields.ssn.textContent = d.documents.socialSecurity;
+
+    datasetPanel.style.display = '';
   }
 
   function showResults(results, c) {
@@ -422,6 +490,24 @@
     }, 2000);
   }
 
+  // ── Full dataset copy/download ──────────────────────────────────
+  function copyDatasetJSON() {
+    if (!currentDataset) return;
+    var json = JSON.stringify(currentDataset, null, 2);
+    navigator.clipboard.writeText(json).then(function() {
+      showToast('Full data set copied!');
+    }).catch(function() {
+      fallbackCopy(json);
+    });
+  }
+
+  function downloadDataset() {
+    if (!currentDataset) return;
+    var json = JSON.stringify(currentDataset, null, 2);
+    var fname = 'iban-dataset-' + currentDataset.ibanRaw.toLowerCase() + '.json';
+    downloadFile(fname, json, 'application/json');
+  }
+
   // ── Bind events ──────────────────────────────────────────────────
   btnGenerate.addEventListener('click', generateIBANs);
 
@@ -433,6 +519,11 @@
   btnExportCSV.addEventListener('click', exportCSV);
   btnExportJSON.addEventListener('click', exportJSON);
   btnExportTXT.addEventListener('click', exportTXT);
+
+  var btnDsCopy = document.getElementById('btn-ds-copy-json');
+  if (btnDsCopy) btnDsCopy.addEventListener('click', copyDatasetJSON);
+  var btnDsDownload = document.getElementById('btn-ds-download');
+  if (btnDsDownload) btnDsDownload.addEventListener('click', downloadDataset);
 
   // Keyboard shortcut: Enter in country search selects first visible
   countrySearch.addEventListener('keydown', function(e) {
@@ -449,4 +540,5 @@
   // ── Init ─────────────────────────────────────────────────────────
   loadCountries();
   renderHistoryPanel();
+  if (window.Dataset && Dataset.loadBanks) Dataset.loadBanks(function(){});
 })();
