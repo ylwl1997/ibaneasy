@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://ibaneasy.com/countries/mu/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the IBAN format for Mauritius?", "acceptedAnswer": {"@type": "Answer", "text": "Mauritius uses a 30-character IBAN with the country code \"MU\" followed by two check digits and a 26-character BBAN. The format is <code>6!n2!n18!c</code>. The bank code occupies positions 5 to 10."}}, {"@type": "Question", "name": "Is Mauritius a SEPA country?", "acceptedAnswer": {"@type": "Answer", "text": "No, Mauritius is not a SEPA member, but uses IBAN for international transfers."}}, {"@type": "Question", "name": "How long is a Mauritius IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "A Mauritius IBAN is exactly 30 characters long. The BBAN portion accounts for 26 characters."}}, {"@type": "Question", "name": "How do I find my Mauritius IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "Your IBAN is printed on your bank statement, available in your online banking portal, or can be obtained from your bank. It typically appears alongside your BIC/SWIFT code for international transfers."}}, {"@type": "Question", "name": "Can I generate a valid Mauritius IBAN for testing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Use the IBAN generator on this page or visit the <a href=\"/\">IBAN Easy homepage</a> to generate mathematically valid IBANs for any supported country. All generation is client-side and private."}}]}</script>
 </head>
@@ -27,6 +28,11 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -64,9 +70,9 @@
 </table></div><h2>Example Mauritius IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> Mauritius IBANs for testing:</p>
 <ul>
-<li><code>MU53 2022 4244 K7SI X2T1 G1G4 4QM8 QN</code></li>
-<li><code>MU24 2766 3222 2SLZ RJM7 E08A 2D8C 72</code></li>
-<li><code>MU34 6116 2071 ZUFD 2T3P B9M9 3FKF KD</code></li>
+<li><code>MU83 8192 1673 8CRO FQOE BCZC TMME YD</code></li>
+<li><code>MU03 8876 2732 QIQ8 NS60 6KF3 L570 CD</code></li>
+<li><code>MU87 0871 7822 VT2U QUZL SVGS 4996 V6</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
 <h2>Generate Mauritius IBANs for Testing</h2>
@@ -164,6 +170,7 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
