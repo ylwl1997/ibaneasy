@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is an IBAN? — Complete Guide to International Bank Account Numbers</title>
+<meta name="description" content="Learn what an IBAN is, how it works, its structure, and why it matters for international banking. Covers IBAN format, country codes, check digits, SEPA, and how to find your IBAN.">
+<link rel="canonical" href="https://ibaneasy.com/what-is-iban/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IBAN Easy">
+<meta property="og:title" content="What is an IBAN? — Complete Guide to International Bank Account Numbers">
+<meta property="og:description" content="Learn what an IBAN is, how it works, its structure, and why it matters for international banking. Covers IBAN format, country codes, check digits, SEPA, and how to find your IBAN.">
+<meta property="og:url" content="https://ibaneasy.com/what-is-iban/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
+<link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+<div class="app-container">
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="/"><span class="lg-accent">IBAN</span><span class="lg-dim"> Easy</span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/what-is-iban/">What is IBAN</a>
+      <a href="/countries/">Countries</a>
+      <a href="/validate/">Validator</a>
+      <a href="/sepa-countries/">SEPA</a>
+      <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="crumb-sep">/</span><span class="crumb-current">What is an IBAN?</span></nav>
+<main class="main-content prose-content">
+<h1>What is an IBAN? The Complete Guide to International Bank Account Numbers</h1>
+<p>An <strong>IBAN</strong> (International Bank Account Number) is a standardised system for identifying bank accounts across national borders. Developed in 1997, IBANs now span 96 countries and territories, making international money transfers safer, faster, and more reliable.</p>
+<p>Every IBAN contains a two-letter country code, two check digits, and a domestic bank account identifier (BBAN). Together, these elements uniquely identify a specific bank account anywhere in the world. Whether you're sending money to Germany, receiving payments from France, or setting up direct debits across SEPA countries, the IBAN is the universal key to cross-border banking.</p>
+<h2>IBAN Structure: How an IBAN is Built</h2>
+<p>An IBAN consists of up to 34 alphanumeric characters, divided into two main parts:</p>
+<h3>1. Country Code (2 letters)</h3>
+<p>The first two characters are the ISO 3166-1 alpha-2 country code. For example:</p>
+<ul>
+<li><strong>DE</strong> — Germany</li>
+<li><strong>FR</strong> — France</li>
+<li><strong>GB</strong> — United Kingdom</li>
+<li><strong>ES</strong> — Spain</li>
+<li><strong>BR</strong> — Brazil</li>
+</ul>
+<h3>2. Check Digits (2 digits)</h3>
+<p>Positions 3 and 4 are the check digits, computed using the MOD-97 algorithm (ISO 7064). These two digits catch 99.94% of typing errors. <a href="/iban-check-digit/">Learn how MOD-97 works →</a></p>
+<h3>3. BBAN — Basic Bank Account Number (up to 30 characters)</h3>
+<p>The remaining characters form the BBAN, which varies by country. The BBAN typically contains:</p>
+<ul>
+<li><strong>Bank code</strong>: Identifies the financial institution (e.g., sort code in the UK, BLZ in Germany)</li>
+<li><strong>Branch code</strong>: Identifies a specific branch (used in some countries like France and Italy)</li>
+<li><strong>Account number</strong>: The individual bank account</li>
+</ul>
+<h2>IBAN Examples by Country</h2>
+<p>Here are examples of IBANs from major countries, showing how the format varies:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Country</th><th>IBAN Length</th><th>Example</th><th>SEPA</th></tr></thead>
+<tbody>
+<tr><td><a href="/countries/de/">Germany</a></td><td>22</td><td><code>DE89 3704 0044 0532 0130 00</code></td><td>&#x2705;</td></tr>
+<tr><td><a href="/countries/fr/">France</a></td><td>27</td><td><code>FR14 2004 1010 0505 0001 3M02 606</code></td><td>&#x2705;</td></tr>
+<tr><td><a href="/countries/gb/">United Kingdom</a></td><td>22</td><td><code>GB29 NWBK 6016 1331 9268 19</code></td><td>&#x2705;</td></tr>
+<tr><td><a href="/countries/es/">Spain</a></td><td>24</td><td><code>ES91 2100 0418 4502 0005 1332</code></td><td>&#x2705;</td></tr>
+<tr><td><a href="/countries/it/">Italy</a></td><td>27</td><td><code>IT60 X054 2811 1010 0000 0123 456</code></td><td>&#x2705;</td></tr>
+<tr><td><a href="/countries/nl/">Netherlands</a></td><td>18</td><td><code>NL91 ABNA 0417 1643 00</code></td><td>&#x2705;</td></tr>
+<tr><td><a href="/countries/ch/">Switzerland</a></td><td>21</td><td><code>CH93 0076 2011 6238 5295 7</code></td><td>&#x2705;</td></tr>
+<tr><td><a href="/countries/pl/">Poland</a></td><td>28</td><td><code>PL61 1090 1014 0000 0712 1981 2874</code></td><td>&#x2705;</td></tr>
+<tr><td><a href="/countries/br/">Brazil</a></td><td>29</td><td><code>BR97 0036 0305 0000 1000 9795 493P 1</code></td><td>&#x274C;</td></tr>
+<tr><td><a href="/countries/ae/">UAE</a></td><td>23</td><td><code>AE07 0331 2345 6789 0123 456</code></td><td>&#x274C;</td></tr>
+</tbody>
+</table></div>
+<h2>History: Why Was IBAN Created?</h2>
+<p>Before IBAN, international bank transfers were error-prone. Different countries used different account numbering systems, and there was no standard way to identify accounts across borders. Routing errors were common, transfers were slow, and banks charged high fees for manual processing.</p>
+<p>The <strong>European Committee for Banking Standards (ECBS)</strong> developed the IBAN system in 1997 to solve these problems. It was later adopted as the international standard <strong>ISO 13616</strong>. The European Union mandated IBAN usage through the <strong>Payment Services Directive (PSD)</strong>, and today all SEPA transfers require both IBAN and BIC/SWIFT codes.</p>
+<h2>Which Countries Use IBAN?</h2>
+<p>As of 2026, <strong>96 countries and territories</strong> use the IBAN system. These include:</p>
+<ul>
+<li><strong>All 36 SEPA countries</strong>: Every EU/EEA member state plus Switzerland, Monaco, San Marino, Andorra, Vatican City, and UK crown dependencies</li>
+<li><strong>60+ non-SEPA countries</strong>: Including Brazil, Turkey, UAE, Saudi Arabia, Pakistan, Costa Rica, Dominican Republic, and many Middle Eastern and African nations</li>
+</ul>
+<p>Notable countries that <strong>do not</strong> use IBAN include the United States, Canada, Australia, China, and Japan — though they can still <em>receive</em> IBAN payments.</p>
+<p><a href="/countries/">Browse the complete list of IBAN countries →</a></p>
+<h2>IBAN vs SWIFT/BIC: What's the Difference?</h2>
+<p>People often confuse IBANs and SWIFT/BIC codes, but they serve different purposes:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Feature</th><th>IBAN</th><th>SWIFT/BIC</th></tr></thead>
+<tbody>
+<tr><td><strong>Purpose</strong></td><td>Identifies a specific bank account</td><td>Identifies a specific bank</td></tr>
+<tr><td><strong>Format</strong></td><td>Up to 34 alphanumeric characters</td><td>8 or 11 alphanumeric characters</td></tr>
+<tr><td><strong>Contains</strong></td><td>Country code + check digits + bank/account details</td><td>Bank code + country code + location + branch</td></tr>
+<tr><td><strong>Example</strong></td><td><code>DE89 3704 0044 0532 0130 00</code></td><td><code>DEUTDEFFXXX</code></td></tr>
+<tr><td><strong>When needed</strong></td><td>SEPA transfers, most international wires</td><td>International wires, interbank messages</td></tr>
+</tbody>
+</table></div>
+<p>For international transfers, you typically need <strong>both</strong> the recipient's IBAN and the bank's BIC/SWIFT code. <a href="/swift-codes/">Look up SWIFT/BIC codes →</a></p>
+<h2>How to Find Your IBAN</h2>
+<p>You can find your IBAN in several ways:</p>
+<ol>
+<li><strong>Bank statement</strong>: Most banks print your IBAN on every statement</li>
+<li><strong>Online banking</strong>: Log into your bank's website or app — your IBAN is usually displayed in your account details</li>
+<li><strong>Bank card</strong>: Some countries print the IBAN on debit/credit cards</li>
+<li><strong>Contact your bank</strong>: Customer service can provide your IBAN</li>
+<li><strong>IBAN calculator</strong>: If you know your domestic bank code and account number, you can calculate your IBAN. Try our <a href="/">IBAN generator</a></li>
+</ol>
+<h2>Frequently Asked Questions</h2>
+<div class="faq-list">
+<details class="faq-item"><summary class="faq-q">What does IBAN stand for?</summary><div class="faq-a"><p>IBAN stands for <strong>International Bank Account Number</strong>. It is a standardised format for identifying bank accounts internationally, defined by ISO 13616.</p></div></details>
+<details class="faq-item"><summary class="faq-q">Is IBAN the same as an account number?</summary><div class="faq-a"><p>No. An IBAN <em>contains</em> your account number but adds a country code, check digits, and bank/branch identifiers. Your domestic account number is just one part of the full IBAN.</p></div></details>
+<details class="faq-item"><summary class="faq-q">Do I need an IBAN to receive money from abroad?</summary><div class="faq-a"><p>If you live in an IBAN country: <strong>yes</strong>. Senders in SEPA countries and most international banks will ask for your IBAN. If you live outside IBAN countries (US, Canada, Australia, etc.), you'll use your domestic account number plus a SWIFT/BIC code instead.</p></div></details>
+<details class="faq-item"><summary class="faq-q">Are IBAN and SWIFT code the same thing?</summary><div class="faq-a"><p>No. An IBAN identifies a <strong>specific bank account</strong>, while a SWIFT/BIC code identifies a <strong>specific bank</strong>. For international transfers, you often need both.</p></div></details>
+<details class="faq-item"><summary class="faq-q">Can I calculate an IBAN from an account number?</summary><div class="faq-a"><p>Yes! If you know your country's IBAN format and your domestic bank/account numbers, you can compute the IBAN. The check digits are calculated using the MOD-97 algorithm. Try our <a href="/">IBAN generator</a> to see how it works.</p></div></details>
+<details class="faq-item"><summary class="faq-q">Why doesn't the United States use IBAN?</summary><div class="faq-a"><p>The US uses a different system (ABA routing numbers + account numbers) for domestic transfers and SWIFT codes for international wires. While US banks can process incoming IBAN payments, they don't issue IBANs to their customers.</p></div></details>
+<details class="faq-item"><summary class="faq-q">How long is an IBAN number?</summary><div class="faq-a"><p>IBAN length varies by country, from 15 characters (Norway) to 34 characters (Malta, Saint Lucia). Most European IBANs are 20-27 characters long. Each country chooses its own BBAN format within the ISO 13616 framework.</p></div></details>
+</div>
+<h2>Explore IBAN Tools & Resources</h2>
+<div class="card-grid card-grid-2" style="margin-top:1rem">
+<a class="country-card" href="/"><div class="cc-badge">&#x1F4A0;</div><div class="cc-name">IBAN Generator</div><div class="cc-meta">Generate valid IBANs for any country — free, no sign-up</div></a>
+<a class="country-card" href="/validate/"><div class="cc-badge">&#x2714;</div><div class="cc-name">IBAN Validator</div><div class="cc-meta">Check any IBAN for correctness using MOD-97</div></a>
+<a class="country-card" href="/countries/"><div class="cc-badge">&#x1F30D;</div><div class="cc-name">All IBAN Countries</div><div class="cc-meta">Complete reference for 96 IBAN formats worldwide</div></a>
+<a class="country-card" href="/swift-codes/"><div class="cc-badge">&#x1F4E8;</div><div class="cc-name">SWIFT/BIC Lookup</div><div class="cc-meta">Find bank BIC codes for international transfers</div></a>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><span class="fb-accent">IBAN</span><span class="fb-dim"> Easy</span></div>
+      <p class="footer-note">Free online IBAN tools. All generation and validation runs client-side. No data is collected or stored. Generated IBANs are for testing only.</p>
+    </div>
+    <div class="footer-links">
+      <a href="/">IBAN Generator</a>
+      <a href="/what-is-iban/">What is an IBAN?</a>
+      <a href="/countries/">All Countries</a>
+      <a href="/validate/">Validator</a>
+      <a href="/sepa-countries/">SEPA Countries</a>
+      <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/sitemap/">Sitemap</a>
+    </div>
+  </div>
+</footer>
+</div><!-- /app-container -->
+</body>
+</html>
