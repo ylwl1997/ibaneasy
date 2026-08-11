@@ -1016,6 +1016,148 @@ p {
   line-height: 1.5;
 }
 
+/* ── Full Data Set Toggle ───────────────────────────────────────── */
+.dataset-toggle-row {
+  margin-bottom: 0.85rem;
+}
+.dataset-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  user-select: none;
+}
+.dataset-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.dt-track {
+  width: 40px;
+  height: 22px;
+  border-radius: 11px;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  position: relative;
+  transition: background 0.2s var(--ease-out);
+  flex-shrink: 0;
+}
+.dt-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: transform 0.2s var(--ease-out), background 0.2s var(--ease-out);
+}
+.dataset-toggle input:checked + .dt-track {
+  background: var(--accent-subtle);
+  border-color: var(--border-active);
+}
+.dataset-toggle input:checked + .dt-track .dt-thumb {
+  transform: translateX(18px);
+  background: var(--accent-light);
+}
+.dt-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.dt-icon { font-size: 1rem; }
+.dt-hint {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+
+/* ── Data Set Panel ─────────────────────────────────────────────── */
+.dataset-panel {
+  margin-top: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  padding: 1.1rem;
+  text-align: left;
+}
+.dataset-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+.ds-quality {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+.ds-quality b {
+  color: var(--green);
+  font-size: 0.9rem;
+}
+.ds-section {
+  margin-bottom: 0.9rem;
+}
+.ds-sec-title {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-light);
+  margin-bottom: 0.45rem;
+}
+.ds-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem 0.9rem;
+}
+.ds-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.32rem 0;
+  border-bottom: 1px dashed var(--border);
+  min-width: 0;
+}
+.ds-label {
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ds-value {
+  color: var(--text);
+  font-size: 0.8rem;
+  text-align: right;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+.ds-value.mono { font-family: var(--font-display); letter-spacing: 0.02em; }
+.valid-tag { color: var(--green); font-size: 0.76rem; }
+.ds-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  flex-wrap: wrap;
+}
+.ds-note {
+  margin-top: 0.6rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
 /* ── Bulk Results ───────────────────────────────────────────────── */
 .bulk-section {
   max-width: var(--max-width);
