@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://ibaneasy.com/countries/tr/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the IBAN format for Turkey?", "acceptedAnswer": {"@type": "Answer", "text": "Turkey uses a 26-character IBAN with the country code \"TR\" followed by two check digits and a 22-character BBAN. The format is <code>5!n17!c</code>. The bank code occupies positions 5 to 9."}}, {"@type": "Question", "name": "Is Turkey a SEPA country?", "acceptedAnswer": {"@type": "Answer", "text": "No, Turkey is not a SEPA member, but uses IBAN for international transfers."}}, {"@type": "Question", "name": "How long is a Turkey IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "A Turkey IBAN is exactly 26 characters long. The BBAN portion accounts for 22 characters."}}, {"@type": "Question", "name": "How do I find my Turkey IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "Your IBAN is printed on your bank statement, available in your online banking portal, or can be obtained from your bank. It typically appears alongside your BIC/SWIFT code for international transfers."}}, {"@type": "Question", "name": "Can I generate a valid Turkey IBAN for testing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Use the IBAN generator on this page or visit the <a href=\"/\">IBAN Easy homepage</a> to generate mathematically valid IBANs for any supported country. All generation is client-side and private."}}]}</script>
 </head>
@@ -27,6 +28,11 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -61,9 +67,9 @@
 </table></div><h2>Example Turkey IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> Turkey IBANs for testing:</p>
 <ul>
-<li><code>TR70 2479 69AY QF6D 9VRR 15FT S7</code></li>
-<li><code>TR41 9999 6LFG AMYD FTXT FVX3 KF</code></li>
-<li><code>TR70 2595 2RWD 4JBH 6LMJ Q29Y PR</code></li>
+<li><code>TR51 7837 2FSC 6DMP W3DP 5OX8 CA</code></li>
+<li><code>TR68 4440 8C1S DRDR I1Z8 4PXC 1V</code></li>
+<li><code>TR85 2529 5L1O X0BP VY7P 0DJZ QA</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
 <h2>Generate Turkey IBANs for Testing</h2>
@@ -148,6 +154,28 @@
 <li><a href="/countries/iq/">Iraq IBAN (23 chars)</a></li>
 <li><a href="/countries/jo/">Jordan IBAN (30 chars)</a></li>
 </ul>
+<h2>Major Bank BIC/SWIFT Codes in Turkey</h2>
+<p>BIC (Bank Identifier Code) / SWIFT codes for major banks in Turkey. These codes are used for international wire transfers alongside the IBAN.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>BIC Code</th><th>Bank Name</th><th>City</th></tr></thead>
+<tbody>
+<tr><td><code class="swift-bic-code">ADABTRIS</code></td><td>Adabank</td><td>Istanbul</td></tr>
+<tr><td><code class="swift-bic-code">AKBKTRIS</code></td><td>Akbank</td><td>Istanbul</td></tr>
+<tr><td><code class="swift-bic-code">DENITRIS</code></td><td>DenizBank</td><td>Istanbul</td></tr>
+<tr><td><code class="swift-bic-code">GARATRIS</code></td><td>Garanti BBVA</td><td>Istanbul</td></tr>
+<tr><td><code class="swift-bic-code">INGBTRIS</code></td><td>ING Bank Turkey</td><td>Istanbul</td></tr>
+<tr><td><code class="swift-bic-code">FINATRIS</code></td><td>QNB Finansbank</td><td>Istanbul</td></tr>
+<tr><td><code class="swift-bic-code">TEKFTRIS</code></td><td>Tekfenbank</td><td>Istanbul</td></tr>
+<tr><td><code class="swift-bic-code">TNBKTRIS</code></td><td>Turkish Bank</td><td>Istanbul</td></tr>
+<tr><td><code class="swift-bic-code">TCMBTR2A</code></td><td>Türkiye Cumhuriyet Merkez Bankası</td><td>Ankara</td></tr>
+<tr><td><code class="swift-bic-code">TCZBTR2A</code></td><td>Türkiye Cumhuriyeti Ziraat Bankası</td><td>Ankara</td></tr>
+<tr><td><code class="swift-bic-code">HALKTRI2</code></td><td>Türkiye Halk Bankası</td><td>Ankara</td></tr>
+<tr><td><code class="swift-bic-code">TVBATR2A</code></td><td>Türkiye Vakıflar Bankası</td><td>Istanbul</td></tr>
+<tr><td><code class="swift-bic-code">ISBKTRIS</code></td><td>Türkiye İş Bankası</td><td>Istanbul</td></tr>
+<tr><td><code class="swift-bic-code">VAFBTRIS</code></td><td>Vakıf Katılım Bankası</td><td>Istanbul</td></tr>
+<tr><td><code class="swift-bic-code">YAPITRIS</code></td><td>Yapı Kredi Bankası</td><td>Istanbul</td></tr>
+</tbody>
+</table></div>
 </main>
 <footer class="site-footer">
   <div class="footer-inner">
@@ -161,6 +189,7 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
