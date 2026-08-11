@@ -1,165 +1,452 @@
-// tool-ui.js — Interactive UI for the IBAN generator on the homepage
+// tool-ui.js — Interactive UI for IBAN generator on homepage
+// Features: searchable country selector, quantity slider, export, history, format legend
 (function() {
   'use strict';
 
-  var select = document.getElementById('country-select');
-  var display = document.getElementById('iban-display');
+  // ── DOM refs ─────────────────────────────────────────────────────
+  var countryButton = document.getElementById('country-button');
+  var countryFlag = document.getElementById('country-flag');
+  var countryLabel = document.getElementById('country-label');
+  var countryMenu = document.getElementById('country-menu');
+  var countrySearch = document.getElementById('country-search');
+  var countryList = document.getElementById('country-list');
+
+  var quantitySlider = document.getElementById('quantity-slider');
+  var quantityValue = document.getElementById('quantity-value');
+
   var btnGenerate = document.getElementById('btn-generate');
-  var btnBulk = document.getElementById('btn-bulk');
+  var ibanDisplay = document.getElementById('iban-display');
+  var ibanLength = document.getElementById('iban-length');
+  var ibanStructure = document.getElementById('iban-structure');
+  var ibanFeedback = document.getElementById('iban-feedback');
+  var singleResult = document.getElementById('single-result');
   var btnCopy = document.getElementById('btn-copy');
   var copyMsg = document.getElementById('copy-msg');
 
-  var countries = [];
-  var currentIBAN = '';
+  var bulkResult = document.getElementById('bulk-result');
+  var bulkList = document.getElementById('bulk-list');
+  var btnCopyAll = document.getElementById('btn-copy-all');
+  var btnExportCSV = document.getElementById('btn-export-csv');
+  var btnExportJSON = document.getElementById('btn-export-json');
+  var btnExportTXT = document.getElementById('btn-export-txt');
 
-  // ── Load country data ──────────────────────────────────────────
+  var historyToggle = document.getElementById('history-toggle');
+  var historyPanel = document.getElementById('history-panel');
+  var historyItems = document.getElementById('history-items');
+  var historyClear = document.getElementById('history-clear');
+  var historyCount = document.getElementById('history-count');
+
+  var countries = [];
+  var selectedCountry = null;
+  var currentIBANs = [];
+  var HISTORY_KEY = 'ibaneasy_history';
+  var MAX_HISTORY = 30;
+
+  // ── Flag emoji converter ─────────────────────────────────────────
+  function countryToFlag(code) {
+    return String.fromCodePoint(0x1F1E6 - 65 + code.charCodeAt(0)) +
+           String.fromCodePoint(0x1F1E6 - 65 + code.charCodeAt(1));
+  }
+
+  // ── Load countries ───────────────────────────────────────────────
   function loadCountries() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '/iban_countries.json', true);
     xhr.onload = function() {
       if (xhr.status === 200) {
         countries = JSON.parse(xhr.responseText);
-        populateSelect();
+        countries.sort(function(a, b) {
+          if (a.sepa !== b.sepa) return a.sepa ? -1 : 1;
+          return a.name.localeCompare(b.name);
+        });
+        buildCountryList();
+        // Default to Germany
+        var de = countries.filter(function(c) { return c.code === 'DE'; })[0];
+        if (de) selectCountry(de);
       }
-    };
-    xhr.onerror = function() {
-      select.innerHTML = '<option value="">Failed to load countries</option>';
     };
     xhr.send();
   }
 
-  function populateSelect() {
-    // Sort: SEPA first, then alphabetically
-    countries.sort(function(a, b) {
-      if (a.sepa !== b.sepa) return a.sepa ? -1 : 1;
-      return a.name.localeCompare(b.name);
-    });
-
-    var html = '<option value="">-- Select a country --</option>';
-    var currentGroup = '';
-
+  // ── Build country dropdown list ──────────────────────────────────
+  function buildCountryList() {
+    var html = '';
     for (var i = 0; i < countries.length; i++) {
       var c = countries[i];
-      var group = c.continent;
-      if (c.sepa && group === 'Europe') group = 'SEPA (Europe)';
-      else if (c.sepa) group = 'SEPA (' + group + ')';
-      else group = 'Non-SEPA (' + group + ')';
+      var flag = countryToFlag(c.code);
+      var sepaMark = c.sepa ? ' <span class="co-tag co-tag-sepa">SEPA</span>' : '';
+      html += '<button class="country-option" type="button" data-index="' + i + '">' +
+        '<span class="co-flag">' + flag + '</span>' +
+        '<span class="co-name">' + c.name + sepaMark + '</span>' +
+        '<span class="co-code">' + c.code + '</span>' +
+      '</button>';
+    }
+    countryList.innerHTML = html;
 
-      if (group !== currentGroup) {
-        if (currentGroup !== '') html += '</optgroup>';
-        html += '<optgroup label="' + group + '">';
-        currentGroup = group;
+    // Click handlers
+    var options = countryList.querySelectorAll('.country-option');
+    for (var j = 0; j < options.length; j++) {
+      (function(idx) {
+        options[j].addEventListener('click', function() {
+          selectCountry(countries[idx]);
+          closeCountryMenu();
+        });
+      })(j);
+    }
+  }
+
+  function selectCountry(c) {
+    selectedCountry = c;
+    countryFlag.textContent = countryToFlag(c.code);
+    countryLabel.textContent = c.name + ' (' + c.code + ')';
+    countryLabel.className = '';
+  }
+
+  // ── Country menu open/close ──────────────────────────────────────
+  function openCountryMenu() {
+    countryMenu.classList.add('open');
+    countryButton.setAttribute('aria-expanded', 'true');
+    countrySearch.value = '';
+    filterCountries('');
+    setTimeout(function() { countrySearch.focus(); }, 100);
+  }
+
+  function closeCountryMenu() {
+    countryMenu.classList.remove('open');
+    countryButton.setAttribute('aria-expanded', 'false');
+  }
+
+  function filterCountries(q) {
+    var opts = countryList.querySelectorAll('.country-option');
+    var ql = q.toLowerCase();
+    for (var i = 0; i < opts.length; i++) {
+      var text = opts[i].textContent.toLowerCase();
+      opts[i].style.display = text.indexOf(ql) !== -1 ? '' : 'none';
+    }
+  }
+
+  countryButton.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (countryMenu.classList.contains('open')) {
+      closeCountryMenu();
+    } else {
+      openCountryMenu();
+    }
+  });
+
+  countrySearch.addEventListener('input', function() {
+    filterCountries(countrySearch.value);
+  });
+
+  countrySearch.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeCountryMenu();
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!countryMenu.contains(e.target) && e.target !== countryButton && !countryButton.contains(e.target)) {
+      closeCountryMenu();
+    }
+  });
+
+  // ── Quantity slider ──────────────────────────────────────────────
+  quantitySlider.addEventListener('input', function() {
+    quantityValue.textContent = quantitySlider.value;
+  });
+
+  // ── Generate ─────────────────────────────────────────────────────
+  function generateIBANs() {
+    if (!selectedCountry) {
+      ibanDisplay.innerHTML = '<span class="placeholder">Select a country and click Generate</span>';
+      return;
+    }
+
+    var count = parseInt(quantitySlider.value, 10);
+    var c = selectedCountry;
+    var results = [];
+
+    for (var i = 0; i < count; i++) {
+      var iban = IBAN.generate(c.code, c.bbanFormat);
+      results.push({
+        raw: iban,
+        formatted: IBAN.format(iban)
+      });
+    }
+
+    currentIBANs = results;
+    showResults(results, c);
+    addToHistory(results, c);
+  }
+
+  function showResults(results, c) {
+    // Single result display (first IBAN)
+    var first = results[0];
+    ibanDisplay.textContent = first.formatted;
+    ibanDisplay.classList.add('generated');
+    ibanLength.textContent = c.ibanLen + ' characters';
+    ibanStructure.textContent = c.bbanFormat;
+    btnCopy.style.display = 'inline-flex';
+    copyMsg.style.display = 'none';
+    singleResult.style.display = '';
+
+    // Show format breakdown if we have bank/branch/account info
+    if (c.bankStart && c.bankLen) {
+      var parts = IBAN.parse(first.raw);
+      if (parts) {
+        var bban = parts.bban;
+        var bankPart = bban.slice(c.bankStart - 5, c.bankStart - 5 + c.bankLen);
+        var accPart = bban.slice(c.accountStart - 5, c.accountStart - 5 + c.accountLen);
+        var legendHtml = '<span style="color:var(--accent-light)">' + parts.country + '</span> ' +
+          '<span style="color:var(--green)">' + parts.check + '</span> ';
+        if (c.branchStart && c.branchLen) {
+          var branchPart = bban.slice(c.branchStart - 5, c.branchStart - 5 + c.branchLen);
+          legendHtml += '<span style="color:var(--gold)">' + bankPart + '</span> ' +
+            '<span style="color:var(--purple)">' + branchPart + '</span> ';
+        } else {
+          legendHtml += '<span style="color:var(--gold)">' + bankPart + '</span> ';
+        }
+        legendHtml += '<span style="color:var(--text-secondary)">' + accPart + '</span>';
+        ibanFeedback.innerHTML = legendHtml;
+        ibanFeedback.style.display = '';
       }
-      html += '<option value="' + c.code + '" data-format="' + c.bbanFormat + '">' +
-              c.code + ' — ' + c.name + ' (' + c.ibanLen + ' chars)</option>';
-    }
-    html += '</optgroup>';
-    select.innerHTML = html;
-  }
-
-  // ── Generate ───────────────────────────────────────────────────
-  function generateOne() {
-    var code = select.value;
-    if (!code) {
-      display.textContent = 'Select a country and click Generate';
-      display.classList.remove('generated');
-      btnCopy.style.display = 'none';
-      return;
     }
 
-    var option = select.options[select.selectedIndex];
-    var format = option.getAttribute('data-format');
-    currentIBAN = IBAN.generate(code, format);
-    display.textContent = IBAN.format(currentIBAN);
-    display.classList.add('generated');
-    btnCopy.style.display = 'inline-flex';
-    copyMsg.style.display = 'none';
-  }
+    // Bulk result
+    if (results.length > 1) {
+      var listHtml = '';
+      for (var i = 0; i < results.length; i++) {
+        listHtml += '<div class="bulk-row" data-idx="' + i + '">' +
+          '<span class="bulk-iban">' + results[i].formatted + '</span>' +
+          '<button class="bulk-copy-one" data-idx="' + i + '" title="Copy">&#x2398;</button>' +
+        '</div>';
+      }
+      bulkList.innerHTML = listHtml;
+      bulkResult.style.display = '';
 
-  function generateBulk() {
-    var code = select.value;
-    if (!code) {
-      display.textContent = 'Select a country first';
-      return;
-    }
-
-    var option = select.options[select.selectedIndex];
-    var format = option.getAttribute('data-format');
-    var lines = [];
-    for (var i = 0; i < 10; i++) {
-      lines.push(IBAN.format(IBAN.generate(code, format)));
-    }
-    currentIBAN = lines.join('\n');
-    display.textContent = currentIBAN;
-    display.classList.add('generated');
-    display.style.whiteSpace = 'pre';
-    display.style.fontSize = '1rem';
-    display.style.textAlign = 'left';
-    btnCopy.style.display = 'inline-flex';
-    copyMsg.style.display = 'none';
-  }
-
-  function resetDisplay() {
-    if (display.style.whiteSpace === 'pre') {
-      display.style.whiteSpace = '';
-      display.style.fontSize = '';
-      display.style.textAlign = '';
+      // Per-row copy buttons
+      var copyBtns = bulkList.querySelectorAll('.bulk-copy-one');
+      for (var j = 0; j < copyBtns.length; j++) {
+        (function(idx) {
+          copyBtns[j].addEventListener('click', function() {
+            copySingle(results[idx].formatted);
+          });
+        })(j);
+      }
+    } else {
+      bulkResult.style.display = 'none';
     }
   }
 
-  // ── Copy ───────────────────────────────────────────────────────
-  function copyToClipboard() {
-    if (!currentIBAN) return;
-    navigator.clipboard.writeText(currentIBAN).then(function() {
-      copyMsg.style.display = 'inline';
-      setTimeout(function() { copyMsg.style.display = 'none'; }, 2000);
+  // ── Copy ─────────────────────────────────────────────────────────
+  function copySingle(text) {
+    navigator.clipboard.writeText(text).then(function() {
+      showToast('Copied!');
     }).catch(function() {
-      // Fallback for older browsers
-      var ta = document.createElement('textarea');
-      ta.value = currentIBAN;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      copyMsg.style.display = 'inline';
-      setTimeout(function() { copyMsg.style.display = 'none'; }, 2000);
+      fallbackCopy(text);
     });
   }
 
-  // ── FAQ Accordion ──────────────────────────────────────────────
-  function initFAQ() {
-    var items = document.querySelectorAll('.faq-item');
-    for (var i = 0; i < items.length; i++) {
-      (function(item) {
-        var q = item.querySelector('.faq-q');
-        q.addEventListener('click', function() {
-          item.classList.toggle('open');
-        });
-      })(items[i]);
-    }
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('Copied!');
   }
 
-  // ── Bind events ────────────────────────────────────────────────
-  btnGenerate.addEventListener('click', function() {
-    resetDisplay();
-    generateOne();
+  function copyAll() {
+    if (!currentIBANs.length) return;
+    var text = currentIBANs.map(function(r) { return r.formatted; }).join('\n');
+    navigator.clipboard.writeText(text).then(function() {
+      showToast('All ' + currentIBANs.length + ' IBANs copied!');
+    }).catch(function() {
+      fallbackCopy(text);
+    });
+  }
+
+  // ── Export ───────────────────────────────────────────────────────
+  function exportCSV() {
+    if (!currentIBANs.length) return;
+    var lines = ['IBAN'];
+    for (var i = 0; i < currentIBANs.length; i++) {
+      lines.push(currentIBANs[i].formatted.replace(/\s/g, ''));
+    }
+    downloadFile('ibans.csv', lines.join('\n'), 'text/csv');
+  }
+
+  function exportJSON() {
+    if (!currentIBANs.length) return;
+    var arr = currentIBANs.map(function(r) {
+      return { iban: r.raw, formatted: r.formatted };
+    });
+    downloadFile('ibans.json', JSON.stringify(arr, null, 2), 'application/json');
+  }
+
+  function exportTXT() {
+    if (!currentIBANs.length) return;
+    var text = currentIBANs.map(function(r) { return r.raw; }).join('\n');
+    downloadFile('ibans.txt', text, 'text/plain');
+  }
+
+  function downloadFile(filename, content, mime) {
+    var blob = new Blob([content], { type: mime + ';charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // ── History ──────────────────────────────────────────────────────
+  function loadHistory() {
+    try {
+      var raw = localStorage.getItem(HISTORY_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch(e) { return []; }
+  }
+
+  function saveHistory(entries) {
+    try {
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(entries.slice(0, MAX_HISTORY)));
+    } catch(e) {}
+  }
+
+  function addToHistory(results, c) {
+    var entries = loadHistory();
+    entries.unshift({
+      ts: Date.now(),
+      country: c.code,
+      countryName: c.name,
+      count: results.length,
+      sample: results[0].formatted,
+      all: results.map(function(r) { return r.formatted; })
+    });
+    saveHistory(entries);
+    renderHistoryPanel();
+  }
+
+  function renderHistoryPanel() {
+    var entries = loadHistory();
+    historyCount.textContent = entries.length;
+    if (entries.length > 0) {
+      historyCount.classList.remove('hidden');
+      historyClear.style.display = '';
+    } else {
+      historyCount.classList.add('hidden');
+      historyClear.style.display = 'none';
+    }
+
+    var html = '';
+    for (var i = 0; i < entries.length; i++) {
+      var e = entries[i];
+      var flag = countryToFlag(e.country);
+      var time = new Date(e.ts);
+      var timeStr = time.toLocaleDateString() + ' ' + time.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+      html += '<div class="hist-item">' +
+        '<div class="hist-head"><span class="hist-flag">' + flag + '</span><span class="hist-country">' + e.countryName + '</span><span class="hist-count">' + e.count + ' IBAN' + (e.count > 1 ? 's' : '') + '</span><span class="hist-time">' + timeStr + '</span></div>' +
+        '<div class="hist-sample">' + e.sample + '</div>' +
+        '<div class="hist-actions">' +
+          '<button class="hist-replay" data-idx="' + i + '">&#x21bb; Regenerate</button>' +
+          '<button class="hist-copy" data-idx="' + i + '">&#x2398; Copy</button>' +
+        '</div>' +
+      '</div>';
+    }
+    if (!entries.length) {
+      html = '<div class="hist-empty">No history yet. Generate some IBANs!</div>';
+    }
+    historyItems.innerHTML = html;
+  }
+
+  historyToggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var open = !historyPanel.classList.contains('open');
+    historyPanel.classList.toggle('open', open);
+    historyToggle.setAttribute('aria-expanded', String(open));
+    if (open) renderHistoryPanel();
   });
 
-  btnBulk.addEventListener('click', function() {
-    generateBulk();
+  document.addEventListener('click', function(e) {
+    if (!historyPanel.contains(e.target) && e.target !== historyToggle && !historyToggle.contains(e.target)) {
+      historyPanel.classList.remove('open');
+      historyToggle.setAttribute('aria-expanded', 'false');
+    }
   });
 
-  btnCopy.addEventListener('click', copyToClipboard);
+  historyItems.addEventListener('click', function(e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var idx = parseInt(btn.getAttribute('data-idx'), 10);
+    var entries = loadHistory();
+    if (idx < 0 || idx >= entries.length) return;
+    var entry = entries[idx];
 
-  // Generate on country change (convenience)
-  select.addEventListener('change', function() {
-    resetDisplay();
-    if (select.value) generateOne();
+    if (btn.classList.contains('hist-replay')) {
+      // Find and select country, set quantity, generate
+      var c = countries.filter(function(c) { return c.code === entry.country; })[0];
+      if (c) {
+        selectCountry(c);
+        quantitySlider.value = Math.min(entry.count, 100);
+        quantityValue.textContent = quantitySlider.value;
+        generateIBANs();
+      }
+    } else if (btn.classList.contains('hist-copy')) {
+      var text = entry.all.join('\n');
+      navigator.clipboard.writeText(text).then(function() {
+        showToast('Copied ' + entry.count + ' IBANs!');
+      }).catch(function() {
+        fallbackCopy(text);
+      });
+    }
+    historyPanel.classList.remove('open');
   });
 
-  // ── Init ───────────────────────────────────────────────────────
+  historyClear.addEventListener('click', function() {
+    saveHistory([]);
+    renderHistoryPanel();
+  });
+
+  // ── Toast ────────────────────────────────────────────────────────
+  function showToast(msg) {
+    var toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(function() {
+      toast.classList.remove('show');
+    }, 2000);
+  }
+
+  // ── Bind events ──────────────────────────────────────────────────
+  btnGenerate.addEventListener('click', generateIBANs);
+
+  btnCopy.addEventListener('click', function() {
+    if (currentIBANs.length > 0) copySingle(currentIBANs[0].formatted);
+  });
+
+  btnCopyAll.addEventListener('click', copyAll);
+  btnExportCSV.addEventListener('click', exportCSV);
+  btnExportJSON.addEventListener('click', exportJSON);
+  btnExportTXT.addEventListener('click', exportTXT);
+
+  // Keyboard shortcut: Enter in country search selects first visible
+  countrySearch.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      var firstVisible = countryList.querySelector('.country-option:not([style*="display: none"])');
+      if (firstVisible) {
+        var idx = parseInt(firstVisible.getAttribute('data-index'), 10);
+        selectCountry(countries[idx]);
+        closeCountryMenu();
+      }
+    }
+  });
+
+  // ── Init ─────────────────────────────────────────────────────────
   loadCountries();
-  initFAQ();
+  renderHistoryPanel();
 })();
