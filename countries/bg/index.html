@@ -13,6 +13,7 @@
 <meta property="og:url" content="https://ibaneasy.com/countries/bg/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the IBAN format for Bulgaria?", "acceptedAnswer": {"@type": "Answer", "text": "Bulgaria uses a 22-character IBAN with the country code \"BG\" followed by two check digits and a 18-character BBAN. The format is <code>4!a4!n2!n8!c</code>. The bank code occupies positions 5 to 8."}}, {"@type": "Question", "name": "Is Bulgaria a SEPA country?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, Bulgaria is part of the SEPA (Single Euro Payments Area) and uses IBAN for all domestic and international transfers."}}, {"@type": "Question", "name": "How long is a Bulgaria IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "A Bulgaria IBAN is exactly 22 characters long. The BBAN portion accounts for 18 characters."}}, {"@type": "Question", "name": "How do I find my Bulgaria IBAN?", "acceptedAnswer": {"@type": "Answer", "text": "Your IBAN is printed on your bank statement, available in your online banking portal, or can be obtained from your bank. It typically appears alongside your BIC/SWIFT code for international transfers."}}, {"@type": "Question", "name": "Can I generate a valid Bulgaria IBAN for testing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Use the IBAN generator on this page or visit the <a href=\"/\">IBAN Easy homepage</a> to generate mathematically valid IBANs for any supported country. All generation is client-side and private."}}]}</script>
 </head>
@@ -27,6 +28,11 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT Codes</a>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -64,9 +70,9 @@
 </table></div><h2>Example Bulgaria IBANs</h2>
 <p>Here are 3 randomly generated but <strong>mathematically valid</strong> Bulgaria IBANs for testing:</p>
 <ul>
-<li><code>BG49 BUPC 4735 53SL Z34D VR</code></li>
-<li><code>BG84 TCNE 7302 24ZY 3N6Y FZ</code></li>
-<li><code>BG59 OUXA 2677 15WW O91U QH</code></li>
+<li><code>BG19 DGJM 3396 46X6 FP5Q 46</code></li>
+<li><code>BG05 HIUS 3795 09TD 3OTJ PN</code></li>
+<li><code>BG47 QMKM 5829 27BQ ZA90 CB</code></li>
 </ul>
 <p style="font-size:0.85rem;color:var(--text-muted)">&#x26A0; These are randomly generated test IBANs — not real bank accounts. Do not use for actual transactions.</p>
 <h2>Generate Bulgaria IBANs for Testing</h2>
@@ -151,6 +157,18 @@
 <li><a href="/countries/ch/">Switzerland IBAN (21 chars, SEPA)</a></li>
 <li><a href="/countries/cy/">Cyprus IBAN (28 chars, SEPA)</a></li>
 </ul>
+<h2>Major Bank BIC/SWIFT Codes in Bulgaria</h2>
+<p>BIC (Bank Identifier Code) / SWIFT codes for major banks in Bulgaria. These codes are used for international wire transfers alongside the IBAN.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>BIC Code</th><th>Bank Name</th><th>City</th></tr></thead>
+<tbody>
+<tr><td><code class="swift-bic-code">BNBGBGSD</code></td><td>Bulgarian National Bank</td><td>Sofia</td></tr>
+<tr><td><code class="swift-bic-code">BUINBGSF</code></td><td>DSK Bank</td><td>Sofia</td></tr>
+<tr><td><code class="swift-bic-code">INTFBGSF</code></td><td>First Investment Bank (Fibank)</td><td>Sofia</td></tr>
+<tr><td><code class="swift-bic-code">BPBIBGSF</code></td><td>Postbank Bulgaria</td><td>Sofia</td></tr>
+<tr><td><code class="swift-bic-code">OLBABG22</code></td><td>United Bulgarian Bank (UBB)</td><td>Sofia</td></tr>
+</tbody>
+</table></div>
 </main>
 <footer class="site-footer">
   <div class="footer-inner">
@@ -164,6 +182,7 @@
       <a href="/validate/">Validator</a>
       <a href="/sepa-countries/">SEPA Countries</a>
       <a href="/iban-check-digit/">Check Digits</a>
+      <a href="/swift-codes/">SWIFT/BIC Codes</a>
       <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
