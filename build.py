@@ -85,12 +85,6 @@ HEAD = '''<!DOCTYPE html>
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <script src="/js/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
-<link rel="alternate" hreflang="en" href="https://ibaneasy.com/">
-<link rel="alternate" hreflang="de" href="https://ibaneasy.com/de/">
-<link rel="alternate" hreflang="es" href="https://ibaneasy.com/es/">
-<link rel="alternate" hreflang="fr" href="https://ibaneasy.com/fr/">
-<link rel="alternate" hreflang="zh" href="https://ibaneasy.com/zh/">
-<link rel="alternate" hreflang="x-default" href="https://ibaneasy.com/">
 {extra}
 </head>
 <body>
@@ -2330,10 +2324,16 @@ def build_translated_homepage(lang_code, title=None, desc=None):
         '<meta property="og:url" content="{}{}">'.format(SITE, can_path)
     )
 
-    # Add hreflang for all supported languages + i18n script before </head>
+    # Home-page language cluster only: en/de/es/fr/zh + x-default (self-referencing).
+    # Non-translated pages (countries/learn/…) must NOT declare these alternates.
+    # Strip any stale hreflang the EN index may still carry, then inject the cluster.
+    html = __import__('re').sub(r'\s*<link rel="alternate" hreflang="[^"]+" href="[^"]+">', '', html)
     hreflang = (
         '<link rel="alternate" hreflang="en" href="{}">\n'.format(SITE + '/') +
-        '<link rel="alternate" hreflang="{}" href="{}">\n'.format(lang_code, SITE + can_path) +
+        '<link rel="alternate" hreflang="de" href="{}">\n'.format(SITE + '/de/') +
+        '<link rel="alternate" hreflang="es" href="{}">\n'.format(SITE + '/es/') +
+        '<link rel="alternate" hreflang="fr" href="{}">\n'.format(SITE + '/fr/') +
+        '<link rel="alternate" hreflang="zh" href="{}">\n'.format(SITE + '/zh/') +
         '<link rel="alternate" hreflang="x-default" href="{}">\n'.format(SITE + '/') +
         '<script src="/js/i18n.js" defer></script>'
     )
