@@ -1957,6 +1957,33 @@ td a:hover { text-decoration: underline; }
 
 .footer-links a:hover { color: var(--accent-light); }
 
+.footer-related {
+  max-width: var(--max-width);
+  margin: 1.15rem auto 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 1rem;
+}
+
+.footer-related-label {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.footer-related a {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.footer-related a:hover { color: var(--accent-light); }
+
 /* ── Prose ─────────────────────────────────────────────────────── */
 .prose-content h2 {
   color: var(--text);
