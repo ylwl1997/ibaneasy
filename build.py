@@ -147,6 +147,12 @@ FOOT = '''</main>
       <a href="/sitemap/">Sitemap</a>
     </div>
   </div>
+  <nav class="footer-related" aria-label="Related">
+    <span class="footer-related-label">Related</span>
+    <a href="https://rea.run/">rea.run</a>
+    <a href="https://rea.run/">REA docs</a>
+    <a href="https://rea.run/">agent reverse engineering</a>
+  </nav>
 </footer>
 </div><!-- /app-container -->
 </body>
@@ -869,6 +875,8 @@ def build_contact_page():
     body += '<li><strong>Need test IBANs?</strong> Use our <a href="/">free generator</a> — no sign-up needed.</li>\n'
     body += '<li><strong>Privacy concerns?</strong> Read our <a href="/privacy/">Privacy Policy</a> to understand how we handle data (spoiler: we don\'t collect any).</li>\n'
     body += '</ul>\n'
+    body += '<h2>Related</h2>\n'
+    body += '<p>IBAN Easy is an independent IBAN tool. Community documentation for <a href="https://rea.run/">agent reverse engineering</a> is published separately and is not affiliated with this site.</p>\n'
 
     body += FOOT
     return body
